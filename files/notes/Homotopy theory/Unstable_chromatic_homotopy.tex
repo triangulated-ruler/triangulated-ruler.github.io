@@ -1,0 +1,1612 @@
+\part{Unstable Chromatic Homotopy Theory}
+
+\chapter{Chromatic localizations on spaces}
+
+\section{More on chromatic localizations}
+
+	We first give a short review on reflective localizations. 
+	\begin{defn}
+		For a family of morphisms $S$ in a category $\mathcal{C}$, we define an object $X$ to be $S$-local if for any $f:Y\to Z$ in $S$, we have $f^*:\Hom(Z,X)\to\Hom(Y,X)$ is an equivalence. We define $f:Y\to Z$ to be an $S$-equivalence if for all $X$ to be $S$-local, we have $f^*:\Hom(Y,X)\to\Hom(Z,X)$ an equivalence. Finally we define an object $X$ to be $S$-acyclic if $X\to *$ is an $S$-equivalence. 
+	\end{defn}
+
+	\begin{thm}\label{Refl_loc}
+		There is a localization functor $L_S:\mathcal{C}\adj\mathcal{C}_S:\iota$ from $\mathcal{C}$ to the full-subcategory consisting $S$-local objects $\mathcal{C}_S$. Moreover, this localization functor exhibits an equivalence $\mathcal{C}_S\simeq\mathcal{C}[S^{-1}]$. By construction, we have a morphism $X\to L_S(X)$ which is an $S$-equivalence. 
+	\end{thm}
+
+	\begin{defn}\label{Null_loc_equiv}
+		For any object $A$, we define the localization functor $P_A$ to be the reflective localization associated to the set consisting of a single map $A\to *$. 
+
+		We say an object $X$ is $A$-null if we have $\Map(*,X)\to\Map(A,X)$ is an equivalence. This, equivalently, means $X$ is $S$-local where $S$ consists of the single morphism $A\to *$. 
+
+		We say an object $Y$ is $A$-periodic if for all $A$-null spectra $X$, the inclusion $\Map(*,X)\to\Map(Y,X)$ is an equivalence. This means the morphism $Y$ is $S$-acyclic where $S$ is the same as in the above. 
+
+		In particular, the above definitions apply to the category $\Sp$ or $\An$. 
+	\end{defn}
+
+	\begin{remark}
+		The theory of Bousfield localizations is complete contained in reflective localizations. Note that for a spectra, $E$-equivalences ($E$-local objects) are simply the $S$-equivalences ($S$-local objects) in which $S$ is the set of morphisms $X\to *$ where $X$ runs through all $E$-acyclic spectra. 
+	\end{remark}
+
+	\begin{lemma}\label{Null_finite_smashing}
+		For any spectrum $A$, $P_A$ commutes with finite colimits, hence for finite $F$, we have $P_A(X)\wedge F\simeq P_A(X\wedge F)$. 
+	\end{lemma}
+	\begin{proof}
+		Similar to the proof of \cref{Loc_finite_smashing}. 
+	\end{proof}
+
+	\begin{lemma}\label{Null_prop_smash}
+		For $E\wedge A\simeq*$, we have a natural equivalence $E\wedge X\to E\wedge P_A(X)$ for all $X$. 
+	\end{lemma}
+	\begin{proof}
+		From the construction of $P_A$ (which I won't do here). (Yes, absolutely not). 
+	\end{proof}
+
+	\begin{defn}
+		We define $F(n)$ to be a spectrum of type $n$. This is well-defined up to Bousfield equivalence. 
+	\end{defn}
+
+	\begin{lemma}\label{Loc_equiv_lem_1}
+		For a spectrum $X$ and a self map $f:\Sigma^dX\to X$, we have $\langle X\rangle=\langle X[f^{-1}]\rangle\wedge\langle X/\Sigma^dX\rangle$. 
+	\end{lemma}
+	\begin{proof}
+		For any spectrum $Y$, $Y\wedge X\simeq*$ obviously implies $Y\wedge X[f^{-1}]\simeq*$ and $Y\wedge X/\Sigma^dX\simeq*$. For the converse, if $Y\wedge X/\Sigma^dX=0$, then we have a natural equivalence $Y\wedge f:Y\wedge\Sigma^dX\to Y\wedge X$. Thus every map in the diagram $Y\wedge X\to Y\wedge\Sigma^{-d}X\to\cdots$ is an equivalence, hence induces an equivalence $Y\wedge X\to Y\wedge X[f^{-1}]$. Thus $Y\wedge X\simeq*$. 
+	\end{proof}
+
+	\begin{lemma}\label{Loc_equiv_lem_2}
+		We have an orthogonal decomposition for any choice of $F(n)$
+		\[ \langle S\rangle=\langle F(0)[v_0^{-1}]\rangle\vee\cdots\vee\langle F(n)[v_n^{-1}]\rangle\vee\langle F(n+1)\rangle \]
+	\end{lemma}
+	\begin{proof}
+		By \cref{Loc_equiv_lem_1}, we have the decomposition. Then, to prove that it is orthogonal, it suffices to prove for $i<j$, $F(i)[v_i^{-1}]\wedge F(j)$ is contractible, so that $F(i)[v_i^{-1}]\wedge F(j)[v_j^{-1}]\simeq*$. However, supposing $v_i$ has degree $d$, this follows from that $v_i\wedge\id:\Sigma^dF(i)\wedge F(j)\to F(i)\wedge F(j)$ is zero on all $K(m)$, hence is nilpotent. 
+	\end{proof}
+
+	\begin{defn}
+		We define $T(n)$ to be a spectrum of the form $X[f^{-1}]$, where $X$ is of type $n$ and $f$ is a $v_n$-self map of $X$. 
+	\end{defn}
+
+	\begin{prop}\label{Bousfield_class_telescope}
+		Such $T(n)$ is well-defined up to Bousfield equivalence. 
+	\end{prop}
+	\begin{proof}
+		For a type $n$ spectrum $X$ with a $v_n$-self map $f$, consider the full subcategory $\mathcal{D}_X$ of finite $p$-local spectra spanned by spectra $Y$ admitting a $v_n$-self map $g$ satisfying $X[f^{-1}]\wedge Z\simeq*\implies Y[g^{-1}]\wedge Z\simeq *$. 
+
+		We then prove that $\mathcal{D}_X$ is a thick subcategory of finite $p$-local spectra. Now, $\mathcal{D}_X$ is obviously closed under retracts, since for $Y_1$ and $Y_2$ with morphisms $Y_1\to Y_2\to Y_1$, we may assume the $v_n$-self maps of $Y_i$ agrees with the morphisms. Then it follows that $Y_1[g_1^{-1}]\wedge Z$ is a retract of $Y_2[g_2^{-1}]\wedge Z$, hence is trivial. Then, for a fiber sequence $Y_1\to Y_2\to Y_3\to Y_4$ with $Y_2$ and $Y_3$ in $\mathcal{D}_X$, we may again assume the $v_n$-self maps of $Y_i$ agrees with this fiber sequence. Thus we have $Y_1[g_1^{-1}]\wedge Z$ and $Y_4[g_4^{-1}]\wedge Z$ are fibers or cofibers of amorphism between trivial spectra, hence trivial. 
+
+		Finally, by \cref{Thick_subcat_thm} and that $\mathcal{D}_X$ contains $X$, we deduce that $\mathcal{D}_X\simeq\mathcal{C}_{\geq n}$. Therefore $T(n)$ is well-defined. 
+	\end{proof}
+	\begin{coro}\label{Tel_equiv_T_loc}
+		We have $L_n^f\simeq L_{T(0)\vee T(1)\vee\cdots\vee T(n)}$. 
+	\end{coro}
+	\begin{proof}
+		Recall that by \cref{Smash_loc_ker_type}, we have $L_n^f$ is the smashing localization having the minimal kernel with $\Sp_{(p)}^{\text{fin}}\cap\ker L_{E(n)}=\mathcal{C}_{\geq n+1}$. Then it suffices to prove $L_{T(0)\vee\cdots\vee T(n)}$ has the same property. Firstly, notice that by \cref{Loc_equiv_lem_2}, we have $\langle S\rangle=\langle T(0)\rangle\vee\cdots\langle T(n)\rangle\vee\langle F(n+1)\rangle$. Assuming for a spectrum $E$, we have $\Sp_{(p)}^{\text{fin}}\cap\ker L_{E(n)}\simeq\mathcal{C}_{\geq n+1}$, then smashing $E$ with the above equality, we have 
+		\[ \langle E\rangle=\langle E\wedge T(0)\rangle\vee\cdots\langle E\wedge T(n)\rangle \]
+
+		Then, it suffices to show that $L_{T(0)\vee\cdots\vee T(n)}$ is smashing. Notice that we have $\Sp_{(p)}^{\text{fin}}\cap\ker L_E=\Sp_{(p)}^{\text{fin}}\cap\ker L_{L_E(S)}$ for any spectrum $E$. Therefore we may apply $E=L_{T(0)\vee\cdots\vee T(n)}(S)$ to the above equality. In particular, we have 
+		\[ \langle L_{T(0)\vee\cdots\vee T(n)}(S)\rangle\leq\langle T(0)\vee\cdots\vee T(n)\rangle \]
+
+		However, since each $T(0)\vee\cdots\vee T(n)$-local spectrum is a module over $L_{T(0)\vee\cdots\vee T(n)}(S)$, $T(0)\vee\cdots\vee T(n)$-local implies $L_{T(0)\vee\cdots\vee T(n)}(S)$-local. Therefore, they have the same Bousfield class and hence $L_{T(0)\vee\cdots\vee T(n)}$ is smashing. 
+	\end{proof}
+
+	\begin{thm}\label{Tel_loc_equiv_F_null}
+		We have $L_n^f\simeq P_{F(n+1)}$. 
+	\end{thm}
+
+	\begin{proof}
+		By \cref{Loc_equiv_lem_2}, $(T(0)\vee\cdots\vee T(n))\wedge F(n+1)\simeq*$, thus $F(n+1)$ is $T(0)\vee\cdots\vee T(n)$-acyclic. Thus for all $X$, $\Map(F(n+1),L_n^f(X))\simeq*$. By the universal property of $P_{F(n+1)}$, this gives a natural transformation $\id\to P_{F(n+1)}\to L_n^f$. Thus to show the natural transformation is an equivalence, it suffices to show that for all $X$, $P_{F(n+1)}(X)$ is $T(0)\vee\cdots\vee T(n)$-local. To show this, let $Z$ be a $T(0)\vee\cdots\vee T(n)$-acyclic spectrum. We show that any map $Z\to P_{F(n+1)}(X)$ is null. It suffices to show that $P_{F(n+1)}(Z)$ is contractible. 
+
+		By \cref{Loc_equiv_lem_2}, we have $T(i)\wedge F(n+1)\simeq*$ for $i\leq n$ and all possible choices of $T$ and $F$. Thus by \cref{Null_prop_smash}, we have $T(i)\wedge Z\to T(i)\wedge P_{F(n+1)}(Z)$ an equivalence. Since $Z$ is $T(0)\vee\cdots\vee T(n)$-acyclic, it is $T(i)$-acyclic. Therefore $T(i)\wedge P_{F(n+1)}(Z)\simeq*$. Then by definition of nullification, we have $\dual F(n+1)\wedge P_{F(n+1)}(Z)\simeq\Map(F(n+1),P_{F(n+1)}(Z))\simeq*$. But since $\langle \dual F(n+1)\rangle\simeq\langle F(n+1)\rangle$ and the equality in \cref{Loc_equiv_lem_2}, we actually see that $P_{F(n+1)}(Z)$ is $S$-null, hence $P_{F(n+1)}(Z)\simeq*$. 
+	\end{proof}
+
+\section{Localizations in the category $\An_*$}
+
+	In this section, we apply the localizations introduced in the previous section to the category $\An_*$. The localizations in $\An_*$ is mostly the same as in $\Sp$. 
+	A first remark here is that we would very much like to consider the localizations in the category $\An$ instead of $\An_*$ since it would be much more convenient to define the localizations (see the first remark below). However, there is no space $X$ with $\Sigma_+^\infty X$ a type-$n$ spectrum since it must contain a direct summand of the sphere spectrum $S$. On the otherhand, there is clearly a pointed space $Y$ such that $\Sigma^\infty Y$ is of type $n$ since we may consider the cellular structure of $F(n)$, and since it is finite, it must come from a finite pointed CW complex. 
+	However, when we pass from the stable case to the unstable case, another problem we may encounter is that spectra representing the same Bousfield class (i.e. different spectra of type $n$), may end up having different Bousfield classes in $\An_*$ (if we regard $F(n)$ as a space with its suspension spectrum type $n$). This would be partially resolved by Bousfield's theorem (\cref{Bousfield_thm}), which mainly states that the unstable Bousfield classes of finite type $n$-spaces admitting certain properties is determined by the connectivity of the space. 
+
+	\begin{const}
+		In the category $\An_*$, the notion of $S$-local spaces and $S$-equivalences must be slightly modified. For pointed spaces $A$ and $B$, we let $\Hom(A,B)$ denote the mapping space of unpointed maps and $\Hom_*(A,B)$ denote the mapping space of pointed maps. Then we define the $S$-local spaces and $S$-equivalences in $\An_*$ to be respectively the objects $X$ such that $\Hom(B,X)\to\Hom(A,X)$ is an equivalence for all $A\to B\in S$ and the morphisms $Y\to Z$ such that $\Hom(Z,X)\to\Hom(Y,X)$ is an equivalence for all $S$-local space $X$. 
+	\end{const}
+
+	\begin{remark}
+		For a self map $f:\Sigma^dA\to A$, the local objects associated to $f$ can be viewed as $Y$ such that $f_*:[A,Y]\to[\Sigma^dA,Y]$. This, in some sense, makes $L_f$ somewhat of a periodization. 
+	\end{remark}
+
+	We first present a few direct examples on localizations. 
+
+	\begin{exam}\label{Loc_exam}
+		Let $A=S^n$. Then a space is $A$-null iff it is $(n-1)$-truncated, and is $A$-periodic iff it is $n$-connective. 
+
+		let $A=S^1/p$, then a simply connected $p$-local space is $A$-null iff it is rational, and is $A$-periodic iff its homotopy groups are torsion. 
+	\end{exam}
+
+	We might first notice that in the definition above, the choice of the $\Hom$ not preserving the base points is not that essential since we may always choose a base point. 
+	
+	\begin{lemma}\label{Basept_lemma}
+		Let $S$ be a set of morphisms in $\An_*$ consisting of morphisms of connected spaces. Then a space $X$ is $S$-local iff for every choice of base point in $X$, the map $\Hom_*(B,X)\to\Hom_*(A,X)$ is an equivalence for all $A\to B$ in $S$. 
+	\end{lemma}
+
+	\begin{lemma}\label{Fibration_lemma}
+		Let $S$ be a set of morphisms in $\An_*$. For a morphism of fibrations $f:(p_1:X_1\to B)\to(p_2:X_2\to B)$ inducing an $S$-equivalence (for some fixed set of morphisms $S$) for each $f_*:p_1^{-1}(b)\to p_2^{-1}(b)$, we have $f:X_1\to X_2$ is an $S$-equivalence. 
+	\end{lemma}
+	\begin{proof}
+		Notice that we have natural identifications $X_i\simeq\ilim_{b\in B}p_i^{-1}(b)$, then the theorem follows by the fact that $S$-equivalences are preserved under colimits. 
+	\end{proof}
+
+	\begin{lemma}\label{Quotient_lemma}
+		Suppose we have a H-group homomorphism $G_1\to G_2$ and a map of principal bundles. 
+		% https://q.uiver.app/#q=WzAsNixbMCwwLCJHXzEiXSxbMSwwLCJYXzEiXSxbMiwwLCJCXzEiXSxbMCwxLCJHXzIiXSxbMSwxLCJYXzIiXSxbMiwxLCJCXzIiXSxbMCwxXSxbMCwzXSxbMSw0XSxbMSwyXSxbMiw1XSxbMyw0XSxbNCw1XV0=
+		\[\begin{tikzcd}
+			{G_1} & {X_1} & {B_1} \\
+			{G_2} & {X_2} & {B_2}
+			\arrow[from=1-1, to=1-2]
+			\arrow[from=1-1, to=2-1]
+			\arrow[from=1-2, to=1-3]
+			\arrow[from=1-2, to=2-2]
+			\arrow[from=1-3, to=2-3]
+			\arrow[from=2-1, to=2-2]
+			\arrow[from=2-2, to=2-3]
+		\end{tikzcd}\]
+
+		Moreover, the map $X_1\to X_2$ is required to be $G_1$-equivariant. If $G_1\to G_2$ and $X_1\to X_2$ are $S$-equivalences, then we have $B_1\to B_2$ an $S$-equivalence. 
+	\end{lemma}
+	\begin{proof}
+		Simply write $B_i$ as the geometric realization of the simplicial object $X_1\times(G_1)^n$. 
+	\end{proof}
+
+	\begin{coro}\label{Quotient_lemma_coro_loopspace}
+		If $X\to Y$ is a map of $n$-connective spaces having the property that $\Omega^nX\to\Omega^nY$ is an $S$-equivalence, then $X\to Y$ is an $S$-equivalence. 
+	\end{coro}
+	\begin{proof}
+		Directly consider the path fibrations of $\Omega^{k-1}X$ and $\Omega^{k-1}Y$ and the corollary follows by induction. 
+	\end{proof}
+
+	\begin{lemma}\label{Smashing_lemma}
+		If $Y$ is $S$-local, then $Y$ is $X\wedge S$-local for all spaces $X$, where $X\wedge S$ is the set of morphisms consisting of $X$ smashed with the morphisms in $S$. 
+	\end{lemma}
+	\begin{proof}
+		Let $f:A\to B$ be a morphism in $S$. Then the space $X\wedge A$ is the homotopy cofiber of the map $X\vee A\inj X\times A$. This induces the space $\Map(X\wedge A,Y)$ as the homotopy pullback
+		% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXEhvbShYXFx3ZWRnZSBBLFkpIl0sWzAsMSwiWSJdLFsxLDAsIlxcSG9tKFhcXHRpbWVzIEEsWSkiXSxbMSwxLCJcXEhvbShYXFx2ZWUgQSxZKSJdLFswLDJdLFsyLDNdLFswLDFdLFsxLDNdLFswLDMsIiIsMSx7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXItaW52ZXJzZSJ9fV1d
+		\[\begin{tikzcd}
+			{\Hom(X\wedge A,Y)} & {\Hom(X\times A,Y)} \\
+			Y & {\Hom(X\vee A,Y)}
+			\arrow[from=1-1, to=1-2]
+			\arrow[from=1-1, to=2-1]
+			\arrow["\ulcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+			\arrow[from=1-2, to=2-2]
+			\arrow[from=2-1, to=2-2]
+		\end{tikzcd}\]
+
+		Moreover $\Hom(X\vee A,Y)$ fits in a homotopy pullback square 
+		% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXEhvbShYXFx2ZWUgQSxZKSJdLFswLDEsIlkiXSxbMSwwLCJcXEhvbShYLFkpXFx0aW1lc1xcSG9tKEEsWSkiXSxbMSwxLCJZXFx0aW1lcyBZIl0sWzAsMl0sWzIsM10sWzAsMV0sWzEsM11d
+		\[\begin{tikzcd}
+			{\Hom(X\vee A,Y)} & {\Hom(X,Y)\times\Hom(A,Y)} \\
+			Y & {Y\times Y}
+			\arrow[from=1-1, to=1-2]
+			\arrow[from=1-1, to=2-1]
+			\arrow[from=1-2, to=2-2]
+			\arrow[from=2-1, to=2-2]
+		\end{tikzcd}\]
+
+		Thus it suffices to show that $\Hom(X\times B,Y)\to\Hom(X\times A,Y)$ is a weak equivalence. Rewriting this in terms of $\Hom(X,\Hom(B,Y))\to\Hom(X,\Hom(A,Y))$ gives the proof immediately. 
+	\end{proof}
+
+	The lemmas above gives rise to many corollaries on localizations, which we will list below. 
+
+	\begin{thm}\label{Elementary_prop_loc}
+		In the following list we assume $S$ and $T$ to be sets of morphisms in $\An_*$ and $X$ a pointed space. 
+		\begin{enumerate}
+			\item If $S$ consists of morphisms of connected spaces, then $X$ is $S$-local iff every path-component of $X$ is $S$-local (obvious). 
+			\item Suppose $S$ consists of morphism of connected spaces, then $L_SX$ is connected implies that $X$ is connected (follows from the construction). 
+			\item $L_S$ preserves finite products (follows from \cref{Smashing_lemma} and some theory on exponential ideals). 
+			\item $L_S$ preserves colimits (follows from the fact that $L_S$ is a left adjoint). 
+			\item A space is $S$-local and $T$-local iff it is $S\vee T$-local, where $S\vee T$ is the set of morphisms of the form $f\vee g$ where $f\in S$, $g\in T$ (direct). 
+			\item A space $X$ is $FS$-local iff for every choice of basepoint $GX$ is $S$-local, where $F:\An_*\adj\An_*:G$ is a pair of adjoint functors (follows from \cref{Basept_lemma}). 
+			\item If $X$ is $S$-acyclic, then $\Sigma X$ is $\Sigma S$-acyclic (follows from the properties of left adjoints).
+			\item Let $f:X\to Y$ be a map of spaces. Assume $Y$ is $S$-local, then $X$ is $S$-local implies that for every point $y$ of $Y$ the fiber $f^{-1}(y)$ is $S$-local (by the long exact sequence of homotopy groups of fiber sequences). 
+			\item Let $f:X\to Y$ be a map of spaces. Assume $Y$ is $A$-null, then $X$ is $A$-null iff for every point $y$ of $Y$ the fiber $f^{-1}(y)$ is $A$-null (similar to the above argument). 
+			\item If $A$ is $n+1$-connective and $X$ is $n$-truncated, then $X$ is $A$-null (by the properties of truncatedness and connectivity). 
+			\item If $S$ consists of $n$-connective maps, then $X\to L_SX$ is $n$-connective (by the construction of $L_SX$). 
+		\end{enumerate}
+	\end{thm}
+
+	Then we introduce some less trivial facts on localizations. 
+
+	\begin{lemma}\label{Per_implies_acyc}
+		Let $S$ be a set of morphisms in $\An_*$, and $W$ is $S$-acyclic. Then for any space $X$, $X$ is $W$-periodic implies that $X$ is $S$-acyclic. In particular, if $W$ is $S$ acyclic having $\pi_0(W)\neq*$, then for all $X$ we have $X$ is $S$-acyclic. 
+	\end{lemma}
+	\begin{proof}
+		We prove that if $Y$ is $S$-local, then $Y$ is $W$-null. Since $L_SW\simeq*$, by the universal property of the localization the inclusion $Y\inj\Hom(W,Y)$ is an equivalence, hence $Y$ is $W$-null. For the second assertion we notice $S^0$ is a retract of $W$, hence $S^0$ is $S$-acyclic. Thus any $S^0$-periodic space (hence every space) is $S$-acyclic. 
+	\end{proof}
+	
+	\begin{lemma}\label{Susp_k_conn_acyc}
+		Let $S$ be a set of morphisms in $\An_*$. If $L_SX\simeq*$, then for any $k$-connective space $Y$, we have $L_{\Sigma^kS}(X\wedge Y)\simeq*$. 
+	\end{lemma}
+	\begin{proof}
+		Firstly the case where $Y\simeq S^n$ is true by entries (4) and (7) in \cref{Elementary_prop_loc}. Then we consider the general case by proving $L_{\Sigma^kS}(X\wedge \tau_{\leq n}Y)\simeq*$ by an induction on $n$. The base case $n=k$ is trivial since $\tau_{\leq k}Y$ is a wedge of $S^k$, and hence is obvious. Then the induction step follows from the fact that we have a cofiber sequence 
+		\[ X\wedge\tau_{\leq n-1}Y\to X\wedge\tau_{\leq n}Y\to X\wedge\bigvee S^n \]
+
+		Since the first space and last space is $\Sigma^kS$-acyclic, so is the middle space since $L_S$ preserves cofiber sequences. 
+
+		Finally by taking a colimit $X\wedge Y\simeq\ilim X\wedge\tau_{\leq n}Y$, $X\wedge Y$ is $\Sigma^kS$-acyclic. 
+	\end{proof}
+
+	\begin{coro}\label{Susp_k_conn_acyc_sp}
+		If $L_SX\simeq*$, then for any $k$-connective spectrum $Z$, we have 
+		\[ L_{\Sigma^kS}\Omega^\infty(X\wedge Z)\simeq* \]
+	\end{coro}
+	\begin{proof}
+		By \cref{Per_implies_acyc} it suffices to consider the case where $X$ is connected, otherwise every space is $f$-acyclic. Then since $L_SX\simeq *$, we have $L_{\Sigma^\infty S}\Sigma^\infty X\simeq*$ by a similar argument to entry (7) in \cref{Elementary_prop_loc}, hence $L_SQX\simeq *$, where $QX=\Omega^\infty\Sigma^\infty X$. Therefore to prove $L_{\Sigma^kf}\Omega^\infty(X\wedge Z)\simeq*$, it suffices to prove $L_{\Sigma^{\infty+k}f}X\wedge Z\simeq*$, which is by a similar argument to \cref{Susp_k_conn_acyc} 
+	\end{proof}
+
+	\begin{coro}\label{Homology_EM_periodic}
+		If $\tilde{H}_d(A,\mathbb{F}_p)\neq0$, then for $d'\geq d$, we have $K(\mathbb{Z}/p\mathbb{Z},d')$ is $A$-periodic. 
+	\end{coro}
+	\begin{proof}
+		Firstly by letting $X=A$, $Z=H\mathbb{F}_p$, $k=0$ in \cref{Susp_k_conn_acyc_sp}, since $P_AA\simeq*$, we have $P_A\Omega^\infty(H\mathbb{F}_p\otimes A)\simeq*$. Then since $\tilde{H}_d(A,\mathbb{F}_p)=G\neq0$, $\Omega^\infty(H\mathbb{F}_p\otimes A)$ contains $K(G,d)$ as a component in the product. Hence $K(G,d)$ is a retract of $\Omega^\infty(H\mathbb{F}_p\otimes A)$, and hence $P_AK(G,d)\simeq*$. Moreover, we have $G$ an $\mathbb{F}_p$-vector space, so $P_AK(\mathbb{F}_p,d)\simeq*$. Finally by \cref{Quotient_lemma_coro_loopspace} we have immediately $P_AK(\mathbb{F}_p,d')\simeq*$, since $\Omega^{d'-d}K(\mathbb{F}_p,d')\simeq K(\mathbb{F}_p,d)$ and $\Omega^{d'-d}*\simeq*$. 
+	\end{proof}
+
+	\begin{lemma}\label{Fib_nullification_periodic}
+		Let $A$ be a space and $X$ be any space. Then consider the map $X\to P_AX$, and let $F$ be the fiber of the map at any point $p\in P_AX$. Then we have $P_AF\simeq*$. 
+	\end{lemma}
+	\begin{proof}
+		By Lurie's straightening and unstraightening construction, the fibration $f:X\to P_AX$ is equivalently a functor $\St_f:P_AX\to\An$, where $f^{-1}(p)\simeq\St_f(p)$. Then we consider the composition $P_A\circ\St_f:X\to\An\to\An$, then this is equivalent to another map to $P_AX$, say $\overline{X}\to P_AX$. Note that the fiber of this map at $p$ is $P_AF$, and we have a morphism of fibrations 
+		% https://q.uiver.app/#q=WzAsNixbMCwwLCJGIl0sWzEsMCwiWCJdLFsyLDAsIlBfQVgiXSxbMCwxLCJQX0FGIl0sWzEsMSwiXFxvdmVybGluZXtYfSJdLFsyLDEsIlBfQVgiXSxbMCwzXSxbMSw0XSxbMiw1XSxbMCwxXSxbMSwyXSxbMyw0XSxbNCw1XSxbMiw0LCIiLDEseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XV0=
+		\[\begin{tikzcd}[ampersand replacement=\&]
+			F \& X \& {P_AX} \\
+			{P_AF} \& {\overline{X}} \& {P_AX}
+			\arrow[from=1-1, to=1-2]
+			\arrow[from=1-1, to=2-1]
+			\arrow[from=1-2, to=1-3]
+			\arrow[from=1-2, to=2-2]
+			\arrow[dashed, from=1-3, to=2-2]
+			\arrow[from=1-3, to=2-3]
+			\arrow[from=2-1, to=2-2]
+			\arrow[from=2-2, to=2-3]
+		\end{tikzcd}\]
+
+		And since the bottom fibration is of base and every fiber a $W$-null space, hence so is $\overline{X}$ by entry (9) of \cref{Elementary_prop_loc}. Therefore by the universal property of nullification, we get the lift in the diagram. Thus the map $F\to P_AF\to\overline{X}$ is null, which, again by the universal property of nullification, implies that the map $P_AF\to\overline{X}$ is null-homotopic. Moreover, the lift provides a section of the bottom fibration, hence the bottom fibration is trivial, and hence $P_AF$ is itself contractible. 
+	\end{proof}
+
+	\begin{lemma}\label{Loc_prod_EM_space}
+		Let $S$ be a set of morphisms in $\An_*$. If $X$ is a product of Eilenberg-Maclane spaces $K(G,n)$ with all $G$ Abelian, then $L_S(X)$ is also a product of Eilenberg-Maclane spaces. 
+	\end{lemma}
+	\begin{proof}
+		We first recall from the entry (3) of \cref{Elementary_prop_loc} that $L_S$ preserves finite products. Then we prove that a space is a product of Eilenberg-Maclane spaces iff it is of the form $\Omega^\infty M$ for some $H\mathbb{Z}$-module $M$. Only if is obvious by the delooping construction. If is by the following observation: for a $H\mathbb{Z}$-module $M$, the composition $M\to H\mathbb{Z}\otimes M\to M$ where the first map is the inclusion $\mathbb{S}\otimes M\to H\mathbb{Z}\otimes M$ induced by the unit of $H\mathbb{Z}$, hence $M$ is a retract of $H\mathbb{Z}\otimes M$. Then choose a Moore spectrum $M_n$ such that $\pi_n(M_n\otimes H\mathbb{Z})\simeq\pi_n(M)$ and a comparison map $M_n\to M$ inducing the isomorphism on $\pi_n$, and the map $H\mathbb{Z}\otimes(\bigoplus M_n)\to H\mathbb{Z}\otimes M\to M$ induces an isomorphism on homotopy groups, and hence a splitting $M\simeq\bigoplus H\mathbb{Z}\otimes M_n$. 
+
+		Thus it suffices to see that $L_S$ lifts to the stable case, that is, there is some $\Omega^\infty\tilde{L}_SM\simeq L_S\Omega^\infty M$ for all connective $H\mathbb{Z}$-modules $M$. This follows from the fact that $L_S$ preserves products, hence preseserves infinite loopspaces. 
+	\end{proof}
+
+	\begin{lemma}\label{Commute_loc_loopspace}
+		Let $S$ be a set of morphisms in $\An_*$. If $X$ is connected, then $L_S\Omega X\simeq\Omega L_{\Sigma S}X$. 
+	\end{lemma}
+	\begin{proof}
+		Firstly we have a map $L_S\Omega X\to\Omega L_{\Sigma S}X$ given by the following process. For a connected space $X$, we have the localization map $X\to L_{\Sigma S}X$. Then apply the loopspace functor we have $\Omega X\to\Omega L_{\Sigma S}X$. Then by the entry (6) in \cref{Elementary_prop_loc}, $\Omega L_{\Sigma S}X$ is $S$-local, hence we have a factorization $\Omega X\to L_S\Omega X\to\Omega L_{\Sigma S}X$. 
+
+		We then construct its inverse. Since $X$ is connected, so is $L_{\Sigma S}X$. Since $f$ preserves products, the map $\Omega X\to L_S\Omega X$ is a map of loopspaces, and we pass to classifying spaces we have a map $X\to BL_S\Omega X$. Then again by entry (6), $BL_S\Omega X$ is $L_{\Sigma S}$-local, and hence we have a factorization $X\to L_{\Sigma S}X\to BL_S\Omega X$. Applying the loopspace functor we have a map $\Omega L_{\Sigma S}\to L_S\Omega X$, which we would show to be the inverse. 
+
+		We now verify that the maps are indeed inverses to each other. Since we have a map $\Omega X\to\Omega L_{\Sigma S}X\to L_S\Omega X$ whose composition is the localization of $\Omega X$, by the universal property of localizations $L_S\Omega X$ is also the localization of $\Omega L_{\Sigma S}X$, hence the composition $L_S\Omega X\to\Omega L_{\Sigma S}X\to L_S\Omega X$ is the identity. 
+
+		For the other composite, we deloop the maps $\Omega X\to L_S\Omega X\to\Omega L_{\Sigma S}X$ and obtain that $X\to BL_S\Omega X\to L_{\Sigma S}X$ is the localization map. Hence we also have the $L_{\Sigma S}X\to BL_S\Omega X\to L_{\Sigma S}X$ is the identity, and passing to loopspaces we obtain the result. 
+	\end{proof}
+
+	\begin{lemma}\label{Susp_loc_prod_EM}
+		Let $S$ be a set of morphisms in $\An$ consisting of morphisms between connected spaces. Let $X$ be a connected $H$-space, then if $L_SX\simeq*$ then we have $L_{\Sigma S}X$ a product of Abelian Eilenberg-Maclane spaces. 
+	\end{lemma}
+	\begin{proof}
+		Firstly notice that $L_{\Sigma S}X$ is a connected $H$-space since $L_{\Sigma S}$ preserves finite products and connectivity (by the entry (3) and (11) in \cref{Elementary_prop_loc}). Moreover, since everything is connected here, we may use the space of pointed maps. 
+
+		We first notice that we have 
+		\[ \Hom_*(\Sigma L_{\Sigma S}X,L_{\Sigma S}X)\simeq\Hom_*(L_{\Sigma S}X,\Omega L_{\Sigma S}X)\simeq\Hom_*(L_{\Sigma S}X,L_SX)\simeq* \]
+
+		Thus we have $L_{\Sigma S}X$ is $\Sigma L_{\Sigma S}X$-null. Then we prove $L_{\Sigma S}X$ is a retract of $\mathrm{SP}(L_{\Sigma S}X)$ (the infinite symmetric product), which finishes the theorem since by the Dold-Thom theorem, the symmetric product is a product of Abelian Eilenberg-Maclane spaces and a retract of Abelian Eilenberg-Maclane spaces is a product of Abelian Eilenberg-Maclane spaces. To prove this, we prove the inclusion $L_{\Sigma S}X\inj\mathrm{SP}(L_{\Sigma S}X)$ induces an isomorphism 
+		\[ \Hom_*(\mathrm{SP}(L_{\Sigma S}X),L_{\Sigma S}X)\simeq\Hom_*(L_{\Sigma S}X,L_{\Sigma S}X) \]
+
+		In fact, we claim the following more general lemma. For a connected space $A$ and a connected $\Sigma A$-null $H$-space $X$, we have an equivalence $\Hom_*(\mathrm{SP}(A),X)\simeq\Hom_*(A,X)$. We first notice that since $X$ is $\Sigma A$-null, the space $\Hom_*(A,X)$ is discrete. Moreover $\pi_1(X)$ acts trivially on $\Hom_*(A,X)$ since $X$ is a connected $H$-space. We claim that under these conditions 
+		\[ \Hom_*(A\times A,X)\simeq\Hom_*(A,X)\times\Hom_*(A,X) \]
+
+		This is obvious since we have $\Hom(A\times A,X)\simeq\Hom(A,\Hom(A,X))$, and we can extract $\Hom_*(A,X)$ from the fiber of $\Hom(A,X)\to X$ by evaluating on the basepoint of $A$. Therefore we have a natural $\mathbb{E}_\infty$-group structure on $\Hom_*(A,X)$. 
+		Finally noticing that by Dold-Thom theorem, we have $\mathrm{SP}(A)\simeq\Omega^\infty H\mathbb{Z}\otimes A$ since they are both isomorphic to $\prod K(H_n(A),n)$. Thus it suffices to prove that 
+		\begin{align*}
+			&\Hom_*(\Omega^\infty(H\mathbb{Z}\otimes A),X) \\
+			\simeq&\Hom(H\mathbb{Z},B^\infty\Hom_*(A,X)) \\
+			\simeq&\Hom_{\mathbb{E}_\infty}(\mathbb{Z},\Hom_*(A,X)) \\
+			\simeq&\Hom_*(A,X)
+		\end{align*}
+		The only non-trivial part is the first equivalence, which can be proven by considering the following inclusion of full subcategories of $\mathbb{E}_\infty$-groups into the category $\Fun(\Fin_*^{\op},\An)$ (the so-called $\Gamma$-spaces). The first equivalence is then a standard fact by abstract nonsense. 
+	\end{proof}
+
+\section{The unstable Bousfield class and Bousfield theorem}
+
+	As before, we may introduce the notion of Bousfield classes to the category $\An_*$. 
+	
+	\begin{defn}\label{Unstable_Bousfield_class}
+		We say two pointed spaces $A$ and $B$ are unstably Bousfield equivalent if the $A$-null spaces coincide with the $B$-null spaces. We denote $\langle A\rangle$ by the set of all spaces unstably Bousfield equivalent to $A$. Moreover, we define $\langle A\rangle\leq\langle B\rangle$ if $X$ is $B$-null implies that $X$ is $A$-null. 
+	\end{defn}
+
+	\begin{coro}
+		We have $\langle A\wedge B\rangle\leq\langle A\rangle$. 
+	\end{coro}
+
+	\begin{lemma}\label{Equiv_Bousfield_class_cond}
+		The following are equivalent. 
+		\begin{enumerate}
+			\item $\langle A\rangle\leq\langle B\rangle$.
+			\item Every $A$-periodic space is $B$-periodic. 
+			\item $A$ is $B$-periodic. 
+			\item The unit $X\to P_BX$ factors as $X\to P_AX\to P_BX$. 
+			\item $P_BP_AX\simeq P_BX$. 
+		\end{enumerate}
+	\end{lemma}
+	\begin{proof}
+		Direct. 
+	\end{proof}
+
+	We then prove the following fundamental theorem on the unstable Bousfield class related to telescopic localizations. 
+
+	\begin{cond}\label{Cond_type_loc}
+		We consider the following condition on a space $A$. We suppose $A$ is a finite $p$-local space of the form $\Sigma B$ with $B$ connected. Moreover we require $A$ to have integral homology bounded $p$-power torsion (which along with the condition $A=\Sigma B$ implies that $A$ is simply connected). 
+	\end{cond}
+	
+	\begin{thm}[Bousfield]\label{Bousfield_thm}
+		Let $A$ and $A'$ be finite $p$-local spaces satisfying \cref{Cond_type_loc} and with their suspension spectrum having type $>0$ (that is, the reduced integral homology is torsion), then we have $\langle A\rangle\leq\langle A'\rangle$ iff $\type A\geq\type A'$ (we abbreviate the type of $\Sigma^\infty A$ by $\type A$), and $\conn A\geq\conn A'$. 
+	\end{thm}
+
+	We will need the following result to prove \cref{Bousfield_thm}
+
+	\begin{thm}\label{Fib_null_susp_EM_tors}
+		Let $A$ be a $n$-connective pointed space such that the reduced homology groups $\tilde{H}_*(A,\mathbb{Z})$ are $p$-power torsion and $H_n(A;\mathbb{F}_p)\neq0$, then we have for any $k\geq1$, $\fib(P_{\Sigma^{k+1}A}X\to P_{\Sigma^kA}X)$ is equivalent to an Eilenberg-Maclane space $K(G,n+k)$, where $G$ is a $p$-torsion Abelian group. 
+	\end{thm}
+	\begin{proof}
+		By replacing $A$ by $\Sigma^{k-1}A$, it suffices to show that the fiber $F$ of $P_{\Sigma^2A}X\to P_{\Sigma A}X$ is an Eilenberg-Maclane space of the form $K(G,n+1)$ with $G$ Abelian and $p$-torsion. 
+
+		By \cref{Fib_nullification_periodic} we have $P_{\Sigma A}F\simeq*$ since the nullification $P_{\Sigma A}F\simeq P_{\Sigma A}P_{\Sigma^2A}F$. Moreover we have $P_{\Sigma^2A}F\simeq F$ since the two spaces are already $\Sigma^2A$-null. Then we claim $P_{\Sigma^2A}F$ is an $H$-space, so that we can apply \cref{Susp_loc_prod_EM}. The structure of an $H$-space on $P_{\Sigma^2A}F$ originates from the fact that $P_{\Sigma^2A}(F\vee F)\simeq P_{\Sigma^2A}(F\times F)$. This is because 
+		\[ \fib(F\vee F\to F\times F)\simeq S^1\wedge\Omega F\wedge\Omega F\simeq\Omega F\wedge Z \]
+		where $Z$ is simply connected, and $\Omega F\wedge Z$ is $\Sigma^2A$-null since $P_{\Sigma A}F\simeq*\implies P_A\Omega F\simeq *$, and by \cref{Susp_k_conn_acyc} we have $P_{\Sigma^2A}(\Omega F\wedge Z)\simeq*$. Thus the codiagonal $P_{\Sigma^2A}(F\vee F)\to P_{\Sigma^2A}F$ can be lifted to a map $P_{\Sigma^2A}(F\times F)\to P_{\Sigma^2A}F$, and hence $P_{\Sigma^2A}F$ is an $H$-space. 
+
+		Now that $F$ is a product of Abelian Eilenberg-Maclane spaces, we show that there is in fact only one Abelian Eilenberg-Maclane spaces in the product and that the group is $p$-torsion. By the entry (11) of \cref{Elementary_prop_loc}, and that $A$ is $n$-connective, we have $\Sigma A\to *$ is $n+1$-connective, hence so is $F$. 
+
+		Next we show $\pi_m(F)$ has no $p$-torsion for all $m\geq n+2$. Notice that $K(\pi_m(F),m)$ is a retract of $F$, hence it is $\Sigma^2A$-null and $\Sigma A$-periodic. Moreover, by \cref{Homology_EM_periodic}, since 
+		\[ \tilde{H}_{n+1}(\Sigma A,\mathbb{F}_p)=\tilde{H}_{n+2}(\Sigma^2A,\mathbb{F}_p)=\tilde{H}_n(A,\mathbb{F}_p)=0 \]
+		we have $K(\mathbb{F}_p,m)$ is $\Sigma A$-periodic for $m\geq n+1$ and $\Sigma^2A$-periodic for $m\geq n+2$. Hence the map $K(\pi_m(F),m)\to K(\pi_m(F)/\pi_m(F)[p],m)$ has fiber $K(V,m)$, where $V$ is a $\mathbb{F}_p$-vector space, hence the map is an equivalence after applying $P_{\Sigma^2A}$ for $m\geq n+2$. Then since $K(\pi_m(F),m)$ is $\Sigma^2A$-null, the map is actually an equivalence for $m\geq n+2$. Therefore $\pi_m(F)$ has no $p$-torsion for $m\geq n+2$. 
+
+		Then we show $\pi_m(F)$ satisfies $\pi_m(F)\otimes\mathbb{Z}[p^{-1}]=0$ for all $m\geq n+2$. Consider the fiber sequence 
+		\[ K(\pi_m(F)\otimes\mathbb{F}_p,m-1)\to K(\pi_m(F),m)\xrightarrow{\times p}K(\pi_m(F),m) \]
+
+		Thus since $K(\pi_m(F)\otimes\mathbb{F}_p,m-1)$ is $\Sigma A$-periodic, the multiplication by $p$ map 
+		\[ K(\pi_m(F),m)\to K(\pi_m(F),m) \] 
+		is an equivalence after applying $P_{\Sigma A}$. Passing to the limit, we have 
+		\[ K(\pi_m(F),m)\to K(\pi_m(F)\otimes\mathbb{Z}[p^{-1}],m) \] 
+		is an equivalence after applying $P_{\Sigma A}$. Therefore $K(\pi_m(F)\otimes\mathbb{Z}[p^{-1}],m)$ is $\Sigma A$-periodic since so is $K(\pi_m(F),m)$. However, $K(\pi_m(F)\otimes\mathbb{Z}[p^{-1}],m)$ is also $\Sigma A$-null by the following argument. Since $A$ has reduced homology consisting of $p$-power torsion, it (and hence $\Sigma A$) has trivial reduced $\mathbb{Z}[p^{-1}]$-homology. By the universal coefficient theorem, it has also trivial $\mathbb{Z}[p^{-1}]$-cohomology. Therefore by the representability of cohomology, we have 
+		\[ \Hom(\Sigma A,K(\pi_m(F)\otimes\mathbb{Z}[p^{-1}],m))\simeq K(\pi_m(F)\otimes\mathbb{Z}[p^{-1}],m) \]
+
+		Thus $K(\pi_m(F)\otimes\mathbb{Z}[p^{-1}],m)$ is both $\Sigma A$-null and $\Sigma A$-periodic, hence $\pi_m(F)\otimes\mathbb{Z}[p^{-1}]$ is trivial. 
+
+		Now we have proven that $\pi_m(F)=0$ for all $m\geq n+2$ since they have no $p$-torsion and trivial after inverting $p$. It remains to show that $\pi_{n+1}(F)$ is $p$-torsion. Since $K(\pi_{n+1}(F),n+1)\to K(\pi_{n+1}(F)/\pi_{n+1}(F)[p],n+1)$ is an equivalence after applying $P_{\Sigma A}$, $K(\pi_{n+1}(F)/\pi_{n+1}(F)[p],n+1)$ is $\Sigma A$-periodic. Similar to the above argument, notice that $\pi_{n+1}(F)/\pi_{n+1}(F)[p]$ is $p$-torsion free, hence the space is $\Sigma A$-null. Hence $\pi_{n+1}(F)/\pi_{n+1}(F)[p]=0$, and hence $\pi_{n+1}(F)$ is $p$-torsion. 
+	\end{proof}
+
+	\begin{proof}
+		We now prove \cref{Bousfield_thm}. We first state an auxillary lemma. We claim that if $\Sigma^\infty A$ is contained in the thick subcategory generated by $\Sigma^\infty A'$, then there is some $d$ such that $\langle\Sigma^dA\rangle\leq\langle A'\rangle$. We consider the full subcategory $\mathcal{C}$ of finite $p$-local spectra consisting of spectra of the form $\Sigma^{\infty+n}B$, where $n$ is any integer (may be negative) and $B$ is a finite $p$-local space such that $\langle B\rangle\leq\langle A'\rangle$. Then obviously this category contains $\Sigma^\infty A'$, and it suffices to prove that it is thick, so that it must contain $\Sigma^\infty A$, and hence a suspension of $A$ satisfies the desired property. 
+
+		For a cofiber sequence of spectra $P\to Q\to R$ with two entries in $\mathcal{C}$, we wish to prove the third is also in $\mathcal{C}$. Now by definition it is closed under arbitrary suspension and loopspaces, so WLOG we assume $P$ and $Q$ are in $\mathcal{C}$ and prove $R$ is in $\mathcal{C}$. Again by definition of $\mathcal{C}$, we suppose there is a cofiber sequence of spaces $L\to M\to N$ such that 
+		\[ P\to Q\to R\simeq\Sigma^{\infty+k}L\to\Sigma^{\infty+k}M\to\Sigma^{\infty+k}N \]
+		moreover we may assume $\langle A'\rangle\geq\langle L\rangle$ and $\langle A'\rangle\geq\langle M\rangle$, or equivalently $L$ and $M$ are $A'$-periodic. Then since $P_{A'}$ is a left adjoint, it preserves cofiber sequences, hence $P_{A'}L\to P_{A'}M\to P_{A'}N$ is isomorphic to a cofiber sequence $*\to *\to P_{A'}N$, which forces $P_{A'}N$ to be trivial. 
+
+		Then for a retract diagram $P\to Q\to P$ with $Q\in\mathcal{C}$, again assume 
+		\[ P\to Q\to P\simeq\Sigma^{\infty+k}L\to\Sigma^{\infty+k}M\to\Sigma^{\infty+k}L \]
+		with $M$ $A'$-periodic. Then $L$ is $A'$-periodic since $A'$-periodicity is closed under retracts. Hence we have proven the auxillary lemma. 
+
+		We now prove that if $\langle A\rangle\leq\langle A'\rangle$ then $\type A\geq\type A'$ and $\conn A\geq\conn A'$. For connectivity, notice that since $A'$ is $\conn A'$-connective, it is $S^{\conn A'}$-periodic. Hence we have $\langle A'\rangle\leq\langle S^{\conn A'}\rangle$, hence $A$ is also $\conn A'$-connective by transitivity of the partial order. Thus $\conn A\geq\conn A'$. For the type, assume $\widetilde{K(n)}_*(A')=0$, since $K(n)$ is a field, equivalently we have $\widetilde{K(n)}^*(A')=0$, hence 
+		\[ \pi_m\Hom(A',\Omega^\infty K(n))\simeq\pi_0\Hom(A',\Omega^{\infty+m}K(n))\simeq\widetilde{K(n)}^{-m}(A')\simeq* \]
+		and thus $\Omega^{\infty+m}K(n)$ are $A'$-null for all $m$, and hence are $A$-null for all $m$ by assumption. Thus $\widetilde{K(n)}_*(A)=0$, and hence $\type A\geq\type A'$. 
+
+		Finally it suffices to prove the converse. Since $\type A\geq\type A'$, by the thick subcategory theorem we clearly have $\Sigma^\infty A$ in the thick subcategory generated by $\Sigma^\infty A'$, hence there is some $d$ such that $\langle\Sigma^dA\rangle\leq\langle A'\rangle$. We will prove that $\langle\Sigma^{d-1}A\rangle\leq\langle A'\rangle$, so that by induction we will have $\langle A\rangle\leq\langle A'\rangle$. Hence we may assume that $d=1$. By the assumption, $P_{A'}(A)\simeq P_{A'}P_{\Sigma A}(A)$. Hence to show $\langle A\rangle\leq\langle A'\rangle$, it suffices to prove $P_{A'}P_{\Sigma A}(A)\simeq*$. But note that obviuously we have $P_A(A)\simeq*$, hence $P_{\Sigma A}(A)$ is the fiber of the map $P_{\Sigma A}(A)\to P_A(A)$, which, by \cref{Fib_null_susp_EM_tors}, has the form $K(G,d')$ where $G$ is $p$-power torsion. But this is clearly $A'$-periodic by \cref{Homology_EM_periodic}. Hence we have proven the theorem. 
+	\end{proof}
+
+\chapter{The Bousfield-Kuhn functor}
+
+\section{Unstable telescopic localizations}
+
+	With the preparations in the previous sections, we can finally begin the study of telescopic localizations on spaces. 
+
+	Recall that the telescopic localization $L_n^f$ is given by killing all the $v_m$-maps for $m<n$ and inverting the $v_n$-map. In \cref{Tel_loc_equiv_F_null}, we find that $L_n^f\simeq P_{F(n+1)}$, which gives two possible methods to define telescopic localization on spaces. We first focus on one. We remark here that from now on, when we mention a type $n$ space, it will be implicitly be $p$-local for some fixed $p$. 
+
+	\begin{defn}
+		We fix integers $n$ and $d$. Suppose $d$ is sufficiently large so that there exists a space $F(n+1,d)$ of type $n+1$ and connectivity $d$ satisfying \cref{Cond_type_loc}. Then we define the category $L_n^f(\An_*)_{(p)}^{>d}$ to be the full subcategory of $\An_*$ consisting of the spaces that is $(d+1)$-connective, $p$-local and $F(n+1,d)$-null. By definition, this category admits all limits and colimits. 
+	\end{defn}
+
+	\begin{coro}
+		We have a localization functor $P_{F(n+1,d)}:(\An_*)_{(p)}^{>d}\to L_n^f(\An_*)_{(p)}^{>d}$. 
+	\end{coro}
+	\begin{proof}
+		The proof is mainly due to the definition of local objects. We only need to deal with the connectivity conditions here. Notice that $F(n+1,d)\to *$ is $d$-connective, so by the entry (11) of \cref{Elementary_prop_loc}, so is $X\to P_A(X)$. Now $X$ and $P_A(X)$ have isomorphic homotopy groups up to degree $d-1$, and we show $\pi_d(P_A(X))=0$. We have an exact sequence of homotopy groups 
+		\[ \pi_d(X)\to\pi_d(P_A(X))\to\pi_{d-1}(X,P_A(X)) \] 
+		with the first and last term zero, which forces $\pi_d(P_A(X))=0$. 
+	\end{proof}
+
+	The difference between the categories $L_n^f(\An_*)_{(p)}^{>d}$ when the type $n$ varies is analogous to the stable case, but we do encounter something new when $d$ varies. A good news is that this difference is simple enough. 
+
+	\begin{prop}\label{Tel_loc_conn_var_rational}
+		There is a fully faithful embedding $L_n^f(\An_*)_{(p)}^{>d+1}\inj L_n^f(\An_*)_{(p)}^{>d}$ which identifies the image as the spaces $X\in L_n^f(\An_*)_{(p)}^{>d}$ such that $(\pi_{d+1}X)_\mathbb{Q}$-vanishes. 
+	\end{prop}
+	\begin{proof}
+		We consider the functor as the composition 
+		\[ L_n^f(\An_*)_{(p)}^{>d+1}\inj(\An_*)_{(p)}^{>d}\xrightarrow{P_{F(n+1,d)}}L_n^f(\An_*)_{(p)}^{>d} \]
+		which we will abuse notation to denote by $P_{F(n+1,d)}$. Then for $X\in L_n^f(\An_*)_{(p)}^{>d+1}$, the map $X\to P_{F(n+1,d)}X$ has fiber a $F(n+1,d)$-periodic space by the \cref{Fib_nullification_periodic}. Now, by \cref{Loc_exam}, recall that $S^1/p$-periodic $p$-local spaces have torsion homotopy groups. Then since $\Sigma S^1/p$ have type 1 and connectivity 2, we have $\langle\Sigma S^1/p\rangle\geq\langle F(n+1,d)\rangle$. Thus the fiber is also $\Sigma S^1/p$-periodic, hence trivial on rational homotopy groups. Thus $X\to P_{F(n+1,d)}X$ is an isomorphism on rational homotopy groups, hence we have the image of $P_{F(n+1,d)}$ contained in spaces where the $(d+1)$-th rational homotopy groups zero. 
+
+		Then we consider the functor $\tau_{\geq d+2}:L_n^f(\An_*)_{(p)}^{>d}\to(\An_*)_{(p)}^{>d+1}$. For $X\in L_n^f(\An_*)_{(p)}^{>d}$, we have a fiber sequence $\tau_{\geq d+2}X\to X\to K(\pi_{d+1}(X),d+1)$. Since $X$ is $F(n+1,d)$-null, it is $\Sigma F(n+1,d)$-null by \cref{Smashing_lemma}. For $X$ with $(\pi_{n+1}(X))_\mathbb{Q}$ non-trivial, $K(\pi_{n+1}(X),d+1)$ is clearly $\Sigma F(n+1,d)$-null by the definition of spaces of type $n+1$. So when $(\pi_{n+1}(X))_\mathbb{Q}$ is non-trivial, $\tau_{\geq d+2}$ upgrades to a functor $L_n^f(\An_*)_{(p)}^{>d}\to L_n^f(\An_*)_{(p)}^{>d+1}$. 
+
+		Finally we show that for $X$ with $(\pi_{n+1}(X))_\mathbb{Q}$-trivial, $\tau_{\geq d+2}$ is an inverse to the functor $P_{F(n+1,d)}$. Firstly for a space $Y\in L_n^f(\An_*)_{(p)}^{>d+1}$, we prove $Y\to P_{F(n+1,d)}(Y)$ induces an isomorphism on homotopy groups in degrees $>d+1$. Let $F$ be its fiber. Since $Y$ is $P_{\Sigma F(n+1,d)}$-local, $F$ is equivalently the fiber of $P_{\Sigma F(n+1,d)}(Y)\to P_{F(n+1,d)}(Y)$, hence has the form $K(G,d)$ by \cref{Fib_null_susp_EM_tors}. By delooping we have a fiber sequence $Y\to P_{F(n+1,d)}(Y)\to K(G,d+1)$, so $Y$ must be the $(d+2)$-connective cover of $P_{F(n+1,d)}(Y)$. 
+
+		Then for a space $X\in L_n^f(\An_*)_{(p)}^{>d}$ with $(\pi_{d+1}(X))_\mathbb{Q}=0$, we prove the map $\tau_{\geq n+2}X\to X$ is a $F(n+1,d)$-nullification of $\tau_{\geq n+2}X$. We show that the fiber of this map is $F(n+1,d)$-periodic. Note that the fiber is the Eilenberg-Maclane space $K(\pi_{d+1}(X),d)$, but $\pi_{d+1}(X)$ is $p$-power torsion, and hence is periodic by \cref{Homology_EM_periodic}. 
+	\end{proof}
+
+	\begin{lemma}\label{Tel_loc_acyc_cond}
+		Let $X$ be a $p$-local space. Then $X$ is $F(n+1,d)$-periodic iff the three following conditions are satisfied. 
+		\begin{enumerate}
+			\item $X$ is $d$-connective. 
+			\item The homotopy group $\pi_d(X)$ is $p$-power torsion. 
+			\item The connective cover $\tau_{\geq d+1}X$ is $\Sigma F(n+1,d)$-periodic. 
+		\end{enumerate}
+	\end{lemma}
+	\begin{proof}
+		If the three conditions are satisfied, then we have a fiber sequence $\tau_{\geq d+1}X\to X\to K(\pi_d(X),d)$, where $K(\pi_d(X),d)$ and $\tau_{\geq d+1}X$ are $F(n+1,d)$-periodic by \cref{Homology_EM_periodic} and definition, hence $X$ is $F(n+1,d)$-periodic. 
+
+		Conversely, suppose $X$ is $F(n+1,d)$-periodic. By the entry (11) of \cref{Elementary_prop_loc} $X\to P_{F(n+1,d)}X\simeq*$ is $d$-connective. We have $P_{\Sigma F(n+1,d)}X$ equivalent to the fiber of $P_{\Sigma F(n+1,d)X}\to P_{F(n+1,d)}X\simeq*$, hence $P_{\Sigma F(n+1,d)}X\simeq K(G,d)$ for some $p$-power torsion Abelian group. Then consider the fiber sequence $F\to X\to P_{\Sigma F(n+1,d)}X\simeq K(G,d)$. Now $F$ is $\Sigma F(n+1,d)$-periodic, hence $(d+1)$-connective. This implies that $F$ is the $(d+1)$-connective cover of $X$, hence the second and third condition follows immediately. 
+	\end{proof}
+
+	\begin{prop}\label{Tel_loc_fin_lim}
+		The functor $\An_*\to L_n^f(\An_*)_{(p)}^{>d}$ given by $X\mapsto P_{F(n+1,d)}(\tau_{\geq d+1}X_{(p)})$ is left exact (that is, preserves finite limits). We denote this functor by $L_{n,d}^f$. 
+	\end{prop}
+	\begin{proof}
+		Obviously taking connective covers commutes with limits. Localization at $p$ is left exact since it firstly preserves the final object, and preserves pullbacks due to the Mayer-Vietoris sequence of homotopy groups of pullbacks, and the fact that $\mathbb{Z}_{(p)}$ is flat. Hence it now suffices to prove the functor $P_{F(n+1,d)}:(\An_*)_{(p)}^{>d}\to(\An_*)_{(p)}^{>d}$ is left exact. Again, it obviously preserves final objects, so it suffices to check that it preserves pullbacks. 
+
+		Consider maps of $d$-connected pointed spaces $X_1\to X_0\from X_2$. We show the canonical map 
+		\[ \tau_{\geq d+1}(X_1\times_{X_0}X_2)\to\tau_{\geq d+1}(P_{F(n+1,d)}X_1\times_{P_{F(n+1,d)}X_0}P_{F(n+1,d)}X_2) \]
+		has $F(n+1,d)$-periodic fiber. We let $F$ denote this fiber. Obviously $F$ is $d$-connective, and since rationalization is left exact, $\pi_*(F)_\mathbb{Q}$ is trivial, hence the homotopy groups of $F$ is $p$-power torsion. Thus by \cref{Tel_loc_acyc_cond}, by induction, it suffices to find some $P_A$-local space $F'$ such that their $d'$-connective cover agree for $d'\gg d$. To do this, we let $Y_i$ be the fiber of the map $X_i\to P_{F(n+1,d)}X_i$, and consider $F'=\tau_{\geq d+1}Y_1\times_{\tau_{\geq d+1}Y_0}\tau_{\geq d+1}Y_2$. Now they have a common connctive cover $\tau_{\geq d+1}(Y_1\times_{Y_0}Y_2)$ by considering the long exact sequence of homotopy groups of a fiber sequence or a pullback square, hence by \cref{Tel_loc_acyc_cond} it suffices to prove $F'$ is $F(n+1,d)$-periodic. 
+
+		Notice that 
+		\[ P_{F(n+1,d)}\Omega\tau_{d+1}Y\simeq\Omega P_{\Sigma F(n+1,d)}\tau_{d+1}Y\simeq * \]
+		where the first equivalence is \cref{Commute_loc_loopspace} the second equivalence is by \cref{Tel_loc_acyc_cond}. Thus $\Omega\tau_{d+1}Y_0$ is $F(n+1,d)$-periodic. Then we consider the fiber sequence $K\to\tau_{d+1}Y_1\to\tau_{d+1}Y_0$. This gives a fiber sequence $\Omega\tau_{d+1}Y_0\to K\to\tau_{d+1}Y_1$. Hence $K$ is $F(n+1,d)$-periodic since both $\Omega\tau_{d+1}Y_0$ and $\tau_{d+1}Y_1$ is. Now consider the fiber sequence $K\to\tau_{d+1}Y_1\times_{\tau_{d+1}Y_0}\tau_{d+1}Y_2\to\tau_{d+1}Y_2$, which proves that $F'$ is $F(n+1,d)$-periodic. This finishes the whole proof. 
+	\end{proof}
+
+	We now wish to investigate the properties preserved by $L_{n,d}^f$, which also leads to the other route to defining telescopic localizations in spaces. As before, we start from the stable setting. 
+
+	\begin{defn}\label{Periodic_homotopy_grp_sp}
+		For a spectrum $X$ and a finite $p$-local spectrum $F(n)$ of type $n$, we define the $v_n$-periodic homotopy groups of $X$ by 
+		\[ v_n^{-1}\pi_d(X;F(n))\simeq\ilim(\pi_d\Map(F(n),X)\xrightarrow{v_n}\pi_{d+t}\Map(F(n),X)\to\cdots) \]
+		where the colimit is given by precomposing with $v_n$. This construction only depends on the choice of $F(n)$ by \cref{Periodicity_thm_lem_5}. 
+	\end{defn}
+
+	\begin{prop}\label{T_n_loc_crit}
+		A map of spectra $f:X\to Y$ is an $T(n)$-equivalence iff it induces an isomorphim on $v_n$-periodic homotopy groups for any choice of $F(n)$. 
+	\end{prop}
+	\begin{proof}
+		We prove that we have the following identification of $v_n^{-1}\pi_*$ as a homology theory
+		\[ v_n^{-1}\pi_*(X)\simeq DT(n)_*(X) \]
+		where $DT(n)$ is the dual of the telescope of $F(n)$. Let $v_n$ be a $v_n$-self map of $F(n)$, then $Dv_n$ is a $v_n$-self map of $\dual F(n)$. Hence we may upgrade the construction of $v_n^{-1}\pi_d(X;F(n))$ to the colimit of spectrum 
+		\[ \ilim(\Map(F(n),X)\to\Map(\Sigma^tF(n),X)\to\cdots) \]
+
+		By definition of $p$-local finite spectra and duals, this is equivalently the colimit 
+		\[ \ilim(\dual F(n)\otimes X\from\Sigma^{-t}\dual F(n)\otimes X\to\cdots) \]
+		and by the definition of $T(m)$ in \cref{Telescope_const}, this is obviously $DT(m)\otimes X$. Hence we have the identification above. 
+	\end{proof}
+
+	We then turn to the unstable setting. 
+
+	\begin{defn}\label{Periodic_homotopy_grp}
+		For a space $X$, and a finite space of type $m$ equipped with a $v_n$-self map $v_n:\Sigma^tF(n)\to F(n)$, we define its $v_n$-periodic homotopy groups $v_n^{-1}\pi_d(X;F(n))$ by 
+		\[ v_n^{-1}\pi_d(X;F(n))\simeq\ilim(\pi_d\Hom_*(F(n),X)\xrightarrow{v_n}\pi_{d+t}\Hom_*(F(n),X)\to\cdots) \]
+		where the colimit is given by precomposing with $v_n$. This construction depends on the choice of $F(n)$, but not the choice of the $v_n$-self map (we will see this later). 
+	\end{defn}
+
+	\begin{defn}\label{Periodic_equiv}
+		We define a map $f:X\to Y$ to be $v_n$-periodic equivalence if for all choices of base points and some $F(n)$, we have $v_n^{-1}\pi_*(X;F(n))\to v_n^{-1}\pi_*(Y;F(n))$ is an equivalence. 
+	\end{defn}
+
+	\begin{const}\label{Pre_Bousfield_Kuhn_fun}
+		We may realize $v_n^{-1}\pi_d(X;F(n))$ as the homotopy groups of a spectra, since by definition it is periodic of period $t$. Explicitly, the spectra is constructed as follows. Let 
+		\[ Y=\Hom_*(F(n),X)\to\Hom_*(\Sigma^tF(n),X)\to\Hom_*(\Sigma^{2t}F(n),X)\to\cdots \]
+
+		Then clearly $\Omega^tY=Y$. Hence we define the spectrum $\Phi_{v_n}(X)$ by letting its $k$-th space be $\Omega^{Nt-k}Y$, where $N\gg0$ is any integer such that $Nt>k$. 
+	\end{const}
+
+	Not so obviously, the above construction does not depend on the choice of the $v_n$-self map by the following arguments. 
+
+	\begin{lemma}\label{Pre_Bousfield_Kuhn_susp_power}
+		Let $v_n:\Sigma^tF(n)\to F(n)$ be a $v_n$-self map of a finite space of type $n$. Then $\Phi_{\id_W\wedge v_n}(X)\simeq\Map(W,\Phi_{v_n}(X))$, $\Phi_{v_n^k}(X)\simeq\Phi_{v_n}(X)$. Here $\id_W\wedge v_n$ is the map $\id_W\wedge v_n:W\wedge\Sigma^tF(n)\to W\wedge F(n)$, where $W$ is a pointed space, and $v_n^k:\Sigma^{kt}F(n)\to F(n)$ be the map obtained by $v_n$ composed with itself by $k$ times. We remark here that by the Kunneth formula for the $K(n)$-homology, $W\wedge F(n)$ has always type $\geq n$, and when it has type $>n$, the $v_n$-self map $\id_W\wedge v_n$ is nilpotent, and $\Phi_{\id_W\wedge v_n}(X)\simeq0$. 
+	\end{lemma}
+	\begin{proof}
+		Direct. 
+	\end{proof}
+
+	\begin{coro}\label{Pre_Bousfield_Kuhn_unique}
+		For two different $v_n$-self maps $v_n:\Sigma^tF(n)\to F(n)$ and $v'_n:\Sigma^{t'}F(n)\to F(n)$, we have $\Phi_{v_n}\simeq\Phi_{v'_n}$. 
+	\end{coro}
+	\begin{proof}
+		Recall from \cref{Periodicity_thm_lem_5} that we may assume $v_n$ and $v'_n$ are stably equivalent after raising to a suitable power. Thus $\Sigma^kv_n^a\simeq\Sigma^k(v'_n)^b$. By \cref{Pre_Bousfield_Kuhn_susp_power} we have $\Phi_{v_n}\simeq\Sigma^k\Phi_{\Sigma^kv_n^a}\simeq\Sigma^k\Phi_{\Sigma^k(v'_n)^b}\simeq\Phi_{v'_n}$. 
+	\end{proof}
+
+	Therefore by the uniqueness of $\Phi_{v_n}$, we will denote it by $\Phi_{F(n)}$ to show its independence of the choice of the $v_n$-self map. But do notice that the choice of the type $n$ space $F(n)$ still matters in the construction. 
+	We also remark here that the construction $\Phi_{F(n)}(X)$ is also somewhat functorial in the choice of $F(n)$. Namely we have the following property. 
+	
+	\begin{lemma}\label{Pre_Bousfield_Kuhn_cofib}
+		For a map of type $n$ spaces $F(n)\to F'(n)$, we have a functor $\Phi_{F'(n)}(X)\to\Phi_{F(n)}(X)$. Moreover, if we regard $F''(n)=\cof(F(n)\to F'(n))$ as a space equipped with a $v_n$-self map, then we have 
+		\[ \Phi_{F''(n)}=\fib(\Phi_{F'(n)}(X)\to\Phi_{F(n)}(X)) \]
+	\end{lemma}
+	\begin{proof}
+		Firstly the functorality is obtained by \cref{Periodicity_thm_lem_5}. The second property is by the fact that a cofiber of a map of $v_n$-self maps is a $v_n$-self map, and taking fibers commute with filtered colimits. 
+	\end{proof}
+
+	\begin{thm}\label{Periodic_equiv_indep_type_n}
+		Let $f:X\to Y$ be a pointed map of pointed spaces. Then for any type $n$ spaces $F(n)$ and $F'(n)$ equipped with $v_n$-self maps, then $f$ induces an equivalence $\Phi_{F(n)}(X)\simeq\Phi_{F(n)}(Y)$ iff $\Phi_{F'(n)}(X)\simeq\Phi_{F'(n)}(Y)$. 
+	\end{thm}
+	\begin{proof}
+		It suffices to prove that $X\to Y$ induces an isomorphism on $v_n$-periodic homotopy groups with coefficients in $F'(n)$. Recall that by the thick subcategory theorem, $\Sigma^\infty F'(n)$ is in the thick subcategory generated by $\Sigma^\infty F(n)$. Therefore $\Sigma^{\infty+N}F'(n)$ is generated by $\Sigma^\infty F(n)$ under retracts, suspensions and cofibers under finitely many steps for $N\gg0$. Therefore to prove the above, it suffices to prove the three special cases. 
+		\begin{enumerate}
+			\item $F'(n)$ is a retract of $F(n)$. 
+			\item $F'(n)$ is a suspension of $F(n)$. 
+			\item For another $F''(n)$ such that $\Phi_{F''(n)}(X)\simeq\Phi_{F''(n)}(Y)$ and a map $F''(n)\to F(n)$, $F'(n)=\cof(F''(n)\to F(n))$. 
+		\end{enumerate}
+		The first case is obvious since if this is the case then $v_n^{-1}\pi_*(X;F'(n))$ is a retract of \\
+		$v_n^{-1}\pi_*(X;F(n))$, and a retract of an isomorphism is an isomorphism. The second case is by \cref{Pre_Bousfield_Kuhn_susp_power}. Finally the third case is by the fact that 
+		\[ \Hom_*(F'(n),X)\simeq\fib(\Hom_*(F(n),X)\to\Hom_*(F''(n),X)) \]
+		and that taking fibers commutes with filtered colimits. 
+	\end{proof}
+
+	Therefore we may define the $v_n$-periodic homotopy equivalences to the maps send by $\Phi_{F(n)}$ to equivalences for any type $n$ space $F(n)$. 
+
+	\begin{thm}\label{Pre_Bousfield_Kuhn_T_n_loc}
+		For any type $n$ space $F(n)$ equipped with a $v_n$-self map $v_n$, we have $\Phi_{F(n)}(X)$ is $T(n)$-local. 
+	\end{thm}
+	\begin{proof}
+		Recall that we have from \cref{Tel_loc_equiv_F_null} that $L_n^f\simeq P_{F(n+1)}$ and from \cref{Tel_equiv_T_loc} that a space is $T(n)$-local iff it is $L_n^f$-local but not $L_{n-1}^f$-local. Therefore it suffices to see that $\Phi_{F(n)}(X)$ is $\Sigma^\infty F'(n+1)$-acyclic but not $\Sigma^\infty F'(n)$-acyclic for some type $n$ space $F'(n)$ and some type $n+1$ space $F'(n+1)$. The first fact follows from \cref{Pre_Bousfield_Kuhn_susp_power} since $F(n)\wedge F'(n+1)$ is a type $(n+1)$-space, hence $\Map(\Sigma^\infty F'(n+1),\Phi_{F(n)}(X))\simeq\Phi_{F(n)\wedge F'(n+1)}(X)\simeq0$. For the second fact, it suffices to show that $\Phi_{F(n)\wedge F'(n)}(X)\neq0$, which follows from \cref{Periodic_equiv_indep_type_n} since if the converse holds, then $X\to *$ would be a $v_n$-periodic equivalence, which implies $\Phi_{F(n)}(X)\simeq0$. 
+	\end{proof}
+
+	\begin{thm}\label{Pre_Bousfield_Kuhn_inv_tel_loc}
+		For any pointed space $X$, for $0<m\leq n$ and any $d$, we have a canonical equivalence $\Phi_{F(m)}(X)\simeq\Phi_{F(m)}(L_{n,d}^fX)$
+	\end{thm}
+	\begin{proof}
+		Recall that $L_{n,d}^f:\An_*\to L_n^f(\An_*)_{(p)}^{>d}$ is the composition $X\mapsto P_{F(n+1,d)}(\tau_{\geq d+1}X_{(p)})$. Hence it suffices to verify the three constructions do not change $\Phi_{F(m)}$. 
+
+		Firstly, we prove $\tau_{\geq d+1}X\to X$ induces an equivalence $\Phi_{F(m)}(\tau_{\geq d+1}X)\simeq\Phi_{F(m)}(X)$, which is obvious since we have 
+		\[ \Omega^\infty\Phi_{F(m)}(X)\simeq\ilim(\Hom_*(F(m),\Omega^{Nt}X)\to\Hom_*(F(m),\Omega^{Nt+t}X)\to\cdots) \]
+		passes to a sufficiently large loopspace of $X$, which is not affected by the connective cover. 
+
+		Then we prove that $X\to X_{(p)}$ induces an equivalence $\Phi_{F(m)}(X)\to\Phi_{F(m)}(X_{(p)})$. This is obtained by considering the pullback square of localizations $X\simeq X_{(p)}\times_{X_\mathbb{Q}}X[p^{-1}]$, which results in the pullback square
+		% https://q.uiver.app/#q=WzAsNCxbMCwwLCJYIl0sWzEsMCwiWF97KHApfSJdLFswLDEsIlhbcF57LTF9XSJdLFsxLDEsIlhfXFxtYXRoYmJ7UX0iXSxbMCwxXSxbMSwzXSxbMCwyXSxbMiwzXSxbMCwzLCIiLDEseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyLWludmVyc2UifX1dXQ==
+		\[\begin{tikzcd}[ampersand replacement=\&]
+			{\Hom_*(F(m),X)} \& {\Hom_*(F(m),X_{(p)})} \\
+			{\Hom_*(F(m),X[p^{-1}])} \& {\Hom_*(F(m),X_\mathbb{Q})}
+			\arrow[from=1-1, to=1-2]
+			\arrow[from=1-1, to=2-1]
+			\arrow["\ulcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+			\arrow[from=1-2, to=2-2]
+			\arrow[from=2-1, to=2-2]
+		\end{tikzcd}\]
+
+		Now by the universal property of localizations, we have 
+		\[ \Hom_*(F(m),X[p^{-1}])\simeq\Hom_*(F(m)[p^{-1}],X[p^{-1}]) \] 
+		and hence vanishes since $F(m)$ is of type $>0$. The likewise fact holds for $\Hom_*(F(m),X_\mathbb{Q})$, hence the bottom arrow is an equivalence, which proves that the top arrow is an equivalence. Thus we have $\Phi_{F(m)}(X)\simeq\Phi_{F(m)}(X_{(p)})$. 
+
+		Finally it suffices to prove that for any $d$-connected space, the localization $X\to P_{F(n+1,d)}X$ induces an equivalence $\Phi_{F(m)}(X)\to\Phi_{F(m)}(P_{F(n+1,d)}(X))$. Again we may prove only that the $d$-connective cover of the zeroth space of the two spectra are equivalent. Firstly notice that $L_{T(m)}\Sigma^\infty F(n+1,d)\simeq0$ since $F(n+1)$ has type $n+1>m$. But by \cref{Pre_Bousfield_Kuhn_T_n_loc} we see that $\Phi_{F(m)}(X)$ is $T(m)$-local, hence we have 
+		\[ \Hom_*(F(n+1,d),\Omega^\infty\Phi_{F(m)}(X))\simeq\Hom_*(\Sigma^\infty F(n+1,d),\Phi_{F(m)}(X))\simeq* \]
+		and hence $\Omega^\infty\Phi_{F(m)}(X)$ is $F(n+1,d)$-null. Therefore the desired equivalence is an exchange map of $P_{F(n+1,d)}$ with the second factor of $\Hom$, hence we can make a few reductions as shown below (we remark here that $\tau_{\geq d+1}$ commutes with filtered colimits since it is a right adjoint). 
+		\begin{align*}
+			&\tau_{\geq d+1}\Omega^\infty\Phi_{F(m)}(X)\simeq\tau_{\geq d+1}\Omega^\infty\Phi_{F(m)}(P_{F(n+1,d)}X) \\
+			\iff&\tau_{\geq d+1}P_{F(n+1,d)}\ilim(\Hom_*(\Sigma^{kt}F(m),X))\simeq\Omega^\infty\ilim(\Hom_*(\Sigma^{kt}F(m),P_{F(n+1,d)}X)) \\
+			\iff&\ilim(\tau_{\geq d+1}(P_{F(n+1,d)}(\Hom_*(\Sigma^{kt}F(m),X))))\simeq\ilim(\tau_{\geq d+1}\Hom_*(\Sigma^{kt}F(m),P_{F(n+1,d)}X)) \\
+			\iff&P_{F(n+1,d)}(\Hom_*(\Sigma^{kt}F(m),X))\simeq\Hom_*(\Sigma^{kt}F(m),P_{F(n+1,d)}X),\forall k
+		\end{align*}
+		But since $F(m)$ is finite, we may write $\Sigma^{kt}F(m)$ as a finite colimit of $S^0$. This makes \\
+		$\Hom_*(\Sigma^{kt}F(m),X)$ a finite limit, which commutes with $P_{F(n+1,d)}$ by \cref{Tel_loc_fin_lim}. 
+	\end{proof}
+
+	\begin{prop}\label{Periodic_homotopy_grp_equiv_d_conn}
+		Let $X$ be a $F(n+1,d)$-null pointed space. Then for any type $n$ space $F(n)$ equipped with a $v_n$-self map $v_n:\Sigma^tF(n)\to F(n)$, we have the map $\pi_k\Hom_*(F(n),X)\to v_n^{-1}\pi_k(X;F(n))$ an isomorphism for $k>d$. 
+	\end{prop}
+	\begin{proof}
+		We claim that the transition maps in the colimit 
+		\[ \Hom_*(F(n),X)\to\Hom_*(\Sigma^tF(n),X)\to\cdots \]
+		are homotopy equivalences after passing to the $(d+1)$-connective covers, which proves the assertion directly by passing to the colimit. We claim the identity component of the homotopy fiber, that is, the identity component of $\Hom_*(\cof(v_n),X)$ is $(d-1)$-truncated. To prove this, note that 
+		\[ \Omega^{d-1}\Hom_*(\cof(v_n),X)\simeq\Hom_*(\Sigma^{d-1}\cof(v_n),X)\simeq* \]
+		where the last equivalence is by the fact that $X$ is $\Sigma^{d-1}\cof(v_n)$-null, since $\type\Sigma^{d-1}\cof(v_n)\geq n+1$, and $\conn\Sigma^{d-1}\cof(v_n)\geq d$, and by \cref{Bousfield_thm} we have proven the result. 
+	\end{proof}
+
+	\begin{thm}\label{Tel_loc_equiv_crit}
+		Let $f:X\to Y$ be a map of pointed spaces. Then $L_{n,d}^f(f)$ is an equivalence iff for $0<m\leq n$, $f$ is a $v_m$-periodic equivalence and $(\pi_kX)_\mathbb{Q}\to(\pi_kY)_\mathbb{Q}$ is an equivalence for $k>d$. 
+	\end{thm}
+	\begin{proof}
+		$\implies$: The first condition follows from \cref{Pre_Bousfield_Kuhn_inv_tel_loc}, and the second follows from the fact that $\fib(f)$ must be $F(n+1,d)$-acyclic, hence must be rationally trivial on degree greater than $d$ (the degrees below $d$ are being removed in the construction). 
+
+		$\impliedby$: We apply induction on $n$. For the case where $n=0$, we have $L_0^f(X)\simeq(\tau_{\geq d+1}X)_\mathbb{Q}$, where the assumptions clearly imply $L_{n,d}^f(f)$ is an equivalence. For $n>0$, WLOG assume that $X$ and $Y$ are already $(d+1)$-connected, $p$-local and $F(n+1,d)$-null. Then by the assumption the fiber $F=\fib(f)$ is rationally trivial and $v_m$-periodic homotopy equivalent to a point for $0<m\leq n$. Let $F(n,d')$ be a type $n$ space of connectivity $d'$ equipped with a $v_n$-self map. By \cref{Periodic_homotopy_grp_equiv_d_conn}, the space $\Hom_*(F(n,d'),F)$ is $d$-truncated since it is $v_n$-homotopy equivalent to a point. By replacing $F(n,d')$ by a suitable suspension we may assume $\Hom_*(F(n,d'),F)\simeq*$. We moreover assume that $d'>d$. Therefore $F$ is $F(n,d')$-null. Then $\tau_{\geq d'+1}F$ is also $F(n,d')$-null since $\tau_{\geq d'+1}$ is a right adjoint, hence $\tau_{\geq d'+1}F$ can be regarded as an object in $L_{n-1}^f(\An_*)_{(p)}^{>d'}$. By the induction hypothesis on $n$, we conclude that $\tau_{\geq d'+1}F\simeq*$. Moreover, by assumption $\tau_{\geq d+1}F$ is rationally trivial and $F(n+1,d)$-null, by \cref{Tel_loc_conn_var_rational} we have $P_{F(n+1,d)}\tau_{\geq d'+1}F\simeq\tau_{\geq d+1}F$. Therefore we have $F$ is $d$-truncated. Moreover, since it is a fiber of a map of $d+1$-connective spaces, it must be $d$-connective. Therefore $F$ is concentrated at degree $d$, and hence $F\simeq K(G,d)$ for some $G$. Since $f$ is a rational equivalence on degree greater than $d$, $G$ must be torsion, and since $F$ is $p$-local, $G$ must be $p$-power torsion. Thus $K(G,d)$ is $F(n+1,d)$-periodic by \cref{Tel_loc_acyc_cond}. Thus $f$ is an equivalence since $X$ and $Y$ are $F(n+1,d)$-null. 
+	\end{proof}
+
+	\begin{coro}\label{Tel_loc_equiv_maps}
+		The functor $L_{n,d}^f:\An_*\to L_n^f(\An_*)_{(p)}^{>d}$ exhibits the category $L_n^f(\An_*)_{(p)}^{>d}$ as the localization of $\An_*$ with respect to the maps satisfying the conditions in \cref{Tel_loc_equiv_crit}. 
+	\end{coro}
+	\begin{proof}
+		Directly by the definition of localizations and \cref{Tel_loc_equiv_crit}. 
+	\end{proof}
+
+	\begin{lemma}\label{Pre_Bousfield_Kuhn_vanish_crit}
+		For a $F(n)$-null space $X$, we have $\Phi_{F(m)}(X)\simeq0$ for all $m>n$. 
+	\end{lemma}
+	\begin{proof}
+		By replacing $F(m)$ with a suspension, we may assume that the connectivity of $F(m)$ is greater than the connectivity of $F(n)$. Therefore by \cref{Bousfield_thm} we have $X$ is $F(m)$-null. Therefore the mapping space $\Hom_*(F(m),X)\simeq*$, and hence $\Phi_{F(m)}(X)\simeq0$. 
+	\end{proof}
+
+	\begin{defn}\label{Monochromatic_loc}
+		We let $\An_*^{v_n}$ be the full subcategory of $L_n^f(\An_*)_{(p)}^{>d}$ consisting of $F(n,d)$-periodic objects. Explicitly, $\An_*^{v_n}$ is the category of spaces that are $(d+1)$-connective, $p$-local, $F(n+1,d)$-null, and $F(n,d)$-periodic. 
+
+		We define a localization functor $M_n^f:\An_*\to\An_*^{v_n}$ by 
+		\[ X\mapsto\tau_{\geq d+1}\fib(P_{F(n+1,d)}(\tau_{\geq d+1}X_{(p)})\to P_{F(n,d)}(\tau_{\geq d+1}X_{(p)})) \]
+	\end{defn}
+
+	\begin{coro}\label{Monochromatic_loc_v_n_equiv}
+		A morphism in $\An_*^{v_n}$ is an equivalence iff it is an $v_n$-periodic homotopy equivalence. 
+	\end{coro}
+	\begin{proof}
+		By \cref{Tel_loc_equiv_crit}. 
+	\end{proof}
+
+	\begin{coro}\label{Monochromatic_loc_equiv_maps}
+		The functor $M_n^f:\An_*\to\An_*^{v_n}$ exhibits $\An_*^{v_n}$ as the localization of $\An_*$ with respect to the $v_n$-periodic equivalences. 
+	\end{coro}
+	\begin{proof}
+		Directly by \cref{Monochromatic_loc_v_n_equiv}
+	\end{proof}
+
+	\begin{coro}\label{Tel_susp_loop}
+		The stabilization $\Sp(\An_*^{v_n})$ can be identified with $\Sp_{T(n)}$. We denote the associated suspension spectrum and infinite loopspace functor by $\Sigma^\infty_{T(n)}$ and $\Omega^\infty_{T(n)}$. Moreover, we have $\Sigma^\infty_{T(n)}\simeq L_{T(n)}\Sigma^\infty$ (under a certain inclusion $\An_*^{v_n}\inj\An_*$) and $\Omega^\infty_{T(n)}\simeq\Omega^\infty\circ\tau_{\geq d_{n+1}+1}$, where $d_{n+1}$ depends on the inclusion chosen $\An_*^{v_n}\inj\An_*$. 
+	\end{coro}
+	\begin{proof}
+		By verifying universal properties, $\Sp(\mathcal{C}[W^{-1}])$ can be identified with the category \\
+		$\Sp(\mathcal{C})[\Sigma^\infty W^{-1}]$. Therefore $\Sp(\An_*^{v_n})$ is the category obtained by inverting the $v_n$-periodic equivalences in $\Sp$, which is obviously $\Sp_{T(n)}$. 
+	\end{proof}
+
+	The above corollary shows that the nature of the category $\An_*^{v_n}$ do not depend on the value of $d$ in $L_n^f(\An_*)_{(p)}^{>d}$, since $\An_*^{v_n}$ is uniquely determined by its universal property as a localization. However, what $d$ does affect is the inclusion functor $\An_*^{v_n}\inj\An_*$, which must have image in $(d+1)$-connected spaces. 
+
+	\begin{thm}\label{Pre_Bousfield_Kuhn_inv_mono_loc}
+		Let $F(n)$ be a type $n$ space equipped with a $v_n$-self map. Then the natural transformation $X\to M_n^fX$ induces an equivalence $\Phi_{F(n)}(X)\to\Phi_{F(n)}(M_n^fX)$. 
+	\end{thm}
+	\begin{proof}
+		Recall in \cref{Pre_Bousfield_Kuhn_inv_tel_loc}, the natural transformations $X\to P_AX$, $X\to X_{(p)}$, and $\tau_{\geq d+1}X\to X$ are send to equivalences by $\Phi_{F(n)}$. Therefore it suffices to show that for a $F(n+1,d)$-null space $X$, the construction $X\mapsto\fib(X\to P_{F(n,d)}X)$ does not change the $v_n$-periodic homotopy groups of $X$, which is obvious since $P_{F(n,d)}X$ has trivial $v_n$-periodic homotopy groups. 
+	\end{proof}
+
+\section{The construction of the Bousfield Kuhn functor}
+
+	In the last chapter we introduced the notion $\Phi_{F(n)}(X)$, which is exactly the information of the $v_n$-periodic homotopy groups of $X$. However, this construction (and also the $v_n$-periodic homotopy groups) depend on the choice of the type $n$ $p$-local space $F(n)$. In this section, we introduce the notion of the Bousfield-Kuhn functor, which unifies the construction $\Phi_{F(n)}(X)$. Namely, we prove the following theorem. 
+	
+	\begin{thm}\label{Bousfield_Kuhn_fun}
+		There is a unique functor $\Phi:\An_*\to\Sp_{T(n)}$ such that for any finite $p$-local type $n$ space $F(n)$, we have $\Phi_{F(n)}(X)\simeq\Map(F(n),\Phi(X))$. 
+	\end{thm}
+	\begin{proof}
+		We firstly notice that the notion $\Phi_{F(n)}(X)$ can be extended naturally to a functor $\Phi_-(-):(\Sp_n)^{\op}\to\Fun(\An_*,\Sp_{T(n)})$, where $\Sp_n$ is the subcategory of $p$-local finite spectra of type $\geq n$. This is essentially by \cref{Pre_Bousfield_Kuhn_susp_power} and \cref{Periodicity_thm_lem_5}. Then we consider $F:(\Sp_\mathrm{fin})^{\op}\to\Fun(\An_*,\Sp_{T(n)})$ as the right Kan extension of $\Phi_-(-)$. Since $\Sp_{T(n)}$ is closed under limits, the right Kan extension is well defined. Then we let $\Phi=F(\mathbb{S}_{(p)})$, namely by the construction of the right Kan extension, 
+		\[ \Phi(X)=\plim\Phi_E(X) \]
+		where the limit is taken on the over category $(\Sp_n^{\op})_{\mathbb{S}_{(p)}/}$. Then by \cref{Pre_Bousfield_Kuhn_cofib}, we have $\Phi_-(-):(\Sp_n)^{\op}\to\Fun(\An_*\to\Sp_{T(n)})$ is left exact. Therefore $F$ is also left exact, and since 
+		\[ F(\mathbb{S}_{(p)})(X)=\Phi(X)\simeq\Map(\mathbb{S}_{(p)},\Phi(X)) \]
+
+		By the definition of the Kan extension and the definition of extension by limits we have 
+		\[ F(F(n))(X)=\Phi_{F(n)}(X)=\Map(F(n),\Phi(X)) \]
+
+		Then we prove uniqueness. Suppose $\Phi':\An_*\to\Sp_{T(n)}$ is another functor satisfying the given conditions, then let $F':(\Sp_{\mathrm{fin}})^{\op}\to\Fun(\An_*,\Sp_{T(n)})$ by letting $F'(E)(X)=\Map(E,\Phi'(X))$. Then by the universal property of the Kan extension we obtain a natural transformation $F'\to F$, which is an equivalence on the full subcategory spanned by spectra of type $\geq n$. Therefore for some type $n$ spectrum $F(n)$, we have $\Map(F(n),\Phi(X))\simeq\Map(F(n),\Phi'(X))$. By taking duals we have $\dual F(n)\otimes\Phi(X)\simeq \dual F(n)\otimes\Phi'(X)$. By passing to the colimit we have $\Phi(X)\to\Phi'(X)$ is a $T(n)$-equivalence. But since both $\Phi(X)$ and $\Phi'(X)$ are $T(n)$-local, they must be equivalent. 
+	\end{proof}
+
+	\begin{remark}
+		In practice, we often find a cofinal system of type $n$ spectra 
+		\[ E_0\to E_1\to\cdots \]
+		among all type $n$ spectra with a map to $\mathbb{S}_{(p)}$, and use $\plim_k\Phi_{E_k}(X)$ to calculate $\Phi(X)$. 
+	\end{remark}
+
+	\begin{prop}\label{Bousfield_Kuhn_lex}
+		The functor $\Phi:\An_*\to\Sp_{T(n)}$ is left exact. 
+	\end{prop}
+	\begin{proof}
+		It suffices to prove $\Phi_{F(n)}:\An_*\to\Sp_{T(n)}$ is left exact, where $F(n)$ is some type $n$ space with a $v_n$-self map. Since limits of spectra are computed spacewise, it suffices to prove $\Omega^{\infty+k}\Phi_{F(n)}$ is left exact. Then since $\Phi_{F(n)}$ is a periodic spectrum, it suffices to show $\Omega^\infty\Phi_{F(n)}$ is left exact. But by construction, 
+		\[ \Omega^\infty\Phi_{F(n)}X=\ilim(\Hom_*(F(n),X)\to\Hom_*(\Sigma^tF(n),X)\to\cdots) \]
+		which is clearly right exact since finite limits commutes with filtered colimits. 
+	\end{proof}
+
+	\begin{prop}\label{Bousfield_Kuhn_v_n_equiv}
+		A map $f:X\to Y$ of pointed spaces is a $v_n$-periodic homotopy equivalence iff $\Phi(f):\Phi(X)\to\Phi(Y)$ is an equivalence. 
+	\end{prop}
+	\begin{proof}
+		$\implies$ is obvious since by definition $v_n$-periodic homotopy equivalences are the maps send by $\Phi_{F(n)}$ to equivalences. Therefore by passing to limits we have $\Phi(f)$ an equivalence. 
+
+		$\impliedby$ is also obvious since $\Phi_{F(n)}(X)\simeq\Map(F(n),\Phi(X))$. 
+	\end{proof}
+	
+	\begin{coro}\label{Bousfield_Kuhn_source_v_n}
+		The functor $\Phi:\An_*\to\Sp_{T(n)}$ factors through the localization $\An_*\to\An_*^{v_n}$. 
+	\end{coro}
+	\begin{proof}
+		Directly by \cref{Monochromatic_loc_v_n_equiv} and \cref{Bousfield_Kuhn_v_n_equiv}. 
+	\end{proof}
+
+	\begin{thm}\label{Bousfield_Kuhn_adjoint}
+		The functor $\Phi:\An_*^{v_n}\to\Sp_{T(n)}$ admits a left adjoint $\Theta:\Sp_{T(n)}\to\An_*^{v_n}$. 
+	\end{thm}
+	\begin{proof}
+		By the construction of $\Phi$ as a right Kan extension, it suffices to prove $\Phi_{F(n)}$ for $F(n)$ a type $n$ space with a $v_n$-self map $v_n:\Sigma^tF(n)\to F(n)$ has a left adjoint $\Theta_{F(n)}$ (then we may construct $\Theta$ as a colimit of $\Theta_{F(n)}$). Explicitly, we show that for each spectrum $Z$, the functor $X\mapsto\Hom(Z,\Phi_{F(n)}(X))$ is corepresented by some $\Theta_{F(n)}(Z)\in\An_*^{v_n}$. 
+
+		Since left adjoints preserves colimits, it suffices to prove $\Theta_{F(n)}(Z)$ exists for $Z=\mathbb{S}^{kt}$ with $k$ any integer (possibly negative). Using $t$-periodicity of $\Phi_{F(n)}(X)$ it suffices to prove the case for $Z=\mathbb{S}$, that is, the functor $X\mapsto\Omega^\infty\Phi_{F(n)}(X)$ is corepresentable. But by \cref{Periodic_homotopy_grp_equiv_d_conn} we have the sequence 
+		\[ \Hom_*(F(n),X)\to\Hom_*(\Sigma^tF(n),X)\to\cdots \]
+		is eventually constant since it is constant after taking a $d$-connective cover for a $F(n+1,d)$-null space $X$. Thus we only need to show that the functor $X\mapsto\Hom_*(\Sigma^{ct}F(n),X)$ is corepresentable for some $c\gg0$ (since $X\in\An_*^{v_n}$, which is also why the theorem does not hold if we regard $\Phi$ as a functor $\An_*\to\Sp$). 
+
+		We claim this is corepresented by $P_{F(n+1,d)}(\Sigma^{ct}F(n))$. This space obviously lies in \\
+		$L_n^f(\An_*)_{(p)}^{>d}$, and for $c\gg0$, $P_{F(n,d)}(\Sigma^{ct}F(n))\simeq*$ by \cref{Bousfield_thm} and the definition of the unstable Bousfield class. Hence $P_{F(n+1,d)}(\Sigma^{ct}F(n))\in\An_*^{v_n}$, and represents the functor, which proves the theorem. 
+	\end{proof}
+
+	The most fundamental property of the Bousfield Kuhn functor is that the $T(n)$-localization functor of spectra factors through it. 
+	
+	\begin{thm}\label{Bousfield_Kuhn_tel_loc_fac}
+		Let $X$ be a spectrum. Then we have a canonical equivalence $\Phi\Omega^\infty(X)\simeq L_{T(n)}(X)$. 
+	\end{thm}
+	\begin{proof}
+		We first calculate $\Phi_{F(n)}\Omega^\infty(X)$ where $F(n)$ is a type $n$ space equipped with a $v_n$-self map. We have 
+		\begin{align*}
+			&\Omega^\infty\Phi_{F(n)}(\Omega^\infty X) \\
+			\simeq&\ilim(\Hom_*(F(n),\Omega^\infty X)\to\Hom_*(\Sigma^tF(n),\Omega^\infty X)\to\cdots) \\
+			\simeq&\ilim(\Hom(\Sigma^\infty F(n),X)\to\Hom(\Sigma^{\infty+t}F(n),X)\to\cdots) \\
+			\simeq&\ilim(\Omega^\infty D\Sigma^\infty F(n)\otimes X\to\Omega^{\infty-t}D\Sigma^\infty F(n)\otimes X\to\cdots) \\
+			\simeq&\Omega^\infty \dual F(n)[v_n^{-1}]\otimes X \\
+			\simeq&\Omega^\infty \dual F(n)[v_n^{-1}]\otimes L_{T(n)}X 
+		\end{align*}
+		where the fourth equivalence is since $\Omega^\infty$, as a right adjoint, commutes with filtered colimits, and the final equivalence is since $\dual F(n)[v_n^{-1}]$ is a telescope of type $n$, hence $\dual F(n)[v_n^{-1}]$ calculates the $T(n)$-homology of $X$ for some $X$, hence it is safe to replace $X$ by $L_{T(n)}(X)$. However, when $X$ is itself $T(n)$-local, the sequence 
+		\[ \Hom(\Sigma^\infty F(n),X)\to\Hom(\Sigma^{\infty+t}F(n),X)\to\cdots \]
+		is actually constant since the fiber of the map is $\Hom(\Sigma^\infty F(n)/v_n,X)$, and the previous spectrum is a spectrum of type $n+1$, and since $X$ is $T(n)$-local hence $F(n+1)$-null, this fiber is null. Therefore we have 
+		\[ \Omega^\infty\Phi_{F(n)}(\Omega^\infty X)\simeq\Omega^\infty\Map(\Sigma^\infty F(n),L_{T(n)}X) \]
+		and since both sides are periodic, we have $\Phi_{F(n)}(\Omega^\infty X)\simeq\Map(\Sigma^\infty F(n),L_{T(n)}X)$. This clearly holds after replacing $\Sigma^\infty F(n)$ by any type $n$ spectrum. 
+
+		Thus the conclusion follows from 
+		\[ \Phi(\Omega^\infty X)\simeq\plim_E\Phi_E(\Omega^\infty X)\simeq\plim_E\Map(E,L_{T(n)}X)\simeq L_{T(n)}X \]
+	\end{proof}
+
+	\begin{coro}\label{Bousfield_Kuhn_susp_loop_adj}
+		We have two pairs of adjunctions 
+		% https://q.uiver.app/#q=WzAsMyxbMiwwLCJcXFNwX3tUKG4pfSJdLFsxLDAsIlxcQW5fKl57dl9ufSJdLFswLDAsIlxcU3Bfe1Qobil9Il0sWzAsMSwiXFxPbWVnYV5cXGluZnR5X3tUKG4pfSIsMCx7Im9mZnNldCI6LTF9XSxbMSwyLCJcXFBoaSIsMCx7Im9mZnNldCI6LTF9XSxbMiwxLCJcXFRoZXRhIiwwLHsib2Zmc2V0IjotMX1dLFsxLDAsIlxcU2lnbWFeXFxpbmZ0eV97VChuKX0iLDAseyJvZmZzZXQiOi0xfV1d
+		\[\begin{tikzcd}[ampersand replacement=\&]
+			{\Sp_{T(n)}} \& {\An_*^{v_n}} \& {\Sp_{T(n)}}
+			\arrow["\Theta", shift left, from=1-1, to=1-2]
+			\arrow["\Phi", shift left, from=1-2, to=1-1]
+			\arrow["{\Sigma^\infty_{T(n)}}", shift left, from=1-2, to=1-3]
+			\arrow["{\Omega^\infty_{T(n)}}", shift left, from=1-3, to=1-2]
+		\end{tikzcd}\]
+		such that the horizontal compositions are the identities. 
+	\end{coro}
+	\begin{proof}
+		\cref{Bousfield_Kuhn_tel_loc_fac} implies that the bottom composition is the identity, and the top row is left adjoint to the bottom row, hence the identity. 
+	\end{proof}
+
+\section{Monadicity of the Bousfield Kuhn functor}
+
+	We first recall a few facts on monads. 
+
+	\begin{defn}\label{Infty_monads}
+		Recall that traditionally (or in the 1-categorical sense), a monad on a 1-category $\mathcal{C}$ is an endofunctor $T:\mathcal{C}\to\mathcal{C}$ equipped with a natural transformation $\mu:T\circ T\to T$ and a natural transformtion $\eta:\id_\mathcal{C}\to T$ such that the following diagrams commute. 
+		% https://q.uiver.app/#q=WzAsOCxbMCwwLCJUXFxjaXJjIFRcXGNpcmMgVCJdLFsxLDAsIlRcXGNpcmMgVCJdLFswLDEsIlRcXGNpcmMgVCJdLFsxLDEsIlQiXSxbMiwwLCJUIl0sWzMsMCwiVFxcY2lyYyBUIl0sWzQsMCwiVCJdLFszLDEsIlQiXSxbMCwxLCJcXG11XFxjaXJjIDFfVCJdLFsxLDMsIlxcbXUiXSxbMCwyLCIxX1RcXGNpcmMgXFxtdSIsMl0sWzIsMywiXFxtdSIsMl0sWzQsNSwiMV9UXFxjaXJjXFxldGEiXSxbNSw3LCJcXG11IiwyXSxbNiw1LCJcXGV0YVxcY2lyYyAxX1QiLDJdLFs2LDcsIjFfVCJdLFs0LDcsIjFfVCIsMl1d
+		\[\begin{tikzcd}[ampersand replacement=\&]
+			{T\circ T\circ T} \& {T\circ T} \& T \& {T\circ T} \& T \\
+			{T\circ T} \& T \&\& T
+			\arrow["{\mu\circ 1_T}", from=1-1, to=1-2]
+			\arrow["{1_T\circ \mu}"', from=1-1, to=2-1]
+			\arrow["\mu", from=1-2, to=2-2]
+			\arrow["{1_T\circ\eta}", from=1-3, to=1-4]
+			\arrow["{1_T}"', from=1-3, to=2-4]
+			\arrow["\mu"', from=1-4, to=2-4]
+			\arrow["{\eta\circ 1_T}"', from=1-5, to=1-4]
+			\arrow["{1_T}", from=1-5, to=2-4]
+			\arrow["\mu"', from=2-1, to=2-2]
+		\end{tikzcd}\]
+		where $1_T$ denotes the trivial natural transformation $1_T:T\to T$ given by $\id$. Finally, an algebra of a monad is an object of $\mathcal{C}$, say $X$, equipped with a morphism $m:TX\to X$ such that the following diagrams commute 
+		% https://q.uiver.app/#q=WzAsNyxbMCwwLCJUXFxjaXJjIFRYIl0sWzEsMCwiVFgiXSxbMCwxLCJUWCJdLFsxLDEsIlgiXSxbMiwwLCJYIl0sWzMsMCwiVFgiXSxbMywxLCJYIl0sWzAsMSwiXFxtdVxcY2lyYyAxX1giXSxbMSwzLCJtIl0sWzAsMiwiMV9UXFxjaXJjIG0iLDJdLFsyLDMsIm0iLDJdLFs0LDUsIlxcZXRhX1giXSxbNSw2LCJtIl0sWzQsNiwiMV9YIiwyXV0=
+		\[\begin{tikzcd}[ampersand replacement=\&]
+			{T\circ TX} \& TX \& X \& TX \\
+			TX \& X \&\& X
+			\arrow["{\mu\circ 1_X}", from=1-1, to=1-2]
+			\arrow["{1_T\circ m}"', from=1-1, to=2-1]
+			\arrow["m", from=1-2, to=2-2]
+			\arrow["{\eta_X}", from=1-3, to=1-4]
+			\arrow["{1_X}"', from=1-3, to=2-4]
+			\arrow["m", from=1-4, to=2-4]
+			\arrow["m"', from=2-1, to=2-2]
+		\end{tikzcd}\]
+		where $1_X$ is the identity map on $X$. 
+
+		The constructions immediately generalizes to $\infty$-categories. Note that the above definitions abstracts to the following. Let $\mathcal{C}$ be an $\infty$-category, then $\Fun(\mathcal{C},\mathcal{C})\simeq\Hom_{\Cat}(\mathcal{C},\mathcal{C})$ has a tautological structure of an $\mathbb{E}_1$ monoidal category with tensor product given by composition of functors (here $\Cat$ is regarded as a $(\infty,2)$-category). Then $\mathcal{C}$ is a category left tensored over $\Fun(\mathcal{C},\mathcal{C})$ given by applying an endofunctor on an object. Therefore, the above definition of monads generalizes as follows. We define a monad $T$ on a category $\mathcal{C}$ to be an $\mathbb{E}_1$-algebra in $\Fun(\mathcal{C},\mathcal{C})$, and a $T$-algebra $X$ to be an object of $\LMod_T(\mathcal{C})$. 
+	\end{defn}
+
+	\begin{const}\label{Adj_EM_K_fun_defn}
+		For a monad $T$ on $\mathcal{C}$, notice that we have the following adjunction 
+		\[ T:\mathcal{C}\adj\LMod_T(\mathcal{C}):U \]
+		which also recovers the monad by the composition $UT$.  
+		For a pair of adjunction $F:\mathcal{C}\adj\mathcal{D}:G$, we have $GF$ a monad on $\mathcal{C}$, with its category of algebras equivalent to the essential image of $G$. 
+
+		Explicitly, the $\mathbb{E}_1$-algebra structure of $GF$ has the multiplication map $1_G\circ\varepsilon\circ 1_F:GFGF\to GF$ and the unit map $\eta:\id_\mathcal{C}\to GF$. Furthermore, notice that for any element $Y\in\mathcal{D}$, $GY$ is a $GF$-algebra with the action given by $1_G\circ\varepsilon\circ 1_Y:GFGY\to GY$. Hence $G$ upgrades to a comparison functor (the Eilenberg-Moore functor) $E:\mathcal{D}\to\LMod_{GF}(\mathcal{C})$, and we say $GF$ is monadic iff the previous comparison functor is an equivalence. 
+
+		We have the further definition of the Kleisli category, or the category of free $GF$-modules $\LMod_{GF}^{\mathrm{free}}(\mathcal{C})$, defined to be the full subcategory of $\LMod_{GF}(\mathcal{C})$ consisting of the $GF$-modules of the form $GFX$ equipped with the natural module structure. By the definition of adjunctions, a morphism of $GF$-modules $GFX\to GFY$ is equivalent to the data of a morphism $X\to GFY$ as objects of $\mathcal{C}$. Therefore, the Kleisli category is equivalent to a category having the same objects as $\mathcal{C}$, and a morphism $X\to Y$ is defined to be a morphism $X\to GFY$ in $\mathcal{C}$ (this reduces our construction to the usual construction of Kleisli categories). This allows us to define a map 
+		\[ K:\LMod_{GF}^{\mathrm{free}}(\mathcal{C})\to\mathcal{D} \] 
+		given by sending an object $X\in\LMod_{GF}^{\mathrm{free}}(\mathcal{C})$ via the second construction as an object in $\mathcal{C}$ to $FX$, and a morphism $X\to Y$ regarded as a morphism $X\to GFY$ is send to $FX\to FY$ given by the defintion of adjunctions. By this identification we have obviously that $K$ is fully faithful. 
+
+		In the aobve constructions, we see that we have $E\circ K:\LMod_{GF}^{\mathrm{free}}(\mathcal{C})\to\LMod_{GF}(\mathcal{C})$ is naturally equivalent to the inclusion functor of the free modules into all modules. In particular, $E\circ K$ is fully faithful. 
+	\end{const}
+
+	We have the following fundamental theorem of Barr-Beck on the monadicity of adjoint functors, generalized by Lurie to the $\infty$-categorical case, whose proof we will omit. 
+
+	\begin{thm}[Barr-Beck-Lurie]\label{Barr_Beck_Lurie}
+		The adjunction $F:\mathcal{C}\adj\mathcal{D}:G$ is monadic iff the two following conditions holds. 
+		\begin{enumerate}
+			\item $G$ is conservative. 
+			\item For a simplicial object $V$ of $\mathcal{D}$, if it is send to a split simplicial object in $\mathcal{C}$ by $G$, then it admit a colimit in $\mathcal{D}$, and this colimit is preserved by $G$. 
+		\end{enumerate}
+		In particular, if $\mathcal{D}$ admits all geometric realizations, all of which is preserved by $G$, then the second condition clearly holds. 
+	\end{thm}
+
+	We can now state the first main result of this review. 
+
+	\begin{thm}[Eldred-Heuts-Mathew-Meier]\label{Monadicity_Bousfield_Kuhn}
+		The adjunction $\Theta:\Sp_{T(n)}\adj\An_*^{v_n}:\Phi$ is monadic. 
+	\end{thm}
+
+	Before this, we need some lemmas on geometric realizations. 
+
+	\begin{lemma}\label{Bousfield_Friedlander_crit}
+		For a diagram of simplicial spaces $X_\bullet\to B_\bullet\from Y_\bullet$ with $B_n$ is connected for all $n$, then the natural map $|X_\bullet\times_{B_\bullet}Y_\bullet|\to|X_\bullet|\times_{|B_\bullet|}|Y_\bullet|$ is an equivalence. 
+	\end{lemma}
+	\begin{proof}
+		This is a famous result called the Bousfield-Friedlander criterion in simplicial homotopy theory, hence we will omit the proof here. \todo{Reference!}
+	\end{proof}
+
+	\begin{lemma}\label{Hom_geom_realization}
+		Let $V\in\An_*$ be a finite $d$-dimensional CW complex. Then the functor $\Hom_*(V,-):\An_*^{\geq d}\to\An_*$ preserves geometric realizations. 
+	\end{lemma}
+	\begin{proof}
+		Consider a simplicial space $X_\bullet$ with each $X_n$ $d$-connective. Then we consider the collection $T$ of all finite spaces $V$ such that $|\Hom_*(V,X_\bullet)|\simeq\Hom_*(V,|X_\bullet|)$. Note that the category $\An_*$ is a topos, and hence $T$ is closed under coproducts (wedge sums). 
+
+		We apply induction to show all spaces of dimension $\leq d$ is in $T$. Firstly by definition $S^0\in T$, and since $T$ is closed under wedge sums, $0$-dimensional spaces are all in $T$. Assume now that for $n\leq d-1$ that all $n$-dimensional spaces are in $T$, then for any space $Y$ of dimension $n+1$, we have a cofiber sequence $\bigvee S^n\to\tau_{\leq n}Y\to Y$. Moreover, since $n\leq d-1$, $\Hom_*(S^n,X_\bullet)$ is connected, and hence by \cref{Bousfield_Friedlander_crit} and that $\bigvee S^n$ and $\tau_{\leq n}Y$ are in $T$, we have $Y\in T$. 
+	\end{proof}
+
+	\begin{proof}
+		We now apply \cref{Barr_Beck_Lurie} to prove \cref{Monadicity_Bousfield_Kuhn}. Firstly $\Phi$ is conservative by \cref{Bousfield_Kuhn_v_n_equiv} and \cref{Monochromatic_loc_v_n_equiv}. Hence it suffices to prove that $\Phi$ preserves geometric realizations. 
+
+		First note that the colimit in $\Sp_{T(n)}$ is obtained by first taking the colimit in $\Sp$ then take the $T(n)$-localization. This allows us to regard $\Phi$ as a functor $\An_*^{v_n}\to\Sp$. Let $X_\bullet$ be a simplicial object in $\An_*^{v_n}$, we prove $|\Phi(X_\bullet)|\to\Phi(|X_\bullet|)$ is a $T(n)$-equivalence. Since $T(n)$ can be obtained by inverting the $v_n$-self map of any type $n$ spectrum, and the dual of a type $n$ spectrum is still type $n$, it suffices to prove 
+		\[ \Map(F(n),|\Phi(X_\bullet)|)\to\Map(F(n),\Phi(|X_\bullet|)) \] 
+		is an equivalence. Now since in the category of spectra fiber sequences coincide with the cofiber sequences, the fact that geometric realization is a colimit and hence preserves every colimit implies that it commutes with finite limits. Now $\Map(F(n),-)$ is a finite limit since $F(n)$ is finite, hence the left hand side can be identified with $|\Map(F(n),\Phi(X_\bullet))|$. Therefore it suffices to prove 
+		\[ |\Map(F(n),\Phi(X_\bullet))|to\Map(F(n),\Phi(|X_\bullet|)) \]
+		is an equivalence. By \cref{Bousfield_Kuhn_fun} and choosing $F(n)$ to be of the form $\Sigma^\infty F(n)$ for a type $n$ space $F(n)$, it suffices to prove 
+		\[ |\Phi_{F(n)}(X_\bullet)|\to\Phi_{F(n)}(|X_\bullet|) \]
+		is an equivalence. Then, notice that the subcategory $\An_*^{v_n}\subseteq L_n^f(\An_*)_{(p)}^{>d}$ is closed under colimits, and the colimits in $L_n^f(\An_*)_{(p)}^{>d}$ are computed by first taking the colimits in $\An_*$ and then take the localization $L_{n,d}^f$. Finally we notice that the map $L_{n,d}^f:(\An_*)_{(p)}^{>d}\to L_n^f(\An_*)_{(p)}^{>d}$ induces an equivalence on $v_n$-periodic homotopy, hence induces an equivalence after applying $\Phi_{F(n)}$. Therefore it suffices to show that $\Phi_{F(n)}:(\An_*)_{(p)}^{>d}\to\Sp$ preserves geometric realizations for some chosen $d$. 
+
+		Finally we expand the definition of $\Phi_{F(n)}(X_\bullet)$ for $X_n\in(\An_*)_{(p)}^{>d}$. Suppose that the $v_n$-self map of $F(n)$ is $v_n:\Sigma^tF(n)\to F(n)$, we notice that 
+		\[ \Phi_{F(n)}(X_\bullet)\simeq\ilim(\tau_{\geq0}\Phi_{F(n)}(X_\bullet)\to\Omega^t\tau_{\geq0}\Phi_{F(n)}(X_\bullet)\to\cdots) \]
+		hence it suffices to see that $\tau_{\geq0}\Phi_{F(n)}$ preserves geometric realizations. But note that the category of $\mathbb{E}_\infty$-groups are closed under filtered colimits as the subcategory of $\An_*$, hence under the identification of the category of connective spectra and $\mathbb{E}_\infty$-groups, and the fact that 
+		\[ \tau_{\geq0}\Phi_{F(n)}(X_\bullet)\simeq B^\infty\ilim(\Hom_*(F(n),X_\bullet)\to\Hom_*(\Sigma^tF(n),X_\bullet)\to\cdots) \]
+		it suffices to show 
+		\[ |\Hom_*(F(n),X_\bullet)|to\Hom_*(F(n),|X_\bullet|) \]
+		is an isomorphism. But since the category $\An_*^{v_n}$ is independent of the choice of $d$ in $L_n^f(\An_*)_{(p)}^{>d}$, we may choose $d\gg0$ such that $d>\dim F(n)$, and hence the theorem follows from \cref{Hom_geom_realization}
+	\end{proof}
+
+	As a direct corollary, $\Theta$ computes the free algebra (of the monad $\Phi\Theta$) of a $T(n)$-local spectra. Therefore the computation of the functor $\Theta$ may appear as an important question. In fact, for a $T(n)$-local finite spectrum, we have the following way of computing $\Theta$. 
+
+	\begin{prop}\label{Val_theta_fin_sp}
+		Let $F(n)$ be a $(d-2)$-connected finite space of type $n$ with a $v_n$-self map $v:\Sigma^tF(n)\to F(n)$, then we have a canonical equivalence 
+		\[ \Theta(L_{T(n)}\Sigma^{\infty+2}F(n))\simeq L_{n,d}^f\Sigma^2F(n) \]
+	\end{prop}
+	\begin{proof}
+		Consider the space $F(n)/v$. Then by \cref{Bousfield_thm}, $\Sigma^iF(n)/v$ a suspension space having type $n+1$ and connectivity $d+i-1$, hence it is $F(n,d)$-periodic. Thus
+		\[ \Hom_*(L_{n,d}^f\Sigma^iF(n)/v,X)\simeq\Hom_*(\Sigma^iF(n)/v,X)\simeq* \]
+
+		Then consider the cofiber sequence 
+		\[ \Sigma F(n)/v\to\Sigma^{t+2}F(n)\to\Sigma^tF(n)\to\Sigma^2F(n)/v \]
+
+		Let $X\in\An_*^{v_n}$. By the above, we have 
+		\[ \Hom_*(\Sigma^2F(n),X)\simeq\Hom_*(\Sigma^{t+2}F(n),X)\simeq\cdots \]
+
+		Thus for any $X\in\An_*^{v_n}$, we have 
+		\begin{align*}
+			&\Hom_*(\Theta(L_{T(n)}\Sigma^{\infty+2}F(n)),X) \\
+			\simeq&\Hom(L_{T(n)}\Sigma^{\infty+2}F(n),\Phi(X)) \\
+			\simeq&\Omega^\infty\Phi_{\Sigma^2F(n)}(X) \\
+			\simeq&\Hom_*(\Sigma^2F(n),X) \\
+			\simeq&\Hom_*(L_{n,d}^f\Sigma^2F(n),X)
+		\end{align*}
+	\end{proof}
+
+\section{Calculus and dual calculus of functors}
+
+	Recall that we have the general philosophy that there is a monoidal (not generally fully faithful) embedding $\Fun(\Core\Fin,\mathcal{C})\to\Fun(\mathcal{C},\mathcal{C})$ given by 
+	\[ C\mapsto(X\mapsto\bigoplus(C(n)\otimes X^{\otimes n})_{hS_n}) \] 
+	for any category $\mathcal{C}$. Thus given an operad in the classical sense, that is, a symmetric sequence $C\in\Fun(\Core\Fin,\mathcal{C})$ which is a $\mathbb{E}_1$-monoid under the composition product, it gives rise to a monad. The essense of (dual) Goodwillie calculus which is used here finds, in some sense, adjoints to this construction. In this section, $\mathcal{C}$ and $\mathcal{D}$ are \emph{pointed} (or even stable) categories good enough so that they have all limits and colimits that are possibly implicitly needed in the conditions. 
+
+	\begin{defn}\label{Tot_fib}
+		For an $S$-cube $X:P(S)\to\mathcal{C}$, we define its total fiber 
+		\[ \tfib X=\fib(X(\varnothing)\to\plim_{T\subseteq S,T\neq\varnothing}X(T)) \]
+		and dually its total cofiber 
+		\[ \tcof X=\cof(\ilim_{T\subseteq S,T\neq S}X(T)\to X(S)) \]
+	\end{defn}
+
+	\begin{coro}\label{Tot_fib_iterative}
+		The construction of total (co)fibers are iterative. That is, given a cube $X:P(S)\to\mathcal{C}$ and $s\in S$, we have $\tfib(X)$ identified with the total fiber of the following cube 
+		\[ Y:P(S-\{s\})\to\mathcal{C}, Y(T)=\fib(Y(T)\to Y(T\cup\{s\})) \]
+
+		The dual statement holds for the total cofiber. 
+	\end{coro}
+	\begin{proof}
+		By directly verifying the universal property. 
+	\end{proof}
+
+	\begin{defn}\label{Exc_fun}
+		Consider a finite set $S$, and let $P(S)$ be the poset of subsetes of $S$ ordered by inclusion. We define $P_{\leq i}(S)$ to be the subset of $P(S)$ consisting of subsets having cardinality smaller or equal than $i$ and $P_{>i}(S)$ to be the subset of $P(S)$ consisting of subsets having cardinality greater than $i$. 
+
+		We define an $S$-cube $F:P(S)\to\mathcal{C}$ (where $S$ is a finite set) to be strongly coCartesian if it is the left Kan extension of the subdiagram $F:P_{\leq 1}(S)\to\mathcal{C}$. We define a cube to be Cartesian if it is the right Kan extension of the subdiagram $F:P_{>0}(S)\to\mathcal{C}$. 
+
+		We define a functor $F:\mathcal{C}\to\mathcal{D}$ to be $n$-excisive if it takes strongly coCartesian $[n]$-cubes to Cartesian $[n]$-cubes (here $[n]=\{0,1,\cdots,n\}$). Clearly we have a functor is $n$-excisive implies that it is $n+1$-excisive. We define the full subcategory $\Exc_n(\mathcal{C},\mathcal{D})$ to be the full subcategory of $\Fun(\mathcal{C},\mathcal{D})$ spanned by the $n$-excisive functors. 
+
+		Also, we form the dual of the above construction. We have the dual definition of strongly Cartesian cubes and coCartesian cubes. We define a functor to be $n$-coexcisive if it takes strongly Cartesian $[n]$-cubes to coCartesian $[n]$-cubes. Dually we also have a functor is $n$-coexcisive implies that it is $n+1$-excisive. We define the category of coexcisive functors to be $\Exc^n(\mathcal{C},\mathcal{D})$. 
+
+%		We have left adjoints and right adjoints to the inclusion of the excisive and coexcisive functors into the category of all functors, which we denote by $P_k:\Fun(\mathcal{C},\mathcal{D})\to\Exc_n(\mathcal{C},\mathcal{D})$ and $P^k:\Fun(\mathcal{C},\mathcal{D})\to\Exc^n(\mathcal{C},\mathcal{D})$. 
+		Note that when $\mathcal{C}$ and $\mathcal{D}$ are both stable, the notion of excisive and coexcisive functors coincide. 
+	\end{defn}
+
+	As we are working with functors $F:\Sp_{T(n)}\to\Sp_{T(n)}$, we hence assume from now on $\mathcal{C}$ and $\mathcal{D}$ are both stable (even some arguments still work when they are not), so that the excisive functors are exactly the coexcisive functors. 
+
+	\begin{const}\label{Cross_eff}
+		We now introduce methods to detect whether a functor is $n$-excisive. We define the $n$-th cross effect of a functor $F:\mathcal{C}\to\mathcal{D}$ to be the functor $\mathcal{C}^n\to\mathcal{D}$ given by 
+		\[ \crs_n(F)(X_1,\dots,X_n)=\tfib_{T\subseteq S}(F(\coprod_{s\notin T}X_s)) \]
+		where $S=\{1,\dots,n\}$. 
+
+		Dually we define the cocross effect to be 
+		\[ \crs^n(F)(X_1,\dots,X_n)=\tcof_{T\subseteq S}(F(\prod_{s\in T}X_s)) \]
+
+		The two functors detect whether $F$ sends strongly coCartesian $S$-cubes to Cartesian $S$-cubes (or its dual version), hence gives the obvious criterion that $F$ is $n$-excisive iff $\crs_{n+1}(F)=0$. 
+		Note that the construction of (co)cross effects can be iterative, that is, we have 
+		\[ \crs_n(F)(X_1,\dots,X_n)\simeq\crs_2(\crs_{n-1}(F)(X_1,\dots,X_{n-2},-))(X_{n-1},X_n) \]
+		and 
+		\[ \crs^n(F)(X_1,\dots,X_n)\simeq\crs^2(\crs^{n-1}(F)(X_1,\dots,X_{n-2},-))(X_{n-1},X_n) \]
+
+		This follows from the iterative construction of the total (co)fibers. 
+	\end{const}
+
+	\begin{const}\label{Univ_exc_homog}
+		We note that taking the cross effect of a functor $F:\mathcal{C}\to\mathcal{D}$ defines a functor
+		\[ :\Fun(\mathcal{C},\mathcal{D})\to\Fun(\mathcal{C},\mathcal{D}) \]
+		given by 
+		\[ \crs_n^\Delta(F)(X)=\crs_n(F)(X,\dots,X) \]
+
+		Since $\crs_n(X_1,\dots,X_n)$ can be written as a retract of $\crs_n(\coprod X_i,\dots,\coprod X_i)$, we have $F$ $n$-excisive iff $\crs_{n+1}^{\Delta}(F)\simeq*$. Noticing that $F\simeq\crs_1^\Delta(F)$, we have a natural transformation $\varepsilon:\crs_n^\Delta(F)\to F$ given by 
+		\[ \crs_n\Delta(F)(X)\simeq\crs_n(F)(X,\dots,X)\to F(\coprod X)\to F(X) \]
+		where the second map is given by the structure map of the total fiber. We define the cofiber of this natural tranformation to be $G_nF=\cof(\varepsilon)$, and define 
+		\[ P_nF=\ilim(F\to G_{n+1}F\to G_{n+1}G_{n+1}F\to\cdots) \]
+
+		By checking definitions we see that $P_nF$ is the couniversal $n$-excisive functor equipped with a natural transformation $F\to P_nF$. In other terms, we have $P_n$ a localization functor left adjoint to the inclusion $\Exc_n(\mathcal{C},\mathcal{D})\inj\Fun(\mathcal{C},\mathcal{D})$. 
+
+		Dually we define 
+		\[ \crs^n_\Delta(F)(X)=\crs^n(F)(X,\dots,X) \]
+		and a functor is $n$-coexcisive iff $\crs^n_\Delta(F)\simeq*$. Also we have a natural transformation $\eta:F\to\crs^n_\Delta(F)$ given by 
+		\[ F(X)\to F(\prod X)\to\crs^n(F)(X,\dots,X)\simeq\crs^n_\Delta(F)(X) \]
+		take $G^nF=\fib(\eta)$, and finally 
+		\[ P^nF=\plim(F\from G^{n+1}F\from\cdots) \]
+
+		Again we have $P^nF$ is the universal $n$-coexcisive functor equipped with a natural transformation $P^nF\to F$. $P^n$ is also the colocalization functor right adjoint to the inclusion $\Exc^n(\mathcal{C},\mathcal{D})\to\Fun(\mathcal{C},\mathcal{D})$. 
+		For a functor $F$, we define its $n$-homogeneous part $D_nF=\fib(P_nF\to P_{n-1}F)$. Dually its $n$-cohomogeneous part $D^nF=\cof(P^{n-1}F\to P^nF)$. 
+	\end{const}
+
+	\begin{defn}\label{Multilinear_fun}
+		We define a functor $F:\mathcal{C}^n\to\mathcal{D}$ to be multilinear if it is 1-excisive in each variable. Dually we have the definition of comultilinear functors. 
+	\end{defn}
+
+	\begin{prop}\label{Exc_cross_eff_var}
+		If $F:\mathcal{C}\to\mathcal{D}$ is $n$-excisive, then for $0\leq m\leq n$ we have the functor $\crs_{m+1}(F)$ is $(n-m)$-excisive in each variable. 
+	\end{prop}
+	\begin{proof}
+		By the iterative construction of cross effects in \cref{Tot_fib}, we have 
+		\[ \crs_{m+1}(F)(X_1,\dots,X_n,Y)\simeq\crs_m(F(-\coprod Y))(X_1,\dots,X_n) \] 
+		and hence by induction it suffices to prove that if $F$ is $n$-excisive, then $F(-\coprod Y)$ is $(n-1)$-excisive, which is obvious. 
+	\end{proof}
+
+	\begin{thm}\label{N_homog_sym_multilinear}
+		We have an equivalence of categories between the category of $n$-homogeneous functors $\mathcal{C}\to\mathcal{D}$ with the category of symmetric multilinear functors $\mathcal{C}^n\to\mathcal{D}$, with the equivalence given by $F(X)\mapsto\crs_n(F)(X_1,\dots,X_n)$ and $G(X_1,\dots,X_n)\mapsto G(X,\dots,X)_{hS_n}$. We define this second operation by $\Delta_{S_n}$. 
+
+		Dually, we have an equivalence of categories of $n$-cohomogeneous functors with the category of symmetric multilinear functors, with the equivalence given by $F(X)\mapsto\crs^n(F)(X_1,\dots,X_n)$ and $G(X_1,\dots,X_n)\mapsto G(X,\dots,X)^{hS_n}$. We define this by $\Delta^{S_n}$. 
+	\end{thm}
+	\begin{remark}
+		Note that in the stable settings, the $n$-excisive and coexcisive functors agree with each other, and the difference of $P_n$ and $P^n$ comes froms the fact that they are respectively the left and right adjoint to the inclusion. Here, the difference is similar. 
+	\end{remark}
+	\begin{proof}
+		We first verify that for a symmetric multilinear functor $L$ we have $\crs_n\Delta_{S_n}L\to L$ is an isomorphism. By unwinding definitions, we have
+		\begin{align*}
+			&\crs_n\Delta_{S_n}L(X_1,\dots,X_n) \\
+			\simeq&\tfib(T\mapsto L(\coprod_{s\notin T}X_s,\dots,\coprod_{s\notin T}X_s)_{hS_n}) \\
+			\simeq&\tfib(T\mapsto L(\coprod_{s\notin T}X_s,\dots,\coprod_{s\notin T}X_s))_{hS_n} (\text{by~stability})
+		\end{align*}
+
+		Since $L$ is 1-excisive in each factor, we have 
+		\[ L(\coprod_{s\notin T}X_s,\dots,\coprod_{s\notin T}X_s)\simeq\prod_{f\in T^n}L(X_{f(1)},\dots,X_{f(n)}) \]
+		where $T\subseteq S$, $S=\{1,\dots,n\}$. If we denote this cube by $\mathcal{X}$, then this cube can be decomposed into the following. Let $\sigma:S\to S$ be an arbitrary map, and let $\mathcal{X}_\sigma$ denote the cube where $\mathcal{X}_\sigma(T)=L(X_{\sigma(1)},\dots,X_{\sigma(n)})$ if $\sigma(S)\subseteq S-T$ and is trivial otherwise. Then we clearly have $\mathcal{X}\simeq\prod_{\sigma:S\to S}\mathcal{X}_{\sigma}$. 
+
+		Then note that if $\sigma$ is not a bijection we have $\tfib(\mathcal{X}_\sigma)$, then we have $\tfib(\mathcal{X}_\sigma)$ is trivial since in this cube, for $s\notin\img(\sigma)$, the morphism pointing from $T\to T\cup\{s\}$ is an isomorphism, and by the iterative construction of total fibers we have the total fiber is trivial by first taking fibers in this direction. 
+
+		Finally for $\sigma$ is indeed a bijection, we have $\mathcal{X}_{\sigma}$ is trivial except for the initial vertex with value $L(X_{\sigma(1)},\dots,X_{\sigma(n)})$, hence we have 
+		\[ \tfib(\mathcal{X}_\sigma)\simeq L(X_{\sigma(1)},\dots,X_{\sigma(n)}) \]
+
+		Therefore 
+		\[ \tfib(\mathcal{X})\simeq\prod_{\sigma\in S_n}L(X_{\sigma(1)},\dots,X_{\sigma(n)}) \]
+		and the map $\crs_n\Delta_{S_n}L\to L$ is tautological. 
+
+		Since $L$ is symmetric, we have 
+		\[ \crs_n\Delta_{S_n}L(X_1,\dots,X_n)\simeq(\prod_{\sigma\in S_n}L(X_{\sigma(1)},\dots,X_{\sigma(n)}))_{hS_n}\simeq L(X_1,\dots,X_n) \]
+
+		Then we treat the converse case. For an $n$-homogeneous functor $F$, note that $\crs_n(F)\simeq*$ implies that $F$ is also trivial, since $F$ is also $(n-1)$-excisive by definition. Therefore to prove that $\Delta_{S_n}\crs_n(F)\to F$ is an equivalence of $n$-homogeneous functors, it suffices to prove $\crs_n\Delta_{S_n}\crs_n(F)\to\crs_n(F)$ is an equivalence of symmetric multilinear functors. 
+
+		We first construct the natural transformation $\gamma:\Delta_{S_n}\crs_n(F)\to F$. We define 
+		\begin{align*}
+			\gamma_X:&\Delta_{S_n}\crs_n(F)(X) \\
+			\simeq&(\crs_n(F))(X,\dots,X)_{hS_n} \\
+			\to&F(X\amalg\cdots\amalg X)_{hS_n} \\
+			\to&F(X)_{hS_n} \\
+			\to&F(X)
+		\end{align*}
+		where the first arrow is given by the structure map of the total fiber, and we have the last arrow since $F(X)$ has the trivial $S_n$-action. Then note that this map is an equivalence after passing to $\crs_n$ since it agrees with the equivalence defined above, we have the result. 
+	\end{proof}
+	
+	\begin{coro}\label{Alt_const_n_homog}
+		We have 
+		\[ D_n(F)\simeq\ilim_m\Omega^{mn}(\crs_n(F))(\Sigma^mX,\dots,\Sigma^mX) \] 
+		Dually we have 
+		\[ D^n(F)\simeq\plim_m\Sigma^{mn}(\crs^n(F))(\Omega^mX,\dots,\Omega^mX) \]
+	\end{coro}
+	\begin{proof}
+		Similar to the above argument. 
+	\end{proof}
+
+	\begin{coro}\label{Fil_colim_n_homog}
+		A filtered-colimit preserving functor $F:\mathcal{C}\to\mathcal{D}$ where $\mathcal{C}$ is either compactly generated by $\mathbb{S}$ or stable and generated by $\Sigma^n\mathbb{S}$ for some object $\mathbb{S}$ is $n$-homogeneous iff it is of the form $F(X)=(C\otimes X^{\otimes n})_{hS_n}$. 
+	\end{coro}
+	\begin{proof}
+		Using the above equivalence, we have $F(X)\simeq\crs_n(F)(X,\dots,X)_{hS_n}$. Therefore 
+		\[ F(X)\simeq(\crs_n(F)(\mathbb{S},\dots,\mathbb{S})\otimes X^{\otimes n})_{hS_n} \]
+		since $F$ hence $\crs_n(F)$ commutes with filtered colimits. 
+	\end{proof}
+
+	\begin{lemma}\label{n_homog_fac_stab}
+		For any filtered colimit preserving $n$-homogeneous ($n\geq1$) functor $F:\mathcal{C}\to\mathcal{D}$, there is some $F':\Sp(\mathcal{C})\to\Sp(\mathcal{D})$ such that $F=\Omega^\infty F'\Sigma^\infty$. 
+	\end{lemma}
+	\begin{proof}
+		By \cref{Alt_const_n_homog}, the image of a $n$-homogeneous functor lie in the subcategory of infinite loopspaces, and hence $F$ factors through $\Omega^\infty:\Sp(\mathcal{D})\to\mathcal{D}$. Now since $F$ factors as $\mathcal{C}\to\Sp(\mathcal{D})\to\mathcal{D}$, it also factors through $\Sigma^\infty:\mathcal{C}\to\Sp(\mathcal{C})$, and it suffices to prove that the middle functor remains $n$-homogeneous. This is direct by verifying the cross effects vanishes. 
+	\end{proof}
+
+	\begin{thm}[Telescopic Tate vanishing]\label{Tate_vanish}
+		For $G$ a finite group, and an object $X$ of $\Sp_{T(n)}$ equipped with a $G$-action, then we have a norm map between the homotopy orbits and the homotopy fixed points $\Nm:X_{hG}\to X^{hG}$, and the cofiber of the norm map $X^{tG}=\cof(\Nm)$ vanishes. 
+	\end{thm}
+	\begin{proof}
+		\todo{Reference}. 
+	\end{proof}
+
+	\begin{const}\label{N_exc_fun_char}
+		Consider stable categories $\mathcal{C}$ and $\mathcal{D}$, a reduced $(n-1)$-excisive functor $E$, an $n$-homogeneous functor $K$, and an extension of $K$ into $E$ (that is, a fiber sequence $K\to F\to E$, which is also equivalent to the data $E\to\Sigma K$). 
+
+		By \cref{N_homog_sym_multilinear}, we have $\Sigma K\simeq\Delta_{S_n}\crs_n(\Sigma K)$. Since $X$ is a retract of $X\oplus Y$, we have $F(X)$ a retract of $F(X\oplus Y)$, hence since $\mathcal{D}$ is also stable we have $F(X\oplus Y)\simeq F(X)\oplus K$. Thus $\cof(F(X)\to F(X\oplus Y))\simeq\fib(F(X\oplus Y)\to F(X))$. Thus by the direct definition of cross effects and the iterative algorithm for total (co)fibers we have the cross effect of $\Sigma K$ and the cocross effect agrees up to suspensions. Thus we have $\Delta^{S_n}(\crs^n(\Sigma K))$ is cohomogeneous, hence every natural transformation from an $(n-1)$-excisive functor $E$ to $\Delta^{S_n}(\Sigma K)$ vanishes. Finally by the long cofiber sequence 
+		\[ (\crs_n(K)\Delta)^{tS_n}\to\Delta_{S_n}\crs_n(\Sigma K)\xrightarrow{\Nm}\Delta^{S_n}\crs_n(\Sigma K)\to(\crs_n(\Sigma K)\Delta)^{tS_n} \]
+		and that the third functor in the cofiber sequence is $n$-cohomogeneous, we have that a map $E\to\Sigma K\simeq\Delta_{S_n}(\crs_n(\Sigma K))$ is equivalent to a map $E\to(\crs_n(K)\Delta)^{tS_n}$. 
+
+		As a conclusion, a reduced $n$-excisive functor is equivalent to the data of a reduced $(n-1)$-excisive functor $E$, an $n$-homogeneous functor $K$ regarded as an $n$-symmetric functor, and a natural transformation $E\to(\crs_n(K)\Delta)^{tS_n}$. Moreover, this functor can be reconstructed as the fiber 
+		\[ \fib(E\to(\crs_n(K)\Delta)^{tS_n}\to\Delta_{S_n}\crs_n(\Sigma K)\simeq\Sigma K) \]
+	\end{const}
+
+	\begin{coro}\label{Tel_loc_k_exc_split}
+		Every $k$-excisive functor $F:\Sp_{T(n)}\to\Sp_{T(n)}$ splits as the direct sum of $j$-homogeneous functors (where $j<k$). 
+	\end{coro}
+	\begin{proof}
+		Follows directly form \cref{Tate_vanish} and \cref{N_exc_fun_char}. 
+	\end{proof}
+
+\section{Dual calculus in the $T(n)$-local category and nilpotence}
+
+	\cref{Tel_loc_k_exc_split} in the previous section implies that the Goodwillie tower of an $n$-excisive functor of $T(n)$-local spectra splits, which implies that the Goodwillie tower of a coanalytic functor splits. In this section, we wish to see that the converse result, that is, every split Goodwillie tower result in a coanalytic functor, then clearly it suffices to prove the following result. 
+
+	\begin{thm}[Mathew]\label{Exc_comm_inf_prod}
+		If $F\simeq\bigoplus F_j$, and $F_j:\Sp_{T(n)}\to\Sp_{T(n)}$ is filtered colimit preserving and $j$-homogeneous, then the natural map 
+		\[ P^k(\bigoplus_{j=1}^\infty F_j)\simeq P^kF \]
+		is an equivalence. 
+		Dually we have 
+		\[ P_k(\prod_{j=1}^\infty F_j)\simeq\prod_{j=1}^kF_j \]
+		(though this dual is not needed later, we still present it here for the sake of symmetry). 
+	\end{thm}
+
+	We first present the core lemma of uniform nilpotence used to prove the theorem. 
+	\begin{lemma}\label{Unif_nilp_homog}
+		Let $F$ be a finite type $n$-spectrum. Then there exists a constant $C$ such that for all $j>k$ and any filtered colimit preserving $j$-homogeneous functor $H:\Sp_{T(n)}\to\Sp_{T(n)}$, we have the natural transformation 
+		\[ F\otimes(\Sigma^{Ck}\crs^k_\Delta(H)\Omega^C)\to F\otimes(\crs^k_\Delta(H)) \]
+		is null. This constant $C$ only depends on $F$. 
+	\end{lemma}
+
+	\begin{proof}
+		We first show that \cref{Unif_nilp_homog} implies \cref{Exc_comm_inf_prod}. We first note that \cref{Exc_comm_inf_prod} is equivalent to $D^k(\bigoplus_{j>k} F_j)\simeq0$ for all $k$. Then we see that it suffices to prove that $D^k$ commutes with infinite direct sums, which is a property that ordinary sequential limits do not possess (for the construction of $D^k$ as a sequential limit, see \cref{Alt_const_n_homog}). But if we have \cref{Unif_nilp_homog}, this would give the fact that the inverse system $V\otimes\bigoplus(\Sigma^{Ck}\crs^k(F_j)\Delta\Omega^{C})$ is nilpotent. Furthermore, since $V$ is a finite spectrum, we have $V\otimes-$ commutes with sequential limits. Therefore 
+		\[ 0\simeq\plim V\otimes\bigoplus(\Sigma^{nk}\crs^k(F_j)\Delta\Omega^{n})\simeq V\otimes\plim\bigoplus(\Sigma^{nk}\crs^k(F_j)\Delta\Omega^{n}) \]
+		Then by taking the telescopic localization of $V$, we have $\plim\bigoplus(\Sigma^{nk}\crs^k(F_j)\Delta\Omega^{n})$ is $T(n)$-equivalent to $0$, which proves \cref{Exc_comm_inf_prod}. 
+	\end{proof}
+
+	Now it suffices to prove the lemma. To prove this, we need the language of nilpotence and apply it to naive equivariant homotopy theory. 
+
+	\begin{defn}\label{Thick_tensor_ideal}
+		We define a thick tensor ideal $\mathcal{T}^\otimes$ of $\mathcal{C}$ to be a thick subcategory which is also closed under tensoring with any object in $\mathcal{C}$, that is, for $X\in\mathcal{T}^\otimes$ and $Y\in\mathcal{C}$, $X\otimes Y$ is also in $\mathcal{T}^\otimes$. 
+	\end{defn}
+
+	\begin{const}\label{Thick_tensor_ideal_gen}
+		For a symmetric monoidal category $\mathcal{C}$, recall the definition and the process of generation of thick subcategories in \cref{Thick_subcat} and \cref{Thick_subcat_gen}. 
+
+		For a collection of objects $\mathcal{F}\subseteq\mathcal{C}$, since the intersection of two thick tensor ideals is still a thick tensor ideal, we may again consider the minimal thick tensor ideal containing $\mathcal{F}$, denoted by $\mathcal{T}^\otimes(\mathcal{F})$. We will call it the thick tensor ideal generated by $\mathcal{F}$, constructed as follows. 
+
+		Let $\mathcal{T}^\otimes(\mathcal{F})=\mathcal{T}(\mathcal{F}^\otimes)$, where $\mathcal{F}^\otimes$ is the collections of objects in $\mathcal{C}$ of the form $X\otimes Y$, where $X\in\mathcal{C}$ and $\Sigma^nY\in\mathcal{F}$ for some $n\in\mathbb{Z}$. We can easily check that this construction satisfies the desired properties. Moreover, the filtration $\mathcal{T}_n(\mathcal{F})$ of $\mathcal{T}(\mathcal{F})$ induces a filtration on $\mathcal{T}^\otimes(\mathcal{F})$ by letting $\mathcal{T}^\otimes_n(\mathcal{F})=\mathcal{T}_n(\mathcal{F}^\otimes)$. By definition, each $\mathcal{T}^\otimes_n(\mathcal{F})$ is a tensor ideal of $\mathcal{C}$. 
+	\end{const}
+
+	\begin{defn}\label{Nilpotent_objects}
+		For an object $A\in\mathcal{C}$, we define the subcategory of $A$-nilpotent objects to be $\mathcal{T}^\otimes(A)$, or equivalently, $\mathcal{T}(A\otimes\mathcal{C})$. We say it is $A$-nilpotent of degree $n$ if $n$ is the minimal natural number such that it lies in $\mathcal{T}_n^\otimes(A)$. Clearly, every nilpotent object is nilpotent of degree $n$ for some $n$. 
+	\end{defn}
+
+	\begin{lemma}\label{Nilp_equiv_defn}
+		Let $I=\fib(1\to A)$. Then for an object $X\in\mathcal{C}$, the following are equivalent: 
+		\begin{enumerate}
+			\item $X\in\mathcal{T}_n^\otimes(A)$. 
+			\item $X\otimes I^{\otimes n}\to X$ is null. 
+			\item For every sequence of maps $X_n\to X_{n-1}\to\cdots\to X_0\simeq X$ with $A\otimes X_k\to A\otimes X_{k-1}$ null, the composition $X_n\to\cdots\to X$ is null. 
+		\end{enumerate}
+	\end{lemma}
+	\begin{proof}
+		$(1)\implies(2)$: For $n=0$, the assertion is trivial. If $n=1$, then we have the following retract diagram 
+		\[ X\xrightarrow{f}A\otimes Y\xrightarrow{g}X \]
+		Thus since $X\otimes I\to X\to X\otimes A$ is a fiber sequence, it suffices to prove $X\to X\otimes A$ admit a section, and hence $X\otimes A\simeq X\oplus\Sigma(X\otimes I)$, which implies $X\otimes I\to X$ is trivial. For this property, note 
+		\[ X\xrightarrow{\eta\otimes\id}A\otimes X\xrightarrow{\id\otimes f}A\otimes A\otimes Y\xrightarrow{\mu\otimes 1} A\otimes Y \]
+		is equivalent to $f$ by definition, since $\eta:1\to A$ is the unit map and $\mu:A\otimes A\to A$ is the multiplication map. Therefore, 
+		\[ X\xrightarrow{\eta\otimes\id}A\otimes X\xrightarrow{\id\otimes f}A\otimes A\otimes Y\xrightarrow{\mu\otimes 1} A\otimes Y\xrightarrow{g}X \]
+		exhibits $X$ as a retract of $A\otimes X$. For the general case, we apply induction and suppose that the case $n$ is solved. Then for the case of $n+1$, suppose $X$ is $A$-nilpotent of exponent $n+1$, let $Y\to X\to Z$ be a fiber sequence where $Y$ is $A$-nilpotent of exponent $1$ and $Z$ is $A$-nilpotent of exponent $n$. Then we have the following diagram where the columns are fiber sequences 
+		% https://q.uiver.app/#q=WzAsOSxbMCwxLCJYXFxvdGltZXMgSV57XFxvdGltZXMgbisxfSJdLFswLDAsIllcXG90aW1lcyBJXntcXG90aW1lcyBuKzF9Il0sWzAsMiwiWlxcb3RpbWVzIElee1xcb3RpbWVzIG4rMX0iXSxbMiwxLCJYIl0sWzIsMiwiWiJdLFsyLDAsIlkiXSxbMSwwLCJZXFxvdGltZXMgSSJdLFsxLDEsIlhcXG90aW1lcyBJIl0sWzEsMiwiWlxcb3RpbWVzIEkiXSxbMSwwXSxbMCwyXSxbMyw0XSxbNSwzXSxbMSw2XSxbNiw1LCIwIl0sWzYsN10sWzcsOF0sWzIsOCwiMCIsMl0sWzgsNF0sWzAsN10sWzcsM11d
+		\[\begin{tikzcd}[ampersand replacement=\&]
+			{Y\otimes I^{\otimes n+1}} \& {Y\otimes I} \& Y \\
+			{X\otimes I^{\otimes n+1}} \& {X\otimes I} \& X \\
+			{Z\otimes I^{\otimes n+1}} \& {Z\otimes I} \& Z
+			\arrow[from=1-1, to=1-2]
+			\arrow[from=1-1, to=2-1]
+			\arrow["0", from=1-2, to=1-3]
+			\arrow[from=1-2, to=2-2]
+			\arrow[from=1-3, to=2-3]
+			\arrow[from=2-1, to=2-2]
+			\arrow[from=2-1, to=3-1]
+			\arrow[from=2-2, to=2-3]
+			\arrow[from=2-2, to=3-2]
+			\arrow[from=2-3, to=3-3]
+			\arrow["0"', from=3-1, to=3-2]
+			\arrow[from=3-2, to=3-3]
+		\end{tikzcd}\]
+		Then note that the map $X\otimes I^{\otimes n+1}\to Z\otimes I$ is null, hence lifts to a map $X\otimes I^{\otimes n+1}\to Y\otimes I$. Therefore, the map $X\otimes I^{\otimes n+1}\to X$ factors as 
+		\[ X\otimes I^{\otimes n+1}\to Y\otimes I\xrightarrow{0}Y\to X \]
+		hence is null. The case where $X'$ is the retract of the above $X$ is direct. 
+
+		$(2)\implies(1)$: Suppose $\psi:X\otimes I^{\otimes n}\to X$ is null. Then $X$ is a retract of $\cof\psi$, hence it suffices to prove $\cof\psi\in\mathcal{T}_n^\otimes(A)$. To prove this, it suffices to prove $\cof(I^{\otimes n}\to 1)\in\mathcal{T}_n^\otimes(A)$, which is the extension of 
+		\[ \cof(I^{\otimes k+1}\to I^{\otimes k})\simeq A\otimes I^{\otimes k}\in\mathcal{T}_1^\otimes(A) \]
+
+		$(2)\implies(3)$: consider the following diagram 
+		% https://q.uiver.app/#q=WzAsNSxbMCwxLCJYXzEiXSxbMSwxLCJYIl0sWzAsMiwiWF8xXFxvdGltZXMgQSJdLFsxLDIsIlhcXG90aW1lcyBBIl0sWzEsMCwiWFxcb3RpbWVzIEkiXSxbMCwxXSxbMSwzXSxbMCwyXSxbMiwzXSxbNCwxXSxbMCw0LCIiLDEseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XV0=
+		\[\begin{tikzcd}[ampersand replacement=\&]
+			\& {X\otimes I} \\
+			{X_1} \& X \\
+			{X_1\otimes A} \& {X\otimes A}
+			\arrow[from=1-2, to=2-2]
+			\arrow[dashed, from=2-1, to=1-2]
+			\arrow[from=2-1, to=2-2]
+			\arrow[from=2-1, to=3-1]
+			\arrow[from=2-2, to=3-2]
+			\arrow[from=3-1, to=3-2]
+		\end{tikzcd}\]
+		since the bottom map is null, the map $X_1\to X\to X\otimes A$ is null, hence lifts to $X_1\to X\otimes I$. Likewise, we may lift the composition $X_2\to X_1\to X\otimes I$ to $X_2\to X\otimes I^{\otimes2}$ by the same process. Inductively, we result in the fact that the map $X_n\to X$ factors as $X_n\to X\otimes I^{\otimes n}\to X$, hence is null by assumption. 
+
+		$(3)\implies(2)$: Note that the following sequence 
+		\[ X\otimes I^{\otimes n}\to X\otimes I^{\otimes n-1}\to\cdots\to X \]
+		satisfy the desired assumption. 
+	\end{proof}
+
+	Then to apply the above definitions to equivariant settings, we apply another version of the monadicity theorem. 
+
+	\begin{thm}\label{Beck_monadicity_tensor_cat}
+		Let $F:\mathcal{C}\adj\mathcal{D}:G$ be an adjunction of idempotent complete symmetric monoidal stable categories, and $F$ is symmetric monoidal (this implies that $G$ is lax symmetric monoidal). Then if the counit $\varepsilon:FG\to\id_\mathcal{D}$ admit a section $\xi:\id_\mathcal{D}\to FG$, and that the projection formula $G(X)\otimes Y\simeq G(X\otimes F(Y))$ holds, then the adjunction is monadic, and the monad can be identified with the monad $G(1)\otimes-$ (here $1$ is the tensor unit of $\mathcal{D}$, and $G(1)$ admits a natural algebra structure since $G$ is lax symmetric monoidal). 
+	\end{thm}
+	\begin{proof}
+		We first notice that the section of $\varepsilon$ gives a section of the monad $T=GF$, explicitly $G\xi F:T\to TT$ satisfies 
+		\[ T\xrightarrow{G\xi F}TT\xrightarrow{\mu}T \]
+		is the identity. 
+
+		Then for any $T$-module $X$, note that the structure map $m:TX\to X$ admit a natural section $X\to TX$ given by the composition 
+		\[ X\xrightarrow{\eta_X}TX\xrightarrow{(G\xi F)_X}T^2X\xrightarrow{Tm_X}TX \]
+		This is a section of $m:TX\to X$ by definition of $G\xi F$. Moreover this natural section is $T$-linear, hence we have $X$ a retract of $TX$ for every $T$-module $X$. Therefore the inclusion $\LMod_T^{\mathrm{free}}(\mathcal{C})\inj\LMod_T(\mathcal{C})$ is an equivalence after applying idempotent completion, since it is fully faithful (by definition) and every object of $\LMod_T(\mathcal{C})$ is a retract of an object of $\LMod_T^{\mathrm{free}}(\mathcal{C})$. 
+
+		We then prove that the map $K:\LMod_T^{\mathrm{free}}(\mathcal{C})\to\mathcal{D}$ (recall its construction in \cref{Adj_EM_K_fun_defn}) is an equivalence after applying idempotent completion. Firstly we have seen in \cref{Adj_EM_K_fun_defn} that $K$ is fully faithful. Then for an object of $\mathcal{D}$, the section $\xi$ provides 
+		\[ D\xrightarrow{\xi_D}FGD\xrightarrow{\varepsilon_D}D \]
+		hence we have $D$ a retract of $FGD\simeq KGD$. 
+
+		Hence we have $E:\mathcal{D}\to\LMod_T(\mathcal{C})$ an equivalence after applying idempotent completion. But by assumption both sides are already idempotent complete, so the adjunction is monadic. 
+
+		It then remains to identify the monads. Namely, by the projection formula, we have 
+		\[ G(1)\otimes-\simeq G(1\otimes F-)\simeq GF- \]
+		the identification of the units and multiplications follows by diagram chasing. 
+	\end{proof}
+
+	\begin{lemma}\label{Bialg_counit_section}
+		Let $f:R\to S$ be a morphism of $\mathbb{E}_1$-rings. Suppose that there is a map of $R-R$-bimodules $g:S\to R$ such that $gf=1$, then the forgetful functor is left adjoint to $\Hom_R(S,-):\LMod_R\to\LMod_S$ ($\Hom_R(S,M)$ is equipped with the left $S$-module structure via right action on the first factor), and the counit admits a natural section. 
+	\end{lemma}
+	\begin{proof}
+		Firstly the adjunction is obvious. Then the counit of the adjunction is given by 
+		\[ f^*:\Hom_R(S,-)\to\Hom_R(R,-) \]
+		Then we claim that $g^*$ is the section as desired. Firstly, note that 
+		\[ g^*:\Hom_R(R,-)\to\Hom_R(S,-) \]
+		is a morphism of left $R$-modules since $g:S\to R$ is a morphism of $R-R$-bimodules, and in particular preserves the right $R$-module structure. Then $f^*g^*=(gf)^*=\id$, so the counit admits a natural section. 
+	\end{proof}
+
+	\begin{thm}\label{Equivariant_subgrp_module_cat}
+		For $G$ a finite group, let $H$ be a subgroup of $G$ (this is in fact true for stably dualizable group and a finite index subgroup), then we have $\Sigma^\infty_+G/H$ is a natural cocommutative coalgebra given by the diagonal map, and hence a natural commutative algebra structure on $\dual\Sigma^\infty_+G/H$. Then we have 
+		\[ \Sp^{BH}\simeq\Mod_{\dual\Sigma^\infty_+G/H}(\Sp^{BG}) \]
+		where $\Sp^{BG}$ is the category of naive $G$-spectra.  
+	\end{thm}
+	\begin{remark}
+		This argument also applies to the category of genuine $G$-spectra with some care. 
+	\end{remark}
+	\begin{proof}
+		We here regard $\Sp^{BG}$ as the category $\LMod_{\mathbb{S}[G]}(\Sp)$ (here $\mathbb{S}[G]:=\Sigma^\infty_+G$ is the $\mathbb{E}_1$-group algebra), equipped wit. Then note that the restriction functor is given by the forgetful functor of modules induced by the natural map $\mathbb{S}[H]\inj\mathbb{S}[G]$. The coinduction is then given by 
+		\[ \coind_H^G(M)\simeq\Hom_{\mathbb{S}[H]}(\mathbb{S}[G],M) \]
+		By \cref{Beck_monadicity_tensor_cat}, it suffices to show that the counit $\varepsilon:\res_H^G\circ\coind_H^G\to\id$ admits a section (the projection formula holds by formal reasons). But in fact, the section comes from \cref{Bialg_counit_section}, since the inclusion $\mathbb{S}[H]\inj\mathbb{S}[G]$ has obviously a $\mathbb{S}[H]-\mathbb{S}[H]$-bimodule which is a left inverse given by 
+		\[ \mathbb{S}[G]\simeq\bigoplus_{g\in G}\mathbb{S}\to\bigoplus_{h\in H}\mathbb{S}\simeq\mathbb{S}[H] \]
+		which is the identity on $\mathbb{S}$ indexed by $h\in H$ and null on $\mathbb{S}$ indexed by $g\notin H$. Therefore by \cref{Beck_monadicity_tensor_cat} this adjunction is monadic, and it is direct to verify the monad as the algebra $\Sigma^\infty_+G/H$. 
+	\end{proof}
+
+	\begin{const}\label{Subgrp_nilp_exp}
+		We apply \cref{Equivariant_subgrp_module_cat} to nilpotence. Let $\mathcal{F}$ be a collection of subgroups of $G$. We say a object of $\Sp^{BG}$ is $\mathcal{F}$-nilpotent of degree $n$ if it is $\prod_{H\in\mathcal{F}}(\Sigma^\infty_+G/H)$-nilpotent of degree $n$. We will mainly apply the case where $\mathcal{F}$ consists of a single subgroup $H\leq G$. 
+	\end{const}
+
+	\begin{thm}\label{Fin_sp_nilp_fin_grp}
+		Any finite spectrum $F$ in $\Sp_{T(n)}$ equipped with the trivial $G$-action is nilpotent viewed as an element of $\Sp^{BG}$. 
+	\end{thm}
+	\begin{proof}
+		We consider the simplicial model for a point with free $G$-action, namely, let $EG_k=G^{k+1}$, and $EG=\ilim EG_{\leq k}$. Then since we are working in the $T(n)$-local category, by \cref{Tate_vanish} we have 
+		\[ \mathbb{S}_{T(n)}^{hG}\simeq(\mathbb{S}_{T(n)})_{hG}\simeq(\ilim(\mathbb{S}_{T(n)}\otimes EG_{\leq k}))_{hG}\simeq\ilim(\mathbb{S}_{T(n)}\otimes EG_{\leq k})_{hG}\simeq\ilim(\mathbb{S}_{T(n)}\otimes EG_{\leq k})^{hG} \]
+		By compactness of $F$, the map $F\inj F\otimes\mathbb{S}_{T(n)}^{hG}$ factors as 
+		\[ F\to F\otimes(\mathbb{S}_{T(n)}\otimes EG_{\leq k})^{hG}\to F\otimes\mathbb{S}_{T(n)}^{hG} \]
+		Since $F$ is finite, and homotopy fixed points agrees with the homotopy orbits, hence $F\otimes\mathbb{S}_{T(n)}^{hG}\simeq(F\otimes\mathbb{S}_{T(n)})^{hG}$, and the middle term satisfy a similar reduction. By the adjunction $\Delta\dashv\plim$ (here interpreted as the giving a spectrum the trivial $G$-action is left adjoint to taking homotopy fixed points), we obtain a retract diagram 
+		\[ F\to F\otimes EG_{\leq k}\to F \]
+		but $F\otimes EG_{\leq k}$ is clearly $G$-nilpotent by its construction, which implies that so is $F$. 
+	\end{proof}
+
+	\begin{lemma}\label{Unif_nilp_exp_fin_sp}
+		For a finite spectrum $F$ (equipped with the trivial action), there is some constant $C$ only depending on $F$ such that for any finite group and a subgroup $H\leq G$ with $v_p(G)-v_p(H)\leq 1$ (here $v_p(G)$ is the $p$-adic valuation of the order of $G$), and any object $X\in\Sp_{T(n)}^{BG}$, we have $\exp_H(F\otimes X)\leq C$. 
+	\end{lemma}
+	\begin{proof}
+		Consider the Sylow-$p$-subgroup $G_p\leq G$ and $H_p\leq H$, and we assume $H_p\leq G_p$ (which would imply $H_p\triangleleft G_p$ by some finite group theory). Consider $\coind_{G_p}^G(\dual\Sigma^\infty_+(G_p/H_p))=\dual\Sigma^\infty_+(G/H_p)$. Note that $G/H_p$ projects naturally to $G/H$, and by sending $gH$ to the sum of $ghH_p$ (where $hH_p$ runs over the cosets of $H_p$ in $H$), we obtain that $\dual\Sigma^\infty_+(G/H)$ is a retract of $\dual\Sigma^\infty_+(G/H_p)$. This implies that $\exp_{H_p}(\res_{G_p}^GX\otimes F)\geq\exp_H(X\otimes F)$, since if $\res_{G_p}^GX\otimes F\in\mathcal{T}^\otimes_n(\Sigma^\infty_+(G/H_p))$, by the same generation process, after the retraction, we would have $X\otimes F\in\mathcal{T}^\otimes_n(\Sigma^\infty_+(G/H))$. 
+
+		Therefore we may pass to the case where $G$ is a $p$-group, and hence $H\leq G$ is an index $p$ subgroup of $G$, and hence normal. Therefore $\exp_H(F\otimes X)\leq\exp_H(F)$, and $\exp_H(F)\leq\exp(F)$, where the right hand side is the exponent of $F$ as a $C_p$-spectra. Therefore taking $C=\exp(F)$ gives the desired result. 
+	\end{proof}
+
+	Now we are ready to prove \cref{Unif_nilp_homog}
+	\begin{proof}
+		Firstly let $\mathbb{S}_{T(n)}^{\rho_j}$ denote the representation sphere of the standard representation of the symmetry group $S_j$ (that is, $\Sigma_j\act\mathbb{R}^{j-1}$). Then note that by the universal property of loopspaces, we have a $S_j$-equivariant map 
+		\[ e:\mathbb{S}_{T(n)}\simeq\mathbb{S}_{T(n)}^{\otimes j}\to\Omega(\Sigma\mathbb{S}_{T(n)})^{\otimes j}\simeq\mathbb{S}_{T(n)}^{\rho_j} \]
+		This is, in fact, the Euler class for this representation of $S_j$, which vanishes if the representation contains a trivial subrepresentation. We claim that $F\otimes e^C:F\to F\otimes\mathbb{S}_{T(n)}^{C\rho_j}$ is null-homotopic. This is since we may choose a Young subgroup $H\leq S_j$ with $v_p(S_j)-v_p(H)\leq 1$, and the restriction of the standard representation to any Young subgroup of $S_j$ admits a trivial subrepresentation. Therefore $e$ is null if restricted to $\Sp^{BH}$. By \cref{Nilp_equiv_defn}, we have $V\otimes e^C$ null in $\Sp^{BS_j}$ for $j\geq2$ (note $j\geq2$ is essential since otherwise the representation would be trivial anyway, and the Euler class would be the identity). 
+
+		Then, we show that the natural transformation 
+		\[ F\otimes(\Sigma^{Ck}\crs^k_\Delta(H)\Omega^C)\to F\otimes(\crs^k_\Delta(H)) \]
+		is null. By the equivalence $H\simeq(L\circ\Delta)_{hS_j}$ as in \cref{N_homog_sym_multilinear} (where $L=\crs^j(H)$), it suffices to prove that the $S_j$-equivariant natural transformation 
+		\[ F\otimes(\Sigma^{Ck}\crs^k_\Delta(L\circ\Delta_j\circ\Omega^C))\to F\otimes\crs^k_\Delta(L\circ\Delta_j) \]
+		is null (the original case follows from taking $S_j$-homotopy orbits of this one). Since $L$ preserves filtered colimits in each variables by assumption, we have $L(X_1,\dots,X_j)\simeq\partial L\otimes X_1\otimes\cdots\otimes X_j$. By directly checking the definition of cocross effects, we have 
+		\[ \Sigma^{Ck}\crs^k_\Delta(L\circ\Delta_j\circ\Omega^C)\simeq(\bigoplus_{f:[j]\surj[k]}\mathbb{S}_{T(n)}^{-C\rho_{f^{-1}(1)}}\otimes\cdots\otimes\mathbb{S}_{T(n)}^{-C\rho_{f^{-1}(k)}})\otimes(L\circ\Delta_j) \]
+		as $S_j$-equivariant objects (where the $S_j$ action is given by the permutation on $[j]=\{1,2,\dots,j\}$, and in case that some $\sigma\in S_j$ preserves some surjection $f:[j]\surj[k]$, it must lie in the subgroup $\Sigma_{f^{-1}(1)}\times\cdots\times\Sigma_{f^{-1}(k)}$, and thus acts on the permutation spheres). Similarly, 
+		\[ \crs^k_\Delta(L\circ\Delta_j)\simeq(\bigoplus_{f:[j]\surj[k]}\mathbb{S}_{T(n)}^{\otimes f^{-1}(1)}\otimes\cdots\otimes\mathbb{S}_{T(n)}^{\otimes f^{-1}(k)})\otimes(L\circ\Delta_j) \]
+		where the action on $\mathbb{S}_{T(n)}$ is given likewise. Thus to show the desired equivariant map vanishes, it suffices to prove that for each Young subgroup $\Sigma_{j_1}\times\cdots\times\Sigma_{j_k}$, we have the equivariant map 
+		\[ F\otimes\mathbb{S}_{T(n)}^{-C\rho_{j_1}}\otimes\cdots\otimes\mathbb{S}_{T(n)}^{-C\rho_{j_k}}\to F\otimes\mathbb{S}_{T(n)} \]
+		vanishes. But taking dual of the above, we obtain 
+		\[ \dual F\otimes e_1^C\otimes\cdots\otimes e_k^C:\dual F\to \dual F\otimes\mathbb{S}_{T(n)}^{C\rho_{j_1}}\otimes\cdots\otimes\mathbb{S}_{T(n)}^{C\rho_{j_k}} \]
+		Now by the assumption $j>k$, we have at least one $j_i\geq2$, hence $\dual F\otimes\mathbb{S}_{T(n)}\to \dual F\otimes\mathbb{S}_{T(n)}^{C\rho_{j_i}}$ vanishes, hence the above map vanishes if we let $C$ be the constant as in \cref{Unif_nilp_exp_fin_sp} for $\dual F$.
+	\end{proof}
+
+	\begin{coro}\label{Coanalytic_fun_classification}
+		Let $F:\Sp_{T(n)}\to\Sp_{T(n)}$ be a reduced functor preserving filtered colimits. Then $F$ is coanalytic (i.e. $\ilim P^kF\simeq F$) iff $F$ is of the form 
+		\[ F(X)=\bigoplus(C_j\otimes X^{\otimes j})_{hS_j} \]
+		where $C_j$ is an $S_j$-equivariant $T(n)$-local spectra, and the $S_j$-action on $X^{\otimes j}$ is given by permutation of the factors. 
+	\end{coro}
+	\begin{proof}
+		$\implies$: 
+		\[ F(X)\simeq\ilim_kP^kF(X)\simeq\ilim_k\bigoplus_{j<k}D_jP^kF(X)\simeq\ilim_k\bigoplus_j{j<k}(C(j)\otimes X^{\otimes j})\simeq\bigoplus_j(C(j)\otimes X^{\otimes j}) \]
+		$\impliedby$: By \cref{Exc_comm_inf_prod}, 
+		\[ D^j(\bigoplus)\simeq D^j(\bigoplus F_k)\simeq F_j \]
+	\end{proof}
+	
+\section{Classical operads and deduction of the final statement}
+
+	\begin{defn}\label{Classical_operad}
+		We define a classical operad of a category $\mathcal{C}$ to be an $\mathbb{E}_1$-algebra in the category of symmetric sequences in $\mathcal{C}$, that is, $\Fun(\Core\Fin,\mathcal{C})$, with respect to the composition product. A classical cooperad is a $\mathbb{E}_1$-coalgebra with respect to the composition product. 
+	\end{defn}
+
+	\begin{const}\label{Tel_loc_monad_op}
+		Note that the functor $\Fun(\Core\Fin,\mathcal{C})\to\Fun(\mathcal{C},\mathcal{C})$ given by 
+		\[ F\mapsto (X\mapsto\bigoplus(F(n)\otimes X^{\otimes n})_{hS_n}) \]
+		is symmetric monoidal, so any classical operad gives rise to a monad in $\mathcal{C}$. \cref{Coanalytic_fun_classification} shows that when $\mathcal{C}=\Sp_{T(n)}$, this inclusion is fully faithful with image the coanalytic functors, and $P^\infty=\ilim P^n$ is the associated coreflection functor (i.e. the right localization onto the coanalytic functors). 
+	\end{const}
+
+	\begin{const}\label{Bar_const}
+		Recall that for any augmented $\mathbb{E}_1$-algebra of $\mathcal{C}$, say $f:A\to 1$, we define the bar construction of $A$ to be the realization of the simplicial object 
+		% https://q.uiver.app/#q=WzAsNCxbMywwLCIxIl0sWzIsMCwiQSJdLFsxLDAsIkFcXG90aW1lcyBBIl0sWzAsMCwiXFxjZG90cyJdLFsxLDAsIiIsMCx7Im9mZnNldCI6LTF9XSxbMSwwLCIiLDIseyJvZmZzZXQiOjF9XSxbMiwxXSxbMiwxLCIiLDIseyJvZmZzZXQiOi0yfV0sWzIsMSwiIiwyLHsib2Zmc2V0IjoyfV0sWzMsMiwiXFxjZG90cyJdLFszLDIsIlxcY2RvdHMiLDJdXQ==
+		\[\mBar(A)=\begin{tikzcd}[ampersand replacement=\&]
+			\cdots \& {A\otimes A} \& A \& 1
+			\arrow["\cdots", from=1-1, to=1-2]
+			\arrow["\cdots"', from=1-1, to=1-2]
+			\arrow[from=1-2, to=1-3]
+			\arrow[shift left=2, from=1-2, to=1-3]
+			\arrow[shift right=2, from=1-2, to=1-3]
+			\arrow[shift left, from=1-3, to=1-4]
+			\arrow[shift right, from=1-3, to=1-4]
+		\end{tikzcd}\]
+		By definition this is the relative tensor $1\otimes_A1$, and it admits a natural augmented $\mathbb{E}_1$-coalgebra structure given by 
+		\[ 1\otimes_A1\simeq 1\otimes_AA\otimes_A1\to 1\otimes_A1\otimes_A1\simeq 1\otimes_A1\otimes1\otimes_A1 \]
+		Similarly, for an augmented $\mathbb{E}_1$-coalgebra $B$ of $\mathcal{C}$, we may likewise define its cobar construction 
+		% https://q.uiver.app/#q=WzAsNCxbMCwwLCIxIl0sWzEsMCwiQiJdLFsyLDAsIkJcXG90aW1lcyBCIl0sWzMsMCwiXFxjZG90cyJdLFswLDEsIiIsMix7Im9mZnNldCI6MX1dLFswLDEsIiIsMCx7Im9mZnNldCI6LTF9XSxbMSwyXSxbMSwyLCIiLDAseyJvZmZzZXQiOjJ9XSxbMSwyLCIiLDAseyJvZmZzZXQiOi0yfV0sWzIsMywiXFxjZG90cyIsMl0sWzIsMywiXFxjZG90cyJdXQ==
+		\[\coBar(B)=\begin{tikzcd}[ampersand replacement=\&]
+			1 \& B \& {B\otimes B} \& \cdots
+			\arrow[shift right, from=1-1, to=1-2]
+			\arrow[shift left, from=1-1, to=1-2]
+			\arrow[from=1-2, to=1-3]
+			\arrow[shift right=2, from=1-2, to=1-3]
+			\arrow[shift left=2, from=1-2, to=1-3]
+			\arrow["\cdots"', from=1-3, to=1-4]
+			\arrow["\cdots", from=1-3, to=1-4]
+		\end{tikzcd}\]
+		This is likewise an augmented $\mathbb{E}_1$-algebra $\coBar(B)$ of $\mathcal{C}$. By definition, we have $\mBar:\Alg(\mathcal{C})\adj\co\Alg(\mathcal{C}):\coBar$. 
+	\end{const}
+
+	\begin{thm}\label{Susp_loop_adj_mon_coan}
+		The functor $L_{T(n)}\Sigma^\infty_{T(n)}\Omega^\infty_{T(n)}:\Sp_{T(n)}\to\Sp_{T(n)}$ (recall this construction in \cref{Tel_susp_loop}) is coanalytic. More precisely, we have 
+		\[ L_{T(n)}\Sigma^\infty_{T(n)}\Omega^\infty_{T(n)}X\simeq L_{T(n)}\bigoplus_{k=1}^\infty(X^\otimes k)_{hS_k} \]
+	\end{thm}
+	\begin{proof}
+		For a $T(n)$-local spectrum $Y$, we apply $\Phi$ (the Bousfield-Kuhn functor) to the unit map $\Omega^\infty Y\to\Omega^\infty\Sigma^\infty\Omega^\infty Y$, and since $\Phi\Omega\simeq L_{T(n)}$ by \cref{Bousfield_Kuhn_tel_loc_fac}, we have a natural transformation $\lambda_Y:Y\to L_{T(n)}\Sigma^\infty\Omega^\infty Y$. Note that $L_{T(n)}\Sigma^\infty\Omega^\infty Y$ is a non-unital $\mathbb{E}_\infty$-ring spectrum, hence $\lambda$ extends to a map 
+		\[ L_{T(n)}\bigoplus_{k=1}^\infty(Y^{\otimes k})\to L_{T(n)}\Sigma^\infty\Omega^\infty Y \]
+		Now, by a result of Kuhn this is an equivalence when $X$ is $d_{n+1}$-connected (where $d_{n+1}$ is some constant depending on the inclusion of $\An_*^{v_n}\inj\An_*$, or the connectivity of some chosen finite space of type $n+1$) and $T(i)_*X=0$ for $0<i<n$. By \cref{Tel_susp_loop} and picking the corresponding inclusion of $\An_*^{v_n}$ into $\An_*$ we have alternatively $\Omega^\infty_{T(n)}$ equivalent to $\tau_{\geq d_{n+1}+1}\Omega^\infty:L_{T(n)}\Sp\to\An_*^{v_n}$, hence we have 
+		\[ \Sigma^\infty_{T(n)}\Omega^\infty_{T(n)}X\simeq L_{T(n)}\Sigma^\infty\Omega^\infty(\tau_{\geq d+1}X) \]
+		since $\tau_{\geq d+1}X$ is $T(n)$-local, it is $T(i)$-acyclic for $i<n$, and hence we have 
+		\[ L_{T(n)}\Sigma^\infty_{T(n)}\Omega^\infty_{T(n)}(X)\simeq L_{T(n)}\bigoplus_{k=1}^\infty(\tau_{\geq d_{n+1}+1}(X)^{\otimes k})_{hS_k} \]
+		Via the equivalence $L_{T(n)}\tau_{\geq d_{n+1}}X\simeq L_{T(n)}X$, the conclusion holds. 
+	\end{proof}
+
+	\begin{defn}\label{Cocomm_coop_Lie_operad}
+		We define the cocommutative cooperad to be $\Sigma^\infty_{T(n)}\Omega^\infty_{T(n)}$ (this is coanalytic, and is also a comonad since it is the composition of a right adjoint by its left adjoint). We define the Lie operad to be its cobar construction. 
+	\end{defn}
+
+	\begin{remark}
+		Algebras of Lie operads behaves like Lie algebras, and hence the final theorem would give a categorical characterization of Whitehead products. 
+	\end{remark}
+
+	\begin{thm}
+		Let $F:\Sp_{T(n)}\to\Sp_{T(n)}$ be a functor that preserves sifted colimits. Then $F$ is coanalytic. 
+	\end{thm}
+	\begin{proof}
+		We prove $F$ is a colimit of coanalytic functors, which is coanalytic since the inclusion of coanalytic functors into all functors preserves colimits. Note that for any spectrum $X$, the natural map 
+		\[ \ilim_k\Sigma^{\infty-k}\Omega^{\infty-k}(\tau_{\geq d_{n+1}+1}X)\to X \]
+		is an equivalence (here $d_{n+1}$ is defined as in the above proof, and is related to the explicit inclusion $\An_*^{v_n}\inj\An_*$. ), since this obviously holds for the case of a finite spectrum, and the general case follows from writing $X$ a filtered colimit of finite spectra. Therefore, it suffices to prove that the functor 
+		\[ X\mapsto F(L_{T(n)}\Sigma^{\infty-k}\Omega^{\infty-k}(\tau_{\geq d_{n+1}+1}X)) \]
+		is coanalytic. 
+
+		Since $F$ preserves sifted colimits, and $L_{T(n)}$ and $\Sigma^{\infty-k}$ are left adjoints, we have $F\circ L_{T(n)}\circ\Sigma^{\infty-k}:\An_*\to\Sp_{T(n)}$ preserves sifted colimits. Since $\An_*$ is projectively generated with compact generators given by $\Fin_*$, $F\circ L_{T(n)}\circ\Sigma^{\infty-k}$ is the left Kan extension along the inclusion $i:\Fin_*\inj\An_*$ of its restriction $\Fin_*\to\Sp_{T(n)}$, which we denote by $f$. Now, recall that to calculate a left Kan extension, we may apply the coend formula, which is given as follows 
+		\[ \Lan_if(X)\simeq\int^{I\in\Fin_*}\Hom_*(I,X)\otimes f(I) \]
+		here this tensor is the tensor of a space with a spectrum. Recall also that we may reduce a coend to a colimit by passing to the twisted arrow category $T(\Fin_*)$ (that is, the straightening of $\Hom:\mathcal{C}\times\mathcal{C}^{\op}\to\An$), explicitly given by 
+		\[ T(\Fin_*)\to\Fin_*^{\op}\times\Fin_*\xrightarrow{\Hom(-,X)\times f}\An_*\times\Sp_{T(n)}\xrightarrow{\otimes}\Sp_{T(n)} \]
+
+		Thus, $F\circ L_{T(n)}\circ\Sigma^{\infty-k}$ can be written as the colimit of functors of the form 
+		\[ \Hom_*(I,-)\otimes F(L_{T(n)}\Sigma^{\infty-k}J):\An_*\to\Sp_{T(n)} \]
+		where $I$ and $J$ are finite pointed sets. This implies that 
+		\[ X\mapsto F(L_{T(n)}\Sigma^{\infty-k}\Omega^{\infty-k}(\tau_{\geq d_{n+1}+1}X)) \]
+		can be written as the colimit of functors of the form 
+		\[ X\mapsto\Hom_*(I,\Omega^{\infty-k}(\tau_{\geq d_{n+1}+1}X))\otimes C \]
+		for $C$ some $T(n)$-local spectrum. It suffices to show that 
+		\[ X\mapsto L_{T(n)}\Sigma^\infty\Hom_*(I,\Omega^{\infty-k}(\tau_{\geq d_{n+1}+1}X)) \]
+		are coanalytic. However, since $I$ is a finite set, the right hand side can be identified with $(\Sigma^\infty\Omega^{\infty-k}(\tau_{\geq d_{n+1}+1}X))^{\otimes I-*}$. But this functor is clearly coanalytic by the same process of proof as in \cref{Susp_loop_adj_mon_coan}. 
+	\end{proof}
+
+	\begin{thm}\label{Bousfield_Kuhn_Tel_loc_Lie_alg}
+		There is a map of operads $\gamma:\Phi\Theta\to\coBar(\Sigma^\infty_{T(n)}\Omega^\infty_{T(n)})$ which is an equivalence of operads. Therefore, $\Phi\Theta$ can be identified with the Lie operad on $\Sp_{T(n)}$, which produces $\An_*^{v_n}$ as the category of Lie algebras of $\Sp_{T(n)}$. 
+	\end{thm}
+	\begin{proof}
+		Note that the cobar construction $\coBar(\Sigma^\infty_{T(n)}\Omega^\infty_{T(n)})$ is given by the totalization of the cosimplicial object 
+		% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXGlkX3tcXFNwX3tUKG4pfX0iXSxbMSwwLCJcXFNpZ21hXlxcaW5mdHlfe1Qobil9XFxPbWVnYV5cXGluZnR5X3tUKG4pfSJdLFsyLDAsIlxcU2lnbWFeXFxpbmZ0eV97VChuKX1cXE9tZWdhXlxcaW5mdHlfe1Qobil9XFxTaWdtYV5cXGluZnR5X3tUKG4pfVxcT21lZ2FeXFxpbmZ0eV97VChuKX0iXSxbMywwLCJcXGNkb3RzIl0sWzAsMSwiIiwyLHsib2Zmc2V0IjoxfV0sWzAsMSwiIiwwLHsib2Zmc2V0IjotMX1dLFsxLDJdLFsxLDIsIiIsMCx7Im9mZnNldCI6Mn1dLFsxLDIsIiIsMCx7Im9mZnNldCI6LTJ9XSxbMiwzLCJcXGNkb3RzIiwyXSxbMiwzLCJcXGNkb3RzIl1d
+		\[\begin{tikzcd}[ampersand replacement=\&]
+			{\id_{\Sp_{T(n)}}} \& {\Sigma^\infty_{T(n)}\Omega^\infty_{T(n)}} \& {\Sigma^\infty_{T(n)}\Omega^\infty_{T(n)}\Sigma^\infty_{T(n)}\Omega^\infty_{T(n)}} \& \cdots
+			\arrow[shift right, from=1-1, to=1-2]
+			\arrow[shift left, from=1-1, to=1-2]
+			\arrow[from=1-2, to=1-3]
+			\arrow[shift right=2, from=1-2, to=1-3]
+			\arrow[shift left=2, from=1-2, to=1-3]
+			\arrow["\cdots"', from=1-3, to=1-4]
+			\arrow["\cdots", from=1-3, to=1-4]
+		\end{tikzcd}\]
+		But since $\Phi\Omega^\infty_{T(n)}\simeq\Sigma^\infty_{T(n)}\Theta\simeq\id_{\Sp_{T(n)}}$, the totalization of the above cosimplicial diagram is equivalent to the following % https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXFBoaVxcT21lZ2FeXFxpbmZ0eV97VChuKX1cXFNpZ21hXlxcaW5mdHlfe1Qobil9XFxUaGV0YSJdLFsxLDAsIlxcUGhpXFxPbWVnYV5cXGluZnR5X3tUKG4pfVxcU2lnbWFeXFxpbmZ0eV97VChuKX1cXE9tZWdhXlxcaW5mdHlfe1Qobil9XFxTaWdtYV5cXGluZnR5X3tUKG4pfVxcVGhldGEiXSxbMiwwLCJcXGNkb3RzIl0sWzAsMSwiIiwyLHsib2Zmc2V0IjoxfV0sWzAsMSwiIiwwLHsib2Zmc2V0IjotMX1dLFsxLDJdLFsxLDIsIiIsMCx7Im9mZnNldCI6Mn1dLFsxLDIsIiIsMCx7Im9mZnNldCI6LTJ9XV0=
+		\[\begin{tikzcd}[ampersand replacement=\&]
+			{\Phi\Omega^\infty_{T(n)}\Sigma^\infty_{T(n)}\Theta} \& {\Phi\Omega^\infty_{T(n)}\Sigma^\infty_{T(n)}\Omega^\infty_{T(n)}\Sigma^\infty_{T(n)}\Theta} \& \cdots
+			\arrow[shift right, from=1-1, to=1-2]
+			\arrow[shift left, from=1-1, to=1-2]
+			\arrow[from=1-2, to=1-3]
+			\arrow[shift right=2, from=1-2, to=1-3]
+			\arrow[shift left=2, from=1-2, to=1-3]
+		\end{tikzcd}\]
+		hence $\coBar(\Sigma^\infty_{T(n)}\Omega^\infty_{T(n)})\simeq\Tot(\Phi(\Omega^\infty_{T(n)}\Sigma^\infty_{T(n)})^{\bullet+1}\Theta)$, which produces a map 
+		\[ \gamma:\Phi\Theta\to\Tot(\Phi(\Omega^\infty_{T(n)}\Sigma^\infty_{T(n)})^{\bullet+1}\Theta) \]
+		Now upon applying $P_k$ on both sides, since $\Phi$ and $\Theta$ preserves filtered colimits, by the construction of $P_k$, we have $P_k(\Phi\Theta)\simeq\Phi P_k(\id_{\An_*^{v_n}})\Theta$, and on the right hand side we have 
+		\[ P_k\Tot(\Phi(\Omega^\infty_{T(n)}\Sigma^\infty_{T(n)})^{\bullet+1}\Theta)\simeq\Phi\Tot(P_k((\Omega^\infty_{T(n)}\Sigma^\infty_{T(n)})^{\bullet+1}))\Theta \]
+		Thus it suffices to verify that we have 
+		\[ P_k(\id_{\An_*^{v_n}})\to\Tot(P_k((\Omega^\infty_{T(n)}\Sigma^\infty_{T(n)})^{\bullet+1})) \]
+		is an equivalence. 
+
+		In fact, we prove a more general statement saying that 
+		\[ P_k(FG)\simeq\Tot(P_k(F(\Omega^\infty_{T(n)}\Sigma^\infty_{T(n)})^{\bullet+1}G)) \]
+		Suppose $F$ is of the form $H\Sigma^\infty_{T(n)}$, then the above is obviously an equivalence by the extra degeneracy argument on cosimplicial objects. Then note that homogeneous functors are of the form $H\Sigma^\infty_{T(n)}$ by \cref{n_homog_fac_stab}. Therefore the assumption holds for all homogeneous functor $F$. Then the conclusion follows from induction and approximating $F$ to the $k$-th degree (note $P_k(P_k(F))=P_k(F)$), and on each step $D_iF\to P_iF\to P_{i-1}F$ is a fiber sequence, so the homogeneous case and the induction hypothesis works. 
+	\end{proof}
+
+
+
+
+
+%	\begin{proof}
+%		This map originates from the property stated in \cref{Bousfield_Kuhn_susp_loop_adj}. We first note that in a general category $\mathcal{C}$, then a map of $\mathbb{E}_1$-algebras $A\to\coBar(B)$ is equivalent to the data of an augmented $\mathbb{E}_1$-algebra structure of some element projecting to $(A,B)$ in the twisted arrow category $T(\mathcal{C})$ (recall that this is the straightening of the functor $\Hom:\mathcal{C}\times\mathcal{C}^{\op}\to\An$). Therefore, to construct $\gamma$, it suffices to construct an augmented $\mathbb{E}_1$-algebra structure on the object $\Gamma:\Phi\Theta\to\Sigma^\infty_{T(n)}\Omega^\infty_{T(n)}$, where $\Gamma$ is given by 
+%		\[ \Gamma:\Phi\Theta\xrightarrow{\Phi\eta^2\Theta}\Phi\Omega^\infty_{T(n)}\Sigma^\infty_{T(n)}\Omega^\infty_{T(n)}\Sigma^\infty_{T(n)}\Theta\simeq\Sigma^\infty_{T(n)}\Omega^\infty_{T(n)} \]
+		
+%		Then we construct an algebra structure on $\Gamma$. Note that for a symmetric monoidal action $\mathcal{C}\act\mathcal{D}$, an endomorphism object of $D\in\mathcal{D}$ is some $C\in\mathcal{C}$ equipped with a morphism $C\otimes D\to D$, such that it is universal in the sense that for all $E\in\mathcal{C}$, we have
+%		\[ \Hom(E,C)\to\Hom(E\otimes D,C\otimes D)\to\Hom(E\otimes D,D) \]
+%		is an equivalence. By Lurie, we have an $\mathbb{E}_1$-algebra structure on $C$. Since $\Fun(\Sp_{T(n)},\Sp_{T(n)})$ acts on $\Fun(\An_*^{v_n},\Sp_{T(n)})$ by composition of functors, we have $T(\Fun(\Sp_{T(n)},\Sp_{T(n)}))$ acts on $T(\Fun(\An_*^{v_n},\Sp_{T(n)}))$. Therefore, it suffices to show that $\Gamma$ is the endomorphism object of $\Phi\to\Sigma^\infty_{T(n)}$ (this is given by the same process as above). 
+
+%		The action diagram is clearly given by 
+		% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXFBoaVxcVGhldGFcXFBoaSJdLFsxLDAsIlxcU2lnbWFeXFxpbmZ0eV97VChuKX1cXE9tZWdhXlxcaW5mdHlfe1Qobil9XFxTaWdtYV5cXGluZnR5X3tUKG4pfSJdLFswLDEsIlxcUGhpIl0sWzEsMSwiXFxTaWdtYV5cXGluZnR5X3tUKG4pfSJdLFswLDIsIlxcdmFyZXBzaWxvbiIsMl0sWzMsMSwiXFxldGEiLDJdLFswLDFdLFsyLDNdXQ==
+%		\[\begin{tikzcd}[ampersand replacement=\&]
+%			{\Phi\Theta\Phi} \& {\Sigma^\infty_{T(n)}\Omega^\infty_{T(n)}\Sigma^\infty_{T(n)}} \\
+%			\Phi \& {\Sigma^\infty_{T(n)}}
+%			\arrow[from=1-1, to=1-2]
+%			\arrow["\varepsilon"', from=1-1, to=2-1]
+%			\arrow[from=2-1, to=2-2]
+%			\arrow["\eta"', from=2-2, to=1-2]
+%		\end{tikzcd}\]
+%		Let $E:F\to G$ be an arbitrary object of $T(\Fun(\Sp_{T(n)},\Sp_{T(n)}))$, and we must show that 
+%		\[ \Hom(F\to G,\Phi\Theta\to\Sigma^\infty_{T(n)}\Omega^\infty_{T(n)})\to\Hom(F\Phi\to G\Sigma^\infty_{T(n)},\Phi\to\Sigma^\infty_{T(n)}) \]
+%		is an equivalence. The opposite of this map is given by 
+%		\begin{align*}
+%			&\Hom(F\Phi\to G\Sigma^\infty_{T(n)},\Phi\to\Sigma^\infty_{T(n)}) \\
+%			\to&\Hom(F\Phi\Theta\to G\Sigma^\infty_{T(n)}\Omega^\infty_{T(n)},\Phi\Theta\to\Sigma^\infty_{T(n)}\Omega^\infty_{T(n)}) \\
+%			\to&\Hom(F\to G,\Phi\Theta\to\Sigma^\infty_{T(n)}\Omega^\infty_{T(n)}) 
+%		\end{align*}
+%		and they are inverses to one another by the property shown in \cref{Bousfield_Kuhn_susp_loop_adj}. 
+
+%		Finally it suffices to show that the map $\gamma$ induced by $\Gamma$ is an equivalence. Since the domain and codomain of $\gamma$ is coanalytic, it suffices to show that $\gamma$ induces an equivalence on the $k$-excisive approximations for all $k$. 
+%	\end{proof}
+
+
+
+
+%	\begin{const}\label{Nilpotence_exponent}
+%		Let $G$ be a finite group, and we consider the category $\Fun(BG,\Sp_{T(n)})$. We explicitly construct the thick subcategory of $\Fun(BG,\Sp_{T(n)})$ spanned by free objects, that is, objects of the form $\Sigma^\infty G_+\otimes X$ with the natural $G$-action. We denote the collection of these objects by $\mathcal{F}$. Now, we define $\mathcal{T}_1(\mathcal{F})$ to be the collection of objects retracts of objects in $\mathcal{F}$. Then inductively, we define $\mathcal{T}_n(\mathcal{F})$ to be the collection of objects $X$ such that $X$ is a retract of some $X_0$, and $X_0$ sits in a fiber sequence $Y\to X_0\to Z$ where $Y\in\mathcal{T}_1(\mathcal{F})$ and $Z\in\mathcal{T}_{n-1}(\mathcal{F})$. 
+%
+%		Now we have $\bigcup\mathcal{T}_n(\mathcal{F})=\mathcal{T}(\mathcal{F})$ the thick subcategory generated by $\mathcal{F}$, and provides a filtration for this category. We say $X$ is nilpotent if $X\in\mathcal{T}(\mathcal{F})$, and define the exponent of $X$ $\exp(X)$ to be the minimal positive number $n$ such that $X\in\mathcal{T}_n(\mathcal{F})$. 
+%		
+%		Similarly for any subgroup $H\leq G$, we may define the notion of $H$-nilpotence and $H$-exponent for $H$-nilpotent objects $X$, denoted by $\exp_H(X)$. 
+%	\end{const}
+
+
+%	\begin{const}
+%		Note that by definition, the functors $\crs_n^\Delta$ and $\crs^n_\Delta$ admit $S_n$-actions on them, namely by permuting the factors of $X$ in the slots of $\crs_n$ and $\crs^n$. This means that the natural transformations $\varepsilon:\crs_n^\Delta(F)\to F$ and $\eta:F\to\crs^n_\Delta(F)$ factors through the homotopy orbits and homotopy fixed points, namely we let 
+%		\[ \varepsilon_n:\crs_n^\Delta(F)_{hS_n}\to F \]
+%		and 
+%		\[ \eta^n:F\to\crs^n_\Delta(F)^{hS_n} \]
+%		be the maps factoring $\varepsilon$ and $\eta$. 
+%	\end{const}
+
+%	\begin{thm}[Goodwillie]\label{N_homog_fun_char}
+%		For sufficiently good categories $\mathcal{C}$ and $\mathcal{D}$, we define $\mathcal{C}^{(n)}$ to be the category $\mathcal{C}^n_{hS_n}$, where the $S_n$ action on $\mathcal{C}^n$ is given by the permutation on the summands. We then define a symmetric functor $\mathcal{C}\to\mathcal{D}$ to be a functor $F:\mathcal{C}^{(n)}\to\mathcal{D}$. \\
+%		Since the coproduct on $\mathcal{C}$ is symmetric monoidal, we have the coproduct map $\coprod:\mathcal{C}^n\to\mathcal{C}$ factors through the homotopy orbit of the $S_n$-action, hence produces a map $\coprod:\mathcal{C}^{(n)}\to\mathcal{C}$. Finally we define for a functor $F:\mathcal{C}\to\mathcal{D}$ its cross effect $\mathrm{cr}_{(n)}(F)$ to be its precomposition with $\coprod:\mathcal{C}^{(n)}\to\mathcal{C}$. \\
+%		We have the following fully faithful embedding of categories 
+%		\[ \mathrm{cr}_{(n)}:\mathrm{Homog}^n(\mathcal{C},\mathcal{D})\to\mathrm{SymFun}^n(\mathcal{C},\mathcal{D}) \]
+%		Moreover it has essential image the functors whose underlying functor $F:\mathcal{C}^n\to\mathcal{D}$ that is multilinear (exact in each component). 
+%	\end{thm}
+%	\begin{proof}
+%		\todo{Reference}. 
+%	\end{proof}
+
+
+
+
+%	(regarded as a set of objects of $\mathcal{C}$ indexed by the set of natural numbers, and equipped with an $S_n$-action for the object indexed by $n$)
+%	\begin{defn}\label{Coanalytic_fun_defn_1}
+%		We define a symmetric sequence $C$ in $\Sp_{T(n)}$ to be a collection of $T(n)$-local spectra $\{C(k)\}_{k\geq0}$ with $C(k)$ equipped with a $S_k$-action. A symmetric sequence $C$ gives rise to a functor $\Sp_{T(n)}\to\Sp_{T(n)}$ given by 
+%		\[ \lambda(C):\Sp_{T(n)}\to\Sp_{T(n)},F_C(X)=\bigoplus_{k\geq0}(C(k)\otimes X^{\otimes k})_{hS_k} \]
+%		Note that if we let $\Fin$ denote the category of finite sets, and $[n]$ be the set with $n+1$-elements, then we have $\Aut([n])\simeq BS_{n+1}$, where $S_{n+1}$ is the permuatation group of $n+1$-th order. Thus equivalently we may define the category of symmetric sequences to be $\Fun(\Core\Fin,\Sp_{T(n)})$. 
+%	\end{defn}
+
+%	The main purpose of this section is to prove the following theorem. 
+
+%	\begin{thm}\label{Sym_seq_ff_emb}
+%		The embedding $C\mapsto \lambda_C:\Fun(\Core\Fin,\Sp_{T(n)})\to\Fun(\Sp_{T(n)},\Sp_{T(n)})$ is fully faithful. We define its image to be the coanalytic functors. 
+%	\end{thm}
+
+%	To prove the above theorem, we need the following definitions. 
+
+%	\begin{const}\label{Coder_fun_tel_loc}
+%		We define a functor $\lambda_k:\Sp_{T(n)}^{BS_k}\to\Fun(\Sp_{T(n)},\Sp_{T(n)})$ given by 
+%		\[ C\mapsto(X\mapsto (C\otimes X^{\otimes k})_{hS_k}) \]
+%		where the $S_k$-action on $C\otimes X^{\otimes k}$ is given by the natural action on $C$ and the permutation action on $X^{\otimes k}$. Note that by construction $\lambda_k$ preserves all colimits, hence by the adjoint functor theorem it admits a right adjoint 
+%		\[ \partial^k:\Fun(\Sp_{T(n)},\Sp_{T(n)})\to\Sp_{T(n)}^{BS_k} \]
+%		Obviously to prove \cref{Sym_seq_ff_emb}, it suffices to prove that for any $C\in\Fun(\Core\Fin,\Sp_{T(n)})$, we have $C(k)\simeq\partial^k\lambda(C)$. 
+%	\end{const}
+
+%	\begin{lemma}\label{Char_coder_fun}
+%		We have
+%		\[ \partial^k(F)\simeq\Map_{\Fun(\Sp_{T(n)},\Sp_{T(n)})}((-)^{\otimes k},F) \]
+%		Here note that $\Fun(\Sp_{T(n)},\Sp_{T(n)})$ is a stable category, so it makes sense to talk of $\Map(-,-)$ in this category (denoting the mapping spectrum). Moreover, the $S_k$-action of $\partial^k(F)$ is given by the inverse permutation action on $(-)^{\otimes k}$. 
+%	\end{lemma}
+%	\begin{proof}
+%		We have the following chain of equivalences. 
+%		\begin{align*}
+%			&\partial^k(F) \\
+%			\simeq&\Map_{\Sp_{T(n)}}(\mathbb{S}_{T(n)},\partial^k(F)) \\
+%			\simeq&\Map_{\Sp_{T(n)}^{BS_k}}(\mathbb{S}_{T(n)}\otimes\Sigma^\infty_+S_k,\partial^k(F)) \\
+%			\simeq&\Map_{\Fun(\Sp_{T(n)},\Sp_{T(n)})}(\lambda_k(\mathbb{S}_{T(n)}\otimes\Sigma^\infty_+S_k),F) \\
+%			\simeq&\Map_{\Fun(\Sp_{T(n)},\Sp_{T(n)})}((-)^{\otimes k},F)
+%		\end{align*}
+%		where the last equivalence is given by the standard fact that $(\mathbb{S}_{T(n)}\otimes\Sigma^\infty_+S_k\otimes X)_{hS_k}\simeq X$, regardless of the action of $S_k$ on $X$. Then the verification of the $S-k$-action is direct. 
+%	\end{proof}
+
+%	\begin{lemma}
+%		\[ \partial^{k+1}F\simeq\partial^1(X\mapsto\partial^kF(X\oplus-)) \]
+%	\end{lemma}
+%	\begin{proof}
+%		Note that we have 
+%	\end{proof}
+
+%	However, in the $T(n)$-local settings, we have another characterization of the above functors. 
+
+%	\begin{defn}\label{Analytic_fun_defn_2}
+%		Consider a finite set $S$, and let $P(S)$ be the poset of subsetes of $S$ ordered by inclusion. We define $P_{\leq i}(S)$ to be the subset of $P(S)$ consisting of subsets having cardinality smaller or equal than $i$ and $P_{>i}(S)$ to be the subset of $P(S)$ consisting of subsets having cardinality greater than $i$. \\
+%		We define a $n$-cube $F:P(S)\to\mathcal{C}$ (where $|S|=n$) to be strongly coCartesian if it is the left Kan extension of the subdiagram $F:P_{\leq 1}(S)\to\mathcal{C}$. We define a cube to be Cartesian if it is the right Kan extension of the subdiagram $F:P_{>0}(S)\to\mathcal{C}$. \\
+%		We define a functor $F:\mathcal{C}\to\mathcal{D}$ to be $n$-excisive if it takes strongly coCartesian $n$-cubes to Cartesian $n$-cubes. We define the full subcategory $\Exc^n(\mathcal{C},\mathcal{D})$ to be the full subcategory of $\Fun(\mathcal{C},\mathcal{D})$ spanned by the $n$-excisive functors. The inclusion $\Exc^n(\mathcal{C},\mathcal{D})\inj\Fun(\mathcal{C},\mathcal{D})$ admit a left adjoint $P_n$. Moreover, we say $F$ is $n$-homogeneous if $P_{n-1}F\simeq*$ and $P_nF=F$. \\
+%		We define a functor $F:\mathcal{C}\to\mathcal{D}$ to be analytic if we have 
+%		\[ F\to\plim(P_nF\to\cdots\to P_1F\to P_0F) \]
+%		an equivalence. 
+%	\end{defn}
+
+%	We need a few inputs to relate the above definitions. 
+
+%	With the above theorems, we can prove the following. 
+%	\begin{thm}\label{Ana_fun_tel_loc}
+%		The functors introduced in \cref{Analytic_fun_defn_1} are precisely the filtered colimit preserving analytic functors with domain and codomain $\Sp_{T(n)}$, in the sense of \cref{Analytic_fun_defn_2}. 
+%	\end{thm}
+%	\begin{proof}
+%		We observe that the filtered colimit preserving $n$-homogeneous functors are of the form $(C\otimes X^{\otimes n})_{hS_n}$ since any such functor $F:\Sp_{T(n)}^{(n)}\to\Sp_{T(n)}^{(n)}$ is of the form 
+%		\[ F(X)=F'(X,\cdots,X)_{hS_n}=(F'(\mathbb{S},\cdots,\mathbb{S})\otimes X^{\otimes n})_{hS_n} \]
+%		by \cref{N_homog_fun_char}. This directly proves $\implies$. \\
+%		For the converse, an analytic functor $F$ is the colimit of the tower 
+%		\[ F=\plim(P_nF\to\cdots\to P_1F\to P_0F) \]
+%		Then consider the fiber sequences $D_nF\to P_nF\to P_{n-1}F$. Then to show this fiber sequence splits, it suffices to show that any natural transformation $P_{n-1}F\to\Sigma D_nF$ vanishes. By \cref{N_exc_fun_char}, this is equivalent to that any natural transformation $P_{n-1}F\to(D_nF'\delta)^{tS_n}$ vanishes. But since the codomain is $\Sp_{T(n)}$, in which Tate construction vanishes by \cref{Tate_vanish}, hence this fiber sequence splits. Therefore $P_nF\simeq D_nF\oplus P_{n-1}F$, and hence any analytic functor has the form in \cref{Analytic_fun_defn_1}. 
+%	\end{proof}
+
+%	\begin{lemma}\label{Poly_fun_homog_deg_null}
+%		For $F,G:\Sp_{T(n)}\to\Sp_{T(n)}$ with $F$ $n$-homogeneous and $G$ $m$-homogeneous ($n\neq m$), any natural transformation $F\to G$ is null-homotopic (that is, factors through the zero map). 
+%	\end{lemma}
+%	\begin{proof}
+%		If $n>m$, then by the definition $P_n$, we have 
+%		\[ \Hom_{\Fun(\Sp_{T(n)},\Sp_{T(n)})}(F,G)\simeq\Hom_{\Fun(\Sp_{T(n)},\Sp_{T(n)})}(P_mF,G) \]
+%		but by definition $P_mF$ is trivial, hence $F\to G$ must also be trivial. \\
+%		If $n<m$, then as in the proof of \cref{Ana_fun_tel_loc} we have any natural transformation $F\to G$ is trivial by Tate vanishing. 
+%	\end{proof}
+
+	
+
+%	\begin{coro}\label{Ana_fun_hom_space}
+%		We have a fully faithful embedding 
+%		\[ \Fun(\Core\Fin,\Sp_{T(n)})\to\Fun(\Sp_{T(n)},\Sp_{T(n)}) \]
+%		whose essential image consists of filtered colimit preserving analytic functors. 
+%	\end{coro}
+%	\begin{proof}
+%		By \cref{Ana_fun_tel_loc} and \cref{Poly_fun_homog_deg_null}, it remains to prove that the only natural transformations between functors $F(X)=(C\otimes X^{\otimes m})_{hS_m}$ and $G(X)=(D\otimes X^{\otimes m})_{hS_m}$ comes from a map $C\to D$. Firstly for the case $m=1$, note that 
+%	\end{proof}
+
+	%	It suffices to verify that the construction 
+%	\[ \lambda_m:\Sp_{T(n)}^{BS_m}\to\Fun(\Sp_{T(n)},\Sp_{T(n)}),C\mapsto(X\mapsto(C\otimes X^{\otimes m})_{hS_m}) \]
+%	admits the right adjoint $\partial_m$ sending a functor $F=\bigoplus(C(k)\otimes X^{\otimes k})_{hS_k}$ to the $S_m$ equivariant $T(n)$-local spectrum $C(m)$. Firstly clearly $\lambda_m$ preserves colimits, it admit a right adjoint. 

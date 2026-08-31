@@ -1,0 +1,103 @@
+\part{K-theory}
+
+\chapter{Basic constructions in K-theory}
+
+\section{Group completion}
+
+	\begin{defn}
+		In a category $\mathcal{C}$ viewed as a Cartesian symmetric monoidal category, we define $\EE_n\Mon(\mathcal{C})$ to be the category of $\EE_n$-monoids in $\mathcal{C}$. In particular when $n=1$ or $n=\infty$, we denote the category by $\Mon(\mathcal{C})$ and $\CMon(\mathcal{C})$. \\
+		We say a monoid $X$ to be grouplike if the shear map $(\pi_1,\mu):X\times X\to X\times X$ is an equivalence, where $\pi_1$ is the projection to the first factor, and $\mu$ is the multiplication map. We denote the category of grouplike $\EE_n$-monoids to be $\EE_n\Grp(\mathcal{C})$ (the notation for $n=1$ or $n=\infty$ is still adopted). \\
+		Notice that any monoid of $\mathcal{C}$ is naturally pointed by the unit map. 
+	\end{defn}
+
+	\begin{thm}\label{Recognition_principle}
+		We have equivalences of categories 
+		\[ \Grp(\mathcal{C})\simeq\Omega(\mathcal{C}_*) \]
+		where $\Omega(\mathcal{C})$ is the image of the loopspace functor of $\mathcal{C}$. Recall $\EE_n\simeq\EE_1^{\otimes n}$ (this is the tensor product of operads), in particular we have 
+		\[ \EE_n\Grp(\mathcal{C})\simeq\Omega^n(\mathcal{C}_*) \]
+		Formally this applies to the case $n=\infty$ where $\Omega^\infty$ is the infinite loopspace functor $\Omega^\infty:\Sp(\mathcal{C})\to\mathcal{C}$. \\
+		Moreover, these equivalences are determined by the adjunction 
+		\[ B^n:\EE_n\Mon(\mathcal{C})\adj\mathcal{C}_*:\Omega^n \]
+		where $B$ is the bar construction. Again, this applies formally to the case where $n=\infty$, where the adjunction is upgraded to 
+		\[ B^\infty:\EE_\infty\Mon(\mathcal{C})\adj\Sp(\mathcal{C}):\Omega^\infty \]
+	\end{thm}
+	\begin{proof}
+		Omitted. 
+	\end{proof}
+
+	\begin{const}\label{Group_completion}
+		By \cref{Recognition_principle}, we have the unit of the adjunction $B^n\dashv\Omega^n$ the left adjoint to the forgetful functor $\EE_n\Grp(\mathcal{C})\to\EE_n\Mon(\mathcal{C})$, which we will call the group completion functor, denoted by $X\mapsto X^{\grp}$. Moreover, we have a natural tranfromation $\id\to\Omega^nB^n$, hence we have a natural map $X\to X^{\grp}$. 
+	\end{const}
+
+	\begin{defn}\label{Algebraic_K_theory}
+		For any $\EE_\infty$ ring $R$ in any stable presentable category $\mathcal{C}$, we consider the category $\Mod_R$. There is a tensor product on this category given by the bar construction, so $\Mod_R$ is a commutative monoid in the category $\Cat^\times$ (the category of $(\infty,1)$-categories equipped with the Cartesian symmetric monoidal structure). Thus since $\Core:\Cat^\times\to\An^\times$ is symmetric monoidal, we consider the commutative monoid $\Core\Mod_R\in\An^\times$. Finally we define the $K$-theory space to be the commutative monoid $K(R):=\Core\Mod_R^{\grp}$. We often view this as a connective spectrum due to the isomorphism in \cref{Recognition_principle}. 
+	\end{defn}
+
+\section{Waldhausen S-construction}
+
+\chapter{Topological Hochschild homology}
+
+\section{Common definitions and first properties}
+
+	\begin{thm}\label{THH_comm_1}
+		For an $\EE_n$-ring $R$ in any symmetric monoidal category $\mathcal{C}$, we have $\THH(R)$ an $\EE_{n-1}$ ring. 
+	\end{thm}
+
+\section{Generalized Thom spectra and the proof of Bokstedt theorem}
+
+	Recall that in the above we defined the algebraic $K$-theory of a $\EE_\infty$ ring $R$ to be $\Core\Mod_R^{\grp}$. Here we apply the right adjoint of the forgetful functor $\Grp\to\Mon$ to make the monoid $\Core\Mod_R$ a group, which we will denote by the Picard space $\Pic(R)$. 
+
+	\begin{defn}\label{Picard_space}
+		We define the Picard space of an $\EE_n$-ring $R$ ($n\geq2$) in some symmetric monoidal category $\mathcal{C}$ written out by $\Pic(R):=\Core\Mod_R^{\inv}$ to be the subspace of $\Core\Mod_R$ consisting of tensor-invertible modules (that is, modules $M$ such that there is some $N$ such that $M\otimes_RN\simeq R$) in $\Core\Mod_R$. Notice that $\Mod_R$ is $\EE_{n-1}$-monoidal, hence $\Pic(R)$ is an $\EE_{n-1}$-ring in $\An$. When $R$ is $\EE_\infty$, this space is a $\EE_\infty$-group, and we sometimes call this the Picard spectrum. \\
+		More generally, for any $\EE_n$-monoidal category $\mathcal{C}$, we define $\Pic(\mathcal{C}):=\Core\mathcal{C}^{\inv}$ an $\EE_n$-group in $\An$. 
+	\end{defn}
+
+	\begin{remark}
+		For the case where $R$ is an $\EE_\infty$-ring spectrum, $\Pic(R)$ coincides with the spectrum $\mathrm{bgl}_1(R)$, which is the suspension of the unit spectrum of $R$. This is by definition, since $\Omega\Pic(R)$ is exactly the automorphisms of $R$ viewed as an $R$-module. 
+	\end{remark}
+
+	\begin{defn}\label{Gen_thom_spectra}
+		Let $X$ be a space and let $R$ be an $\EE_n$-ring in some stable presentable category $\mathcal{C}$. Then let $f:X\to\Pic(R)$ be a map of spaces. We define the Thom object of $f$ to be 
+		\[ Mf:=\ilim(X\xrightarrow{f}\Pic(R)\inj\Mod_R) \]
+	\end{defn}
+
+	\begin{exam}
+		We let $F(n)$ denote the auto-homotopy equivalences of $S^n$, and let $F=\ilim F(n)$. Thus $F$ can be viewed as $GL_1(S)$, where $S$ is the sphere spectrum. Hence $BF\simeq\Pic(S)$ by the above remark. \\
+		For the canonical bundles on the classifying spaces $BO$, $BU$, and $BSp$, we have the Thom spectra $MO$, $MU$, and $MSp$. They can be obtained from the above construction by the following process. Notice that the $J$-homomorphism $J:O\to F$ is a morphism of groups, hence admit a delooping $BJ:BO\to BF\simeq\Pic(S)$. Then we have $MO\simeq MBJ$. The Thom spectra for $BU$ and $BSp$ is obtained similarly. This gives us a way to think of bundles as maps to $\Pic(S)$. 
+	\end{exam}
+
+	\begin{thm}\label{Thom_fun_sym_mon}
+		For $R$ an $\EE_n$-ring, the functor $M:\An_{/\Pic(R)}\to\Mod_R$ is $\EE_{n-1}$-monoidal. Here $\An_{/\Pic(R)}$ is equipped with the symmetric monoidal structure given by for $f:X\to\Pic(R)$ and $g:Y\to\Pic(R)$, $f\times g:X\times Y\to\Pic(R)\times\Pic(R)\to\Pic(R)$. 
+	\end{thm}
+	\begin{proof}
+		We first notice that by construction $\Pic$ is a functor 
+		\[ \Pic:\EE_{n-1}\Mon(\PrL)\to\EE_{n-1}\Grp(\An) \]
+		Then we construct a left adjoint to this functor. We claim that there is an adjunction 
+		\[ \An_{/-}:\EE_{n-1}\Grp(\An)\adj\EE_{n-1}\Mon(\PrL):\Pic \]
+		To verify this, notice that $\An_{/G}\simeq\Fun(G,\An)$ by the straightening and unstraightening equivalence, hence $\Fun^L(\An_{/G},\mathcal{C})\simeq\Fun(G,\mathcal{C})$, and a functor on the left is $\EE_{n-1}$-monoidal iff the functor on the right is $\EE_{n-1}$-monoidal, hence since $G$ is an $\EE_{n-1}$-group, any $\EE_{n-1}$-monoidal functor $G\to\mathcal{C}$ factors through $G\to\Pic(\mathcal{C})$. To summarize, we have the chain of equivalences which exhibits the adjunction. 
+		\[ \Fun^L_{\EE_{n-1}}(\An_{/G},\mathcal{C})\simeq\Fun_{\EE_{n-1}}(G,\mathcal{C})\simeq\Fun_{\EE_{n-1}}(G,\Pic(\mathcal{C})) \]
+		With this adjunction, it suffices to see that $M$ is the dual of the identity on $\Pic(R)$. But by construction, the dual of the identity on $\Pic(R)$ is given by the following process due to the above chain of equivalence 
+		\[ (\An_{/\Pic(R)}\xrightarrow{\ilim}\Mod_R)\mapsfrom(\Pic(R)\inj\Mod_R)\mapsfrom\id_{\Pic(R)} \]
+		which is exactly the construction of Thom object. 
+	\end{proof}
+
+	\begin{coro}\label{Thom_sp_sym_mon}
+		For $f:G\to\Pic(R)$ where $G$ is an $\EE_\infty$-monoid and $f$ is an $\EE_\infty$-map, we have $Mf$ an $\EE_\infty$-$R$-algebra. 
+	\end{coro}
+	
+	\begin{thm}\label{Space_tensor_E_infty_Thom_obj}
+		Let $X$ be a pointed space and $G$ an $\EE_\infty$-group of spaces. Then for an $\EE_\infty$ ring $R$ and a $\EE_\infty$-map $f:G\to\Pic(R)$, we have an equivalence of $\EE_\infty$-$R$-algebras 
+		\[ X\otimes Mf\simeq Mf\otimes S[X\otimes_*G] \]
+		Here the first tensor denote the tensoring with spaces in the category of $\EE_\infty$-$R$-algebras, the second tensor is the coproduct in the category of $\EE_\infty$-$R$-algebras, and the third tensor is the tensoring with spaces in the category of $\EE_\infty$-groups of spaces. $S[X\otimes G]$
+	\end{thm}
+	\begin{proof}
+		We first prove that we have the following equivalence
+		\[ X\otimes Mf\simeq M(X\otimes G\to G\to\Pic R) \]
+		heret
+	\end{proof}
+
+
+
+	We now consider the interaction of topological Hochschild homology and Thom spectra, which will present a proof (different from the original one) of the Bokstedt theorem. 
+
+

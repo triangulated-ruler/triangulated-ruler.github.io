@@ -1,0 +1,1421 @@
+\part{Ambidexterity}
+
+\chapter{Ambidexterity in terms of $\An_n^m$}
+
+\section{Beck-Chevalley fibrations}
+
+	\begin{defn}\label{Beck_Chevalley_fib}
+		Recall that a pair of adjunction is simply a bifibration to the category $\Delta^1$. Now, given a functor $q:\mathcal{C}\to\mathcal{X}$ a bifibration, for each $f:X\to Y$ in $\mathcal{X}$, we let $f_!\dashv f^*$ the adjunction associated to $f$ over $f_!:\mathcal{C}_X\adj\mathcal{C}_Y:f^*$, where $q^{-1}(X)$ is the homotopy fiber of the map $q$ at $X$. We denote the unit and counit of the adjunction induced by $f$ respectively by $\eta_f$ and $\varepsilon_f$. \\
+		Then, for each Cartesian square 
+		% https://q.uiver.app/#q=WzAsNCxbMCwwLCJYJyJdLFswLDEsIlgiXSxbMSwwLCJZJyJdLFsxLDEsIlkiXSxbMCwyLCJmJyJdLFsyLDMsImciXSxbMCwxLCJnJyIsMl0sWzEsMywiZiIsMl1d
+		\[\begin{tikzcd}
+			{X'} & {Y'} \\
+			X & Y
+			\arrow["{f'}", from=1-1, to=1-2]
+			\arrow["{g'}"', from=1-1, to=2-1]
+			\arrow["g", from=1-2, to=2-2]
+			\arrow["f"', from=2-1, to=2-2]
+		\end{tikzcd}\]
+		we have a natural equivalence of functors $(g')^*f^*=(f')^*g^*$, which induces a natural transformation by the adjunction 
+		\[ f'_!(g')^*\xrightarrow{\eta_f}f'_!(g')^*f^*f_!\simeq f'_!(f')^*g^*f_!\xrightarrow{\varepsilon_{f'}}g^*f_! \]
+		We denote this natural transformation associated to the Cartesian square $\sigma$ by $BC[\sigma]$, the Beck-Chevalley transformation associated to $\sigma$. \\
+		We define $q:\mathcal{C}\to\mathcal{X}$ to be a Beck-Chevalley fibration if it is a bifibration and for all $\sigma$, $BC[\sigma]$ is invertible. 
+	\end{defn}
+
+	\begin{remark}
+		The Beck-Chevalley condition can be viewed as a nice behavior with respect to spans. Explicitly, for a bifibration $q:\mathcal{C}\to\mathcal{X}$, and a span in $\mathcal{X}$, say $X\xleftarrow{f}Z\xrightarrow{g}Y$, we can obviously form a functor $g_!f^*:\mathcal{C}_X\to\mathcal{C}_Y$. However, when we compose spans, we would form the pullback 
+		% https://q.uiver.app/#q=WzAsNixbMCwyLCJ4XzEiXSxbMSwxLCJ4XzIiXSxbMiwwLCJ4XzMiXSxbMCwxLCJ5XzEiXSxbMSwwLCJ5XzIiXSxbMCwwLCJ6Il0sWzMsMCwiZl8xIiwyXSxbMywxLCJnXzEiLDJdLFs0LDEsImZfMiJdLFs0LDIsImdfMiJdLFs1LDQsImcnXzEiXSxbNSwzLCJmJ18yIiwyXSxbNSwxLCIiLDEseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyLWludmVyc2UifX1dXQ==
+		\[\begin{tikzcd}
+			Z & {Y_2} & {X_3} \\
+			{Y_1} & {X_2} \\
+			{X_1}
+			\arrow["{g'_1}", from=1-1, to=1-2]
+			\arrow["{f'_2}"', from=1-1, to=2-1]
+			\arrow["\ulcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+			\arrow["{g_2}", from=1-2, to=1-3]
+			\arrow["{f_2}", from=1-2, to=2-2]
+			\arrow["{g_1}"', from=2-1, to=2-2]
+			\arrow["{f_1}"', from=2-1, to=3-1]
+		\end{tikzcd}\]
+		Then the Beck-Chevalley condition is nothing but stating that the two ways going from $q^{-1}(X_1)$ to $q^{-1}(X_3)$ agrees. We will come back to this in the next section when we are really treating spans. 
+	\end{remark}
+
+	We will then define the notion of ambidexterity. This is the phenomenon that $f_!$ is not only the left adjoint of $f^*$, but also the right adjoint. 
+
+	\begin{const}\label{n_ambidextrous_morphisms}
+		Let $\mathcal{X}$ be a category which admits pullbacks and let $q:\mathcal{C}\to\mathcal{X}$ be a Beck-Chevalley fibration. We will define for $n\geq-2$ two collections of morphisms of $\mathcal{X}$ called the (weakly) $n$-ambidextrous morphisms, and for each $n$-ambidextrous morphism $f:X\to Y$, a natural transformation $\mu_f^{(n)}:\id_{\mathcal{C}_Y}\to f_!\circ f^*$ which exhibits $f_!$ a right adjoint of $f^*$. \\
+		For $n=-2$, we define $f$ to be (weakly) $(-2)$-ambidextrous iff $f$ is an equivalence. We define $\mu_f^{(-2)}$ to be the inverse of the transformation $\varepsilon_f:f_!\circ f^*\to\id_{\mathcal{C}_Y}$. \\
+		We assume now that we have defined the $n$-ambidextrous morphisms and $\mu_f^{(n)}$. Let $f:X\to Y$ be an arbitrary morphism in $\mathcal{C}$, and let $\delta:X\to X\times_YX$ be the diagonal, and we have the following diagram 
+		% https://q.uiver.app/#q=WzAsNSxbMCwwLCJYIl0sWzEsMSwiWFxcdGltZXNfWVgiXSxbMiwxLCJYIl0sWzEsMiwiWCJdLFsyLDIsIlkiXSxbMSwyLCJcXHBpXzEiXSxbMiw0LCJmIl0sWzEsMywiXFxwaV8yIiwyXSxbMyw0LCJmIiwyXSxbMCwxLCJcXGRlbHRhIl0sWzAsMiwiXFxpZF9YIiwwLHsiY3VydmUiOi0yfV0sWzAsMywiXFxpZF9YIiwyLHsiY3VydmUiOjJ9XV0=
+		\[\begin{tikzcd}
+			X \\
+			& {X\times_YX} & X \\
+			& X & Y
+			\arrow["\delta", from=1-1, to=2-2]
+			\arrow["{\id_X}", curve={height=-12pt}, from=1-1, to=2-3]
+			\arrow["{\id_X}"', curve={height=12pt}, from=1-1, to=3-2]
+			\arrow["{\pi_1}", from=2-2, to=2-3]
+			\arrow["{\pi_2}"', from=2-2, to=3-2]
+			\arrow["f", from=2-3, to=3-3]
+			\arrow["f"', from=3-2, to=3-3]
+		\end{tikzcd}\]
+		Let $\sigma$ denote the square in this diagram. Then since $q$ is a Beck-Chevalley fibration, we have $BC[\sigma]:\pi_{1!}\pi_2^*\to f^*f_!$ admit an inverse $BC[\sigma]^{-1}:f^*f_!\to\pi_{1!}\pi_2^*$. We define $f$ to be weakly $(n+1)$-ambidextrous if $\delta$ is $n$-ambidextrous. In this case, we define a natural transformation 
+		\[ \nu_f^{(n+1)}:f^*f_!\xrightarrow{BC[\sigma]^{-1}}\pi_{1!}\pi_2^*\xrightarrow{\mu_\delta^{(n)}}\pi_{1!}\delta_!\delta^*\pi_1^*\simeq\id_{\mathcal{C}_X}\circ\id_{\mathcal{C}_X}\simeq\id_{\mathcal{C}_X} \]
+		We say $f$ is $(n+1)$-ambidextrous if for every pullback diagram 
+		% https://q.uiver.app/#q=WzAsNCxbMCwwLCJYJyJdLFsxLDAsIlknIl0sWzAsMSwiWCJdLFsxLDEsIlkiXSxbMCwxLCJmJyJdLFsyLDMsImYiLDJdLFswLDJdLFsxLDNdXQ==
+		\[\begin{tikzcd}
+			{X'} & {Y'} \\
+			X & Y
+			\arrow["{f'}", from=1-1, to=1-2]
+			\arrow[from=1-1, to=2-1]
+			\arrow[from=1-2, to=2-2]
+			\arrow["f"', from=2-1, to=2-2]
+		\end{tikzcd}\]
+		in $\mathcal{X}$, the map $f'$ is weakly $(n+1)$-ambidextrous and $\nu_f^{(n+1)}$ is the counit for the adjunction $(f')^*\dashv f'_!$. In this case, we say $\mu_f^{(n+1)}:\id_{\mathcal{C}_Y}\to f_!f^*$ induced by the adjunction $f^*\dashv f_!$ given by the counit $\nu_f^{(n+1)}$. 
+	\end{const}
+
+	The previous construction has many interesting property. 
+
+	\begin{prop}\label{Ambi_props}
+		\begin{enumerate}
+			\item If $f:X\to Y$ is an $n$-ambidextrous morphism in $\mathcal{X}$, then $f$ is $n$-truncated. 
+			\item Let $f:X\to Y$ be a (weakly) $n$-ambidextrous morphism in $\mathcal{X}$, then any pullback of $f$ is also (weakly) $n$-ambidextrous. 
+			\item Let $-2\leq m\leq n$, if $f$ is a (weakly) $m$-ambidextrous morphism in $\mathcal{X}$, then $f$ is (weakly) $n$-ambidextrous. Moreover, the morphisms $\mu_f^{(n)}$ and $\mu_f^{(m)}$ ($\nu_f^{(n)}$ and $\nu_f^{(n)}$) agree. 
+			\item Let $-2\leq m\leq n$, and let $f$ be a (weakly) $n$-ambidextrous morphism in $\mathcal{X}$, then $f$ is (weakly) $m$-ambidextrous iff $f$ is $m$-truncated. 
+		\end{enumerate}
+	\end{prop}
+	\begin{proof}
+		The first assertion obviously holds for $n=-2$, by definitions. Since $f$ is $n$-ambidextrous implies $\delta$ is $(n-1)$-ambidextrous, hence $\delta$ is $(n-1)$-truncated, hence by HTT 5.5.6.15, we have $f$ is $n$-truncated. \\
+		The $n$-ambidextrous part of the second assertion is obvious, and the weakly $n$-ambidextrous part follows from the $n$-ambidextrous part. \\
+		For the third assertion, it suffices to prove the case $n=m+1$. Now, the $m$-ambidextrous part follows from weakly $m$-ambidextrous part since it suffices to verify the pullback diagram, which is obvious. Then, notice that the $m$-ambidextrous part implies the weakly $(m+1)$-ambidextrous part, which is by verifying the property on $\delta$. Thus it suffices to prove that for $f$ an equivalence, then $f$ is $(-1)$-ambidextrous. In this case, $f$ is clearly weakly $(-1)$-ambidextrous by the arguments before, and $f_!$ and $f^*$ are homotopy inverses, and a calculation shows that the map $\nu_f$ is the homotopy inverse of the unit map $\eta_f$, thus $f$ is $(-1)$-ambidextrous. Moreover, the maps $\mu_f^{(-1)}$ and $\mu_f^{(-2)}$ agree since they are both inverses to the map $\varepsilon_f:f_!f^*\to\mathcal{C}_Y$. \\
+		For the fourth assertion, the weakly ambidextrous part follows from the ambidextrous part. Then the only if direction is by the first assertion. And for the converse, we prove by induction on $m$. We suppose $f$ is $m$-truncated and $n$-ambidextrous for $m\leq n$, for $m=-2$, the assertion is obvious. Assume then that $m>-2$, and let $\delta:X\to X\times_YX$ be the diagonal map. It suffices to prove $\delta$ is $(m-1)$-ambidextrous and that the map $\nu_f^{(m)}:f^*f_!\to\id_{\mathcal{C}_X}$ is the counit for the adjunction. Since $\delta$ is $(n-1)$-ambidextrous and $(m-1)$-truncated, by induction we have $\delta$ $(m-1)$-ambidextrous, and $\mu_{\delta}^{(m-1)}$ and $\mu_{\delta}^{(n-1)}$ are homotopic. Thus the natural transformations $\nu_f^{(m)}$ and $\nu_f^{(n)}$ are homotopic, and since $\nu_f^{(n)}$ is the counit of an adjunction, $\nu_f^{(m)}$ has the same property. 
+	\end{proof}
+
+	\begin{defn}\label{Ambidextrous_morphisms}
+		Let $\mathcal{X}$ be a category with pullbacks, and let $q:\mathcal{C}\to\mathcal{X}$ be a Beck-Chevalley fibration. Then we let $f:X\to Y$ be (weakly) ambidextrous if it is (weakly) $n$-ambidextrous for some $n$. And we let $\nu_f$ and $\mu_f$ denote the $\nu_f^{(n)}$ and $\mu_f^{(n)}$ in the definition. This is well-defined by \cref{Ambi_props}. In particular, $f$ is ambidextrous iff for every Cartesian diagram 
+		% https://q.uiver.app/#q=WzAsNCxbMCwwLCJYJyJdLFsxLDAsIlknIl0sWzAsMSwiWCJdLFsxLDEsIlkiXSxbMCwxLCJmJyJdLFsyLDMsImYiLDJdLFswLDIsImdfWCIsMl0sWzEsMywiZ19ZIl1d
+		\[\begin{tikzcd}
+			{X'} & {Y'} \\
+			X & Y
+			\arrow["{f'}", from=1-1, to=1-2]
+			\arrow[from=1-1, to=2-1]
+			\arrow[from=1-2, to=2-2]
+			\arrow["f"', from=2-1, to=2-2]
+		\end{tikzcd}\]
+		$f'$ is weakly ambidextrous, and $(f')^*$ admit a right adjoint $f'_*$ isomorphic to its left adjoint $f'_!$. Clearly, ambidextrous morphisms are closed under compositions. 
+	\end{defn}
+
+	We then state a theorem of maximal generality concerning the naturality and coherence of the construction $f\mapsto\mu_f$ or $\nu_f$. This would use the notion of $(\infty,2)$-categories, and we will not state a proof of this theorem. 
+	\begin{thm}\label{Nat_coh_weak_ambi}
+		Let $q:\mathcal{C}\to\mathcal{X}$ be a Beck-Chevalley fibration. We may associate $q$ to a functor of $(\infty,2)$-categories $\Theta:\mathcal{Z}\to\Cat$ (where $\Cat$ is viewed as an $(\infty,2)$-category), which may be described imformally as follows. 
+		\begin{enumerate}
+			\item $\mathcal{Z}$ has objects the same as the objects of $\mathcal{X}$. 
+			\item The 1-morphisms in $\mathcal{Z}$ are spans in $\mathcal{X}$, and the composition is given by the usual composition of spans. 
+			\item Given two 1-morphisms in $\mathcal{Z}$, say $X\from M\to Y$ and $X\from N\to Y$, a 2-morphism from $M$ to $N$ is given by a span between the 1-morphisms, namely 
+			% https://q.uiver.app/#q=WzAsNSxbMCwxLCJYIl0sWzIsMSwiWSJdLFsxLDEsIlAiXSxbMSwwLCJNIl0sWzEsMiwiTiJdLFsyLDBdLFsyLDFdLFsyLDNdLFsyLDRdLFszLDBdLFszLDFdLFs0LDBdLFs0LDFdXQ==
+			\[\begin{tikzcd}
+				& M \\
+				X & P & Y \\
+				& N
+				\arrow[from=1-2, to=2-1]
+				\arrow[from=1-2, to=2-3]
+				\arrow["u", from=2-2, to=1-2]
+				\arrow[from=2-2, to=2-1]
+				\arrow[from=2-2, to=2-3]
+				\arrow["v"', from=2-2, to=3-2]
+				\arrow[from=3-2, to=2-1]
+				\arrow[from=3-2, to=2-3]
+			\end{tikzcd}\]
+			where the map $P\to M$ is ambidextrous. 
+			\item To each $X\in\mathcal{Z}$, we let $\Theta(X)=\mathcal{C}_X$. 
+			\item To each 1-morphism $X\xleftarrow{f}M\xrightarrow{g}Y$ in $\mathcal{Z}$, $\Theta((f,g))=g_!f^*:\mathcal{C}_X\to\mathcal{C}_Y$, and the compatibility with respect to the composition of 1-morphisms is given by the Beck-Chevalley condition. 
+			\item To each 2-morphism in $\mathcal{Z}$ given by the above diagram, $\Theta$ associates it to the natural transformation 
+			\[ g_!f^*\xrightarrow{\mu_u}g_!(u_!u^*)f^*\simeq g'_!(v_!v^*)(f')^*\xrightarrow{\varepsilon_v}g'_!(f')^* \]
+		\end{enumerate}
+		In particular, we have the commutativity of the following. \\
+		For a Cartesian square $\tau$ 
+		% https://q.uiver.app/#q=WzAsNCxbMCwwLCJYJyJdLFsxLDAsIlknIl0sWzAsMSwiWCJdLFsxLDEsIlkiXSxbMCwxLCJmJyJdLFsyLDMsImYiLDJdLFswLDIsImdfWCIsMl0sWzEsMywiZ19ZIl1d
+		\[\begin{tikzcd}
+			{X'} & {Y'} \\
+			X & Y
+			\arrow["{f'}", from=1-1, to=1-2]
+			\arrow["{g_X}"', from=1-1, to=2-1]
+			\arrow["{g_Y}", from=1-2, to=2-2]
+			\arrow["f"', from=2-1, to=2-2]
+		\end{tikzcd}\]
+		if $f$ is weakly ambidextrous, then the diagram of natural transformation commutes. 
+		% https://q.uiver.app/#q=WzAsNSxbMCwwLCIoZicpXipmJ18hZ19YXioiXSxbMSwwLCIoZicpXipnX1leKmZfISJdLFsyLDAsImdfWF4qZl4qZl8hIl0sWzIsMSwiZ19YXioiXSxbMCwxLCJnX1heKiJdLFswLDEsIkJDW1xcdGF1XSJdLFswLDQsIlxcbnVfe2YnfSIsMl0sWzIsMywiXFxudV97Zn0iXSxbMSwyXSxbNCwzLCJcXGlkIiwyXV0=
+		\[\begin{tikzcd}
+			{(f')^*f'_!g_X^*} & {(f')^*g_Y^*f_!} & {g_X^*f^*f_!} \\
+			{g_X^*} && {g_X^*}
+			\arrow["{BC[\tau]}", from=1-1, to=1-2]
+			\arrow["{\nu_{f'}}"', from=1-1, to=2-1]
+			\arrow[from=1-2, to=1-3]
+			\arrow["{\nu_{f}}", from=1-3, to=2-3]
+			\arrow["\id"', from=2-1, to=2-3]
+		\end{tikzcd}\]
+		And for $f:X\to Y$, $g:Y\to Z$ weakly ambidextrous, we have $\nu_{gf}$ homotopic to the composition 
+		\[ (gf)^*(gf)_!\simeq f^*g^*g_!f_!\xrightarrow{\nu_g}f^*f_!\xrightarrow{\nu_f}\id_{\mathcal{C}_X} \]
+		If $f$ is ambidextrous, then the diagram of natural transformations commutes. 
+		% https://q.uiver.app/#q=WzAsNSxbMCwwLCJnX1leKiJdLFsyLDAsImdfWV4qIl0sWzAsMSwiZidfIShmJyleKmdfWV4qIl0sWzEsMSwiZl8hJ2dfWF4qZl4qIl0sWzIsMSwiZ19ZXipmXyFmXioiXSxbMCwxLCJcXGlkIl0sWzAsMiwiXFxtdV97Zid9IiwyXSxbMSw0LCJcXG11X2YiXSxbMiwzXSxbMyw0LCJCQ1tcXHRhdV0iLDJdXQ==
+		\[\begin{tikzcd}
+			{g_Y^*} && {g_Y^*} \\
+			{f'_!(f')^*g_Y^*} & {f_!'g_X^*f^*} & {g_Y^*f_!f^*}
+			\arrow["\id", from=1-1, to=1-3]
+			\arrow["{\mu_{f'}}"', from=1-1, to=2-1]
+			\arrow["{\mu_f}", from=1-3, to=2-3]
+			\arrow[from=2-1, to=2-2]
+			\arrow["{BC[\tau]}"', from=2-2, to=2-3]
+		\end{tikzcd}\] 
+		And for $f:X\to Y$, $g:Y\to Z$ ambidextrous, $\mu_{gf}$ is homotopic to the composition 
+		\[ \id_{\mathcal{C}_Z}\xrightarrow{\mu_g}g_!g^*\xrightarrow{\mu_f}g_!f_!f^*g^*\simeq(gf)_!(gf)^* \]
+	\end{thm}
+
+	\begin{defn}\label{Loc_sys}
+		Let $\mathcal{C}$ be a category. Then the construction $X\mapsto\Fun(X,\mathcal{C})$ defines a functor $\An^{\op}\to\Cat$. We let $q:\LocSys(\mathcal{C})\to\An$ denote the Cartesian fibration classified by this functor. More informally, $\LocSys(\mathcal{C})$ is the category with objects pairs $(X,F)$ where $X\in\An$ is a space and $F:X\to\mathcal{C}$ is a functor (somehow viewed as a locally constant sheaf). 
+	\end{defn}
+
+	\begin{thm}\label{Loc_sys_BC}
+		Let $\mathcal{C}$ be a category admitting limits and small colimits. Then the forgetful functor $\LocSys(\mathcal{C})\to\An$ is a Beck-Chevalley fibration. 
+	\end{thm}
+	\begin{proof}
+		Firstly notice that given a map $f:X\to Y$ of spaces, we have an adjunction $f_!\dashv f^*$ between the categories $\Fun(X,\mathcal{C})$ and $\Fun(Y,\mathcal{C})$ given by the left Kan extension along $f$ and precomposition with $f$. Then we see that $\LocSys(\mathcal{C})\to\An$ is indeed a bifibration. Then we verify that it is a Beck-Chevalley fibration. Suppose we have a Cartesian square $\sigma$. 
+		% https://q.uiver.app/#q=WzAsNCxbMCwwLCJYJyJdLFsxLDAsIlknIl0sWzAsMSwiWCJdLFsxLDEsIlkiXSxbMSwzLCJnX1kiXSxbMCwxLCJmJyJdLFsyLDMsImYiLDJdLFswLDIsImdfWCIsMl1d
+		\[\begin{tikzcd}
+			{X'} & {Y'} \\
+			X & Y
+			\arrow["{f'}", from=1-1, to=1-2]
+			\arrow["{g_X}"', from=1-1, to=2-1]
+			\arrow["{g_Y}", from=1-2, to=2-2]
+			\arrow["f"', from=2-1, to=2-2]
+		\end{tikzcd}\]
+		Unwinding the definitions, we must prove that given local systems $L_X:X\to\mathcal{C}$ and $L_Y:Y\to\mathcal{C}$, and a natural transformation $\alpha:L_X\to L_Y\circ f$ exhibiting $L_Y$ as a left Kan extension of $L_X$ along $f$, then the induced natural transformation $\beta:L_X\circ g_X\to L_Y\circ g_Y\circ f'$ exhibits $L_Y\circ g_Y$ as a left Kan extension of $L_X\circ g_X$ along $f'$. \\
+		We use the pointwise colimit formula. Given a point $y'\in Y'$, we wish to prove the canonical map 
+		\[ \ilim((L_X\circ g_X)|_{X'\times_{Y'}Y'_{/y'}})\to(L_Y\circ g_Y)(y') \]
+		is an equivalence. Since $\sigma$ is a Cartesian square, the above map can be identified with the map 
+		\[ \ilim(L_X|_{X\times_YY_{/y}})\to L_Y(y) \]
+		where $y=g_Y(y')$. Thus the conclusion follows immediately. 
+	\end{proof}
+
+	\begin{defn}\label{Ambi_loc_sys}
+		Let $\mathcal{C}$ be a category having small colimits and let $q:\LocSys(\mathcal{C})\to\An$ denote the Beck-Chevalley fibration. We say a space $X$ is (weakly) $\mathcal{C}$-ambidextrous if $X\to *$ is (weakly) ambidextrous in the sense of \cref{Ambidextrous_morphisms} with respect to $q$. 
+	\end{defn}
+
+	\begin{defn}\label{Trace_form}
+		For a Beck-Chevalley fibration $q:\mathcal{C}\to\mathcal{X}$ and a weakly ambidextrous morphism $f:X\to Y$ in $\mathcal{X}$, we define the trace form to be the composition of natural transformations 
+		\[ \TrFm_f:f_!f^*f_!f^*\simeq f_!(f^*f_!)f^*\xrightarrow{\nu_f}f_!f^*\xrightarrow{\varepsilon_f}\id \]
+	\end{defn}
+	\begin{thm}\label{Ambi_tr_dual}
+		Let $q:\mathcal{C}\to\mathcal{X}$ be a Beck-Chevalley fibration and let $f:X\to Y$ be a weakly ambidextrous morphism in $\mathcal{X}$. Then the following conditions are equivalent. 
+		\begin{enumerate}
+			\item The map $\nu_f:f^*f_!\to\id_{\mathcal{C}_X}$ is the counit of an adjunction $f^*\dashv f_!$. 
+			\item The trace form $\TrFm_f:f_!f^*f_!f^*\to\id_{\mathcal{C}_Y}$ exhibits the functor $f_!f^*$ as its own dual in the monoidal category $\Fun(\mathcal{C}_Y,\mathcal{C}_Y)$. 
+		\end{enumerate}
+		Here we recall that $e:X\otimes Y\to\mathbf{1}$ exhibits $X$ as the dual of $Y$ if there exists a map $c:\mathbf{1}\to Y\otimes X$ and both 
+		\[ X\to X\otimes Y\otimes X\to X \]
+		and 
+		\[ Y\to Y\otimes X\otimes Y\to Y \]
+		is the identity. 
+	\end{thm}
+	\begin{proof}
+		$(1)\implies(2)$: Let $\mu_f:\id_{\mathcal{C}_Y}\to f_!f^*$ be the unit map compatible with $\nu_f$. We construct the map $c:\id_{\mathcal{C}_Y}\to f_!f^*f_!f^*$ by the composition 
+		\[ \id\xrightarrow{\mu_f}f_!f^*\xrightarrow{\eta_f}f_!f^*f_!f^* \]
+		We claim that $c$ and $\TrFm_f$ exhibit $f_!f^*$ as a self-dual object of $\Fun(\mathcal{C}_Y,\mathcal{C}_Y)$. Explicitly, we must verify the two compositions give the identity. Here, we only verify the following, since the other one is done similarly. 
+		\[ f_!f^*\xrightarrow{\id\otimes c}f_!f^*f_!\xrightarrow{\TrFm\otimes\id}f_!f^* \]
+		We have the following commutative diagram 
+		% https://q.uiver.app/#q=WzAsNixbMCwwLCJmXyFmXioiXSxbMSwwLCJmXyFmXipmXyFmXioiXSxbMiwwLCJmXyFmXiogIl0sWzEsMSwiZl8hZl4qZl8hZl4qZl8hZl4qIl0sWzIsMSwiZl8hZl4qZl8hZl4qIl0sWzIsMiwiZl8hZl4qICJdLFswLDEsIlxcaWRcXG90aW1lc1xcbXVfZiJdLFsxLDIsIlxcaWRcXG90aW1lc1xcbnVfZlxcb3RpbWVzXFxpZCJdLFswLDMsIlxcaWRcXG90aW1lcyBjIiwyXSxbMSwzLCJcXGlkXFxvdGltZXNcXGV0YV9mXFxvdGltZXNcXGlkIiwxXSxbMyw0LCJcXGlkXFxvdGltZXNcXG51X2ZcXG90aW1lc1xcaWQiLDJdLFsyLDQsIlxcaWRcXG90aW1lc1xcZXRhX2ZcXG90aW1lc1xcaWQiXSxbNCw1LCJcXHZhcmVwc2lsb25fZlxcb3RpbWVzXFxpZCJdLFszLDUsIlxcVHJGbV9mXFxvdGltZXNcXGlkIiwyXV0=
+		\[\begin{tikzcd}
+			{f_!f^*} & {f_!f^*f_!f^*} & {f_!f^* } \\
+			& {f_!f^*f_!f^*f_!f^*} & {f_!f^*f_!f^*} \\
+			&& {f_!f^* }
+			\arrow["{\id\otimes\mu_f}", from=1-1, to=1-2]
+			\arrow["{\id\otimes c}"', from=1-1, to=2-2]
+			\arrow["{\id\otimes\nu_f\otimes\id}", from=1-2, to=1-3]
+			\arrow["{\id\otimes\eta_f\otimes\id}"{description}, from=1-2, to=2-2]
+			\arrow["{\id\otimes\eta_f\otimes\id}", from=1-3, to=2-3]
+			\arrow["{\id\otimes\nu_f\otimes\id}"', from=2-2, to=2-3]
+			\arrow["{\TrFm_f\otimes\id}"', from=2-2, to=3-3]
+			\arrow["{\varepsilon_f\otimes\id}", from=2-3, to=3-3]
+		\end{tikzcd}\]
+		Which immediately implies that the diagonal is the identity. 
+		$(2)\implies(1)$: Suppose that we have a coevaluation map $c:\id_{\mathcal{C}_Y}\to f_!f^*f_!f^*$ compatible with $\TrFm_f$. We define natural transformations 
+		\[ \mu:\id\xrightarrow{c}f_!f^*f_!f^*\xrightarrow{\varepsilon_f\otimes\id}f_!f^* \]
+		and 
+		\[ \mu':\id\xrightarrow{c}f_!f^*f_!f^*\xrightarrow{\id\otimes\varepsilon_f}f_!f^* \]
+		We will prove that the compositions 
+		\[ f_!\xrightarrow{\mu\otimes\id}f_!f^*f_!\xrightarrow{\id\otimes\nu_f}f_! \]
+		and 
+		\[ f^*\xrightarrow{\id\otimes\mu'}f^*f_!f^*\xrightarrow{\nu_f\otimes\id}f^* \]
+		are identities, so that the triangular identities of the pair is satisfied, hence it is an adjoint pair. \\
+		Again, we only prove the first identity, since the second is similar. Since we have $f_!\dashv f^*$, we have the composite map 
+		\[ \Hom_{\Fun(\mathcal{C}_Y,\mathcal{C}_Y)}(f_!,f_!)\to\Hom_{\Fun(\mathcal{C}_Y,\mathcal{C}_Y)}(f_!f^*,f_!f^*)\to\Hom_{\Fun(\mathcal{C}_Y,\mathcal{C}_Y)}(f_!f^*,\id_{\mathcal{C}_Y}) \]
+		is an equivalence. Thus it suffices to verify that 
+		\[ f_!f^*\xrightarrow{\mu\otimes\id}f_!f^*f_!f^*\xrightarrow{\id\otimes\nu_f\otimes\id}f_!f^*\xrightarrow{\varepsilon_f}\id_{\mathcal{C}_Y} \]
+		is homotopic to $\varepsilon_f$. By definitions of $\TrFm$ and $\mu$, the composition is equivalent to 
+		\[ f_!f^*\xrightarrow{c\otimes\id}f_!f^*f_!f^*f_!f^*\xrightarrow{\varepsilon_f\otimes\id}f_!f^*f_!f^*\xrightarrow{e}\id_{\mathcal{C}_Y} \]
+		Thus the result follows from the commutativity of the diagram % https://q.uiver.app/#q=WzAsNSxbMCwwLCJmXyFmXioiXSxbMSwwLCJmXyFmXipmXyFmXipmXyFmXioiXSxbMiwwLCJmXyFmXipmXyFmXioiXSxbMSwxLCJmXyFmXiogIl0sWzIsMSwiXFxpZF97XFxtYXRoY2Fse0N9X1l9Il0sWzAsMSwiY1xcb3RpbWVzXFxpZCJdLFsxLDIsIlxcdmFyZXBzaWxvbl9mXFxvdGltZXNcXGlkIl0sWzEsMywiXFxpZFxcb3RpbWVzIGUiXSxbMyw0LCJcXHZhcmVwc2lsb25fZiIsMl0sWzIsNCwiZSJdLFswLDMsIlxcaWQiLDJdXQ==
+		\[\begin{tikzcd}
+			{f_!f^*} & {f_!f^*f_!f^*f_!f^*} & {f_!f^*f_!f^*} \\
+			& {f_!f^* } & {\id_{\mathcal{C}_Y}}
+			\arrow["{c\otimes\id}", from=1-1, to=1-2]
+			\arrow["\id"', from=1-1, to=2-2]
+			\arrow["{\varepsilon_f\otimes\id}", from=1-2, to=1-3]
+			\arrow["{\id\otimes e}", from=1-2, to=2-2]
+			\arrow["e", from=1-3, to=2-3]
+			\arrow["{\varepsilon_f}"', from=2-2, to=2-3]
+		\end{tikzcd}\]
+	\end{proof}
+
+\section{The category of spans}
+
+	\begin{defn}
+		We define a full subcategory $\mathcal{C}\to\mathcal{D}$ to be wide if we have $\Core(\mathcal{C})\to\Core(\mathcal{D})$ is an equivalence. 
+	\end{defn}
+
+	\begin{defn}
+		For a category $\mathcal{C}$, we define a weak coWaldhausen structure on $\mathcal{C}$ to be a wide subcategory $\mathcal{C}^\dagger\to\mathcal{C}$, such that any diagram 
+		% https://q.uiver.app/#q=WzAsNyxbMSwwLCJZIl0sWzAsMSwiWCJdLFsxLDEsIloiXSxbMiwwLCJXIl0sWzIsMSwiWCJdLFszLDAsIlkiXSxbMywxLCJaIl0sWzAsMiwiZyJdLFsxLDIsImYiLDJdLFs1LDYsImciXSxbNCw2LCJmIiwyXSxbMyw0LCJnJyIsMix7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFszLDUsImYnIiwwLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzMsNiwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lci1pbnZlcnNlIn19XSxbNywxMSwiIiwwLHsic2hvcnRlbiI6eyJzb3VyY2UiOjMwLCJ0YXJnZXQiOjMwfX1dXQ==
+		\[\begin{tikzcd}
+			& Y & W & Y \\
+			X & Z & X & Z
+			\arrow[""{name=0, anchor=center, inner sep=0}, "g", from=1-2, to=2-2]
+			\arrow["{f'}", dashed, from=1-3, to=1-4]
+			\arrow[""{name=1, anchor=center, inner sep=0}, "{g'}"', dashed, from=1-3, to=2-3]
+			\arrow["\ulcorner"{anchor=center, pos=0.125}, draw=none, from=1-3, to=2-4]
+			\arrow["g", from=1-4, to=2-4]
+			\arrow["f"', from=2-1, to=2-2]
+			\arrow["f"', from=2-3, to=2-4]
+			\arrow[shorten <=10pt, shorten >=10pt, Rightarrow, from=0, to=1]
+		\end{tikzcd}\]
+		of the form on the left with $g\in\mathcal{C}^\dagger$, we have a pullback of it having $g'\in\mathcal{C}^\dagger$. 
+	\end{defn}
+
+	\begin{defn}
+		We define the twisted arrow category $\widetilde{\Delta}^n$ to be the nerve of the category consisting of pairs $(i,j)\in[n]\times[n]$ with $i\leq j$ and $\Hom((i,j),(i',j'))$ is a singleton for $i'\leq i\leq j\leq j'$ and empty otherwise. \\
+		For a weak coWaldhausen category $(\mathcal{C},\mathcal{C}^\dagger)$, we define a map $f:(\widetilde{\Delta}^n)^{\op}\to\mathcal{C}$ is Cartesian if for every $i'\leq i\leq j\leq j'$, the square % https://q.uiver.app/#q=WzAsNCxbMCwwLCJmKGknLGonKSJdLFsxLDAsImYoaScsaikiXSxbMCwxLCJmKGksaicpIl0sWzEsMSwiZihpLGopIl0sWzAsMV0sWzEsM10sWzAsMl0sWzIsM11d
+		\[\begin{tikzcd}
+			{f(i',j')} & {f(i',j)} \\
+			{f(i,j')} & {f(i,j)}
+			\arrow[from=1-1, to=1-2]
+			\arrow[from=1-1, to=2-1]
+			\arrow[from=1-2, to=2-2]
+			\arrow[from=2-1, to=2-2]
+		\end{tikzcd}\]
+		is Cartesian with the vertical morphisms in $\mathcal{C}^\dagger$. \\
+		For a weak coWaldhausen category $(\mathcal{C},\mathcal{C}^\dagger)$, we define the category of spans $\Span(\mathcal{C},\mathcal{C}^\dagger)$ to be the simplicial set with $n$-simplices the set of Cartesian maps $\widetilde{\Delta}^n\to(\mathcal{C},\mathcal{C}^\dagger)$. 
+	\end{defn}
+	
+	\begin{defn}
+		For $f\in\mathcal{C}^\dagger$, we define $\widehat{f}$ to be the morphism in $\Span(\mathcal{C},\mathcal{C}^\dagger)$ given by $Y\xleftarrow{f}X\xrightarrow{\id}X$. This is the inverse of $f$ in $Span(\mathcal{C},\mathcal{C}^\dagger)$. 
+	\end{defn}
+
+	\begin{remark}\label{Explicit_hom_space_span}
+		The above definition indeed corresponds to the common construction of spans of $1$-categories. In fact, we may identify $\Hom_{\Span(\mathcal{C},\mathcal{C}^\dagger)}(X,Y)$ with the full subgroupoid of $\Core(\mathcal{C}_{/X\times Y})$ spanned by object whose morphism composed with the projection to $X$ lies in $\mathcal{C}^\dagger$. 
+	\end{remark}
+
+	\begin{defn}
+		For a space $X$, we say it is $n$-finite if it is $n$-truncated, and all its homotopy groups of degree below $n$ is finite. We say $X$ is $\pi$-finite if it is $n$-finite for some $n$. We will denote the fullsubcategory of $n$-finite spaces $\An_n$. Then we write $\mathcal{K}_n$ for $\pi_0(\Core(\An_n))$ (that is, we choose a representative for each weak homotopy type and form a set $\mathcal{K}_n$). \\
+		We let $\An_{n,m}\subseteq\An_n$ be the wide subcategory containing all $m$-truncated maps. Notice that $(\An_n,\An_{n,m})$ is a coWaldhausen category, hence we let $\An_n^m=\Span(\An_n,\An_{n,m})$ denote the span. \\
+		The Cartesian monoidal structure on $\An_n$ induces a symmetric monoidal structure on $\An_n^m$, given by $(X,Y)\mapsto X\times Y$ on the level of objects and by levelwise Cartesian product of spans on the level of morphisms. Notice that this is monoidal structure is not Cartesian on $\An_n^m$. 
+	\end{defn}
+
+	\begin{lemma}\label{An_n_wide_colim_lem_1}
+		The category $\An_n$ admits $\mathcal{K}_n$-indexed colimits which are preserved and reflected by the inclusion $\An_n\to\An$. 
+	\end{lemma}
+	\begin{proof}
+		It suffices to prove that $\An_n$ is closed under $\mathcal{K}_n$-indexed colimits, since the inclusion $\An_n\to\An$ is fully faithful. More explicitly, let $X$ be an $n$-finite Kan complex, and let $\varphi:X\to\An$ be a functor, we show $\ilim_X\varphi$ is also $n$-finite. By HTT 3.3.4, we have the identification of the colimit with the fibration $E_\varphi\to X$ classified by $\varphi$. By the long exact sequence of homotopy groups, since both $X$ and the fiber is $n$-finite, we see that $E_\varphi$ is $n$-finite.  
+	\end{proof}
+
+	\begin{lemma}\label{An_n_wide_colim_lem_2}
+		Let $\mathcal{D}$ be a category which admits $\mathcal{K}_n$-indexed colimits, and let $F:\An_n\to\mathcal{D}$ be a functor. Then $F$ preserves $\mathcal{K}_n$-indexed colimits iff for every $X\in\An_n$, the collection $\{F(i_x):F(*)\to F(X)\}$ exhibits $F(X)$ as the colimit of the constant $X$-indexed diagram with value $F(*)$. 
+	\end{lemma}
+	\begin{proof}
+		$\implies$: The morphisms $\{*\to X\}$ exhibits $X$ as the colimit of the constant functor $*$ with indexing category $X$. \\
+		$\impliedby$: Suppose the converse holds. Let $Y\in\mathcal{K}_n$ be an $n$-finite space, and let $\varphi:Y\to\An_n$. Let $E_\varphi\to Y$ be the fibration classified by $\varphi$. Again by \cref{An_n_wide_colim_lem_1} and HTT 3.3.4, we have $E_\varphi$ is $n$-finite, and $\varphi(y)\to E_\varphi$ exhibits $E_\varphi$ as the colimit of $\varphi$ in $\An_n$. We must show that $F(\varphi(y))\to F(E_\varphi)$ exhibits $F(E_\varphi)$ as the colimit of the diagram $\psi=F\circ\varphi:Y\to\mathcal{D}$. Consider the lax commuting diagram 
+		% https://q.uiver.app/#q=WzAsNCxbMCwwLCJFX1xcdmFycGhpIl0sWzEsMCwiWSJdLFsyLDAsIioiXSxbMSwxLCJcXG1hdGhjYWx7RH0iXSxbMCwxLCJwIl0sWzEsMywiXFxwc2kiLDFdLFsxLDJdLFsyLDMsIkYoRV9cXHZhcnBoaSkiXSxbMCwzLCJGKCopIiwyXSxbOCwxLCIiLDIseyJzaG9ydGVuIjp7InNvdXJjZSI6MjB9fV0sWzUsMiwiIiwxLHsic2hvcnRlbiI6eyJzb3VyY2UiOjIwfX1dXQ==
+		\[\begin{tikzcd}
+			{E_\varphi} & Y & {*} \\
+			& {\mathcal{D}}
+			\arrow["p", from=1-1, to=1-2]
+			\arrow[""{name=0, anchor=center, inner sep=0}, "{F(*)}"', from=1-1, to=2-2]
+			\arrow[from=1-2, to=1-3]
+			\arrow[""{name=1, anchor=center, inner sep=0}, "\psi"{description}, from=1-2, to=2-2]
+			\arrow["{F(E_\varphi)}", from=1-3, to=2-2]
+			\arrow[shorten <=2pt, Rightarrow, from=0, to=1-2]
+			\arrow[shorten <=5pt, Rightarrow, from=1, to=1-3]
+		\end{tikzcd}\]
+		where the left diagonal is the constant functor with value $F(*)$, and the right diagonal sends the point to $F(E_\varphi)$. Now by assumption, we have $\{F(i_z):F(*)\to F(\varphi(y))\}_{z\in\varphi(y)}$ exhibits $\psi(y)=\ilim_{\varphi(y)}F(*)$. Identifying $\varphi(y)$ with the fiber of $p:E_\varphi\to Y$ at $y$ we see that $\psi$ is the left Kan extension of the constant diagram $E_\varphi\to\mathcal{D}$ along $p:E_\varphi\to Y$. Similarly by considering the set of morphisms $\{F(i_z):F(*)\to F(E_\varphi)\}_{z\in E_\varphi}$ exhibits $F(E_\varphi)$ as the left Kan extension of $F(*)$ along the final morphism $E_\varphi\to *$. Then by the pasting law for Kan extensions, we have $F(E_\varphi)$ a left Kan extension of $\psi$ along $Y\to *$, which is equivalently stating that $F$ preserves this colimit.  
+	\end{proof}
+
+	\begin{lemma}\label{An_n_wide_colim_lem_3}
+		For $-2\leq m\leq n$, the subcategory inclusion $\An_n\inj\An_n^m$ preserves $\mathcal{K}_n$-indexed colimits. 
+	\end{lemma}
+	\begin{proof}
+		By \cref{An_n_wide_colim_lem_2}, it suffices to show that for every $X\in\An_n^m$, the collection of morphisms $\{i_x:*\to X\}_{x\in X}$ exhibit $X$ as the colimit of the constant diagram $*$ in $\An_n^m$. Equivalently, we need to show that given any test object $Y\in\An_n^m$, the map $\Hom_{\An_n^m}(X,Y)\to\Hom_{\An}(X,\Hom_{\An_n^m}(*,Y))$ is an equivalence of spaces, where the map is given by sending $f:X\to Y$ to the map $x\mapsto i_x^*(f)$, equipped with the compact open topology. \\
+		Let $p_X:X\times Y\to X$ denote the projection onto the first space. By \cref{Explicit_hom_space_span}, we have $\Hom_{\An_n^m}(X,Y)$ the full subgroupoid of $\Core((\An_n)_{/X\times Y})$ spanned by the objects $Z\to X\times Y$ where $Z\to X\times Y\to X$ is $m$-truncated. Under this equivalence, the restriction map $i_x^*$ is given by the pullback functor $i^*_{\{x\}\times Y}:(\An_n)_{X\times Y}\to(\An_n)_(\{x\}\times Y)$. By the straightening-unstraightening equivalence, we have the collection of pullback functors $i_{\{x\}\times Y}:\An_{/X\times Y}\to\An_{/Y}$ induces an equivalence $\St_X:\An_{/X\times Y}\simeq\Fun(X,\An_{/Y})$, hence an equivalence after applying $\Core$. \\
+		Now, given an object $Z\to X\times Y$ in $\Core(\An_{/X\times Y})$, the condition that $Z\to X\times Y\to X$ is an $m$-truncated map is equivalent to the condition that the essential image of $\Core(\St_X)(Z\to X\times Y):X\to\Core(\An_{/Y})$ is contained in $\Core((\An_m)_{/Y})$ (by checking the fibers at each $y$). Moreover, since $X$ is $n$-truncated and $m\leq n$, so $Z$ is automatically $n$-truncated. Finally, since the morphism from an $n$-truncated space to the point is naturally $m$-truncated, we may identify $\Core((\An_n)_{/Y})$ with $\Hom_{\An_n^m}(*,Y)$, hence we have the desired equivalence of groupoids. 
+	\end{proof}
+
+	\begin{lemma}\label{An_n_wide_colim_lem_4}
+		Let $-2\leq m\leq n$, then any equivalence in $\An_n^m$ is homotopic to the image of an equivalence in $\An_n\subseteq\An_n^m$. 
+	\end{lemma}
+	\begin{proof}
+		Given a span $X\xleftarrow{p}Z\xrightarrow{q}Y$ which is an equivalence in $\An_n^m$, we may associate it to the functor $p_!q^*:\Fun(Y,\An)\to\Fun(X,\An)$ (here $q^*$ is given by the precomposition and $p_!$ is given by the left Kan extension). Then, notice that the functor $\An_n^{\op}\to\An$ given by $X\mapsto\Fun(X,\An)$ classifies a left fibration over $\An_n$, which is, in fact, a Beck-Chevalley fibration by \cref{Loc_sys_BC}. This implies that the map sending a span to the map $p_!q^*:\Fun(Y,\An)\to\Fun(X,\An)$ respects composition of spans. Thus if the span is an equivalence in $\An_n^m$, then $p_!q^*:\Fun(Y,\An)\to\Fun(X,\An)$ is an equivalence of categories. In particular, $p_!q^*$ preserves terminal objects. Since $q^*$ also preserves the terminal object, $p_!(*):X\to\An$ is the terminal functor. On the other hand, by construction of the left Kan extension, $p_!(*)$ sends $x$ to the homotopy fiber $Z_x$ of $p$ at $x$. Thus $Z_x$ is contractible, hence $p$ is an equivalence. Thus let $r:X\to Z$ be an inverse of $p$. Thus the span is homotopic to the image of $q\circ r\in\Hom_{\An}(X,Y)$. 
+	\end{proof}
+
+	\begin{coro}\label{An_n_wide}
+		The subcategory $\An_n\subseteq\An_n^m$ is wide. 
+	\end{coro}
+	\begin{proof}
+		Directly by \cref{An_n_wide_colim_lem_4}. 
+	\end{proof}
+
+	\begin{coro}
+		Let $X$ be a space, then any $X$-indexed diagram in $\An_n^m$ comes from an $X$-indexed diagram in $\An_n$. 
+	\end{coro}
+	\begin{proof}
+		Directly by \cref{An_n_wide}. 
+	\end{proof}
+
+	\begin{coro}\label{An_n_colim}
+		For every $-2\leq m\leq n$, the category $\An_n^m$ admits $\mathcal{K}_n$-indexed colimits. Moreover, $F:\An_n^m\to\mathcal{D}$ preserves $\mathcal{K}_n$ indexed colimits iff the precomposition $\An_n\to\An_n^m\to\mathcal{D}$ preserves $\mathcal{K}_n$ indexed colimits. 
+	\end{coro}
+	\begin{proof}
+		By \cref{An_n_wide} and \cref{An_n_wide_colim_lem_3}
+	\end{proof}
+
+	\begin{thm}\label{An_n_m_com_alg}
+		The category $\An_n^m$ with the tensor product is a commutative algebra object in $\Cat_{\mathcal{K}_n}$. Here we adopt the notation that $\Cat_{\mathcal{K}_n}$ denotes the category of categories admitting $\mathcal{K}_n$-indexed colimits and the morphisms $\mathcal{K}_n$-indexed colimit preserving functors. 
+	\end{thm}
+	\begin{proof}
+		It suffices to prove that the symmetric monoidal structure on $\An_n^m$ preserves $\mathcal{K}_n$-indexed colimits in each variables, which follows from \cref{An_n_colim} and that the symmetric monoidal structure comes from the Cartesian structure on $\An_n$, which clearly preserves colimits in each variables. 
+	\end{proof}
+
+\section{Semiadditivity}
+
+	\begin{defn}\label{Semiadditivity}
+		For $\mathcal{D}$ a category and $m\geq -2$, we say $\mathcal{D}$ is $m$-semiadditive if $\mathcal{D}$ admits $\mathcal{K}_m$-indexed colimits, and every $m$-finite space is $\mathcal{D}$-ambidextrous in the sense of \cref{Ambi_loc_sys}. In short, $m$-semiadditive categories are the categories where $\mathcal{K}_n$-indexed colimits and limits coincide for $n\leq m$. 
+	\end{defn}
+
+	We have the following characterization of $m$-semiadditivity within $(m-1)$-semiadditive categories. 
+	\begin{cond}\label{Cond_1}
+		We consider the following conditions. 
+		\begin{enumerate}
+			\item $\mathcal{D}$ has $\mathcal{K}_n$-indexed colimits. 
+			\item $\mathcal{D}$ is $(m-1)$-semiadditive. 
+			\item $\mathcal{D}$ admits a structure of a $\An_m^{m-1}$-module in $\Cat_{\mathcal{K}_m}$. Explicitly, there is an action of the symmetric monoidal category $\An_m^{m-1}$ on $\mathcal{D}$, such that the action map $\An_m^{m-1}\times\mathcal{D}\to\mathcal{D}$ preserves $\mathcal{K}_m$-indexed colimits in each variable. We denote the action $X\otimes(-):\mathcal{D}\to\mathcal{D}$ by $[X]:\mathcal{D}\to\mathcal{D}$. 
+		\end{enumerate}
+		Notice that in the third condition, the action of $X$ on $\mathcal{D}$ is unique. This is since that we may write $X=\ilim_X*$, hence $[X]=\ilim_X[*]$. Moreover, we may identify $[X]$ with the composed functor $\mathcal{D}\xrightarrow{p^*}\Fun(X,\mathcal{D})\xrightarrow{p_!}\mathcal{D}$, where $p:X\to *$ is the terminal map. 
+	\end{cond}
+	\begin{thm}\label{m_1_semiadd_to_m_semiadd}
+		Suppose that $\mathcal{D}$ satisfies the conditions of \cref{Cond_1}. Then $\mathcal{D}$ is $m$-semiadditive iff the collection of morphisms $[\widehat{i}_x]:[X]\to[*]$ exhibits $[X]$ as the limit in $\Fun(\mathcal{D},\mathcal{D})$ of the constant diagram with value $[*]$. 
+	\end{thm}
+
+	\begin{defn}
+		Let $X$ be a $m$-finite space. We denote by $\Tr_X:X\times X\to*$ be the morphism in $\An_m^{m-1}$ given by the span 
+		\[ X\times X\xleftarrow{\delta}X\to * \]
+		and its dual span $\widehat{\Tr}_X$ given by 
+		\[ *\from X\xrightarrow{\delta}X\times X \]
+	\end{defn}
+	\begin{lemma}
+		$\Tr_X$ exhibits $X$ as self-dual. 
+	\end{lemma}
+	\begin{proof}
+		Obvious (the coevaluation map is given by $\widehat{\Tr}_X$). 
+	\end{proof}
+
+	\begin{lemma}\label{Univ_right_unit}
+		Suppose $\mathcal{D}$ satisfies \cref{Cond_1}, and let $X$ be an $m$-finite space. Then the natural transformation 
+		\[ p_!p^*\simeq[X]\xrightarrow{[p]}[*]\simeq\id \]
+		is a counit associated to the adjunction $p_!\dashv p^*$. Here $p$ is the terminal map $X\to *$. 
+	\end{lemma}
+	\begin{proof}
+		If $X$ is empty then $[X]$ is initial in $\Fun(\mathcal{D},\mathcal{D})$. And thus the counit must be homotopic to $[p]$. We then may assume that $X$ is not empty. In this case, it suffices to prove the natural transformation $[p]^{ad}:p^*\to p^*$ adjoint to $[p]:p_!p^*\to\id$ is an equivalence. \\
+		Notice that specifying a natural transformation $T:p^*\to p^*$ is the same as giving an $X$-indexed family of natural transformations $\{T_x:\id\to\id\}_{x\in X}$. Since $\{[i_x]:[*]\to[X]\}$ exhibits $[X]$ as the colimit in $\Fun(\mathcal{D},\mathcal{D})$, then the adjoint natural transformation of $[p]$, $p^*\to p^*$ is given by the family $\{[p]\circ[i_x]:\id\to\id\}_{x\in X}$. Since each transformation in the family is an equivalence, their colimit is an equivalence. 
+	\end{proof}
+
+	\begin{lemma}\label{Univ_wrong_unit}
+		Suppose $\mathcal{D}$ satisfies \cref{Cond_1}, and let $X$ be an $m$-finite space. Then the natural transformation 
+		\[ \id\simeq[*]\xrightarrow{[\widehat{p}]}[X]\simeq p_!p^* \]
+		is a unit exhibiting $p_!$ as the right adjoint of $p^*$. In otherwords, it exhibits $p:X\to *$ as $\mathcal{D}$-ambidextrous. 
+	\end{lemma}
+	\begin{proof}
+		By \cref{Ambi_tr_dual}, we have $p_!p^*$ self dual in $\Fun(\mathcal{D},\mathcal{D})$. Let $\mu_X:\id\to p_!p^*$ be a unit compatible to $\nu_X:p^*p_!\to\id$. We then show that $[\widehat{p}]$ is equivalent to $\mu_X$. Since $p_!p^*$ is self dual, it suffices to compare the natural transformation $p_!p^*\to\id$ dual to $\mu_X$ and $[\widehat{p}]$ respectively. \\
+		We first compute the dual of $\mu_X$. Notice that 
+		\[ p_!p^*\xrightarrow{\id\otimes\mu_X}p_!p^*p_!p^*\xrightarrow{\id\otimes\nu_X\otimes\id}p_!p^* \]
+		is homotopic to the identity since $\mu_X$ and $\nu_X$ are the unit and the counit of the adjunction $p^*\dashv p_!$. Thus the dual of $\mu_X$ is the counit $\varepsilon_X:p_!p^*\to\id$. \\
+		Then, the action functor $\An_m^{m-1}\to\Fun(\mathcal{D},\mathcal{D})$ is monoidal and sends $X$ to $[X]$. Then since $X$ is self-dual, the dual of $[\widehat{p}]$ is the image of the dual in $\An_m^{m-1}$. Thus the dual of $[\widehat{p}]$ is $[p]\simeq\varepsilon_X$, which proves the claim. 
+	\end{proof}
+
+	\begin{defn}
+		Given an $(m-1)$-truncated map $f:X\to Y$ of $m$-finite spaces, we let $\St_f:Y\to\An$ be the straightening of $f$. Since $f$ is $(m-1)$-truncated, the homotopy fiber $X_y$ is $(m-1)$-finite, and hence $\St_f$ factors as $\St_f:Y\to\An_{m-1}\to\An$. Then we let $\overline{\St}_f$ denote the composition $Y\to\An_{m-1}\to\An_m\to\An_m^{m-1}$. 
+	\end{defn}
+
+	\begin{defn}
+		Notice that for any $Y$, we have the pointwise action $\Fun(Y,\An_m^{m-1})$ on $\Fun(Y,\mathcal{D})$. In particular, the map $\overline{\St}_f\in\Fun(Y,\An_m^{m-1})$ gives a functor $[\overline{\St}_f]:\Fun(Y,\mathcal{D})\to\Fun(Y,\mathcal{D})$. Informally, we have $[\overline{\St}_f](L)(y)=[X_y](L(y))$. 
+	\end{defn}
+
+	\begin{lemma}
+		Suppose $\mathcal{D}$ satisfies \cref{Cond_1}, then let $f:X\to Y$ be an $(m-1)$-truncated map of $m$-finite spaces. Then there is an equivalence 
+		\[ [\overline{\St}_f]\simeq f_!f^* \]
+		of functors $\mathcal{D}_Y\to\mathcal{D}_Y$.  
+	\end{lemma}
+	\begin{proof}
+		Consider the base change $g:X\times_YX\to X$ of $f$ along itself. Then the diagonal map $\delta:X\to X\times_YX$ is a section of $g$. 
+	\end{proof}
+
+	\todo{Finish this part!}
+
+\section{$\An_n^m$ as a mode}
+
+	\begin{thm}
+		Let $-2\leq m\leq n$ be integers and let $\mathcal{D}$ be an $m$-semiadditive category which admits $\mathcal{K}_n$-indexed colimits. Then the evaluation at $*\in\An_n^m$ induces an equivalence of categories 
+		\[ \Fun_{\mathcal{K}_n}(\An_n^m,\mathcal{D})\simeq\mathcal{D} \]
+		In other words, $\An_n^m$ is the free $m$-semiadditive category admitting $\mathcal{K}_n$-indexed colimits, generated by one point. 
+	\end{thm}
+
+	\begin{defn}
+		We say a category $\mathcal{C}\in\PrL$ is a mode if it is a commutative algebra in $\PrL$, and the multiplication map is an equivalence $\mathcal{C}\otimes\mathcal{C}\simeq\mathcal{C}$, here the monoidal structure is of course the Lurie tensor product. Equivalently, $\mathcal{C}$ defines a localization functor $(-)\otimes\mathcal{C}$ onto the category of $\mathcal{C}$-modules. 
+	\end{defn}
+
+	\begin{coro}\label{Cat_of_spans_as_mode}
+		$\An_m^m$ is the mode of $m$-semiadditivity. That is, a presentable category $\mathcal{C}$ is $n$-semiadditive iff $\mathcal{C}\otimes\An_m^m\simeq\mathcal{C}$, or equivalently, iff $\mathcal{C}$ is a $\An_m^m$-module. 
+	\end{coro}
+
+	\todo{Finish this part!}
+
+
+\chapter{Semiadditivity}
+
+\section{Norms and integrals}
+
+	\begin{defn}\label{Nm_fun}
+		Given categories $\mathcal{C}$ and $\mathcal{D}$, we define a normed functor $q:\mathcal{D}\nto\mathcal{C}$ to be the data of an adjunction triad $q_!\dashv q^*\dashv q_*$ between $\mathcal{C}$ and $\mathcal{D}$, together with a norm map $\Nm_q:q_!\to q_!$. We say $q$ is iso-normed functor if $\Nm_q$ is an isomorphism. \\
+		We write $X_q$ for $q_!q^*X$, and $c_!^q$ ($u_!^q$) for the counit (unit) of the adjunction $q_!\dashv q^*$, and $c_*^q$ ($u_*^q$) for the counit (unit) of the adjunction $q^*\dashv q_*$. 
+	\end{defn}
+	\begin{lemma}
+		A normed functor $q$ is iso-normed iff $\Nm_q:q_!\to q_*$ is an isomorphism at $q^*X$ for all $X\in\mathcal{D}$. 
+	\end{lemma}
+	\begin{proof}
+		One direction is clear. The other direction follows from the triangular identity of the adjunctions. 
+	\end{proof}
+	\begin{lemma}
+		A normed functor $q$ is iso-normed iff $c_*^q\circ q^*\Nm_q:q^*q_!\to q^*q_*\to\id$ is a counit map for the adjunction $q^*\dashv q_!$. 
+	\end{lemma}
+	\begin{proof}
+		Direct. 
+	\end{proof}
+	\begin{defn}
+		We denote the above counit by $\nu_q$, and its corresponding unit by $\mu_q$. 
+	\end{defn}
+
+	\begin{lemma}
+		A composition of (iso-) normed functors are (iso-) normed. 
+	\end{lemma}
+	\begin{proof}
+		Direct. 
+	\end{proof}
+
+	\begin{defn}\label{Int_iso_nm_fun}
+		Let $q:\mathcal{D}\nto\mathcal{C}$ be an iso-normed functor. For every $X,Y\in\mathcal{C}$, we define an integral map 
+		\[ \int_q:\Hom_{\mathcal{D}}(q^*X,q^*Y)\to\Hom_{\mathcal{C}}(X,Y) \]
+		given by the composition 
+		\[ \Hom_{\mathcal{D}}(q^*X,q^*Y)\xrightarrow{q_*}\Hom_{\mathcal{C}}(q_*q^*X,q_*q^*Y)\xrightarrow{\Nm_q^{-1}}(q_*q^*X,q_!q^*Y)\xrightarrow{c_!\circ-\circ u_*}\Hom_{\mathcal{C}}(X,Y) \] 
+		Or equivalently the composition 
+		\[ \Hom_{\mathcal{D}}(q^*X,q^*Y)\xrightarrow{q_!}\Hom_{\mathcal{C}}(q_!q^*X,q_!q^*Y)\xrightarrow{c_!\circ-\circ\mu_q}\Hom_{\mathcal{C}}(X,Y) \]
+	\end{defn}
+
+	\begin{defn}
+		Let $q:\mathcal{D}\nto\mathcal{C}$ be an iso-normed functor. For every $X\in\mathcal{C}$, we define a map $|q|_X:X\to X$ given by $\int_q\id_{q^*X}$. Equivalently, this is given by the $|q|=c_!^q\circ\mu_q$. 
+	\end{defn}
+
+	The construction satisfies the following naturality conditions. 
+
+	\begin{lemma}
+		Let $q:\mathcal{D}\nto\mathcal{C}$ and let $X,Y,Z\in\mathcal{C}$, then for $f:q^*X\to q^*Y$ and $g:Y\to Z$, we have $g\circ\int_qf=\int_q(q^*g\circ f)$. Conversely, we have for $f:X\to Y$ and $g:q^*Y\to q^*Z$ the equality $\int_qg\circ f=\int_q(g\circ q^*f)$. 
+	\end{lemma}
+
+	\begin{lemma}
+		For composable iso-normed functors $q\circ p:\mathcal{E}\to\mathcal{D}\to\mathcal{C}$, we have $\int_q\circ\int_p=\int_{q\circ p}$. 
+	\end{lemma}
+
+	Then we restate a few facts on Beck-Chevalley conditions using our new language. 
+
+	\begin{defn}\label{BC_cond_sq}
+		Consider the following square. 
+		% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG1hdGhjYWx7Q30iXSxbMSwwLCJcXHRpbGRle1xcbWF0aGNhbHtDfX0iXSxbMCwxLCJcXG1hdGhjYWx7RH0iXSxbMSwxLCJcXHRpbGRle1xcbWF0aGNhbHtEfX0iXSxbMCwxLCJGX3tcXG1hdGhjYWx7Q319Il0sWzIsMywiRl97XFxtYXRoY2Fse0R9fSIsMl0sWzAsMiwicV4qIiwyXSxbMSwzLCJcXHRpbGRle3F9XioiXV0=
+		\[\begin{tikzcd}
+			{\mathcal{C}} & {\tilde{\mathcal{C}}} \\
+			{\mathcal{D}} & {\tilde{\mathcal{D}}}
+			\arrow["{F_{\mathcal{C}}}", from=1-1, to=1-2]
+			\arrow["{q^*}"', from=1-1, to=2-1]
+			\arrow["{\tilde{q}^*}", from=1-2, to=2-2]
+			\arrow["{F_{\mathcal{D}}}"', from=2-1, to=2-2]
+		\end{tikzcd}\]
+		Suppose we have $q_!\dashv q^*$ and $\tilde{q}_!\dashv\tilde{q}^*$, we get a natural transformation 
+		\[ BC_![\sigma]:\tilde{q}_!F_\mathcal{D}\xrightarrow{u_!^q}\tilde{q}_!F_\mathcal{D}q^*q_!\simeq\tilde{q}_!\tilde{q}^*F_{\mathcal{C}}q_!\xrightarrow{c_!^{\tilde{q}}}F_\mathcal{C}q_! \]
+		Dually for $q^*\dashv q_*$ and $\tilde{q}^*\dashv\tilde{q}_*$, we get a natural transformation 
+		\[ BC_*[\sigma]F_\mathcal{C}q_*\xrightarrow{u_*^{\tilde{q}}}\tilde{q}_*\tilde{q}^*F_{\mathcal{C}}q_*\simeq\tilde{q}_*F_\mathcal{D}q^*q_*\xrightarrow{c_*^q}\tilde{q}_*F_{\mathcal{D}} \]
+		We say $\sigma$ satisfies the $BC_!$ ($BC_*$) property if $q^*$ and $\tilde{q}^*$ admit left (right) adjoints, and the transformation $BC_!$ ($BC_*$) is an isomorphism. 
+	\end{defn}
+
+	The construction satisfy all possible natural conditions one may expect (for example the passing of squares). 
+
+	\begin{defn}\label{Nm_sq}
+		We define a normed square to be a pair of normed functors $q:\mathcal{D}\nto\mathcal{C}$ and $\tilde{q}:\tilde{\mathcal{D}}\to\tilde{\mathcal{C}}$ and the following diagram 
+		% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG1hdGhjYWx7Q30iXSxbMSwwLCJcXHRpbGRle1xcbWF0aGNhbHtDfX0iXSxbMCwxLCJcXG1hdGhjYWx7RH0iXSxbMSwxLCJcXHRpbGRle1xcbWF0aGNhbHtEfX0iXSxbMCwxLCJGX1xcbWF0aGNhbHtDfSJdLFsyLDMsIkZfXFxtYXRoY2Fse0R9IiwyXSxbMCwyLCJxXioiLDJdLFsxLDMsIlxcdGlsZGV7cX1eKiJdXQ==
+		\[\begin{tikzcd}
+			{\mathcal{C}} & {\tilde{\mathcal{C}}} \\
+			{\mathcal{D}} & {\tilde{\mathcal{D}}}
+			\arrow["{F_\mathcal{C}}", from=1-1, to=1-2]
+			\arrow["{q^*}"', from=1-1, to=2-1]
+			\arrow["{\tilde{q}^*}", from=1-2, to=2-2]
+			\arrow["{F_\mathcal{D}}"', from=2-1, to=2-2]
+		\end{tikzcd}\]
+		We call the square iso-normed if $q$ and $\tilde{q}$ are iso-normed. Then, for a normed square, we have the following norm-diagram 
+		% https://q.uiver.app/#q=WzAsNCxbMCwwLCJGX1xcbWF0aGNhbHtDfXFfISJdLFsxLDAsIkZfXFxtYXRoY2Fse0N9cV8qIl0sWzAsMSwiXFx0aWxkZXtxfV8hRl9cXG1hdGhjYWx7RH0iXSxbMSwxLCJcXHRpbGRle3F9XypGX1xcbWF0aGNhbHtEfSJdLFswLDEsIlxcTm1fcSJdLFsyLDMsIlxcTm1fe1xcdGlsZGV7cX19IiwyXSxbMiwwLCJCQ18hIl0sWzEsMywiQkNfKiJdXQ==
+		\[\begin{tikzcd}
+			{F_\mathcal{C}q_!} & {F_\mathcal{C}q_*} \\
+			{\tilde{q}_!F_\mathcal{D}} & {\tilde{q}_*F_\mathcal{D}}
+			\arrow["{\Nm_q}", from=1-1, to=1-2]
+			\arrow["{BC_*}", from=1-2, to=2-2]
+			\arrow["{BC_!}", from=2-1, to=1-1]
+			\arrow["{\Nm_{\tilde{q}}}"', from=2-1, to=2-2]
+		\end{tikzcd}\]
+		Finally, we define a weakly ambidextrous square is a normed square, such that the norm-diagram commutes. An ambidextrous square is a weakly ambidextrous iso-normed square. 
+	\end{defn}
+
+	Yet again, there are naturality properties. 
+
+	Then we discuss the interaction of normed functor with the monoidal structure of categories. 
+	\begin{defn}\label{Mon_nm_fun}
+		Let $\mathcal{C}$ and $\mathcal{D}$ be monoidal categories. Then a $\otimes$-normed functor $q:\mathcal{D}\nto\mathcal{C}$ is a normed functor, such that $q^*$ is monoidal (and hence $q_!$ is colax and $q_*$ is lax monoidal), and the composition of the following maps are isomorphisms. 
+		\[ q_!(Y\otimes(q^*X))\to (q_!Y)\otimes(q_!q^*X)\xrightarrow{\id\otimes c_!}(q_!Y)\otimes X \]
+		\[ q_!((q^*X)\otimes Y)\to (q_!q^*X)\otimes(q_!Y)\xrightarrow{c_!\otimes\id}X\otimes(q_!Y) \]
+		We denote the unit of $\mathcal{C}$ by $1_\mathcal{C}$. Then, we define $1_q=q_!q^*1_\mathcal{C}$. From the above, we see that $1_q\otimes-\simeq q_!q^*$ by the following. 
+		\[ q_!q^*X\simeq q_!(q^*(X)\otimes q^*(1_\mathcal{C}))\to X\otimes q_!q^*1_\mathcal{C}\simeq X\otimes1_q \]
+		Thus we define $(-)_q=q_!q^*(-)$. \\
+		Moreover, we have the following map 
+		\[ \varepsilon:1_q\otimes 1_q\simeq q_!q^*q_!q^*1_\mathcal{C}\simeq q_!(q^*q_!)q^*1_\mathcal{C}\xrightarrow{\nu}q_!q^*1_\mathcal{C}\xrightarrow{c_!}1_\mathcal{C} \]
+	\end{defn}
+
+	For monoidal categories, iso-normed functors admit a much more accessible characterization. 
+	\begin{prop}\label{Iso_nm_unit_self_dual}
+		Let $q:\mathcal{D}\nto\mathcal{C}$ be a $\otimes$-normed functor of monoidal categories. The following are equivalent. 
+		\begin{enumerate}
+			\item $q$ is iso-normed. 
+			\item $\Nm_q$ is an isomorphism at $q^*1_\mathcal{C}$. 
+			\item $\varepsilon:1_q\otimes 1_q\to1_\mathcal{C}$ is a duality datum. 
+		\end{enumerate}
+	\end{prop}
+	\begin{proof}
+		This is essentially \cref{Ambi_tr_dual}. 
+	\end{proof}
+
+	\begin{defn}
+		We define a $\otimes$-normed square to be a pair of $\otimes$-normed functors $q:\mathcal{D}\nto\mathcal{C}$ and $\tilde{q}:\tilde{\mathcal{D}}\nto\tilde{\mathcal{C}}$ and a commutative square of monoidal category and monoidal functors 
+		% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG1hdGhjYWx7Q30iXSxbMSwwLCJcXHRpbGRle1xcbWF0aGNhbHtDfX0iXSxbMCwxLCJcXG1hdGhjYWx7RH0iXSxbMSwxLCJcXHRpbGRle1xcbWF0aGNhbHtEfX0iXSxbMCwxLCJGX1xcbWF0aGNhbHtDfSJdLFsxLDMsIlxcdGlsZGV7cX0iXSxbMCwyLCJxIiwyXSxbMiwzLCJGX1xcbWF0aGNhbHtEfSIsMl1d
+		\[\begin{tikzcd}
+			{\mathcal{C}} & {\tilde{\mathcal{C}}} \\
+			{\mathcal{D}} & {\tilde{\mathcal{D}}}
+			\arrow["{F_\mathcal{C}}", from=1-1, to=1-2]
+			\arrow["q^*"', from=1-1, to=2-1]
+			\arrow["{\tilde{q}^*}", from=1-2, to=2-2]
+			\arrow["{F_\mathcal{D}}"', from=2-1, to=2-2]
+		\end{tikzcd}\]
+		For such a square we define a colax natural transformation of functors 
+		\[ \theta:(-)_{\tilde{q}}F_\mathcal{C}=\tilde{q}_!\tilde{q}^*F_\mathcal{C}\simeq\tilde{q}_!F_\mathcal{D}q^*\xrightarrow{BC_!}F_\mathcal{C}q_!q^*=F_\mathcal{C}(-)_q \]
+		Then by the isomorphisms in \cref{Mon_nm_fun}, we have natural isomorphisms 
+		\[ L_q:(X\otimes Y)_q\to X_q\otimes Y\hspace{5em}R_q:(X\otimes Y)_q\to X\otimes Y_q \]
+	\end{defn}
+	\begin{prop}
+		For a weakly ambidextrous $\otimes$-normed square, if it satisfies the $BC_!$-condition and $q$ is iso-normed, then $\tilde{q}$ is iso-normed, and the $BC_*$-condition holds as well. 
+	\end{prop}
+	\begin{proof}
+		Since $BC_!$-condition is satisfied, the operation $\theta$ is an isomorphism. Notice that $1_{\tilde{q}}\simeq F_\mathcal{C}(1_\mathcal{C})$ and consider the diagram 
+		% https://q.uiver.app/#q=WzAsOCxbMCwwLCIxX3tcXHRpbGRle3F9fVxcb3RpbWVzMV97XFx0aWxkZXtxfX0iXSxbMCwxLCJGX1xcbWF0aGNhbHtDfSgxX3EpXFxvdGltZXMgRl9cXG1hdGhjYWx7Q30oMV9xKSJdLFswLDIsIkZfXFxtYXRoY2Fse0N9KDFfcVxcb3RpbWVzIDFfcSkiXSxbMSwyLCJGX1xcbWF0aGNhbHtDfShxXyEocV4qcV8hKXFeKjFfXFxtYXRoY2Fse0N9KSJdLFsxLDAsIlxcdGlsZGV7cX1fIShcXHRpbGRle3F9XipcXHRpbGRle3F9XyEpXFx0aWxkZXtxfV4qRl9cXG1hdGhjYWx7Q30oMV9cXG1hdGhjYWx7Q30pIl0sWzIsMCwiXFx0aWxkZXtxfV8hXFx0aWxkZXtxfV4qRl9cXG1hdGhjYWx7Q30oMV9cXG1hdGhjYWx7Q30pIl0sWzIsMiwiRl9cXG1hdGhjYWx7Q30ocV8hcV4qMV9cXG1hdGhjYWx7Q30pIl0sWzMsMSwiRl9cXG1hdGhjYWx7Q30oMV9cXG1hdGhjYWx7Q30pXFxzaW1lcSAxX3tcXHRpbGRle1xcbWF0aGNhbHtDfX19Il0sWzAsMSwiXFx0aGV0YVxcb3RpbWVzXFx0aGV0YSIsMl0sWzEsMiwiXFxzaW1lcSIsMl0sWzAsNCwiTF97XFx0aWxkZXtxfX1eey0xfVJfe1xcdGlsZGV7cX19XnstMX0iXSxbMiwzLCJMX3Feey0xfVJfcV57LTF9IiwyXSxbMyw2LCJcXG51IiwyXSxbNCw1LCJcXHRpbGRle1xcbnV9Il0sWzUsNywiXFx0aWxkZXtjfV8hIl0sWzYsNywiY18hIiwyXSxbNCwzLCJcXHRoZXRhXFxjZG90XFx0aGV0YSIsMl0sWzUsNiwiXFx0aGV0YSIsMl1d
+		\[\begin{tikzcd}
+			{1_{\tilde{q}}\otimes1_{\tilde{q}}} & {\tilde{q}_!(\tilde{q}^*\tilde{q}_!)\tilde{q}^*F_\mathcal{C}(1_\mathcal{C})} & {\tilde{q}_!\tilde{q}^*F_\mathcal{C}(1_\mathcal{C})} \\
+			{F_\mathcal{C}(1_q)\otimes F_\mathcal{C}(1_q)} &&& {F_\mathcal{C}(1_\mathcal{C})\simeq 1_{\tilde{\mathcal{C}}}} \\
+			{F_\mathcal{C}(1_q\otimes 1_q)} & {F_\mathcal{C}(q_!(q^*q_!)q^*1_\mathcal{C})} & {F_\mathcal{C}(q_!q^*1_\mathcal{C})}
+			\arrow["{L_{\tilde{q}}^{-1}R_{\tilde{q}}^{-1}}", from=1-1, to=1-2]
+			\arrow["{\theta\otimes\theta}"', from=1-1, to=2-1]
+			\arrow["{\tilde{\nu}}", from=1-2, to=1-3]
+			\arrow["{\theta\cdot\theta}"', from=1-2, to=3-2]
+			\arrow["{\tilde{c}_!}", from=1-3, to=2-4]
+			\arrow["\theta"', from=1-3, to=3-3]
+			\arrow["\simeq"', from=2-1, to=3-1]
+			\arrow["{L_q^{-1}R_q^{-1}}"', from=3-1, to=3-2]
+			\arrow["\nu"', from=3-2, to=3-3]
+			\arrow["{c_!}"', from=3-3, to=2-4]
+		\end{tikzcd}\]
+		and $F_\mathcal{C}(1_q)\otimes F_\mathcal{C}(1_q)\to 1_{\tilde{\mathcal{C}}}$ is a duality datum. By the above diagram, we see that this is also a duality datum for $1_{\tilde{q}}$. Therefore $\tilde{q}$ is iso-normed. Finally, the $BC_*$ condition holds by observing the norm diagram in \cref{Nm_sq}. 
+	\end{proof}
+
+	\begin{defn}\label{Amenable_iso_nm_fun}
+		We define an iso-normed functor $q:\mathcal{D}\nto\mathcal{C}$ to be amenable if $|q|$ is an isomorphism. 
+	\end{defn}
+
+	\begin{lemma}\label{Crit_amenability}
+		For a ambidextrous square
+		% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG1hdGhjYWx7Q30iXSxbMSwwLCJcXHRpbGRle1xcbWF0aGNhbHtDfX0iXSxbMCwxLCJcXG1hdGhjYWx7RH0iXSxbMSwxLCJcXHRpbGRle1xcbWF0aGNhbHtEfX0iXSxbMCwxLCJGX1xcbWF0aGNhbHtDfSJdLFsxLDMsIlxcdGlsZGV7cX0iXSxbMCwyLCJxIiwyXSxbMiwzLCJGX1xcbWF0aGNhbHtEfSIsMl1d
+		\[\begin{tikzcd}
+			{\mathcal{C}} & {\tilde{\mathcal{C}}} \\
+			{\mathcal{D}} & {\tilde{\mathcal{D}}}
+			\arrow["{F_\mathcal{C}}", from=1-1, to=1-2]
+			\arrow["q^*"', from=1-1, to=2-1]
+			\arrow["{\tilde{q}^*}", from=1-2, to=2-2]
+			\arrow["{F_\mathcal{D}}"', from=2-1, to=2-2]
+		\end{tikzcd}\]
+		such that $F_\mathcal{C}$ is conservative, if $\tilde{q}$ is amenable then $q$ is amenable. 
+	\end{lemma}
+	\begin{proof}
+		Since the square is ambidextrous, we have $F_\mathcal{C}(|q|_{(-)})=|\tilde{q}|_{F_\mathcal{C}(-)}$. By conservativity of $F_\mathcal{C}$ we obtain the results immediately. 
+	\end{proof}
+
+	\begin{lemma}\label{Amenability_retract}
+		Let $q:\mathcal{D}\nto\mathcal{C}$ be an iso-normed functor, if $q$ is amenable, then for every $X\in\mathcal{C}$ the counit $c_!:q_!q^*X\to X$ has a section up to homotopy. In particular, every object of $\mathcal{C}$ is the retract of an object in the image of $q_!$. 
+	\end{lemma}
+	\begin{proof}
+		By the following identity. 
+		\[ |q|_X=\int_q\id_{q^*X}=\int_q(q^*(c_!)_X\circ(u_!)_{q^*X})=(c_!)_X\circ\int_q(u_!)_{q^*X} \]
+		Thus if $|q|_X$ is an isomorphism, then $(c_!)_X$ has a section. 
+	\end{proof}
+
+	\begin{lemma}\label{Cancellation_amenability}
+		Let $\mathcal{E}\xrightarrow{p}\mathcal{D}\xrightarrow{q}\mathcal{C}$ be a pair of normed functors. If $p$ is amenable and $qp$ is iso-normed, then $q$ is iso-normed. 
+	\end{lemma}
+	\begin{proof}
+		Notice we have 
+		\[ \Nm_{qp}:q_!p_!\xrightarrow{\Nm_p}q_*p_!\xrightarrow{\Nm_q}q_*p_* \]
+		since $\Nm_{qp}$ and $\Nm_p$ are isomorphisms, so is $\Nm_q:q_!p!\to q_*p_!$. But every $X\in\mathcal{D}$ is a retract of an element of the form $p_!Y$ for $Y\in\mathcal{E}$, hence since isomorphisms are closed under retracts, we have $\Nm_q$ an isomorphism for every $X\in\mathcal{D}$. 
+	\end{proof}
+
+\section{Application to local systems}
+
+	\begin{defn}\label{Amenable_morphism}
+		Recall from \cref{Loc_sys_BC} we have $\LocSys(\mathcal{C})\to\An$ a Beck-Chevalley fibration. Moreover, recall the definition of (weakly) $\mathcal{C}$-ambidextrous morphisms from \cref{Ambidextrous_morphisms}. By the definition given in the last section, we have for any weakly $\mathcal{C}$-ambidextrous morphism $q:A\to B$ is associated to a normed functor 
+		\[ q_\mathcal{C}^c:\Fun(A,\mathcal{C})\nto\Fun(B,\mathcal{C}) \]
+		with $(q_\mathcal{C}^c)^*=q^*$ and other morphisms of definition likewise defined. By definition, $q_\mathcal{C}^c$ is iso-normed iff $q$ is $\mathcal{C}$-ambidextrous. \\
+		Then recall the definition of amenability from \cref{Amenable_iso_nm_fun}. We say $q:A\to B$ is amenable if it is $\mathcal{C}$-ambidextrous and $q_\mathcal{C}^c$ is amenable. \\
+		In the special case where $q:A\to *$, $|q|$ is a natural transformation $|q|:\id_{\mathcal{C}}\to\id_{\mathcal{C}}$, and we also denote this by $|A|_\mathcal{C}$, called the $\mathcal{C}$-cardinality of $A$. 
+	\end{defn}
+
+	From now on, as in the previous chapter, we abbreviate the terminal morphism of spaces $!_X:X\to *$ by $X$, and adopt this convention to any notation involved. 
+
+	\begin{exam}
+		Notice that for $q:[n]\to *$, we have $q_!$ the coproduct of $n$ objects, and $q_*$ the product of $n$ objects. Moreover, if $\mathcal{C}$ is $0$-semiadditive, $|q|_X$ is given by the multiplication by $n$ map. 
+	\end{exam}
+
+	\begin{const}\label{Assoc_int_base_prod}
+		Recall the notion of Beck-Chevalley fibrations in \cref{Beck_Chevalley_fib}, and recall that it coincides with the $BC_!$ property in \cref{BC_cond_sq}. This actually implies the following. Consider the following pullback square 
+		% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXHRpbGRle0F9Il0sWzEsMCwiQSJdLFswLDEsIlxcdGlsZGV7Qn0iXSxbMSwxLCJCIl0sWzAsMSwic19BIl0sWzEsMywicSJdLFswLDIsIlxcdGlsZGV7cX0iLDJdLFsyLDMsInNfQiIsMl0sWzAsMywiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lci1pbnZlcnNlIn19XV0=
+		\[\begin{tikzcd}[ampersand replacement=\&]
+			{\tilde{A}} \& A \\
+			{\tilde{B}} \& B
+			\arrow["{s_A}", from=1-1, to=1-2]
+			\arrow["{\tilde{q}}"', from=1-1, to=2-1]
+			\arrow["\ulcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+			\arrow["q", from=1-2, to=2-2]
+			\arrow["{s_B}"', from=2-1, to=2-2]
+		\end{tikzcd}\]
+		which induces the base change square 
+		% https://q.uiver.app/#q=WzAsNCxbMSwxLCJcXEZ1bihcXHRpbGRle0F9LFxcbWF0aGNhbHtDfSkiXSxbMCwxLCJcXEZ1bihBLFxcbWF0aGNhbHtDfSkiXSxbMSwwLCJcXEZ1bihcXHRpbGRle0J9LFxcbWF0aGNhbHtDfSkiXSxbMCwwLCJcXEZ1bihCLFxcbWF0aGNhbHtDfSkiXSxbMSwwLCJzX0FeKiIsMl0sWzMsMSwicV4qIiwyXSxbMiwwLCJcXHRpbGRle3F9XioiXSxbMywyLCJzX0JeKiJdLFswLDMsIiIsMSx7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXItaW52ZXJzZSJ9fV1d
+		\[\begin{tikzcd}[ampersand replacement=\&]
+			{\Fun(B,\mathcal{C})} \& {\Fun(\tilde{B},\mathcal{C})} \\
+			{\Fun(A,\mathcal{C})} \& {\Fun(\tilde{A},\mathcal{C})}
+			\arrow["{s_B^*}", from=1-1, to=1-2]
+			\arrow["{q^*}"', from=1-1, to=2-1]
+			\arrow["{\tilde{q}^*}", from=1-2, to=2-2]
+			\arrow["{s_A^*}"', from=2-1, to=2-2]
+			\arrow["\ulcorner"{anchor=center, pos=0.125, rotate=180}, draw=none, from=2-2, to=1-1]
+		\end{tikzcd}\]
+		From \cref{Loc_sys_BC} we see that this square admits the $BC_!$ condition and $BC_*$ condition iff $\mathcal{C}$-admits colimits or limits of the shape $q^{-1}(b)$ for all $b$. This gives rise to the following naturality condition on the integral. Suppose $q$ is ambidextrous, then for all $X,Y\in\Fun(B,\mathcal{C})$, and $f:q^*X\to q^*Y$, we have 
+		\[ s_B^*\int_qf\simeq\int_{\tilde{q}}s_A^*f \]
+		by the second definition of the integral. Consequently, we also have 
+		\[ s_B^*|q|_X=|\tilde{q}|_{s_B^*X} \]
+		directly. \\
+		Not that directly, we have the associativity for integrals. That is, consider the pullback square 
+		% https://q.uiver.app/#q=WzAsNCxbMCwwLCJBXzJcXHRpbWVzX0JBXzEiXSxbMSwwLCJBXzEiXSxbMCwxLCJBXzIiXSxbMSwxLCJCIl0sWzAsMSwiXFxwaV8xIl0sWzAsMiwiXFxwaV8yIiwyXSxbMiwzLCJxXzIiLDJdLFsxLDMsInFfMSJdLFswLDMsInFfMlxcdGltZXNfQnFfMSIsMV1d
+		\[\begin{tikzcd}[ampersand replacement=\&]
+			{A_2\times_BA_1} \& {A_1} \\
+			{A_2} \& B
+			\arrow["{\pi_1}", from=1-1, to=1-2]
+			\arrow["{\pi_2}"', from=1-1, to=2-1]
+			\arrow["{q_2\times_Bq_1}"{description}, from=1-1, to=2-2]
+			\arrow["{q_1}", from=1-2, to=2-2]
+			\arrow["{q_2}"', from=2-1, to=2-2]
+		\end{tikzcd}\]
+		such that $q_1$ and $q_2$ are $\mathcal{C}$-ambidextrous, then so is $\pi_1$, $\pi_2$ and the diagonal. We have for all $X,Y,Z\in\Fun(B,\mathcal{C})$ and maps $f_1:q_1^*X\to q_1^*Y$, $f_2:q_2^*Y\to q_2^*Z$, an equivalence 
+		\[ \int_{q_2\times_Bq_1}(\pi_2^*f_2\circ\pi_1^*f_1)\simeq\int_{q_2}f_2\circ\int_{q_1}f_1 \]
+		In particular, we have 
+		\[ |q_2\times_Bq_1|_X\simeq|q_2|_X\circ|q_1|_X \] 
+	\end{const}
+
+	Amenable spaces are principally detected and used in the following ways. 
+	
+	\begin{coro}\label{Crit_amen_spaces}
+		Consider the above pullback square of spaces. If $\pi_0(s_B)$ is surjective and $\tilde{q}$ is $\mathcal{C}$-amenable, then $q$ is $\mathcal{C}$-amenable. 
+	\end{coro}
+	\begin{proof}
+		Follows from \cref{Crit_amenability}. 
+	\end{proof}
+
+	\begin{prop}\label{Cancellation_amen_spaces}
+		Let $A\to E\to B$ be a fiber sequence of weakly $\mathcal{C}$-ambidextrous spaces and $B$ is connected. Then if $A$ is amenable and $E$ is ambidextrous, then $B$ is also ambidextrous. 
+	\end{prop}
+	\begin{proof}
+		By \cref{Cancellation_amenability}. 
+	\end{proof}
+
+	\begin{prop}\label{Amen_counit_isom}
+		Let $A$ be a connected space. If $\Omega A$ is $\mathcal{C}$-amenable, then the counit map $c_!^A:A_!A^*\to\id$ is an isomorphism. 
+	\end{prop}
+	\begin{proof}
+		Consider a choice of basepoint $e:*\to A$. Then the composition 
+		\[ \id\simeq A_!e_!e^*A^*\xrightarrow{\id\circ c_!^e\circ\id}A_!A^*\xrightarrow{c_!^A}\id \]
+		is the counit of the adjunction 
+		\[ \id\simeq A_!e_!\adj e^*A^*\simeq\id \]
+		Hence $A_!c_!^eA^*$ is a left inverse of $c_!^A$, and to show $c_!^A$ is an isomorphism it suffices to show that $A_!c_!^eA^*$ thus $c_!^e$ admit a further left inverse. By \cref{Crit_amen_spaces} $e$ is amenable, by \cref{Amenability_retract} we obtain the result. 
+	\end{proof}
+
+	\begin{defn}\label{m_semiadditive_functors}
+		We define a functor $F:\mathcal{C}\to\mathcal{D}$ between $m$-semiadditive categories to be $m$-semiadditive if it preserves $m$-finite colimits. 
+	\end{defn}
+
+	\begin{defn}
+		Let $F:\mathcal{C}\to\mathcal{D}$ be a functor of categories and $q:A\to B$ a map of spaces. We define the $(F,q)$-square to be the following commutative square of categories. 
+		% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXEZ1bihCLFxcbWF0aGNhbHtDfSkiXSxbMCwxLCJcXEZ1bihBLFxcbWF0aGNhbHtDfSkiXSxbMSwwLCJcXEZ1bihCLFxcbWF0aGNhbHtEfSkiXSxbMSwxLCJcXEZ1bihBLFxcbWF0aGNhbHtEfSkiXSxbMCwyLCJGXyoiXSxbMCwxLCJxXioiLDJdLFsyLDMsInFeKiJdLFsxLDMsIkZfKiIsMl1d
+		\[\begin{tikzcd}[ampersand replacement=\&]
+			{\Fun(B,\mathcal{C})} \& {\Fun(B,\mathcal{D})} \\
+			{\Fun(A,\mathcal{C})} \& {\Fun(A,\mathcal{D})}
+			\arrow["{F_*}", from=1-1, to=1-2]
+			\arrow["{q^*}"', from=1-1, to=2-1]
+			\arrow["{q^*}", from=1-2, to=2-2]
+			\arrow["{F_*}"', from=2-1, to=2-2]
+		\end{tikzcd}\]
+	\end{defn}
+
+	\begin{lemma}
+		Like the above, if $\mathcal{C}$ and $\mathcal{D}$ admit and $F$ preserves all $q^{-1}(b)$ shaped colimits (limits), then the $(F,q)$-square satisfies the $BC_!$ ($BC_*$) condition. 
+	\end{lemma}
+	\begin{proof}
+		By the pointwise construction of Kan extensions used in the proof of \cref{Loc_sys_BC}. 
+	\end{proof}
+
+	We have the following categorical result. 
+	\begin{thm}\label{Induct_ambi}
+		Let $F:\mathcal{C}\to\mathcal{D}$ be a functor preserving $(m-1)$-finite colimits. Let $q:A\to B$ be a $m$-finite map of spaces. Then if $q$ is (weakly) $\mathcal{C}$-ambidextrous and (weakly) $\mathcal{D}$-ambidextrous, then the $(F,q)$-square is (weakly) ambidextrous. 
+	\end{thm}
+	\begin{proof}
+		Recall that a weakly ambidextrous square is ambidextrous iff $q_\mathcal{C}^c$ and $q_\mathcal{D}^c$ is iso-normed, hence it suffices to prove the weakly ambidextrous part of the claim, that is, the norm-diagram in \cref{Nm_sq} commutes. \\
+		Firstly, notice that the commutativity of the norm diagram 
+		% https://q.uiver.app/#q=WzAsNCxbMCwwLCJGX1xcbWF0aGNhbHtDfXFfISJdLFsxLDAsIkZfXFxtYXRoY2Fse0N9cV8qIl0sWzAsMSwiXFx0aWxkZXtxfV8hRl9cXG1hdGhjYWx7RH0iXSxbMSwxLCJcXHRpbGRle3F9XypGX1xcbWF0aGNhbHtEfSJdLFswLDEsIlxcTm1fcSJdLFsyLDMsIlxcTm1fe1xcdGlsZGV7cX19IiwyXSxbMiwwLCJCQ18hIl0sWzEsMywiQkNfKiJdXQ==
+		\[\begin{tikzcd}
+			{F_\mathcal{C}q_!} & {F_\mathcal{C}q_*} \\
+			{\tilde{q}_!F_\mathcal{D}} & {\tilde{q}_*F_\mathcal{D}}
+			\arrow["{\Nm_q}", from=1-1, to=1-2]
+			\arrow["{BC_*}", from=1-2, to=2-2]
+			\arrow["{BC_!}", from=2-1, to=1-1]
+			\arrow["{\Nm_{\tilde{q}}}"', from=2-1, to=2-2]
+		\end{tikzcd}\]
+		is equivalent to the commutativity of the following wrong way counit diagram 
+		% https://q.uiver.app/#q=WzAsNCxbMCwxLCJcXHRpbGRle3F9XipcXHRpbGRle3F9XyFGX1xcbWF0aGNhbHtEfSJdLFsxLDEsIkZfXFxtYXRoY2Fse0R9Il0sWzAsMCwiXFx0aWxkZXtxfV4qRl9cXG1hdGhjYWx7Q31xXyEiXSxbMSwwLCJGX1xcbWF0aGNhbHtEfXFeKnFfISJdLFsyLDMsIlxcc2ltZXEiXSxbMywxLCJcXG51X3EiXSxbMCwyLCJCQ18hIl0sWzAsMSwiXFxudV97XFx0aWxkZXtxfX0iLDJdXQ==
+		\[\begin{tikzcd}[ampersand replacement=\&]
+			{\tilde{q}^*F_\mathcal{C}q_!} \& {F_\mathcal{D}q^*q_!} \\
+			{\tilde{q}^*\tilde{q}_!F_\mathcal{D}} \& {F_\mathcal{D}}
+			\arrow["\simeq", from=1-1, to=1-2]
+			\arrow["{\nu_q}", from=1-2, to=2-2]
+			\arrow["{BC_!}", from=2-1, to=1-1]
+			\arrow["{\nu_{\tilde{q}}}"', from=2-1, to=2-2]
+		\end{tikzcd}\]
+		by moving the $\tilde{q}_*$ on the bottom right to the left functors by adjunction. To prove that the second diagram commutes, we consider the following diagram of spaces. 
+		% https://q.uiver.app/#q=WzAsNSxbMCwwLCJBIl0sWzEsMSwiQVxcdGltZXNfQkEiXSxbMiwxLCJBIl0sWzEsMiwiQSJdLFsyLDIsIkIiXSxbMyw0LCJxIiwyXSxbMiw0LCJxIl0sWzEsMiwiXFxwaV8xIl0sWzEsMywiXFxwaV8yIiwyXSxbMCwxLCJcXGRlbHRhIiwyXSxbMCwyLCJcXHNpbWVxIiwyLHsiY3VydmUiOi0yfV0sWzAsMywiXFxzaW1lcSIsMCx7ImN1cnZlIjoyfV1d
+		\[\begin{tikzcd}[ampersand replacement=\&]
+			A \\
+			\& {A\times_BA} \& A \\
+			\& A \& B
+			\arrow["\delta"', from=1-1, to=2-2]
+			\arrow["\simeq"', curve={height=-12pt}, from=1-1, to=2-3]
+			\arrow["\simeq", curve={height=12pt}, from=1-1, to=3-2]
+			\arrow["{\pi_1}", from=2-2, to=2-3]
+			\arrow["{\pi_2}"', from=2-2, to=3-2]
+			\arrow["q", from=2-3, to=3-3]
+			\arrow["q"', from=3-2, to=3-3]
+		\end{tikzcd}\]
+		Since both $\mathcal{C}$ and $\mathcal{D}$ admits $m$-finite colimits, we have by \cref{Loc_Sys_BC} that the natural transformation 
+		\[ BC_!:(\pi_2)_!\pi_1^*\to q^*q_! \]
+		is an isomorphism for local systems with coefficients in $\mathcal{C}$ or $\mathcal{D}$. Then by definition, $\nu_q^\mathcal{C}$ is the composition 
+		\[ q^*q_!\xrightarrow{BC_!^{-1}}(\pi_2)_!\pi_1^*\xrightarrow{\mu_\delta}(\pi_2)_!\delta_!\delta^*\pi_1^*\simeq\id \]
+		where $\mu_\delta$ exists since by definition $q$ is weakly ambidextrous hence $\delta$ is ambidextrous. Therefore we only need to prove the commutativity of each the small part in the following diagram (notice the source and target of each functor in the following diagram is not written out explicitly, but it is a functor between local systems with coefficients in $\mathcal{C}$ before composing with $F_*$ and with coefficients in $\mathcal{D}$ after composing with $F_*$). % https://q.uiver.app/#q=WzAsMTIsWzAsMCwicV4qcV8hRl8qIl0sWzAsMiwicV4qRl8qcV8hIl0sWzAsNCwiRl8qcV4qcV8hIl0sWzEsNCwiRl8qKFxccGlfMilfIVxccGlfMV4qIl0sWzIsNCwiRl8qKFxccGlfMilfIVxcZGVsdGFfIVxcZGVsdGFeKlxccGlfMV4qIl0sWzMsMiwiRl8qIl0sWzEsMCwiKFxccGlfMilfIVxccGlfMV4qRl8qIl0sWzIsMCwiKFxccGlfMilfIVxcZGVsdGFfIVxcZGVsdGFeKlxccGlfMV4qRl8qIl0sWzEsMiwiKFxccGlfMilfIUZfKihcXHBpXzFeKikiXSxbMiwxLCIoXFxwaV8yKV8hXFxkZWx0YV8hXFxkZWx0YV4qRl8qXFxwaV8xXioiXSxbMiwyLCIoXFxwaV8yKV8hXFxkZWx0YV8hRl8qXFxkZWx0YV4qXFxwaV8xXioiXSxbMiwzLCIoXFxwaV8yKV8hRl8qXFxkZWx0YV8hXFxkZWx0YV4qXFxwaV8xXioiXSxbMCw2LCJCQ18hXlxcbWF0aGNhbHtEfSJdLFs2LDcsIlxcbXVfXFxkZWx0YV5cXG1hdGhjYWx7RH0iXSxbNyw5LCJcXHNpbWVxIl0sWzksMTAsIlxcc2ltZXEiXSxbMTAsMTEsIkJDW1xcZGVsdGFdXyEiXSxbMTEsNCwiQkNbXFxwaV8yXV8hIiwyXSxbMCwxLCJCQ1txXV8hIiwyXSxbMSwyLCJcXHNpbWVxIiwyXSxbMiwzLCJCQ18hXlxcbWF0aGNhbHtDfSIsMl0sWzMsNCwiXFxtdV9cXGRlbHRhXlxcbWF0aGNhbHtDfSIsMl0sWzYsOCwiXFxzaW1lcSIsMl0sWzgsMywiQkNbXFxwaV8yXV8hIiwyXSxbMTAsNSwiXFxzaW1lcSJdLFs4LDksIlxcbXVfXFxkZWx0YV5cXG1hdGhjYWx7RH0iXSxbOCwxMSwiXFxtdV9cXGRlbHRhXlxcbWF0aGNhbHtDfSIsMl0sWzQsNSwiIiwxLHsiY3VydmUiOjN9XSxbNyw1LCJcXHNpbWVxIiwyLHsiY3VydmUiOi0zfV1d
+		\[\begin{tikzcd}[ampersand replacement=\&]
+			{q^*q_!F_*} \& {(\pi_2)_!\pi_1^*F_*} \& {(\pi_2)_!\delta_!\delta^*\pi_1^*F_*} \\
+			\&\& {(\pi_2)_!\delta_!\delta^*F_*\pi_1^*} \\
+			{q^*F_*q_!} \& {(\pi_2)_!F_*(\pi_1^*)} \& {(\pi_2)_!\delta_!F_*\delta^*\pi_1^*} \& {F_*} \\
+			\&\& {(\pi_2)_!F_*\delta_!\delta^*\pi_1^*} \\
+			{F_*q^*q_!} \& {F_*(\pi_2)_!\pi_1^*} \& {F_*(\pi_2)_!\delta_!\delta^*\pi_1^*}
+			\arrow["{BC_!^\mathcal{D}}", from=1-1, to=1-2]
+			\arrow["{BC[q]_!}"', from=1-1, to=3-1]
+			\arrow["{\mu_\delta^\mathcal{D}}", from=1-2, to=1-3]
+			\arrow["\simeq"', from=1-2, to=3-2]
+			\arrow["\simeq", from=1-3, to=2-3]
+			\arrow["\simeq"', curve={height=-18pt}, from=1-3, to=3-4]
+			\arrow["\simeq", from=2-3, to=3-3]
+			\arrow["\simeq"', from=3-1, to=5-1]
+			\arrow["{\mu_\delta^\mathcal{D}}", from=3-2, to=2-3]
+			\arrow["{\mu_\delta^\mathcal{C}}"', from=3-2, to=4-3]
+			\arrow["{BC[\pi_2]_!}"', from=3-2, to=5-2]
+			\arrow["\simeq", from=3-3, to=3-4]
+			\arrow["{BC[\delta]_!}", from=3-3, to=4-3]
+			\arrow["{BC[\pi_2]_!}"', from=4-3, to=5-3]
+			\arrow["{BC_!^\mathcal{C}}"', from=5-1, to=5-2]
+			\arrow["{\mu_\delta^\mathcal{C}}"', from=5-2, to=5-3]
+			\arrow[curve={height=18pt}, from=5-3, to=3-4]
+		\end{tikzcd}\]
+		Where in the diagram $BC[f]_!$ denote the Beck-Chevalley transformation for the square 
+		% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXEZ1bihCLFxcbWF0aGNhbHtDfSkiXSxbMSwwLCJcXEZ1bihCLFxcbWF0aGNhbHtEfSkiXSxbMCwxLCJcXEZ1bihBLFxcbWF0aGNhbHtDfSkiXSxbMSwxLCJcXEZ1bihBLFxcbWF0aGNhbHt9RCkiXSxbMCwyLCJmXioiLDJdLFswLDEsIkZfKiJdLFsxLDMsImZeKiJdLFsyLDMsIkZfKiIsMl1d
+		\[\begin{tikzcd}[ampersand replacement=\&]
+			{\Fun(B,\mathcal{C})} \& {\Fun(B,\mathcal{D})} \\
+			{\Fun(A,\mathcal{C})} \& {\Fun(A,\mathcal{}D)}
+			\arrow["{F_*}", from=1-1, to=1-2]
+			\arrow["{f^*}"', from=1-1, to=2-1]
+			\arrow["{f^*}", from=1-2, to=2-2]
+			\arrow["{F_*}"', from=2-1, to=2-2]
+		\end{tikzcd}\]
+		Then all the small patches of the diagram commutes, hence the whole diagram commutes, which proves the claim. 
+	\end{proof}
+
+	This strong technical result immediately gives the following corollaries. 
+	\begin{coro}
+		Let $F:\mathcal{C}\to\mathcal{D}$ be a functor of $m$-semiadditive categories. Then the functor $F$ preserves $m$-finite colimits iff it preserves $m$-finite limits. 
+	\end{coro}
+	\begin{proof}
+		We prove by induction on $m$. The assertion is obvious when $m=-2$, and then we assume the claim holds for $m-1$. Then we have $F$ preserves both $(m-1)$-finite limits and colimits. Then for every $m$-finite space $A$, consider $A:A\to *$. Since $\mathcal{C}$ and $\mathcal{D}$ are $(m-1)$-semiadditive and $F$ preserves $(m-1)$-finite colimits, we have the $(F,A)$-square weakly ambidextrous. Since $\mathcal{C}$ and $\mathcal{D}$ are $m$-semiadditive, we have the square ambidextrous. Thus the $(F,A)$-square satisfies the $BC_!$ condition iff it satisfies the $BC_*$ condition. Explicitly, $F$ preserves $A$ colimits iff it preserves $A$ limits. 
+	\end{proof}
+
+	\begin{coro}
+		Let $\{\mathcal{C}_i\}$ be a collection of $m$-semiadditive categories. Then $\mathcal{C}=\prod\mathcal{C}_i$ is $m$-semiadditive. 
+	\end{coro}
+	\begin{proof}
+		We again prove by induction on $m$. Again the assertion is obvious when $m=-2$. Then let $q:A\to B$ be an $m$-finite space. Then by induction, $\mathcal{C}$ is $(m-1)$-semiadditive, hence $q$ is weakly $\mathcal{C}$-ambidextrous. Therefore it suffices to show that $\Nm_q^\mathcal{C}$ is an isomorphism. By \cref{Induct_ambi}, $q$ is $\mathcal{C}_i$-ambidextrous and the projection $\pi:\mathcal{C}\to\mathcal{C}_i$ preserves colimits, hence the $(\pi_i,q)$-square is weakly ambidextrous. Also, since $\pi_i$ commutes with limits and colimits, the $(\pi_i,q)$-square satisfies both $BC_!$ and $BC_*$ conditions. Hence we have $\pi_iq_!\to\pi_iq_*$ is an isomorphism, and by the jointly conservativity of $\pi_i$ we have $q_!\to q_*$ an isomorphism. 
+	\end{proof}
+
+	\begin{coro}\label{Comm_int_semiadditive_fun}
+		Let $F:\mathcal{C}\to\mathcal{D}$ be an $m$-semiadditive functor and let $q:A\to B$ be an $m$-finite map of spaces. For all $X,Y\in\Fun(B,\mathcal{C})$ and $f:q^*X\to q^*Y$, we have 
+		\[ F(\int_qf)\simeq\int_qF(f)\in\Hom_{\Fun(B,\mathcal{D})}(FX,FY) \]
+		In particular $F(|q|_{X})=|q|_{F(X)}$. 
+	\end{coro}
+	\begin{proof}
+		The $(F,q)$-square is ambidextrous by \cref{Induct_ambi}, and satisfies the $BC$ conditions by \cref{Loc_sys_BC}. Thus by the naturality conditions of the normed squares we obtain the results. 
+	\end{proof}
+
+	As before, the theory can be slightly simplified in symmetric monoidal categories due to the presence of tensor units. 
+
+	\begin{defn}\label{Semiadditive_sym_mon_cat}
+		An $m$-semiadditively symmetric monoidal category is an $m$-semiadditive symmetric monoidal category such that the tensor product distribute over $m$-finite colimits. 
+	\end{defn}
+
+	\begin{thm}\label{Sym_mon_loc_sys_BC}
+		Let $\mathcal{C}$ be a symmetric monoidal category. Let $q:A\to B$ be a weakly $\mathcal{C}$-ambidextrous map of spaces such that the tensor product of $\mathcal{C}$ distribute over colimits of the form $q^{-1}(b)$. Then the normed functor 
+		\[ q_\mathcal{C}^c:\Fun(A,\mathcal{C})\nto\Fun(B,\mathcal{C}) \]
+		is $\otimes$-normed in a canonical way. 
+	\end{thm}
+	\begin{proof}
+		Direct by checking the conditions in \cref{Mon_nm_fun}. 
+	\end{proof}
+
+	\begin{coro}\label{Mon_fun_preserve_semiadd}
+		Let $F:\mathcal{C}\to\mathcal{D}$ be an $m$-finite colimit preserving monoidal functor between monoidal categories admitting $m$-finite colimits and the tensor product distribute over the $m$-finite colimits. Then if $\mathcal{C}$ is $m$-semiadditive, so is $\mathcal{D}$. 
+	\end{coro}
+	\begin{proof}
+		Since $\An_m^m$ is a mode, any $m$-finite colimit preserving functor $F:\mathcal{C}\to\mathcal{D}$ is a map of algebras in $\Cat$, hence preserves the property of being classified by the $\An_m^m$ mode. Thus $\mathcal{C}$ is $m$-semiadditive implies $\mathcal{D}$ is $m$-semiadditive. 
+	\end{proof}
+
+	\begin{lemma}\label{Tensor_unit_naturality}
+		Let $\mathcal{C}$ be a $m$-semiadditively monoidal category with unit $1$ and $A$ an $m$-finite space. Then we have for every $X\in\mathcal{C}$, $|A|_X\simeq\id_X\otimes|A|_1$. In particular, $A$ is $\mathcal{C}$-amenable iff $|A|_1$ is an isomorphism. Therefore, we will later denote $|A|_1$ by $|A|$ (which is a morphism $|A|:1\to 1$). 
+	\end{lemma}
+	\begin{proof}
+		Notice given an object $X$, the functor $-\otimes X:\mathcal{C}\to\mathcal{C}$ preserves $m$-finite colimits. Thus the integral distribute over $F_X$, and we have 
+		\[ \id_X\otimes|A|_1\simeq (-\otimes X)(|A|_1)\simeq|A|_X \]
+	\end{proof}
+
+	\begin{lemma}\label{Univ_tensor_unit_int}
+		$|A|_*\in\Hom_{\An_m^m}(*,*)$ is given by the span $*\from A\to *$. 
+	\end{lemma}
+	\begin{proof}
+		Recall from \cref{Univ_right_unit} and \cref{Univ_wrong_unit} that for an action of $\An_m^m$ on an $m$-semiadditive category $\mathcal{C}$, if we denote for a $m$-finite space $X$ the action of $X$ on $\mathcal{C}$ by $[X]:\mathcal{C}\to\mathcal{C}$, we have the counit for the adjunction $[X]\to\id$ given by the span $X:X\from X\to *$ (hence a natural transformation $[X]\to[*]$ given by the action functor $\An_m^m\to\End(\mathcal{C})$), and the wrong way counit exhibiting the ambidexterity the dual span $X^\vee:*\from X\to X$. Therefore, as the composition of the two, $|X|_*$ is the span computed as follows. 
+		% https://q.uiver.app/#q=WzAsNixbMCwyLCIqIl0sWzIsMiwiQSJdLFs0LDIsIioiXSxbMSwxLCJBIl0sWzMsMSwiQSJdLFsyLDAsIkEiXSxbMywxXSxbNCwxXSxbNCwyXSxbMywwXSxbNSwzXSxbNSw0XSxbNSwxLCIiLDAseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyLWludmVyc2UifX1dXQ==
+		\[\begin{tikzcd}[ampersand replacement=\&]
+			\&\& A \\
+			\& A \&\& A \\
+			{*} \&\& A \&\& {*}
+			\arrow[from=1-3, to=2-2]
+			\arrow[from=1-3, to=2-4]
+			\arrow["\ulcorner"{anchor=center, pos=0.125, rotate=-45}, draw=none, from=1-3, to=3-3]
+			\arrow[from=2-2, to=3-1]
+			\arrow[from=2-2, to=3-3]
+			\arrow[from=2-4, to=3-3]
+			\arrow[from=2-4, to=3-5]
+		\end{tikzcd}\]
+	\end{proof}
+
+	\begin{lemma}\label{A_monad_unit_self_dual}
+		Let $\mathcal{C}$ be a symmetric monoidal category. For every $\mathcal{C}$-ambidextrous space such that $\otimes$ distribute over $A$-colimits, the object $1_A$ (recall this is the object given by $A_!A^*1\in\Fun(*,\mathcal{C})\simeq\mathcal{C}$) is dualizable. 
+	\end{lemma}
+	\begin{proof}
+		By \cref{Iso_nm_unit_self_dual} directly. 
+	\end{proof}
+
+	\begin{defn}\label{Sym_mon_dim}
+		Let $\mathcal{C}$ be a symmetric monoidal category with tensor unit $1$. Then for any dualizable object $X\in\mathcal{C}$ with dual $X^\vee$, we define the symmetric monoidal dimension of $X$ $\dim_\mathcal{C}(X)$ to be a morphism $1\to 1$ given by $1\xrightarrow{\eta}X\otimes X^\vee\to X^\vee\otimes X\xrightarrow{\varepsilon}1$, where $\eta$ is the coevaluation map and $\varepsilon$ is the evaluation map. Obviously, symmetric monoidal dimensions are preserved by symmetric monoidal functors. \\
+		Then for a space $A$, we say $A$ is dualizable in $\mathcal{C}$ if $1_A$ is dualizable, and we write $\dim_\mathcal{C}(A)=\dim_\mathcal{C}(1_A)$. 
+	\end{defn}
+
+	\begin{lemma}\label{m_fin_self_dual}
+		Every $m$-finite space $A$ is self dual in $\An_m^m$ with symmetric monoidal dimension $\dim_{\An_m^m}(A)=(*\from A^{S^1}\to *)=|A^{S^1}|\in\Hom_{\An_m^m}(*,*)$. 
+	\end{lemma}
+	\begin{proof}
+		Notice that we have $\varepsilon:(A\times A\xleftarrow{\Delta}A\to*)$ and $\eta(*\from A\xrightarrow{\Delta}A\times A)$ are the duality data of $A$ by direct checking. Thus the symmetric monoidal dimension is computed by the following diagram. 
+		% https://q.uiver.app/#q=WzAsNixbMCwyLCIqIl0sWzIsMiwiQVxcdGltZXMgQSJdLFs0LDIsIioiXSxbMSwxLCJBIl0sWzMsMSwiQSJdLFsyLDAsIkFee1NeMX0iXSxbMywxXSxbNCwxXSxbNCwyXSxbMywwXSxbNSwzXSxbNSw0XSxbNSwxLCIiLDAseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyLWludmVyc2UifX1dXQ==
+		\[\begin{tikzcd}[ampersand replacement=\&]
+			\&\& {A^{S^1}} \\
+			\& A \&\& A \\
+			{*} \&\& {A\times A} \&\& {*}
+			\arrow[from=1-3, to=2-2]
+			\arrow[from=1-3, to=2-4]
+			\arrow["\ulcorner"{anchor=center, pos=0.125, rotate=-45}, draw=none, from=1-3, to=3-3]
+			\arrow[from=2-2, to=3-1]
+			\arrow[from=2-2, to=3-3]
+			\arrow[from=2-4, to=3-3]
+			\arrow[from=2-4, to=3-5]
+		\end{tikzcd}\]
+		and by \cref{Univ_tensor_unit_int}, we have $(*\from A^{S^1}\to *)=|A^{S^1}|$. 
+	\end{proof}
+
+	\begin{coro}\label{Sym_mon_dim_space}
+		Let $\mathcal{C}$ be an $m$-semiadditively symmetric monoidal category with tensor unit $1_\mathcal{C}$. Then we have $\dim_\mathcal{C}(A)=|A^{S^1}|$. If furthermore $A$ is a loopspace, we have $\dim_\mathcal{C}(A)=|A||\Omega A|$. 
+	\end{coro}
+	\begin{proof}
+		Firstly by \cref{Comm_int_semiadditive_fun} and the fact that symmetric monoidal dimension is preserved by symmetric monoidal functors, we have 
+		\[ F(\dim_{\An_m^m}A)\simeq F(|A^{S^1}|)\simeq |A^{S^1}|_{F(*)}\simeq|A^{S^1}|_{1_\mathcal{C}}\simeq\dim_\mathcal{C}(A) \]
+		Then if $A$ is a loopspace, $A^{S^1}\simeq A\times\Omega A$ splits by simple arguments, and by \cref{Assoc_int_base_prod} we obtain 
+		\[ \dim_\mathcal{C}(A)=|A^{S^1}|=|A\times\Omega A|=|A|\circ|\Omega A| \]
+	\end{proof}
+
+\section{Arithmetic aspects}
+
+	\begin{defn}\label{Wreath_op}
+		Notice for any object in any (reasonably well-behaved) category $X\in\mathcal{C}$, we define the wreath operation $X\wr C_p$ by $X^p_{hC_p}$, where the $C_p$ action on $X^p$ is given by permuting the factors. 
+	\end{defn}
+
+	\begin{lemma}
+		The functor $(-)\wr C_p:\An\to\An$ preserves fiber products. 
+	\end{lemma}
+	\begin{proof}
+		We let $e:*\to BC_p$ be a choice of a base point, then notice $(-)\wr C_p$ is equivalent to the composition 
+		\[ \An\xrightarrow{e_*}\Fun(BC_p,\An)\simeq\An_{/BC_p}\xrightarrow{\pi}\An \]
+		Then $e_*$ is a right adjoint, hence preserves limits. Also, $\pi$ preserves limits of contractible shape. 
+	\end{proof}
+
+	\begin{defn}
+		Let $\mathcal{C}$ be a symmetric monoidal category. Consider $(-)\wr C_p:\Cat\to\Cat$. Explicitly, we have a functor $(-)\wr C_p:\Fun(A,\mathcal{C})\to\Fun(A\wr C_p,\mathcal{C}\wr C_p)$. Then since $\bigotimes:\mathcal{C}^p\to\mathcal{C}$ is symmetric monoidal, we have it factoring through $\bigotimes:(\mathcal{C}^p)_{hC_p}\to\mathcal{C}$. Then we define the functor $\Theta_A^p$ to be the composition 
+		\[ \Fun(A,\mathcal{C})\xrightarrow{(-)\wr C_p}\Fun(A\wr C_p,\mathcal{C}\wr C_p)\xrightarrow{\otimes}\Fun(A\wr C_p,\mathcal{C}) \]
+	\end{defn}
+
+	\begin{const}\label{Theta_p_sq}
+		The construction $\Theta_A^p$ admits the two following naturality conditions. For a symmetric monoidal functor $F:\mathcal{C}\to\mathcal{D}$, we have 
+		% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXEZ1bihBLFxcbWF0aGNhbHtDfSkiXSxbMCwxLCJcXEZ1bihBLFxcbWF0aGNhbHtEfSkiXSxbMSwwLCJcXEZ1bihBXFx3ciBDX3AsXFxtYXRoY2Fse0N9KSJdLFsxLDEsIlxcRnVuKEFcXHdyIENfcCxcXG1hdGhjYWx7RH0pIl0sWzAsMiwiXFxUaGV0YV9BXnAiXSxbMiwzLCJGXyoiXSxbMCwxLCJGXyoiLDJdLFsxLDMsIlxcVGhldGFfQV5wIiwyXV0=
+		\[\begin{tikzcd}[ampersand replacement=\&]
+			{\Fun(A,\mathcal{C})} \& {\Fun(A\wr C_p,\mathcal{C})} \\
+			{\Fun(A,\mathcal{D})} \& {\Fun(A\wr C_p,\mathcal{D})}
+			\arrow["{\Theta_A^p}", from=1-1, to=1-2]
+			\arrow["{F_*}"', from=1-1, to=2-1]
+			\arrow["{F_*}", from=1-2, to=2-2]
+			\arrow["{\Theta_A^p}"', from=2-1, to=2-2]
+		\end{tikzcd}\]
+		For a map of spaces $q:A\to B$, we have 
+		% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXEZ1bihCLFxcbWF0aGNhbHtDfSkiXSxbMCwxLCJcXEZ1bihBLFxcbWF0aGNhbHtDfSkiXSxbMSwwLCJcXEZ1bihCXFx3ciBDX3AsXFxtYXRoY2Fse0N9KSJdLFsxLDEsIlxcRnVuKEFcXHdyIENfcCxcXG1hdGhjYWx7Q30pIl0sWzAsMiwiXFxUaGV0YV9CXnAiXSxbMiwzLCIocVxcd3IgQ19wKV4qIl0sWzAsMSwicV4qIiwyXSxbMSwzLCJcXFRoZXRhX0FecCIsMl1d
+		\[\begin{tikzcd}[ampersand replacement=\&]
+			{\Fun(B,\mathcal{C})} \& {\Fun(B\wr C_p,\mathcal{C})} \\
+			{\Fun(A,\mathcal{C})} \& {\Fun(A\wr C_p,\mathcal{C})}
+			\arrow["{\Theta_B^p}", from=1-1, to=1-2]
+			\arrow["{q^*}"', from=1-1, to=2-1]
+			\arrow["{(q\wr C_p)^*}", from=1-2, to=2-2]
+			\arrow["{\Theta_A^p}"', from=2-1, to=2-2]
+		\end{tikzcd}\]
+		We call the second square the $\Theta^p$-square of $q$. Thus if $q$ is finite, so is $q\wr C_p$, hence if $\mathcal{C}$ is $(m-1)$-semiadditive and has $m$-finite colimits, then the $\Theta^p$-square is canonically normed, and is iso-normed if $\mathcal{C}$ is $m$-semiadditive. 
+	\end{const}
+
+	\begin{coro}\label{Loc_sys_tensor_BC}
+		Again, we have for a map $q:A\to B$ and $\mathcal{C}$ a symmetric monoidal category admitting all (co)limits of the shape $q^{-1}(b)$, and that the tensor product distributes over all $q$-(co)limits, then the $\Theta^p$-square of $q$ satisfies the $BC_*$ ($BC_!$) condition. 
+	\end{coro}
+	\begin{proof}
+		We consider 
+		% https://q.uiver.app/#q=WzAsNixbMCwwLCJcXEZ1bihCLFxcbWF0aGNhbHtDfSkiXSxbMCwxLCJcXEZ1bihBLFxcbWF0aGNhbHtDfSkiXSxbMSwwLCJcXEZ1bihCXFx3ciBDX3AsXFxtYXRoY2Fse0N9KSJdLFsxLDEsIlxcRnVuKEFcXHdyIENfcCxcXG1hdGhjYWx7Q30pIl0sWzIsMCwiXFxGdW4oQl5wLFxcbWF0aGNhbHtDfSkiXSxbMiwxLCJcXEZ1bihBXnAsXFxtYXRoY2Fse0N9KSJdLFswLDEsInFeKiIsMl0sWzIsMywiKHFcXHdyIENfcCleKiJdLFs0LDUsIihxXnApXioiXSxbMSwzLCJcXFRoZXRhX0FecCIsMl0sWzAsMiwiXFxUaGV0YV9CXnAiXSxbMiw0LCJcXHBpX0JeKiJdLFszLDUsIlxccGlfQV4qIiwyXV0=
+		\[\begin{tikzcd}[ampersand replacement=\&]
+			{\Fun(B,\mathcal{C})} \& {\Fun(B\wr C_p,\mathcal{C})} \& {\Fun(B^p,\mathcal{C})} \\
+			{\Fun(A,\mathcal{C})} \& {\Fun(A\wr C_p,\mathcal{C})} \& {\Fun(A^p,\mathcal{C})}
+			\arrow["{\Theta_B^p}", from=1-1, to=1-2]
+			\arrow["{q^*}"', from=1-1, to=2-1]
+			\arrow["{\pi_B^*}", from=1-2, to=1-3]
+			\arrow["{(q\wr C_p)^*}", from=1-2, to=2-2]
+			\arrow["{(q^p)^*}", from=1-3, to=2-3]
+			\arrow["{\Theta_A^p}"', from=2-1, to=2-2]
+			\arrow["{\pi_A^*}"', from=2-2, to=2-3]
+		\end{tikzcd}\]
+		Then the right square satisfies the $BC$-conditions by \cref{Loc_sys_BC}, and since $\pi_B^*$ is conservative, it suffices to prove the outer square satisfies the $BC_*$ ($BC_!$) condition, which is obvious. 
+	\end{proof}
+
+	\begin{thm}\label{Ambi_theta_p_sq}
+		Let $\mathcal{C}$ be a $m$-semiadditively symmetric monoidal category and let $q:A\to B$ be an $m$-finite map of spaces, then the $\Theta^p$ square of $q$ is ambidextrous. 
+	\end{thm}
+	\begin{proof}
+		The proof is similar to \cref{Induct_ambi}. 
+	\end{proof}
+
+	\begin{thm}\label{Theta_p_comm_int}
+		Let $\mathcal{C}$ be an $m$-semiadditively symmetric monoidal category and $q:A\to B$ an $m$-finite map of spaces. Then for any $X,Y\in\Fun(B,\mathcal{C})$ and $f:q^*X\to q^*Y$, we have 
+		\[ \Theta_B^p(\int_qf)\simeq\int_{q\wr C_p}\Theta_A^p(f)\in\Hom_{\Fun(B\wr C_p,\mathcal{C})}(\Theta_B^pX,\Theta_B^pY) \]
+	\end{thm}
+	\begin{proof}
+		By \cref{Loc_sys_tensor_BC} the $\Theta^p$ squares satisfies the $BC$ conditions, and by \cref{Ambi_theta_p_sq} we have it ambidextrous, hence by \cref{Comm_int_semiadditive_fun} the theorem follows immediately. 
+	\end{proof}
+
+	Then we present the key property of $\Theta^p$ exhibiting its arithmetic essence. Namely, we calculate the difference between $\Theta^p(f+g)$ and $\Theta^p(f)+\Theta^p(g)$, and find that $\Theta^p$ would be an additive derivation (we will define this later). 
+
+	To calculate this, we must investigate the $\Theta^p$-square for $q:*\sqcup*\to *$. 
+
+	\begin{const}
+		The $\Theta^p$-square can be written as 
+		% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXEZ1bigqLFxcbWF0aGNhbHtDfSkiXSxbMCwxLCJcXEZ1bigqXFxzcWN1cCosXFxtYXRoY2Fse0N9KSJdLFsxLDAsIlxcRnVuKEJDX3AsXFxtYXRoY2Fse0N9KSJdLFsxLDEsIlxcRnVuKCgqXFxzcWN1cCopXFx3ciBDX3AsXFxtYXRoY2Fse0N9KSJdLFswLDEsInFeKiIsMl0sWzIsMywiKHFcXHdyIENfcCleKiJdLFsxLDMsIlxcVGhldGFfeypcXHNxY3VwKn1ecCIsMl0sWzAsMiwiXFxUaGV0YV8qXnAiXV0=
+		\[\begin{tikzcd}[ampersand replacement=\&]
+			{\Fun(*,\mathcal{C})} \& {\Fun(BC_p,\mathcal{C})} \\
+			{\Fun(*\sqcup*,\mathcal{C})} \& {\Fun((*\sqcup*)\wr C_p,\mathcal{C})}
+			\arrow["{\Theta_*^p}", from=1-1, to=1-2]
+			\arrow["{q^*}"', from=1-1, to=2-1]
+			\arrow["{(q\wr C_p)^*}", from=1-2, to=2-2]
+			\arrow["{\Theta_{*\sqcup*}^p}"', from=2-1, to=2-2]
+		\end{tikzcd}\]
+		Firstly, the left arrow $q^*$ can be identified with the diagonal $\Delta:\mathcal{C}\to\mathcal{C}^2$. Then recall that in the polynomial $(x+y)^p$, every term except for $x^p$ and $y^p$ has coefficient a multiple of $p$. Therefore $(*\sqcup*)^p_{hC_p}$ can be identified with $BC_p\sqcup BC_p\sqcup\overline{S}$, where $\overline{S}$ is a discrete set constructed as follows: let $S$ be the subset of $\{x,y\}^p$ containing every point except for $x^p$ and $y^p$, and $\overline{S}$ is the quotient of $S$ under the free $C_p$ action on $S$ given by the obvious $C_p$ action on $\{x,y\}^p$. \\
+		Thus we have 
+		\[ \Fun((*\sqcup*)\wr C_p,\mathcal{C})\simeq\mathcal{C}^{BC_p}\times\mathcal{C}^{BC_p}\times\prod_{\overline{\omega}\in\overline{S}}\mathcal{C} \]
+		Choosing a base point $e:*\to BC_p$, we have $q\wr C_p=(\id,\id,e,\dots,e)$, hence the right arrow of the diagram can be identified with $(\id,\id,e^*,\dots,e^*)$. Finally it suffices to identify the bottom arrow with a functor 
+		\[ \Phi:\mathcal{C}\times\mathcal{C}\to\mathcal{C}^{BC_p}\times\mathcal{C}^{BC_p}\times\prod\mathcal{C} \]
+		We write $\overline{\omega}(X,Y)=\omega_1(X,Y)\otimes\cdots\otimes\omega_p(X,Y)$, where $\omega$ is a preimage of $\overline{\omega}$ and $\omega_i(X,Y)=X$ if $\omega_i=x$, and $\omega_i(X,Y)=Y$ if $\omega_i=y$ (here $\omega_i$ is the $i$-th coordinate of $\omega$). 
+		Thus $\Phi$ is clearly given by 
+		\[ \Phi(X,Y)=(\Theta^pX,\Theta^pY,\overline{\omega}(X,Y)_{\overline{\omega}\in\overline{S}}) \]
+	\end{const}
+
+	\begin{coro}\label{Additivity_theta_p}
+		Let $\mathcal{C}$ be a 0-semiadditively symmetric monoidal category. Then given $X,Y\in\mathcal{C}$ 
+		\[ \Theta^p(f+g)=\Theta^p(f)+\Theta^p(g)+\sum\int_e\overline{\omega}(f,g) \]
+	\end{coro}
+	\begin{proof}
+		Directly by the above $\Theta^p$-square for $q$. 
+	\end{proof}
+
+	Now we show the analogy of the above construction with some common features in arithmetics.
+	
+	\begin{defn}\label{Semi_delta_ring}
+		Let $R$ be a commutative ring. We define an additive $p$-derivation on $R$ (where $p$ is a prime number), is a map of sets $\delta:R\to R$ such that 
+		\[ \delta(x+y)=\delta(x)+\delta(y)+(x^p+y^p-(x+y)^p)/p \]
+		and $\delta(1)=0$. We remark here that we should, as above, regard $(x^p+y^p-(x+y)^p)/p$ as an integral polynomial since all coefficients are naturally integers. We call the pair $(R,\delta)$ a semi-$\delta$-ring. A morphism of semi-$\delta$-rings are morphism of rings preserving the additive $p$-derivation. 
+	\end{defn}
+
+	\begin{remark}
+		We recall that a $p$-typical $\lambda$-ring is a ring $R$ equipped with an operation $\lambda:R\to R$ such that $\lambda/p$ is the Frobenius endomorphism of the $\mathbb{F}_p$-algebra $R/p$. Then we immediately see that the additive $p$-derivation above gives a $p$-typical $\lambda$-ring structure by letting $\lambda(x)=x^p+p\delta(x)$. 
+	\end{remark}
+
+	\begin{const}
+		Let $\mathcal{C}$ be a $0$-semiadditively symmetric monoidal category, then for $x\in\co\CAlg(\mathcal{C})$ and $Y\in\CAlg(\mathcal{C})$, we have $\pi_0\Hom(X,Y)$ a commutative rig (that is, a ring without additive inverses). We will then attempt to construct an additive $p$-derivation $\delta$ on this rig when $\mathcal{C}$ is $1$-semiadditively symmetric monoidal through the following operation $\alpha$ which we will define later. 
+	\end{const}
+	\begin{remark}
+		The terminology rig should come from rng, which is a ring without i, the unit. 
+	\end{remark}
+
+	We fix the notation by letting $e:*\to BC_p$ to be a choice of base point and $r:BC_p\to *$ the final map. Moreover, we let $\Theta^p$ denote the map $\Theta^p_*:\mathcal{C}\to\Fun(BC_p,\mathcal{C})$, the map sending an object $X$ to $X^{\otimes p}$ equipped with the permuting action of $C_p$ on the tensor. 
+
+	\begin{const}\label{Alpha_operation}
+		Since $X$ is a cocommutative algebra in $\mathcal{C}$, the comultiplication map $X\to X^{\otimes p}$ factors through the homotopy fixed point $X\to(X^{\otimes p})^{hC_p}\simeq r_*\Theta^p(X)$. Similarly we have a map $r_!\Theta^p(Y)\simeq(Y^{\otimes p})_{hC_p}\to Y$. We denote by the dual of these maps 
+		$t_X:r^*X\to\Theta^p(X)$ and $m_Y:\Theta^p(Y)\to r^*Y$. By definition, since $re=\id_*$, we have $e^*t_X:X\to X^{\otimes p}$ the comultiplication and $e_*m_Y:Y^{\otimes p}\to Y$ the multiplication. \\
+		Then, for $g:\Theta^p(X)\to\Theta^p(Y)$, we denote $\overline{\alpha}(g)$ by the composition 
+		\[ X\xrightarrow{t_X^\vee}r_*\Theta^p(X)\xrightarrow{\Nm_r^{-1}}r_!\Theta^p(X)\xrightarrow{g}\xrightarrow{m_Y^\vee}Y \]
+		Then for $f:X\to Y$, we define $\alpha(f)=\overline{\alpha}(\Theta^p(f))$. 
+	\end{const}
+
+	\begin{lemma}\label{Additive_alpha_bar}
+		The map $\overline{\alpha}:\Hom(\Theta^pX,\Theta^pY)\to\Hom(X,Y)$ constructed above is additive. 
+	\end{lemma}
+	\begin{proof}
+		We first notice that the map $r_*$ preserves products since it is taking the limit of a diagram. Thus the functor $r_*$ is additive, hence the map $\Hom(\Theta^pX,\Theta^pY)\to\Hom(r_*\Theta^pX,r_*\Theta^pY)$ is additive. Then $\overline{\alpha}$ is this additive map with a precomposition and a postcomposition, hence is additive. 
+	\end{proof}
+
+	Moreover, $\alpha$ has naturality with functors and composition. Explicitly, we have 
+	\begin{lemma}\label{Naturality_alpha}
+		For $h:X'\to X$ a map in $\co\CAlg(\mathcal{C})$ and $g:Y\to Y'$ a map in $\CAlg(\mathcal{C})$, for any $f:X\to Y$, we have $\alpha(g\circ f\circ h)\simeq g\circ\alpha(f)\circ h\in\Hom(X',Y')$. \\
+		For $F:\mathcal{C}\to\mathcal{D}$ a $1$-semiadditive symmetric monoidal functor between $1$-semiadditively symmetric monoidal categories, for any $X\in\co\CAlg(\mathcal{C})$ and $Y\in\CAlg(\mathcal{C})$, we have $F:\Hom(X,Y)\to\Hom(FX,FY)$ commutes with the operation $\alpha$. 
+	\end{lemma}
+	\begin{proof}
+		Direct. 
+	\end{proof}
+
+	\begin{thm}\label{Additivity_alpha}
+		For any $X\in\co\CAlg(\mathcal{C})$ and $Y\in\CAlg(\mathcal{C})$, we have $\alpha$ an additive $p$-derivation on $\pi_0\Hom(X,Y)$. That is, for any $f,g:X\to Y$, we have 
+		\[ \alpha(f+g)=\alpha(f)+\alpha(g)+((f+g)^p-f^p-g^p)/p \]
+	\end{thm}
+	\begin{proof}
+		Before proving the theorem, we first prove that for 
+		\[ h:e^*\Theta^p(X)\simeq X^{\otimes p}\to Y^{\otimes p}\simeq e^*\Theta^p(Y) \]
+		we have $\overline{\alpha}(\int_eh):X\to Y$ the composition 
+		\[ X\xrightarrow{e^*t_X}X^{\otimes p}\xrightarrow{h}Y^{\otimes p}\xrightarrow{e^*m_Y}Y \]
+		Firstly, we see that $\int_eh$ is the composition 
+		\[ \Theta^p(X)\xrightarrow{u_*^e}e_*e^*\Theta^p(X)\xrightarrow{h}e_*e^*\Theta^p(Y)\xrightarrow{\Nm_e^{-1}}e_!e^*\Theta^p(Y)\xrightarrow{c_!^e}\Theta^p(Y) \]
+		Then after applying $\overline{\alpha}$, we get $\overline{\alpha}\int_eh$ the composition 
+		% https://q.uiver.app/#q=WzAsMTAsWzAsMSwiWCJdLFswLDAsInJfKlxcVGhldGFecChYKSJdLFsxLDAsInJfKmVfKmVeKlxcVGhldGFecChYKSJdLFsyLDAsInJfKmVfKmVeKlxcVGhldGFecChZKSJdLFszLDAsInJfKmVfIWVeKlxcVGhldGFecChZKSJdLFs0LDAsInJfKlxcVGhldGFecChZKSJdLFs1LDAsInJfIVxcVGhldGFecChZKSJdLFs1LDEsIlkiXSxbMSwxLCJlXipcXFRoZXRhXnAoWCkiXSxbMiwxLCJlXipcXFRoZXRhXnAoWSkiXSxbMCw4XSxbOCw5XSxbOSw3XSxbMCwxXSxbMSwyXSxbMiwzXSxbMyw0XSxbNCw1XSxbNSw2XSxbNiw3XSxbMiw4LCIiLDEseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzIsOCwiIiwxLHsib2Zmc2V0IjoxLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzMsOSwiIiwxLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFs5LDMsIiIsMSx7Im9mZnNldCI6LTEsInN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XV0=
+		\[\begin{tikzcd}[ampersand replacement=\&, column sep=small]
+			{r_*\Theta^p(X)} \& {r_*e_*e^*\Theta^p(X)} \& {r_*e_*e^*\Theta^p(Y)} \& {r_*e_!e^*\Theta^p(Y)} \& {r_*\Theta^p(Y)} \& {r_!\Theta^p(Y)} \\
+			X \& {e^*\Theta^p(X)} \& {e^*\Theta^p(Y)} \&\&\& Y
+			\arrow[from=1-1, to=1-2]
+			\arrow[from=1-2, to=1-3]
+			\arrow[no head, from=1-2, to=2-2]
+			\arrow[shift right, no head, from=1-2, to=2-2]
+			\arrow[from=1-3, to=1-4]
+			\arrow[no head, from=1-3, to=2-3]
+			\arrow[from=1-4, to=1-5]
+			\arrow[from=1-5, to=1-6]
+			\arrow[from=1-6, to=2-6]
+			\arrow[from=2-1, to=1-1]
+			\arrow[from=2-1, to=2-2]
+			\arrow[from=2-2, to=2-3]
+			\arrow[shift left, no head, from=2-3, to=1-3]
+			\arrow[from=2-3, to=2-6]
+		\end{tikzcd}\]
+		By the commutativity of this diagram we have proven the lemma. Then by \cref{Additivity_theta_p}, we have 
+		\[ \alpha(f+g)=\alpha(f)+\alpha(g)+\overline{\alpha}\sum_{\overline{\omega}}\overline{\alpha}(\int_e\overline{\omega}(f,g)) \]
+		By the lemma, we have $\overline{\alpha}(\int_e\overline{\omega}(f,g))=f^i\otimes g^j$, where $i$ and $j$ are the times of $x$ and $y$ appearing in $\overline{\omega}$. 
+	\end{proof}
+
+	In particular, we may apply the above to the following setting. 
+	\begin{const}
+		Let $\mathcal{C}$ be a symmetric monoidal category. Then we let
+		\[ R_\mathcal{C}=\pi_0\Hom(1_\mathcal{C},1_\mathcal{C}) \] 
+		Since $1_\mathcal{C}$ is trivially a commutative algebra and a cocommutative coalgebra, and the $\pi_0$ of the $\Hom$ space of a stable category is always an additive group, we have $R_\mathcal{C}$ a semi-$\delta$-ring if $\mathcal{C}$ is additionally stable and $1$-semiadditive. 
+	\end{const}
+
+	\begin{prop}\label{Alpha_operation_integral}
+		Let $\mathcal{C}$ be a $1$-semiadditively symmetric monoidal category, then for any $f\in R_\mathcal{C}$, we have $\alpha(f)=\int_{BC_p}\Theta^p(f)$. 
+	\end{prop}
+	\begin{proof}
+		We first notice that the action of $C_p$ on $\Theta^p(1_\mathcal{C})\simeq 1_\mathcal{C}^{\otimes p}$ since $1_\mathcal{C}$ is the initial object in the category $\CAlg(\mathcal{C})$, and the action that permutes the factors in $1_\mathcal{C}^{\otimes p}$ is an action respecting the algebra structure of $1_\mathcal{C}^{\otimes p}\simeq 1_\mathcal{C}$. Consequently, we have the maps 
+		\[ t_{1_\mathcal{C}}^\vee:1_\mathcal{C}\to r_*\Theta^p(1_\mathcal{C})\simeq r_*r^*1_\mathcal{C} \] 
+		is the unit, and 
+		\[ m_{1_\mathcal{C}}^\vee:r_!r^*1_\mathcal{C}\simeq r_!\Theta^p(1_\mathcal{C})\to 1_\mathcal{C} \]
+		is the counit. Thus we have $\overline{\alpha}(g)=\int_{BC_p}g$ by unwinding the definitions, and hence the result. 
+	\end{proof}
+
+	\begin{thm}\label{Alpha_operation_on_int_space}
+		Let $\mathcal{C}$ be a $m$-semiadditively symmetric monoidal category for $m\geq1$. Then for any $m$-finite space $A$, we have $\alpha(|A|)\simeq|A\wr C_p|\in R_\mathcal{C}$
+	\end{thm}
+	\begin{proof}
+		We define some map of spaces. We let $q:A\to *$ be the final map, $\pi:A\wr C_p\to BC_p$ be the map $q\wr C_p$, and $r:BC_p\to *$ the final map. Then we have 
+		\[ \alpha(|A|)\simeq\overline{\alpha}(\Theta^p(|A|))\simeq\int_r\Theta^p(|A|)\simeq\int_r\Theta^p(\int_q\id_{1_\mathcal{C}})\simeq\int_r\int_\pi\id_{1_\mathcal{C}}\simeq\int_{r\pi}\id_{1_\mathcal{C}}\simeq|A\wr C_p| \]
+		where the first three equality is given by definition and the fourth by \cref{Theta_p_comm_int}, and the fifth the naturality of integrals with respect to compositions. 
+	\end{proof}
+
+	\begin{coro}\label{Alpha_operation_on_unit}
+		For any $1$-semiadditively symmetric monoidal category and let $X\in\co\CAlg(\mathcal{C})$ and $Y\in\CAlg(\mathcal{C})$, let $R=\pi_0\Hom_\mathcal{C}(X,Y)$, we have $\alpha(1_R)\simeq|BC_p|\circ 1_R$. 
+	\end{coro}
+	\begin{coro}
+		Firstly notice that the unit map $1_R$ is given by the composition $X\to 1_\mathcal{C}\to Y$, where the maps $\varepsilon:X\to 1_\mathcal{C}$ and $\eta:Y\to 1_\mathcal{C}$ are the counit and unit map given by the coalgebra and algebra structures on $X$ and $Y$. Then by the naturality of $\alpha$, we have 
+		\[ \alpha(1_R)\simeq\alpha(\eta\circ 1_{R_\mathcal{C}}\circ\varepsilon)\simeq\eta\circ\alpha(1_{R_\mathcal{C}})\circ\varepsilon \]
+		Since obviously $1_{R_\mathcal{C}}\simeq|*|\in\Hom(1_\mathcal{C},1_\mathcal{C})$, we apply \cref{Alpha_operation_on_int_space} and we have 
+		\[ \eta\circ\alpha(1_{R_\mathcal{C}})\circ\varepsilon\simeq\eta\circ\alpha(|*|)\circ\varepsilon\simeq\eta\circ|BC_p|\circ\varepsilon\simeq|BC_p|\circ\eta\circ\varepsilon\simeq|BC_p|1_R \]
+		Here the only non-trivial equivalence is the second last equivalence, which is since $|BC_p|$ is a natural transformation. 
+	\end{coro}
+
+	Now note that the only two obstructions preventing $\alpha$ from being an additive $p$-derivation is that the correction terms in the additivity has a sign error and $\alpha(1_R)\neq0$. Therefore the following correction would produce an additive $p$-derivation. 
+	
+	\begin{const}\label{Additive_p_der_on_hom_alg}
+		Let $\mathcal{C}$ be a stable $1$-semiadditively symmetric monoidal category with $X\in\co\CAlg(\mathcal{C})$ and $Y\in\CAlg(\mathcal{C})$, we have $R=\pi_0\Hom(X,Y)$ a ring, and we let $\delta:R\to R$ be given by $\delta(f)=|BC_p|f-\alpha(f)$. This is an additive $p$-derivation since $|BC_p|f$ is linear, and hence its additivity follows from \cref{Additivity_alpha}, and obviously $\delta(1_R)=0$. 
+	\end{const}
+
+	\begin{coro}
+		From \cref{Naturality_alpha}, we have for $F:\mathcal{C}\to\mathcal{D}$ a symmetric monoidal $1$-semiadditive functor between stable $1$-semiadditively symmetric monoidal categories, and given $X\in\co\CAlg(\mathcal{C})$ and $Y\in\CAlg(\mathcal{C})$ we have 
+		\[ F:\pi_0\Hom_\mathcal{C}(X,Y)\to\pi_0\Hom_\mathcal{D}(FX,FY) \]
+		a morphism of semi-$\delta$-rings. 
+	\end{coro}
+
+\section{Detecting semiadditivity}
+
+	In this section we finally present the core technique on detecting the semiadditivity of categories. We first give some basic properties of semi-$\delta$-rings. 
+
+	\begin{defn}
+		For an element $x\in\mathbb{Q}$, we define $\delta(x)=(x-x^p)/p$. This is canonically (and uniquely) a additive $p$-derivation on any subring of $\mathbb{Q}$. For a ring $R$, We define $S_R$ to be the set of primes invertible in $R$, and we define $\mathbb{Q}_R$ to be $\mathbb{Q}[S_R^{-1}]$. 
+	\end{defn}
+
+	\begin{lemma}\label{Semi_delta_ring_lem_1}
+		Let $(R,\delta)$ be a semi-$\delta$-ring, then for all $t\in\mathbb{Q}_R$ and $x\in R$ we have $\delta(tx)=t\delta(x)+\delta(t)x^p$. 
+	\end{lemma}
+	\begin{proof}
+		Consider the function $\varphi:\mathbb{Q}_R\to R$ given by $\varphi(t)=\delta(tx)-\delta(t)x^p$. Then by the additivity of $\delta$ and some calculation, we have $\varphi(t+s)=\varphi(t)+\varphi(s)$. Then since $\varphi(1)=\delta(x)$, we have $\varphi(t)=t\delta(x)$ since $\mathbb{Q}_R$ is a subring of $\mathbb{Q}$. 
+	\end{proof}
+
+	\begin{lemma}\label{Semi_delta_ring_lem_2}
+		Let $(R,\delta)$ be a $p$-local semi-$\delta$-ring, then any torsion element is nilpotent. 
+	\end{lemma}
+	\begin{proof}
+		Since $R$ is $p$-local, for any torsion element $x$ there is some $d$ such that $p^dx=0$. Then by \cref{Semi_delta_ring_lem_1}, we have 
+		\[ 0=\delta(0)=\delta(p^dx)=p^d\delta(x)+\delta(p^d)x^{p} \]
+		Then multiplying $x$ on both sides we have $\delta(p^d)x^{p+1}=0$. By elementary number theory we have $v_p(\delta(p^d))=d-1$, hence we have $p^{d-1}x^{p+1}=0$ since $R$ is $p$-local. Then repeat this process for $d$-times we have $x^{d(p+1)}=0$. 
+	\end{proof}
+
+	\begin{lemma}\label{Semi_delta_ring_lem_3}
+		Let $(R,\delta)$ be a non-zero $p$-local semi-$\delta$-ring. Then the map $\varphi:\mathbb{Q}_R\to R$ is a monomorphism of semi-$\delta$-rings. In particular, the $\delta$ defined on $\mathbb{Q}_R$ is the unique additive $p$-derivation. 
+	\end{lemma}
+	\begin{proof}
+		Firstly we have $\varphi\circ\delta=\delta\circ\varphi$. Then if $\varphi$ is not injective, so is the initial morphism $\mathbb{Z}\to R$. Therefore $1\in R$ is torsion. By \cref{Semi_delta_ring_lem_2} we have $1$ is nilpotent hence $R=0$. 
+	\end{proof}
+
+	\begin{coro}\label{Semi_delta_ring_cor_1}
+		For any non-zero $p$-local semi-$\delta$-ring $(R,\delta)$, either $p\in R^\times$ and $\mathbb{Q}_R=\mathbb{Q}\subseteq R$ or $p\notin R^\times$ and $\mathbb{Q}_R=\mathbb{Z}_{(p)}\subseteq R$, and $x\in\mathbb{Q}_R$ is invertible iff $v_p(x)=0$. 
+	\end{coro}
+
+	\begin{lemma}\label{Semi_delta_ring_lem_4}
+		Let $(R,\delta)$ be a $p$-local semi-$\delta$-ring. Then the ideal $I_{\mathrm{tor}}\subseteq R$ of torsion elements is closed under $\delta$. 
+	\end{lemma}
+	\begin{proof}
+		For $x\in I_{\mathrm{tor}}$, we have some $p^dx=0$. Thus $\delta(p^{d+1}x)=0$, and by \cref{Semi_delta_ring_lem_1}, $\delta(p^{d+1}x)=p^{d+1}\delta(x)+\delta(p^{d+1})x^p$. Then since $\delta(p^{d+1})x^p=cp^dx^p=0$, we have $p^{d+1}\delta(x)=0$. Thus $\delta(x)$ is still torsion. 
+	\end{proof}
+
+	\begin{prop}\label{Semi_delta_ring_tors_free_inv}
+		We define $R^{\mathrm{tf}}$ to be the ring $R/I_{\mathrm{tor}}$. Then if $(R,\delta)$ is a $p$-local semi-$\delta$-ring, there is a unique additive $p$-derivation $\delta$ on $R^{\mathrm{tf}}$, such that the quotient map $R\surj R^{\mathrm{tf}}$ is a morphism of semi-$\delta$-rings. Moreover, this quotient map detects invertibility (that is, the preimages of invertible elements are also invertible). 
+	\end{prop}
+	\begin{proof}
+		We first note that for $x\in R$ and $y\in I_{\mathrm{tor}}$, we have 
+		\[ \delta(x+y)-\delta(x)=\delta(y)+(x^p+y^p-(x+y)^p)/p \]
+		Then by \cref{Semi_delta_ring_lem_4} we have $\delta(y)\in I_{\mathrm{tor}}$ and $(x^p+y^p-(x+y)^p)/p=Cy\in I_{\mathrm{tor}}$. Thus we have $\delta(x+I_{\mathrm{tor}})=\delta(x)+I_{\mathrm{tor}}$ is a well-defined map of sets on $R^{\mathrm{tf}}$. This is obviously the unique additive $p$-derivation on $R^{\mathrm{tf}}$, and the quotient map detects invertibility since the kernel of the quotient map consists of torsion elements. 
+	\end{proof}
+
+	\begin{coro}
+		Let $\mathcal{C}$ be a stable $1$-semiadditively symmetric monoidal category with $X\in\co\CAlg(\mathcal{C})$ and $Y\in\CAlg(\mathcal{C})$. Then let $R=\Hom(X,Y)$. Then every torsion element of $R$ is nilpotent, and if $\mathbb{Q}\otimes R=0$ then $R=0$. 
+	\end{coro}
+
+	The main method we will use to detect semiadditivity is the method introduced by Hopkins-Lurie, which we will see below. 
+
+	\begin{defn}
+		We define a $0$-semiadditive category $\mathcal{C}$ to be $p$-local if for all $n$ coprime to $p$, we have $|[n]|_X$ is invertible. 
+	\end{defn}
+
+	\begin{thm}\label{Semiadditive_induct}
+		A $(n-1)$-semiadditively presentably symmetric monoidal stable $p$-local category $\mathcal{C}$ is $n$-semiadditive iff $B^nC_p$ is $\mathcal{C}$-ambidextrous. In particular, if there is an $(n-1)$-finite $p$-space $A$ such that $\pi_{n-1}(A)\neq0$ and $|A|_{1_\mathcal{C}}$ is an isomorphism, then $\mathcal{C}$ is $n$-semiadditive. 
+	\end{thm}
+	\begin{proof}
+		$\implies$ is obvious. For the converse, notice first by \cref{Cat_of_spans_as_mode}, to exhibit $\mathcal{C}$ as $n$-semiadditive, it suffices to construct an $\An_n^n$-module on $\mathcal{C}$ compatible with the given $\An_{n-1}^{n-1}$-module structure. However, for an $n$-finite space $A$, from \cref{An_n_wide_colim_lem_3}, if we denote the projection $\pi:A\to\tau_{\leq n-1}A$, then we have $A=\ilim_{\tau_{\leq n-1}A}\pi^{-1}(x)$. In short, if the base space is $\mathcal{C}$-ambidextrous and so is all the fibers, then the total space is also $\mathcal{C}$-ambidextrous. \\
+		Therefore to define an $\An_n^n$-action on $\mathcal{C}$, it suffices to define the action for spaces with homotopy groups concentrated at $n$ since we may use these spaces to generate $\An_n^n$ by colimits indexed by $n-1$-finite spaces. Thus for an $n-1$-semiadditive category $\mathcal{C}$, to prove it to be $n$-semiadditive, it suffices to prove that all spaces with homotopy groups concentrated at the $n$-th degree is $\mathcal{C}$-ambidextrous. \\
+		Now, such spaces must be of the form $B^nG$ where $G$ is a group (Abelian if $n\geq2$). For the case $n=1$, we consider the sylow $p$-subgroup $H\subseteq G$. Then we have a fiber sequence $G/H\to BH\to BG$. Since $|G/H|$ is coprime to $p$, we have $G/H$ amenable, and hence by \cref{Cancellation_amen_spaces}, $BG$ is $\mathcal{C}$-ambidextrous if $BH$ is. Now since $H$ is a $p$-group, $H$ is a extension of finitely many copies of $C_p$. Thus since $BC_p$ is ambidextrous, so is $BH$. Hence $BG$ is $\mathcal{C}$-ambidextrous. \\
+		For $n\geq2$, we have any Abelian group $G$ a direct sum of groups of the form $C_{q^n}$ (where $q$ is a prime), hence again it suffices to prove that all spaces of the form $B^nC_q$ are $\mathcal{C}$-ambidextrous. The case $q=p$ is provided by the assumption, and for the case $q\neq p$, we have by assumption $B^{n-1}C_q$ is $\mathcal{C}$-ambidextrous. Then since the diagonal map of $B^nC_q\to(B^nC_q)^2$ has fiber $B^{n-1}C_q$, the map $f:B^nC_q\to *$ is weakly ambidextrous. By the adjoint functor theorem, it suffices to prove the map $f_*:\Fun(B^nC_q,\mathcal{C})\to\mathcal{C}$ preserves colimits. In fact we will actually show that $f_*$ is an equivalence of categories. That is, we show $\mathcal{C}\inj\Fun(B^nC_q,\mathcal{C})$ is an equivalence. Note that this is equivalent to that for every space $K$ we have 
+		\[ \Core\Fun(K,\mathcal{C})\simeq\Core\Fun(K,\Fun(B^nC_q,\mathcal{C})) \]
+		Hence replacing $\mathcal{C}$ by $\Fun(K,\mathcal{C})$, it suffices to prove 
+		\[ \Core\mathcal{C}\simeq\Fun(B^nC_q,\Core\mathcal{C}) \]
+		Since $\Core\mathcal{C}$ is a space, we may prove the above for the $m$-truncations of $\Core\mathcal{C}$ and obtain the result by taking a colimit. The case $n=1$ is trivial since $B^nC_q$ is $2$-connective, hence every map from $B^mC_q$ to $\tau_{\leq 1}\Core\mathcal{C}$ is null. Assume we have 
+		\[ f_m^*:\tau_{\leq n}\Core\mathcal{C}\simeq\Fun(B^mC_q,\tau_{\leq n}\Core\mathcal{C}) \]
+		Then to prove $f_{m+1}^*$ is an equivalence, we consider the diagram 
+		% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXHRhdV97XFxsZXEgbisxfVxcQ29yZVxcbWF0aGNhbHtDfSJdLFswLDEsIlxcdGF1X3tcXGxlcSBufVxcQ29yZVxcbWF0aGNhbHtDfSJdLFsxLDAsIlxcRnVuKFgsXFx0YXVfe1xcbGVxIG4rMX1cXENvcmVcXG1hdGhjYWx7Q30pIl0sWzEsMSwiXFxGdW4oWCxcXHRhdV97XFxsZXEgbn1cXENvcmVcXG1hdGhjYWx7Q30pIl0sWzAsMl0sWzIsM10sWzAsMV0sWzEsM11d
+		\[\begin{tikzcd}[ampersand replacement=\&]
+			{\tau_{\leq m+1}\Core\mathcal{C}} \& {\Fun(B^mC_q,\tau_{\leq m+1}\Core\mathcal{C})} \\
+			{\tau_{\leq m}\Core\mathcal{C}} \& {\Fun(B^mC_q,\tau_{\leq m}\Core\mathcal{C})}
+			\arrow[from=1-1, to=1-2]
+			\arrow[from=1-1, to=2-1]
+			\arrow[from=1-2, to=2-2]
+			\arrow[from=2-1, to=2-2]
+		\end{tikzcd}\]
+		It suffices to prove $f_{m+1}^*$ is an equivalence on all fibers of $C\in\tau_{\leq m}\Core\mathcal{C}$. Notice that the fiber of the projection $\tau_{\leq m+1}\Core\mathcal{C}\to\tau_{\leq m}\Core\mathcal{C}$ at $C$ is the Eilenberg-Maclane space $K(\pi_m\Aut_{\mathcal{C}}(C),m+1)$. Since the information of automorphisms is contained in the information of endomorphisms, it suffices to prove 
+		\[ K(\Ext^{-m}_\mathcal{C}(C,C),m+1)\to\Fun(B^mC_p,K(\Ext^{-m}_{\mathcal{C}}(C,C),m+1)) \]
+		is an equivalence. This is the vanishing of the $m+1$-th reduced cohomology \\ 
+		$\tilde{H}^{m+1}(B^mC_p;\Ext^{-m}_{\mathcal{C}}(C,C))$ which is true since $\Ext^{-m}_{\mathcal{C}}(C,C)$ is $p$-local. \\
+		For the final assertion, notice that since $A$ is a $(n-1)$-finite $p$-space, so we have a fiber sequence $A\to B\to B^nC_p$ where $b$ is also $(n-1)$-finite. The rest follows from \cref{Cancellation_amen_spaces} (note that $A$ is amenable since $|A|_{1_\mathcal{C}}$ is an isomorphism). 
+	\end{proof}
+
+	\begin{coro}\label{Semiadditivity_rational_crit}
+		Let $\mathcal{C}$ be an $(n-1)$-semiadditively presentably symmetric monoidal stable $p$-local category. We define $A$ to be an $h$-good space if it is a connected $m$-finite $p$-space with $\pi_m(A)\neq0$ and that $h(|A|)$ is rational. Then let $h:R_\mathcal{C}\to S$ (recall $R_\mathcal{C}$ is the semi-$\delta$-ring $\pi_0\Hom(1_\mathcal{C},1_\mathcal{C})$ equipped with the $\delta$-operation defined by $\alpha$) be a morphism of semi-$\delta$-rings detecting invertibility and such that $h(|BC_p|)$ and $h(|A|)$ are rational and non-zero for an $h$-good space $A$, then $\mathcal{C}$ is $n$-semiadditive. 
+	\end{coro}
+	\begin{proof}
+		Then by \cref{Semiadditive_induct}, it suffices to find a $h$-good space $X$ such that $|X|$ is invertible. Firstly by assumption we have $h(|A|)$ is $h$-good. If $p\in S^\times$ we have $B^{n-1}C_p$ satisfying our desired conditions and we are done. So we assume $p\notin S^\times$. In this case, we show that there is an $h$-good space $A$ with $v_p(h(|X|))=0$. \\
+		We have $0\leq v_p(h(|A|))<\infty$, so it suffices to find for any $h$-good space $A$ another $h$-good space $A'$ such that $v_p(h(|A|))-1=v_p(h(|A'|))$. We prove $A'=A\wr C_p$ satisfies the two conditions. Firstly, we have 
+		\[ h(|A\wr C_p|)=h(|BC_p\times A|)-h(\delta|A|)=h(|BC_p|)h(|A|)-h(\delta|A|) \]
+		Then since $h(|BC_p|)$, $h(|A|)$ and $h(\delta|A|)$ are all rational, we have $h(|A\wr C_p|)$ rational. Moreover, obviously $A\wr C_p$ is $m$-finite $p$-space with $\pi_m(A)\neq0$, hence $A\wr C_p$ is $h$-good. Now, since $h(|BC_p|)$ is rational and $p\notin S^\times$, we have $v_p(h(|A|))\leq v_p(h(|BC_p\times A|))$. Finally by elementary number theory we have $v_p(h(\delta|A|))=v_p(h(|A|))-1$, so we have prove the result, and the assertion follows by induction. 
+	\end{proof}
+
+	We then present the method that we will use later to apply the theory of semiadditivity to chromatic localized categories. 
+	\begin{thm}\label{Bootstrap_machine}
+		Let $1\leq m\leq\infty$ and $F:\mathcal{C}to\mathcal{D}$ be a colimit preserving symmetric monoidal functor between presentably symmetric monoidal stable $p$-local categories. Assume that $\mathcal{C}$ is $1$-semiadditive, and the map $\varphi_F:R_\mathcal{C}\to R_\mathcal{D}$ detects invertibility, and finally for $0\leq k<m$, if $B^kC_p$ is dualizable in $\mathcal{D}$ (recall the notion of dualizability of spaces in \cref{Sym_mon_dim}) then the image of $\dim_\mathcal{D}(B^kC_p)$ in $R_\mathcal{D}^\mathrm{tf}$ is rational and non-zero, then both $\mathcal{C}$ and $\mathcal{D}$ are $m$-semiadditive. 
+	\end{thm}
+	\begin{proof}
+		By \cref{Mon_fun_preserve_semiadd}, it suffices to show that $\mathcal{C}$ is $m$-semiadditive. We prove by induction on $k$, where the condition is that for $0\leq i<k$ we have $|B^iC_p|_\mathcal{D}$ in $R_\mathcal{D}^\mathrm{tf}$ are rational and non-zero, and that $\mathcal{C}$ is $k$-semiadditive. The case where $k=1$ is by assumption. For $k\geq2$, by \cref{Sym_mon_dim_space}, we have $B^kC_p$ dualizable and
+		\[\dim_\mathcal{D}(B^kC_p)=|B^kC_p|_\mathcal{D}|B^{k-1}C_p|_\mathcal{D}\in R_\mathcal{D}^\mathrm{tf}\]
+		Therefore by the assumptions we have $\dim_\mathcal{D}(B^kC_p)$ is rational and non-zero. Therefore by the inductive hypothesis, the image of $|B^{k-1}C_p|_\mathcal{D}$ in $R_\mathcal{D}^\mathrm{tf}$ is rational and non-zero hence so is $|B^kC_p|_\mathcal{D}$. Then since the map $R_\mathcal{D}\to R_\mathcal{D}^\mathrm{tf}$ detects invertiblity since $\mathcal{D}$ is $p$-local, $|B^kC_p|_\mathcal{C}$ is rational and non-zero. 
+	\end{proof}
+
+	To better apply the above theorem, we present a setting where the map $\varphi_F$ induced by $F:\mathcal{C}\to\mathcal{D}$ detects invertibility. 
+
+	\begin{defn}
+		Let $F:\mathcal{C}\to\mathcal{D}$ be a colimit preserving monoidal functor between stably presentably monoidal categories nil-conservative if for every ring $R\in\Alg(\mathcal{C})$ we have $F(R)\simeq0$ implies $R=0$. 
+	\end{defn}
+
+	Directly by definition we have 
+	
+	\begin{lemma}
+		\begin{enumerate}
+			\item Any conservative functor is nil-conservative. 
+			\item The composition of nil-conservative functors is nil-conservative. 
+			\item For $F:\mathcal{C}\to\mathcal{D}$ and $G:\mathcal{D}\to\mathcal{E}$, if $GF$ is nil-conservative then so is $F$. 
+		\end{enumerate}
+	\end{lemma}
+
+	\begin{lemma}\label{Dualizable_closed_cofib}
+		Let $\mathcal{C}$ be a stably presentably monoidal category, and let $R,S\in\Alg(\mathcal{C})$, then for every cofiber sequence $X\to Y\to Z\in{_S}\Mod_R(\mathcal{C})$, if two out of $X,Y,Z$ are right dualizable then so is the third. 
+	\end{lemma}
+	\begin{proof}
+		Suppose $X$ and $Y$ are right dualizable. We let $\mathcal{M}$ be a category with a left $\mathcal{C}$-action on it, that is, $\mathcal{M}\in\LMod_\mathcal{C}(\PrL)$. Thus we have a functor 
+		\[ X\otimes_R(-):\LMod_R(\mathcal{M})\to\LMod_S(\mathcal{M}) \]
+		This construction is obviously functorial with respect to functors for $\mathcal{M}$. Notice that $X$ is right dualizable iff for every $\mathcal{M}$, the functor $X\otimes_R(-)$ has a left adjoint, and for every functor $U:\mathcal{M}'\to\mathcal{M}''$, the Beck-Chevalley map $F''_XU\to UF'_X$ obtained from the adjunction and naturality is an isomorphism. 
+		Then for every $\mathcal{M}$ we have a cofiber sequence of functors 
+		\[ X\otimes_R-\to Y\otimes_R-\to Z\otimes_R- \]
+		This induces a cofiber sequence of adjoint functors $F_Z\to F_Y\to F_X$. Thus we have a diagram of Beck-Chevalley maps 
+		% https://q.uiver.app/#q=WzAsNixbMCwwLCJGJydfWlUiXSxbMSwwLCJGJydfWVUiXSxbMiwwLCJGJydfWFUiXSxbMCwxLCJVRidfWiJdLFsxLDEsIlVGJ19ZIl0sWzIsMSwiVUYnX1giXSxbMCwxXSxbMSwyXSxbMyw0XSxbNCw1XSxbMCwzXSxbMSw0XSxbMiw1XV0=
+		\[\begin{tikzcd}[ampersand replacement=\&]
+			{F''_ZU} \& {F''_YU} \& {F''_XU} \\
+			{UF'_Z} \& {UF'_Y} \& {UF'_X}
+			\arrow[from=1-1, to=1-2]
+			\arrow[from=1-1, to=2-1]
+			\arrow[from=1-2, to=1-3]
+			\arrow[from=1-2, to=2-2]
+			\arrow[from=1-3, to=2-3]
+			\arrow[from=2-1, to=2-2]
+			\arrow[from=2-2, to=2-3]
+		\end{tikzcd}\]
+		Thus if the second and third vertical map are equivalences, so is the first. 
+	\end{proof}
+
+	\begin{lemma}\label{Nil_cons_equiv_dualizable_cons}
+		A colimit preserving monoidal functor $F:\mathcal{C}\to\mathcal{D}$ of stably presentably monoidal categories is nil-conservative iff for every $S\in\Alg(\mathcal{C})$, the induced functor $F:\LMod_S(\mathcal{C})\to\LMod_{F(S)}(\mathcal{D})$ is conservative when restricted to the subcategory of right dualizable modules. 
+	\end{lemma}
+	\begin{proof}
+		$\impliedby$ is obvious since every ring is right dualizable over itself as a left module. \\
+		$\implies$: let $f:N_1\to N_2$ be a map of right dualizable left $S$-modules and let $M$ be the cofiber of $f$, and by \cref{Dualizable_closed_cofib} $M$ is also right dualizable. Thus we show that if $FM=0$ then $M=0$. Let $M^\vee$ denote the right dual of $M$, we have $M^\vee\otimes_SM\simeq\Map_S(M,M)$. Thus $F(\Map_S(M,M))\simeq F(M^\vee\otimes_SM)\simeq0$ since $F$ is monoidal. Thus $\Hom_S(M,M)\simeq0$, and hence $M\simeq0$. 
+	\end{proof}
+
+	\begin{coro}\label{Nil_cons_det_inv}
+		Let $F:\mathcal{C}\to\mathcal{D}$ be a nil-conservative $m$-semiadditively symmetric monoidal functor between $m$-semiadditively symmetric monoidal stable presentable $p$-local categories. Then the map $\varphi_F:R_\mathcal{C}\to R_\mathcal{D}$ detects invertibility. In particular if $A$ is $\mathcal{C}$-ambidextrous and $\mathcal{D}$-amenable the $A$ is $\mathcal{C}$-amenable. 
+	\end{coro}
+	\begin{proof}
+		This follows from \cref{Nil_cons_equiv_dualizable_cons} since $1_\mathcal{C}$ is dualizable. 
+	\end{proof}
+
+\section{Applications in the chromatic settings}
+
+
+
+\chapter{Semiadditive Height}
+
+

@@ -1,0 +1,81 @@
+HA:
+  type: book
+  author: "Lurie, Jacob"
+  title: Higher algebra
+  date: 2017-9-18
+  url: "https://www.math.ias.edu/~lurie/papers/HA.pdf"
+
+HTT: 
+  type: book
+  author: "Lurie, Jacob"
+  title: Higher topos theory 
+  date: 2008-7-31
+  url: "https://www.math.ias.edu/~lurie/papers/HTT.pdf"
+
+SAG:
+  type: book
+  author: "Lurie, Jacob"
+  title: Spectral algebraic geometry
+  date: 2018-2-3
+  url: "https://www.math.ias.edu/~lurie/papers/SAG-rootfile.pdf"
+
+CentralFct: 
+  type: article 
+  author: "Gaitsgory, Dennis"
+  title: Construction of central elements in the affine Hecke algebra via nearby cycles 
+  date: 2000-10-27
+
+BF:
+  type: article
+  author: ["Bezrukavnikov, Roman", "Finkelberg, Michael"]
+  title: Equivariant Satake category and Kostant-Whittaker reduction
+  date: 2026-2-25
+
+AB:
+  type: article 
+  author: ["Arkhipov, Sergey", "Bezrukavnikov, Roman"]
+  title: Perverse sheaves on affine flags and Langlands dual group 
+  date: 2020-2-11
+
+central: 
+  type: book 
+  author: ["Achar, Pramod", "Riche, Simon"]
+  title: Central sheaves on affine flag varieties
+  date: 2025
+
+Highestwt1: 
+  type: article 
+  author: ["Cline, Edward", "Parshall, Brian", "Scott, Leonard"]
+  title: Finite dimensional algebras and highest weight categories 
+  date: 1988
+
+KoszulFin:
+  type: article 
+  author: ["Beilinson, Alexander", "Ginzburg, Victor", "Soergel, Wolfgang"]
+  title: Koszul duality patterns in representation theory 
+  date: 1996-4
+
+Highestwt2: 
+  type: article 
+  author: "Riche, Simon"
+  title: Geometric representation theory in positive characteristic
+  date: 2017-1-11
+
+DAG1: 
+  type: book
+  author: ["Gaitsgory, Dennis", "Rozenblyum, Nick"]
+  title: "A study in derived algebraic geometry, Volume 1: Correspondences and duality"
+
+Stacks:
+  type: book  
+  author: "Stacks Project Authors"
+  title: The stacks project 
+  date: 2026
+  url: "https://stacks.math.columbia.edu"
+
+KosKacMoody: 
+  type: article
+  author: ["Yun, Zhiwei", "Bezrukavnikov, Roman"]
+  title: Koszul duality for Kac--Moody groups
+  date: 2014-6-22
+  url: "https://arxiv.org/pdf/1101.1253"

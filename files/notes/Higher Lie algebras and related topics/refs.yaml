@@ -1,0 +1,105 @@
+HA:
+  type: book
+  author: "Lurie, Jacob"
+  title: Higher algebra
+  date: 2017-9-18
+  url: "https://www.math.ias.edu/~lurie/papers/HA.pdf"
+
+SAG:
+  type: book
+  author: "Lurie, Jacob"
+  title: Spectral algebraic geometry
+  date: 2018-2-3
+  url: "https://www.math.ias.edu/~lurie/papers/SAG-rootfile.pdf"
+
+HTT: 
+  type: book
+  author: "Lurie, Jacob"
+  title: Higher topos theory
+  date: 2008-7-31
+  url: "https://www.math.ias.edu/~lurie/papers/HTT.pdf"
+
+Ching1: 
+  type: article
+  author: "Ching, Michael"
+  title: Bar constructions for topological operads and the Goodwillie derivatives of the identity 
+  date: 2005-12-13
+
+GK: 
+  type: article
+  author: ["Ginzburg, Victor", "Kapranov, Mikhail"]
+  title: Koszul duality for operads
+  date: 1994-10
+
+Moerdijk1:
+  type: book
+  author: ["Heuts, Gijs", "Moerdijk, Ieke"]
+  title: Simplicial and dendroidal homotopy theory 
+  date: 2022
+
+Moerdijk2:
+  type: article
+  author: ["Hoffbeck, Eric", "Moerdijk, Ieke"]
+  title: Koszul duality for algebras over infinity operads 
+  date: 2026-2-9
+
+Moerdijk3:
+  type: article
+  author: ["Hinich, Vladimir", "Moerdijk, Ieke"]
+  title: On the equivalence of the Lurie's infinity operads and dendroidal infinity operads 
+  date: 2024-10-9
+
+Dendroidal1:
+  type: article
+  author: ["Moerdijk, Ieke", "Weiss, Ittay"]
+  title: Dendroidal sets
+  date: 2007-1-10
+
+Goodwillie1:
+  type: article
+  author: "Goodwillie, Thomas"
+  title: "Calculus III: taylor series"
+  date: 2003-10-30
+
+Quillen1:
+  type: article
+  author: "Quillen, Daniel"
+  title: Rational homotopy theory
+  date: 1968-6-5
+
+Koszul: 
+  type: article 
+  author: "Gijs, Heuts"
+  title: Koszul duality and a conjecture of Francis-Gaitsgory
+  date: 2024-8-12
+
+DerIdentity:
+  type: article
+  author: "Brenda Johnson"
+  title: The derivatives of homotopy theory
+  date: 1995-4
+
+LieDef: 
+  type: book
+  author: "Manetti, Marco"
+  title: Lie methods in deformation theory 
+  date: 2022
+
+DiffCoh:
+  type: book
+  author: "Schreiber, Urs"
+  title: Differential cohomology in a cohesive infinity topos 
+  date: 2017
+  url: "https://ncatlab.org/schreiber/show/differential+cohomology+in+a+cohesive+topos"
+
+UnifyDef:
+  type: article
+  author: "Pridham, J.P."
+  title: Unifying derived deformation theories
+  date: 2019-9-5
+
+Ching2:
+  type: article
+  author: ["Ching, Michael", "Salvatore, Paolo"]
+  title: Koszul duality for topological En operads
+  date: 2022-1-28

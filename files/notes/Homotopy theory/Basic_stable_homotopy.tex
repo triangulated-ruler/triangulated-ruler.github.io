@@ -1,0 +1,394 @@
+\part{Basic Stable Homotopy Theory}
+
+\chapter{Spectra}
+
+\section{Basic concepts}
+
+\section{The stable $\infty$-category $\Sp$}
+
+\chapter{Constructions}
+
+\section{Bousfield localization}
+
+	In this section, we will develop the theory of localizations on the $\infty$-category of spectra. We begin by presenting the most important theorem of this section, the adjoint functor theorem. But before this, we need some preliminaries on $\infty$-category theory. 
+	\begin{defn}
+		For an $\infty$-category $\mathcal{C}$ and a regular cardinal $\kappa$, we define $\mathcal{C}$ to be $\kappa$-filtered if for every $\kappa$-small simplicial set $K$ and every map $f:K\to\mathcal{C}$, there exists a map $\overline{f}^\triangleright:K^\triangleright\to\mathcal{C}$ extending $f$. In particular, we say $\mathcal{C}$ is filtered if $\mathcal{C}$ is $\omega$-filtered. Clearly for $\kappa<\lambda$, all $\lambda$-filtered categories are $\kappa$-filtered. \\
+		For an $\infty$-category $\mathcal{C}$ and a regular cardinal $\kappa$, we let $\Ind_\kappa(\mathcal{C})$ denote the full subcategory of $\mathcal{P}(\mathcal{C})$ spanned by the functors $f:\mathcal{C}^{\op}\to\iGrpd$ such that they classify right fibrations $\widetilde{\mathcal{C}}\to\mathcal{C}$ and $\widetilde{\mathcal{C}}$ is $\kappa$-filtered. Notice that under the intuition that $\mathcal{P}(\mathcal{C})$ is the category obtained from $\mathcal{C}$ by freely adjoining colimits, $\Ind_\kappa(\mathcal{C})$ has the intuition of adjoining only $\kappa$-filtered colimits. Consequently, $\Ind_\kappa(\mathcal{C})$ admits all $\kappa$-filtered colimits. \\
+		We define a category $\mathcal{C}$ to be accessible if it is of the form $\Ind_\kappa(\mathcal{C}^0)$ for some small category $\mathcal{C}^0$ and some regular cardinal $\kappa$. This definition admits a relative version: we define a functor $f:\mathcal{C}\to\mathcal{D}$ with $\mathcal{C}$ an accessible category to be accessible if it is $\kappa$-continuous for some regular cardinal $\kappa$. We define $\mathcal{C}$ to be presentable if it is both accessible and closed under small colimits. 
+	\end{defn}
+	\begin{thm}\label{Adj_func_thm}
+		Let $F:\mathcal{C}\to\mathcal{D}$ be a functor between presentable $\infty$-categories. Then, we have
+		\begin{enumerate}
+			\item $F$ has a right adjoint iff it preserves small colimits. 
+			\item $F$ has a left adjoint iff it is accessible and preserves small limits. 
+		\end{enumerate}
+	\end{thm}
+
+	\begin{thm}\label{Presentability_stable_cat}
+		A stable $\infty$-category $\mathcal{C}$ is presentable iff the following conditions are satisfied. 
+		\begin{enumerate}
+			\item The $\infty$-category $\mathcal{C}$ admits small coproducts. 
+			\item The homotopy category $h\mathcal{C}$ is locally small. 
+			\item There exists a regular cardinal $\kappa$ and a $\kappa$-compact generator $X\in\mathcal{C}$. 
+		\end{enumerate}
+		Here $X$ is a generator iff for all $Y$, $\pi_0\Map_{\mathcal{C}}(X,Y)=*$ implies that $Y$ is the zero object. 
+	\end{thm}
+
+	\begin{coro}\label{Cond_presentable}
+		The category $\Sp$ is presentable. Moreover, for a full subcategory $\mathcal{C}$ of $\Sp$ closed under shifts and homotopy colimits with a small $\mathcal{C}_0$ generating $\mathcal{C}$ under colimits, $\mathcal{C}$ is also presentable. 
+	\end{coro}
+
+	\begin{coro}
+		For such subcategory $\mathcal{C}$, there exists a colocalization functor $G:\Sp\to\mathcal{C}$. 
+	\end{coro}
+
+	\begin{defn}\label{E_acyc_loc_equiv}
+		For $\mathcal{C}$ satisfying \cref{Cond_presentable}, we define an object $X$ to be $\mathcal{C}$-local if for any object $Y$ in $\mathcal{C}$, we have $[Y,X]=*$. Then we define $\mathcal{C}^\perp$ to be the full subcategory of $\Sp$ spanned by $\mathcal{C}$-local objects. Finally, we define a morphism $f:X\to Y$ is a $\mathcal{C}$-equivalence if its fiber is in $\mathcal{C}$. 
+		For a ring spectrum $E$, we define $\mathcal{C}_E$ to be the subcategory spanned by the $E$-acyclic spectra (that is, $E\wedge X=*$), and we define an object to be $E$-local if it is in $\mathcal{C}_E^\perp$, and finally a morphism to be an $E$-equivalence if $f$ is a $\mathcal{C}_E$ equivalence. 
+	\end{defn}
+
+	\begin{const}\label{Bousfield_localization}
+		We form the cofiber of the counit map $G(X)\to X$, denoted by $L(X)$. $L(X)$ is equipped with a map $X\to L(X)$. It is obvious that $L$ has (and is characterized by the following two properties). 
+		\begin{enumerate}
+			\item $L(X)$ is $\mathcal{C}$-local. 
+			\item $X\to L(X)$ is an $\mathcal{C}$-equivalence. 
+		\end{enumerate}
+		Moreover, $L$ is a localization into $\mathcal{C}^\perp$. 
+	\end{const}
+
+	\begin{coro}
+		The subcategory $\mathcal{C}_E$ spanned by $E$-acyclic spectra satisfies the condition of \cref{Cond_presentable}, hence there is a functor $G_E:\Sp\to\mathcal{C}_E$ exhibiting $\mathcal{C}_E$ a coreflective subcategory of $\Sp$. We also have $L_E$, the localization functor. 
+	\end{coro}
+
+	We present a few properties of $E$-local spectra. 
+	\begin{prop}\label{Loc_Whitehead}
+		If $X$ and $Y$ are $E$-local spectra and $f:X\to Y$ is an $E$-equivalence, then $f$ is an equivalence. 
+	\end{prop}
+	\begin{proof}
+		We first notice that if a spectrum $X$ is both $E$-local and $E$-acyclic, then $X\simeq*$. This is since $\id:X\to X$ is null-homotopic. Then, we may consider $\fib(f)$, which is both $E$-local and $E$-acyclic. 
+	\end{proof}
+
+	\begin{prop}
+		$E$-local spectra are closed under retracts, shifting, forming fibers, and products. 
+	\end{prop}
+	\begin{proof}
+		Direct. 
+	\end{proof}
+
+	\begin{prop}
+		A module spectrum $X$ over a ring spectrum $E$ is $E$-local. 
+	\end{prop}
+	\begin{proof}
+		This is since $X$ is a retract of $X\wedge E$, and $X\wedge E$ is obviously $E$-local. 
+	\end{proof}
+
+	\begin{prop}
+		$E$-localization is compatible with the wedge sum, shiftings, and fiber sequences. That is, $L_E(X\vee Y)\simeq L_E(X)\vee L_E(Y)$, and $L_E(\Sigma^{\pm1}X)\simeq\Sigma^{\pm1}L_E(X)$. 
+	\end{prop}
+	\begin{proof}
+		Since $E$-local spectra has products (hence finite coproducts), $L_E$ preserves finite coproducts (i.e. wedge sums). Since fiber sequences is equivalent to cofiber sequences, which is computed by pushouts, and $E$-local spectra is closed under the formation of cofibers, $L_E$ preserves fiber sequences. Then shifting is just a simple case of a fiber sequence. 
+	\end{proof}
+
+	\begin{lemma}\label{Cond_smashing_loc}
+		Let $\mathcal{C}$ be a subcategory of $\Sp$ satisfying \cref{Cond_presentable}, then the following conditions are equivalent. 
+		\begin{enumerate}
+			\item $\mathcal{C}^\perp$ is closed under colimits. 
+			\item $L$ preserves colimits. 
+			\item $G$ preserves colimits. 
+			\item $L$ is of the form $L(X)=K\wedge X$ for some $K$. 
+		\end{enumerate}
+	\end{lemma}
+	\begin{proof}
+		$(1)\iff(2)$ is since left adjoints preserves colimits. \\
+		$(2)\iff(3)$ by the cofiber sequence $G\to\id\to L$. \\
+		$(2)\iff(4)$ by observing the action of $L$ on $S$, and then generate the whole category $\Sp$. 
+	\end{proof}
+	\begin{coro}
+		In this case, we have $L(X)\simeq L(S)\wedge X$. 
+	\end{coro}
+	\begin{proof}
+		Since $X$ is $\mathcal{C}$-local iff $L(X)\simeq L(S)\wedge X\simeq*$, hence $\mathcal{C}$ can be identified with the $L(S)$-acyclic spectra. 
+	\end{proof}
+
+	\begin{defn}
+		We define a localization functor $L$ to be smashing if it satisfies the equivalent condition in \cref{Cond_smashing_loc}. 
+	\end{defn}
+
+	\begin{thm}\label{Loc_finite_smashing}
+		For any spectrum $E$, $L_E$ commutes with finite colimits. Hence for finite spectra $F$, we have $L_E(X\wedge F)=L_E(X)\wedge F$. 
+	\end{thm}
+	\begin{proof}
+		It suffices to prove that the full subcategory of $E$-local spectra admits finite colimits, since $L_E$, as a left adjoint, commutes with all existing colimits. Then, for $E$-local spectra $X$ and $Y$, $X\vee Y$ is also $E$-local since for an $E$-acyclic spectrum $Z$, a morphism $Z\to X\vee Y$ is equivalent to the data of a morphism $Z\to X$ and $Z\to Y$, hence $Z\to X\vee Y$ must be trivial. Thus $E$-local spectra admits all finite limits (stable categories admits all pushouts). As for the second assertion, to show that $L_E(X)\wedge F\to L_E(X\wedge F)$ is an equivalence, it suffices to show that if $W$ is $E$-local then $W\wedge F$ is $E$-local. Let $Z$ be an $E$-acyclic spectrum. Then, we have $\Map(Z,W\wedge F)\simeq\Map(Z\wedge DF,W)\simeq*$, since $Z\wedge DF$ is still $E$-acyclic. Thus $W\wedge F$ is $E$-local. 
+	\end{proof}
+
+	\begin{lemma}
+		Localization functors are uniquely determined by their images. Hence all localization functors form a poset with order the inclusion of their images. 
+	\end{lemma}
+	\begin{proof}
+		Direct by verifying the universal properties. 
+	\end{proof}
+
+	\begin{prop}
+		If $\mathcal{C}_F\subseteq\mathcal{C}_E$, then we have the following. 
+		\begin{enumerate}
+			\item Each $E$-local spectrum is $F$-local. 
+			\item For each spectrum $X$ we have natural equivalences $L_E(L_F(X))\simeq L_E(X)\simeq L_F(L_E(X))$, $G_F(L_E(X))\simeq0\simeq L_E(G_F(X))$, $G_E(G_F(X))\simeq G_F(X)\simeq G_F(G_E(X))$, and finally $G_E(L_F(X))\simeq L_F(G_E(X))$. 
+			\item For each $X$ we have fiber sequences $G_E(L_F(X))\to L_F(X)\to L_E(X)$ and $G_F(X)\to G_E(X)\to G_E(L_F(X))$. 
+		\end{enumerate}
+	\end{prop}
+	\begin{proof}
+		The first two properties are direct. The last one follows from applying $L_F$ to the fiber sequences $G_E(X)\to X\to L_E(X)$ and $G_E$ to $G_F(X)\to X\to L_F(X)$, and apply the second property. 
+	\end{proof}
+
+	\begin{defn}\label{Bousfield_class}
+		We define two spectra $E$ and $F$ to be Bousfield equivalent if their localization functors are isomorphic. The equivalence classes are called Bousfield classes. We denote the Bousfield class of $E$ by $\langle E\rangle$. 
+	\end{defn}
+
+	\begin{const}
+		We notice that we may form an algebraic sturcture on all Bousfield classes resembling a lattice. We define for two spectra $E$ and $F$, $\langle E\rangle\leq\langle F\rangle$ iff all $F$-acyclic spectra are $E$-acyclic. Then we notice $\langle*\rangle$ is the smallest Bousfield class, while $\langle S\rangle$ is the largest (here $S$ is the sphere spectrum). \\
+		Moreover, $\langle E\rangle\vee\langle F\rangle:=\langle E\vee F\rangle$ is a minimal upper bound for $\langle E\rangle$ and $\langle F\rangle$, while $\langle E\rangle\wedge\langle F\rangle:=\langle E\wedge F\rangle$ is a not necessarily maximal lower bound for $\langle E\rangle$ and $\langle F\rangle$. \\
+		Finally, there exists a dual of a spectrum $E^\perp$ such that $\langle E\rangle\wedge\langle E^\perp\rangle=\langle0\rangle$ and $E^{\perp\perp}\simeq E$. 
+	\end{const}
+
+
+
+
+\chapter{Spectral sequences}
+
+\section{The Atiyah-Hirzebruch spectral sequence}
+
+\section{The Milnor spectral sequence}
+
+\section{The Adams spectral sequence}
+
+\chapter{Theorems}
+
+\section{Bott periodicity}
+
+	In this section, we prove the famous result stated first by Bott. We will use a computational proof, so that we can get more information on the homology of relavent spaces. There are, indeed, proofs that does not involves too much computation, such as the proof using group completion. 
+
+	\begin{thm}\label{Bott_periodicity}
+		We have a map $\beta:BU\to\Sigma SU$ inducing a homotopy equivalence. 
+	\end{thm}
+
+	Before we do anything, we state the comparison theorem, which will be extremely useful in the proof. 
+	\begin{thm}\label{Comparison_thm}
+		Let $f:E\to 'E$ be a homomorphism of multiplicative first quadrant homological spectral sequences. Assume that we have the following commutative diagram 
+		% https://q.uiver.app/#q=WzAsMTAsWzAsMCwiMCJdLFs0LDAsIjAiXSxbNCwxLCIwIl0sWzAsMSwiMCJdLFsxLDAsIkVeMl97cCwwfVxcb3RpbWVzIEVeMl97MCxxfSJdLFsyLDAsIkVeMl97cCxxfSJdLFszLDAsIlxcVG9yXzEoRV4yX3twLTEsMH0sRV4yX3swLHF9KSJdLFsxLDEsIidFXjJfe3AsMH1cXG90aW1lcyB7J0VeMl97MCxxfX0iXSxbMiwxLCInRV4yX3twLHF9Il0sWzMsMSwiXFxUb3JfMSgnRV4yX3twLTEsMH0seydFXjJfezAscX19KSJdLFswLDRdLFs0LDVdLFs1LDZdLFs2LDFdLFszLDddLFs3LDhdLFs4LDldLFs5LDJdLFs0LDddLFs1LDhdLFs2LDldXQ==
+		\[\begin{tikzcd}
+			0 & {E^2_{p,0}\otimes E^2_{0,q}} & {E^2_{p,q}} & {\Tor_1(E^2_{p-1,0},E^2_{0,q})} & 0 \\
+			0 & {'E^2_{p,0}\otimes {'E^2_{0,q}}} & {'E^2_{p,q}} & {\Tor_1('E^2_{p-1,0},{'E^2_{0,q}})} & 0
+			\arrow[from=1-1, to=1-2]
+			\arrow[from=1-2, to=1-3]
+			\arrow[from=1-2, to=2-2]
+			\arrow[from=1-3, to=1-4]
+			\arrow[from=1-3, to=2-3]
+			\arrow[from=1-4, to=1-5]
+			\arrow[from=1-4, to=2-4]
+			\arrow[from=2-1, to=2-2]
+			\arrow[from=2-2, to=2-3]
+			\arrow[from=2-3, to=2-4]
+			\arrow[from=2-4, to=2-5]
+		\end{tikzcd}\]
+		Then we have two of the following statements imply the third. 
+		\begin{enumerate}
+			\item $f^2_{p,0}:E^2_{p,0}\to{'E^2_{p,0}}$ is an isomorphism for all $p\geq0$. 
+			\item $f^2_{0,q}:E^2_{0,q}\to{'E^2_{0,q}}$ is an isomorphism for all $q\geq0$. 
+			\item $f^\infty_{p,q}:E^\infty_{p,q}\to{'E^\infty_{p,q}}$ is an isomorphism for all $p,q\geq0$. 
+		\end{enumerate}
+	\end{thm}
+
+	We first construct the map $\beta$. 
+	\begin{const}
+		We let $\mathbb{V}$ denote $\mathbb{C}^\infty$, and $U$ denote the colimit of $U(n)$ under the standard inclusion $\mathbb{C}^n\inj\mathbb{C}^\infty$, and $SU(n)$ denote the colimit of $SU(n)$ (regarded as the standard subgroup $SU(n)\inj U(n)$). Finally, we let $BU=U/U\times U$ denote the colimit of the Grassmannians $U(2n)/U(n)\times U(n)$. Also, we consider the loops of length $\pi$ for convenience. \\
+		For $0\leq\theta\leq\pi$, we define $\nu(\theta)\in U(\mathbb{V}^2)$ by $\nu(\theta)(z,z')=(e^{i\theta}z,e^{-i\theta}z')$. Then, we define $\beta:U(\mathbb{V}^2)\to\Omega SU(\mathbb{V}^2)$ by 
+		\[ \beta(T)(\theta)=[T,\nu(\theta)] \]
+		where the $[-,-]$ denote the commutator. This is clearly a loop. Moreover, since $\nu(\theta)$ is scalar multiplication on each component, we have when $T\in U(\mathbb{V})\times U(\mathbb{V})$ the loop is trivial. Hence by passing to quotients, we have defined a map $\beta:BU=U/U\times U\to\Omega SU$. Clearly, $\beta$ is a map of H-spaces. 
+	\end{const}
+
+	\begin{prop}
+		We have $H_*(BU;\mathbb{Z})=\mathbb{Z}[\gamma_1,\gamma_2,\dots]$, where $\gamma_i\in H_i(BU(1))$ is dual to $c_1^i$. 
+	\end{prop}
+	\begin{proof}
+		This proof is exactly the same as in the computation of $H_*(BO;\mathbb{Z}/2\mathbb{Z})$. Essentially, the hopf algebra structure of the cohomology of these spaces are clear, and it suffices to calculate their dual, resulting in the conclusion. 
+	\end{proof}
+
+	\begin{prop}
+		$H_*(SU(n);\mathbb{Z})\simeq\Lambda_{\mathbb{Z}}[x_3,x_5,\dots,x_{2n-1}]$ (here the exterior product is viewed as a Hopf algebra). 
+	\end{prop}
+	\begin{proof}
+		We first calculate $H^*(SU(n);\mathbb{Z})$. We do this inductively. The case for $n=1$ and $2$ is trivial. Then we consider the fibration $SU(n)\to SU(n+1)\to S^{2n+1}$. We apply the Leray-Serre spectral sequence on this fibration. The second page of this spectral sequence has two rows, one at $0$ and one at $2n+1$, with each row the homology of $SU(n)$ at the corresponding position. Then, the first non-trivial differential that may exists is from $(0,2n)\to(2n+1,0)$. However, this spectral sequence is multiplicative, and by the induction hypothesis, any element in $(2n+1,0)$ must comes from a product of elements in $(m_i,0)$, which, by the structure of the spectral sequence, are permanent cycles. Therefore the spectral sequence degenerates, and we obtain $H^*(SU(n);\mathbb{Z})\simeq\Lambda_{\mathbb{Z}}[\alpha_3,\alpha_5,\dots,\alpha_{2n-1}]$. \\
+		Then we must compute the Hopf algebra structure of $H^*(SU(n);\mathbb{Z})$, and dualize it to obtain our conclusion. In fact, it suffices to prove each $\alpha_i$ is primitive, which then gives the result directly by setting $x_i$ to be the dual of $\alpha_i$. We again use the induction hypothesis. To prove the case for $SU(n+1)$, we first see that $\alpha_3,\dots,\alpha_{2n-1}$ are primitive by the induction hypothesis. Then, notice that $\alpha_{2n+1}$ is the image of the generator for $\pi_{2n+1}(S^{2n+1})$. Then since $SU(n)\to SU(n+1)\to S^{2n+1}$ is a fibration, we see that this element is also primitive (there is no room for the coproduct to be too large with the assumption that $H^*(SU(n+1))\to H^*(SU(n))$ is a Hopf algebra map). 
+	\end{proof}
+
+	\begin{prop}\label{Homology_loopspace_SU_n}
+		$H_*(\Omega SU(n);\mathbb{Z})\simeq\mathbb{Z}[\delta_1,\dots,\delta_n]$, where $\delta_i$ has degree $2i$. Note that here the polynomial is also viewed as a Hopf algebra. 
+	\end{prop}
+	\begin{proof}
+		The main idea is to apply the Leray-Serre spectral sequence on the path space fibration $\Omega SU(n)\to PSU(n)\to SU(n)$, say the spectral sequence is $F$. Then, we construct a spectral sequence 
+		\[ E^2_{*,*}=\mathbb{Z}[\delta_1,\dots,\delta_n]\otimes\Lambda_\mathbb{Z}[x_3,\dots,x_{2n+1}] \]
+		with the $\delta_i$'s concentrated on the bottom with degree $(0,2i)$ and $x_{2k+1}$'s concentrated on the left with degree $(2k+1,0)$. The other terms are given by obvious tensors. Then we let the cycles $x_{2i+1}$ being mapped to $\delta_i$ at the $2i$-th page, which would ensure that this spectral sequence degenerates with only $E_{0,0}^\infty=\mathbb{Z}$. Then we have an obvious map from $E$ to $F$, which is the identity on $E^2_{p,0}$. This, along with the comparison theorem (\cref{Comparison_thm}), gives the calculation $H_*(\Omega SU(n);\mathbb{Z})\simeq\mathbb{Z}[\delta_1,\dots,\delta_n]$. 
+	\end{proof}
+
+	\begin{proof}
+		Now that we have seen the homology of $\Omega SU$ and $BU$ are both polynomial algebras on infinitely many generators, with one on degree $2i$, we show that $\beta$ induces an isomophism on homology. In fact, since we have an obvious map $\mathbb{CP}^\infty\to BU\to\Omega SU$, it suffices to show that $c_1^i$ is mapped to $\delta_i$ modulo decomposables, since the image of $c_1^i$ in $BU$ is a set of generators. 
+		We first notice that $\beta$ induces a morphism of fibrations by restricting the map $\beta$ to $\mathbb{CP}^n\inj BU(1)$. Explicitly, we have 
+		% https://q.uiver.app/#q=WzAsNixbMCwwLCJcXG1hdGhiYntDUH1ee24tMX0iXSxbMSwwLCJcXG1hdGhiYntDUH1ebiJdLFsyLDAsIlNeezJufSJdLFswLDEsIlxcT21lZ2EgU1UobikiXSxbMSwxLCJcXE9tZWdhIFNVKG4rMSkiXSxbMiwxLCJcXE9tZWdhIFNeezJuKzF9Il0sWzAsMSwiaSJdLFsxLDIsIlxccmhvIl0sWzIsNSwiaCJdLFswLDMsIlxcYWxwaGEiLDJdLFsxLDQsIlxcYWxwaGEiLDJdLFszLDQsIlxcT21lZ2EgaSIsMl0sWzQsNSwiXFxPbWVnYVxccGkiLDJdXQ==
+		\[\begin{tikzcd}
+			{\mathbb{CP}^{n-1}} & {\mathbb{CP}^n} & {S^{2n}} \\
+			{\Omega SU(n)} & {\Omega SU(n+1)} & {\Omega S^{2n+1}}
+			\arrow["i", from=1-1, to=1-2]
+			\arrow["\alpha"', from=1-1, to=2-1]
+			\arrow["\rho", from=1-2, to=1-3]
+			\arrow["\alpha"', from=1-2, to=2-2]
+			\arrow["h", from=1-3, to=2-3]
+			\arrow["{\Omega i}"', from=2-1, to=2-2]
+			\arrow["{\Omega\pi}"', from=2-2, to=2-3]
+		\end{tikzcd}\]
+		here the adjoint map of $h$ is the isomorphism $\Sigma S^{2n}\simeq S^{2n+1}$. \\
+		To see that $c_1^i$ is mapped to $\delta_i$ modulo decomposables, we consider the following diagram. 
+		% https://q.uiver.app/#q=WzAsMTAsWzAsMCwiSF97Mm59KFxcbWF0aGJie0NQfV5uKSJdLFswLDUsIkhfezJufShTXnsybn0pIl0sWzEsMywiSF97Mm4rMX0oXFxTaWdtYSBTXnsybn0pIl0sWzEsMiwiSF97Mm4rMX0oXFxTaWdtYVxcbWF0aGJie0NQfV5uKSJdLFsyLDIsIkhfezJuKzF9KFNVKG4rMSkpIl0sWzIsMywiSF97Mm4rMX0oU157Mm4rMX0pIl0sWzIsMSwiSF97Mm4rMX0oXFxTaWdtYVxcT21lZ2EgU1UobisxKSJdLFsyLDQsIkhfezJuKzF9KFxcU2lnbWFcXE9tZWdhIFNeezJuKzF9KSJdLFszLDUsIkhfezJufShcXE9tZWdhIFNeezJuKzF9KSJdLFszLDAsIkhfezJufShcXE9tZWdhIFNVKG4rMSkpIl0sWzAsOSwiXFxhbHBoYV8qIl0sWzAsMSwiXFxzaW1lcSIsMl0sWzksOCwiKFxcT21lZ2FcXHBpKV8qIl0sWzEsOCwiaF8qIiwyXSxbMCwzLCJcXHNpbWVxIl0sWzEsMiwiXFxzaW1lcSJdLFs5LDYsIlxcc2ltZXEiLDJdLFs4LDcsIlxcc2ltZXEiXSxbOCw1LCJcXHNpZ21hIiwyXSxbOSw0LCJcXHNpZ21hIl0sWzMsNiwiKFxcU2lnbWFcXGFscGhhKV8qIl0sWzIsNywiKFxcU2lnbWEgaClfKiIsMl0sWzMsNCwiXFxoYXRcXGFscGhhXyoiLDJdLFsyLDUsIlxcaGF0IGhfKiJdLFszLDIsIlxcc2ltZXEiLDJdLFs0LDUsIlxccGlfKiJdLFs3LDUsIlxcdmFyZXBzaWxvbl8qIl0sWzYsNCwiXFx2YXJlcHNpbG9uXyoiLDJdXQ==
+		\[\begin{tikzcd}
+			{H_{2n}(\mathbb{CP}^n)} &&& {H_{2n}(\Omega SU(n+1))} \\
+			&& {H_{2n+1}(\Sigma\Omega SU(n+1)} \\
+			& {H_{2n+1}(\Sigma\mathbb{CP}^n)} & {H_{2n+1}(SU(n+1))} \\
+			& {H_{2n+1}(\Sigma S^{2n})} & {H_{2n+1}(S^{2n+1})} \\
+			&& {H_{2n+1}(\Sigma\Omega S^{2n+1})} \\
+			{H_{2n}(S^{2n})} &&& {H_{2n}(\Omega S^{2n+1})}
+			\arrow["{\alpha_*}", from=1-1, to=1-4]
+			\arrow["\simeq", from=1-1, to=3-2]
+			\arrow["\simeq"', from=1-1, to=6-1]
+			\arrow["\simeq"', from=1-4, to=2-3]
+			\arrow["\sigma", from=1-4, to=3-3]
+			\arrow["{(\Omega\pi)_*}", from=1-4, to=6-4]
+			\arrow["{\varepsilon_*}"', from=2-3, to=3-3]
+			\arrow["{(\Sigma\alpha)_*}", from=3-2, to=2-3]
+			\arrow["{\hat\alpha_*}"', from=3-2, to=3-3]
+			\arrow["\simeq"', from=3-2, to=4-2]
+			\arrow["{\pi_*}", from=3-3, to=4-3]
+			\arrow["{\hat h_*}", from=4-2, to=4-3]
+			\arrow["{(\Sigma h)_*}"', from=4-2, to=5-3]
+			\arrow["{\varepsilon_*}", from=5-3, to=4-3]
+			\arrow["\simeq", from=6-1, to=4-2]
+			\arrow["{h_*}"', from=6-1, to=6-4]
+			\arrow["\sigma"', from=6-4, to=4-3]
+			\arrow["\simeq", from=6-4, to=5-3]
+		\end{tikzcd}\]
+		Now, the generator $\delta_n$ (in the top right corner) is mapped to the fundamental class in \\
+		$H_{2n+1}(S^{2n+1})$ under $\pi_*\sigma$ by definition, and so is $c_1^i\in H_{2n}(\mathbb{CP}^\infty)$ (in the top left corner). But the maps connecting the top left corner and $H_{2n+1}(S^{2n+1})$ is an isomorphism, hence we obtain the results. 
+	\end{proof}
+
+\section{The nilpotence theorem}
+
+	\begin{thm}\label{Nil_pot_thm}
+		Let $E$ be a ring spectrum, then we have the kernel of the map $h:\pi_*(E)\to MU_*(E)$ consisting of nilpotent elements. 
+	\end{thm}
+	\begin{coro}
+		Every element of positive degree in $\pi_*(S)$ is nilpotent. 
+	\end{coro}
+	
+	\begin{proof}
+		The proof of the theorem will have the following outline. We will first prove the case for $E$ a connective ring spectrum of finite type. To do this, we construct a sequence of spectra $X(n)$ with $X(1)=S$ and $X(\infty)=MU$, and $X(\infty)=\ilim X(n)$. Then, let $\alpha$ be an element in the kernel of $h$ of degree $d$. By definition $\alpha\in MU_*(X)=0$. 
+	\end{proof}
+
+	\subsection{Preliminary results}
+
+	\begin{lemma}\label{Nil_pot_equiv_acyc_loc}
+		For a ring spectrum $X$ and $x\in\pi_d(X)$, we let $x^{-1}X$ denote the colimit $\ilim(X\xrightarrow{x}\Sigma^{-d}X\xrightarrow{x}\Sigma^{-2d}X\to\cdots)$. Then for any ring spectrum $E$, we have $x^{-1}X$ is $E$-acyclic is equivalent to the image of $x$ is nilpotent in $E_d(X)$. 
+	\end{lemma}
+	\begin{proof}
+		$\implies$: Since $E\wedge x^{-1}X=0$, and the smash product commutes with colimits, we have $\ilim(E\wedge X\to\Sigma^{-d}E\wedge X\to\cdots)=0$. Then since $S$ is compact, $[S,-]$ commutes with filtered colimits, hence $\ilim(E_*(X)\to E_{*+d}(X)\to\cdots)=0$. This, however, is exactly the localization of $E_*(X)$ at the image of $x$. Hence the vanishing of the localization implies its nilpotency. \\
+		$\impliedby$: Essentially by reversing the above proof. 
+	\end{proof}
+
+
+
+	\subsection{The construction of $X(n)$ and $G_j$}
+
+	\begin{const}
+		We define $X(n)$ to be the Thom spectrum associated to the map \\
+		$\Omega SU(n)\to\Omega SU\simeq BU$, where the second map is since we have a fibration $SU(n)\to U(n)\to S^1$ inducing isomorphisms on homotopy groups of degree $>1$, hence by Bott periodicity, the second map is a homotopy equivalence. In this sense, $MU$ is the Thom spectra associated to the map $BU\to BU$, which can be regarded as the map $\Omega SU\to BU$. Clearly we have $\ilim X(n)\simeq MU$. 
+	\end{const}
+
+	\begin{lemma}
+		$X(n)$ and $MU$ are commutative ring spectra with $H_*(X(n);\mathbb{Z})\simeq\mathbb{Z}[t_1,\dots,t_{n-1}]$ and $H_*(MU;\mathbb{Z})\simeq\mathbb{Z}[t_1,t_2,\dots]$. 
+	\end{lemma}
+	\begin{proof}
+		Recall that from the stable Thom isomorphism, we have $H_*(X(n);\mathbb{Z})\simeq H_*(\Omega SU(n);\mathbb{Z})$, and from the calculation \cref{Homology_loopspace_SU_n}, we obtain the results immediately. Then $H_*(MU;\mathbb{Z})$ \\
+		$\simeq H_*(\Omega SU;\mathbb{Z})=\mathbb{Z}[t_1,t_2,\dots]$. 
+	\end{proof}
+
+	\begin{coro}\label{X_n_2n_1_conn}
+		The map $X(n)\to MU$ is $(2n-1)$-connected. 
+	\end{coro}
+	\begin{proof}
+		The map induces an isomorphism of homology groups until the $(2n-1)$-th degree. 
+	\end{proof}
+
+	\begin{defn}
+		For a based space $(X,*)$, we recall that the James construction of $X$ is defined as 
+		\[ JX=\coprod_{j=0}^\infty X^j/\thicksim \]
+		where $\thicksim$ is the equivalence relation $(x_1,\dots,x_{i-1},*,x_{i+1},\dots,x_j)\thicksim(x_1,\dots,x_{i-1},x_{i+1},\dots,x_j)$. Or equivalently, this is the (non-commutative) free topological monoid generated by $X$. We define $J_kX$ to be the $k$-th stage of this construction, that is, 
+		\[ J_kX=\coprod_{j=0}^k X^j/\thicksim \]
+	\end{defn}
+
+	Fundamental results on the James construction is the Dold-Thom theorem and the stable splitting. 
+	\begin{thm}\label{Dold_Thom}
+		We have a natural weak homotopy equivalence $\lambda:J(X)\to\Omega\Sigma X$ for $X$ a CW complex. 
+	\end{thm}
+	\begin{thm}\label{Stable_splitting}
+		For any connected CW complex $X$, we have 
+		\[ \Sigma J_kX=\bigvee_{j=0}^k\Sigma X^{\wedge j},\hspace{5em}\Sigma JX=\bigvee_{j=0}^\infty\Sigma X^{\wedge j} \]
+	\end{thm}
+
+	\begin{const}
+		Recall that we have a fibration $\Omega SU(n)\to\Omega SU(n+1)\to\Omega S^{2n+1}$. Then notice by \cref{Dold_Thom}, we have $\Omega S^{2n+1}\simeq JS^{2n}$. We define $B_k$ to be the pullback $\Omega SU(n)$-bundle 
+		% https://q.uiver.app/#q=WzAsNCxbMSwxLCJKIFNeezJufSJdLFsxLDAsIlxcT21lZ2EgU1UobisxKSJdLFswLDAsIkJfayJdLFswLDEsIkpfayBTXnsybn0iXSxbMywwXSxbMSwwXSxbMiwxXSxbMiwzXSxbMiwwLCIiLDEseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyLWludmVyc2UifX1dXQ==
+		\[\begin{tikzcd}
+			{B_k} & {\Omega SU(n+1)} \\
+			{J_k S^{2n}} & {J S^{2n}}
+			\arrow["{i_{-1,0}}", from=1-1, to=1-2]
+			\arrow[from=1-1, to=2-1]
+			\arrow["\ulcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+			\arrow[from=1-2, to=2-2]
+			\arrow[from=2-1, to=2-2]
+		\end{tikzcd}\]
+		Then, we let $F_k$ denote the Thom spectrum associated to the map $B_k\to\Omega SU(n+1)\to\Omega SU\simeq BU$. Finally we let $G_j$ (for the fixed prime $p$) to be $(F_{p^j-1})_{(p)}$. 
+	\end{const}
+
+	\begin{lemma}
+		Notice the filtration $J_0S^{2n}\to J_1S^{2n}\to\cdots\to JS^{2n}$ induces maps 
+		\[ \Omega SU(n)\simeq B_0\to B_1\to\cdots\to\Omega SU(n+1) \]
+		Passing to Thom spectra, we have maps
+		\[ X(n)\simeq F_0\to F_1\to\cdots\to X(n+1) \]
+		We claim that the spectra $F_k$ are $X(n)$-module spectra whose homology is a free $H_*(X(n);\mathbb{Z})$-module, regarded as a submodule of $H_*(X(n+1),\mathbb{Z})\simeq\mathbb{Z}[x_1,\dots,x_n]$ generated by $1,x_n,\dots,x_n^k$. 
+	\end{lemma}
+	\begin{proof}
+		We prove only the result in the topological space case, and use the Thom isomorphism to pass to the Thom spectra. Notice we have a fiber sequence 
+		\[ \Omega SU(n)\to B_k\to J_kS^{2n}\to SU(n) \]
+		Then we replace the last map $J_kS^{2n}\to SU(n)$ by a fibration $E\to SU(n)$ 
+		% https://q.uiver.app/#q=WzAsNCxbMCwxLCJKX2tTXnsybn0iXSxbMSwxLCJTVShuKSJdLFsxLDAsIlBTVShuKSJdLFswLDAsIkUiXSxbMywyXSxbMiwxXSxbMywwXSxbMCwxXSxbMywxLCIiLDEseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyLWludmVyc2UifX1dXQ==
+		\[\begin{tikzcd}
+			E & {PSU(n)} \\
+			{J_kS^{2n}} & {SU(n)}
+			\arrow[from=1-1, to=1-2]
+			\arrow[from=1-1, to=2-1]
+			\arrow["\ulcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+			\arrow[from=1-2, to=2-2]
+			\arrow[from=2-1, to=2-2]
+		\end{tikzcd}\]
+		Then the loopspace $\Omega SU(n)$ acts naturally on the fiber of this fibration $E\to SU(n)$, namely, $B_k$. This, after passing to Thom spectra, gives a natural action of $X(n)$ on $F_k$, which endows it with a $X(n)$-module structure. 
+		Then we consider the Leray-Serre spectral sequence associated to the fiber sequence $\Omega SU(n)\to B_k\to J_kS^{2n}$. By \cref{Stable_splitting}, we have 
+		\begin{align*}
+			&\widetilde{H}_*(J_kS^{2n}) \\
+			\simeq&\widetilde{H}_{*+1}(\Sigma J_kS^{2n}) \\
+			\simeq&\widetilde{H}_{*+1}(\bigvee_{j=0}^k\Sigma S^{2nj}) \\
+			\simeq&\bigoplus_{j=0}^k \widetilde{H}_*(S^{2nj})
+		\end{align*}
+		Thus we have $H_*(J_kS^{2n})$ is free of two generators of dimension $0$ and one generators of dimension $2i$ for $1\leq i\leq k$. The fiber has homology $\mathbb{Z}[\delta_1,\dots,\delta_n]$ by \cref{Homology_loopspace_SU_n}. Thus the Leray-Serre spectral sequence degenerates (since all terms are of even degrees), and gives the homology of $B_k$ as desired. 
+	\end{proof}
+
+
+	
+
+

@@ -1,0 +1,262 @@
+% 本文档编写于 2022 年 9 月 13 日，使用 TeXLive 2022 编译通过
+% 请使用不低于 2021 版的 TeXLive (在苹果系统上可以是 MacTeX) 编译此文档
+% 其它编译器不保证编译效果的正确性，不要使用早已过时并且存在许多 bug 的 CTeX 套装
+
+%==============================%
+%   清华大学求真书院讲义模板   %
+%   清华大学求真书院版权所有   %
+%==============================%
+
+\documentclass[oneside,11pt]{book}
+                               % UTF8 指定文件编码
+                               % oneside 指定书籍为单开页 (防止多余的空白页出现)
+\usepackage[a4paper,margin=1in]{geometry}
+                               % 设置纸张大小为 A4，页边距为1英寸
+
+\usepackage{amsmath}           % AMS 的主包
+\usepackage{amssymb}           % AMS 符号包，会自动加载 amsfonts
+\usepackage{latexsym}          % 几个额外的特殊符号，包括 \Box
+\usepackage{mathrsfs}          % \mathscr 字体样式
+\usepackage{eucal}             % 更改 \mathcal 的字体样式
+\usepackage{amsthm}            % AMS 的定理环境
+\usepackage{mathtools}         % 一些额外的数学环境功能，包括 \dfrac
+\usepackage{stmaryrd}          % 更更多的特殊符号
+\usepackage{esint}             % 更多积分符号
+\usepackage{extarrows}         % 提供在箭头上下写字的命令
+\usepackage{enumerate}         % 带序号列表环境
+\usepackage{xcolor}            % 让 latex 支持花里胡哨的颜色的包
+\usepackage{graphicx}          % 插入各种类型图片支持
+\usepackage{tikz}              % tikz 绘图环境
+\usepackage{tikz-3dplot}       % 一个简单的 tikz 3d 绘图宏包
+\usepackage{tikz-cd}           % 基于 tikz 的交换图表绘制工具
+\usepackage[all,cmtip]{xy}     % 交换图表绘制工具，命令为 \xymatrix
+\usepackage{pgfplots}          % 高级绘图包，基于 tikz，包括 2d 和 3d 绘图
+\pgfplotsset{compat=newest}    % 设置 pgfplots 兼容性选项，以使用新功能
+\usepackage{subcaption}        % 可以交叉引用的图表并排环境
+\usepackage[ocgcolorlinks,linkcolor=blue]{hyperref}
+                               % 更 fancy (如带颜色，可以点击等等) 的引用
+\usepackage{cleveref}          % 更“聪明”的引用，使用此宏包，在引用一个公式/定理等时
+                               % 请使用 \cref 而非 \ref
+\usepackage{hyperref}
+\usepackage[hyperref=true,backend=biber,style=alphabetic,backref=true,url=false]{biblatex}
+                               % 使用 biblatex 管理参考文献，后端采用 biber，取代
+                               % 古老的 natbib + bibtex，使用方法自行上网查阅
+                               % 如果需要用 natbib，请自行注释掉这一行然后正常使用
+\usepackage{tcolorbox}         % 绘制彩色文本框的宏包
+\tcbuselibrary{most}           % 加载 tcolorbox 的库
+\usepackage{bm}                % 为所有数学字体添加粗体，命令 \bm{abcd}
+\usepackage{slashed}           % 在符号上添加反划线，命令 \slashed
+\usepackage{quiver}
+\usepackage{spectralsequences}
+
+%==============================%
+%     请在这里添加其它宏包     %
+%------------------------------%
+
+% \usepackage{physics}         % 提供了方便地打出 d/dx 等符号的命令
+
+
+
+%==============================%
+
+\newcommand{\todo}[1]{\colorbox{red}{#1}}
+
+\newcommand{\from}{\leftarrow}
+\newcommand{\inj}{\hookrightarrow}
+\newcommand{\surj}{\twoheadrightarrow}
+\newcommand{\lto}{\longrightarrow}
+\newcommand{\adj}{\rightleftarrows}
+\newcommand{\nto}{\rightarrowtail}
+\newcommand{\ilim}{\varinjlim}
+\newcommand{\plim}{\varprojlim}
+\newcommand{\act}{\curvearrowright}
+
+\newcommand{\EE}{\mathbb{E}}
+
+\DeclareMathOperator{\Hom}{\mathrm{Hom}}
+\DeclareMathOperator{\Fun}{\mathrm{Fun}}
+\DeclareMathOperator{\End}{\mathrm{End}}
+\DeclareMathOperator{\Aut}{\mathrm{Aut}}
+\DeclareMathOperator{\Gal}{\mathrm{Gal}}
+\DeclareMathOperator{\Map}{\mathrm{Map}}
+\DeclareMathOperator{\Tor}{\mathrm{Tor}}
+\DeclareMathOperator{\Ext}{\mathrm{Ext}}
+\DeclareMathOperator{\fib}{\mathrm{fib}}
+\DeclareMathOperator{\cof}{\mathrm{cof}}
+\DeclareMathOperator{\tfib}{\mathrm{tfib}}
+\DeclareMathOperator{\tcof}{\mathrm{tcof}}
+\DeclareMathOperator{\rank}{\mathrm{rank}}
+\DeclareMathOperator{\Tr}{\mathrm{Tr}}
+\DeclareMathOperator{\img}{\mathrm{im}}
+\DeclareMathOperator{\LocSys}{\mathrm{LocSys}}
+\DeclareMathOperator{\Nm}{\mathrm{Nm}}
+\DeclareMathOperator{\Frob}{\mathrm{Frob}}
+\DeclareMathOperator{\Th}{\mathrm{Th}}
+\DeclareMathOperator{\Ch}{\mathrm{Ch}}
+\DeclareMathOperator{\id}{\mathrm{id}}
+\DeclareMathOperator{\op}{\mathrm{op}}
+\DeclareMathOperator{\im}{\mathrm{im}}
+\DeclareMathOperator{\Core}{\mathrm{Core}}
+\DeclareMathOperator{\Span}{\mathrm{Span}}
+\DeclareMathOperator{\St}{\mathrm{St}}
+\DeclareMathOperator{\TrFm}{\mathrm{TrFm}}
+\DeclareMathOperator{\FGL}{\mathrm{FGL}}
+\DeclareMathOperator{\Def}{\mathrm{Def}}
+\DeclareMathOperator{\Spec}{\mathrm{Spec}}
+\DeclareMathOperator{\Spf}{\mathrm{Spf}}
+\DeclareMathOperator{\Pt}{\mathrm{Pt}}
+\DeclareMathOperator{\gr}{\mathrm{gr}}
+\DeclareMathOperator{\Desc}{\mathrm{Desc}}
+\DeclareMathOperator{\Tot}{\mathrm{Tot}}
+\DeclareMathOperator{\tang}{\mathrm{T}}
+%\DeclareMathOperator{\der}{\mathrm{d}}
+\DeclareMathOperator{\dual}{\mathbb{D}}
+\DeclareMathOperator{\grp}{\mathrm{grp}}
+\DeclareMathOperator{\inv}{\mathrm{inv}}
+\DeclareMathOperator{\Pic}{\mathrm{Pic}}
+\DeclareMathOperator{\THH}{\mathrm{THH}}
+\DeclareMathOperator{\TC}{\mathrm{TC}}
+\DeclareMathOperator{\TP}{\mathrm{TP}}
+\DeclareMathOperator{\conn}{\mathrm{conn}}
+\DeclareMathOperator{\trun}{\mathrm{trun}}
+\DeclareMathOperator{\type}{\mathrm{type}}
+\DeclareMathOperator{\Exc}{\mathrm{Exc}}
+\DeclareMathOperator{\crs}{\mathrm{cr}}
+\DeclareMathOperator{\res}{\mathrm{res}}
+\DeclareMathOperator{\ind}{\mathrm{ind}}
+\DeclareMathOperator{\coind}{\mathrm{coind}}
+\DeclareMathOperator{\mBar}{\mathrm{Bar}}
+\DeclareMathOperator{\coBar}{\mathrm{coBar}}
+\DeclareMathOperator{\Lan}{\mathrm{Lan}}
+\DeclareMathOperator{\Ran}{\mathrm{Ran}}
+
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\der}{\mathrm{d}}
+
+\newcommand{\Aff}{\mathbf{Aff}}
+\newcommand{\Sch}{\mathbf{Sch}}
+\newcommand{\Ring}{\mathbf{Ring}}
+\newcommand{\Set}{\mathbf{Set}}
+\newcommand{\Sp}{\mathbf{Sp}}
+\newcommand{\Cat}{\mathbf{Cat}}
+\newcommand{\An}{\mathbf{An}}
+\newcommand{\Mon}{\mathrm{Mon}}
+\newcommand{\CMon}{\mathrm{CMon}}
+\newcommand{\Grp}{\mathrm{Grp}}
+\newcommand{\CGrp}{\mathrm{CGrp}}
+\newcommand{\Alg}{\mathrm{Alg}}
+\newcommand{\CAlg}{\mathrm{CAlg}}
+\newcommand{\Ab}{\mathbf{Ab}}
+\newcommand{\Sh}{\mathbf{Sh}}
+\newcommand{\Mod}{\mathbf{Mod}}
+\newcommand{\LMod}{\mathbf{LMod}}
+\newcommand{\RMod}{\mathbf{RMod}}
+\newcommand{\iGrpd}{\infty\mathbf{Grpd}}
+\newcommand{\QCoh}{\mathbf{QCoh}}
+\newcommand{\Ind}{\mathrm{Ind}}
+\newcommand{\Pro}{\mathrm{Pro}}
+\newcommand{\PrL}{\mathbf{Pr}^{\mathrm{L}}}
+\newcommand{\Fin}{\mathbf{Fin}}
+\newcommand{\co}{\mathrm{co}}
+
+%==============================%
+
+%==============================%
+%         定理环境设置         %
+%------------------------------%
+\theoremstyle{plain}\newtheorem{thm}{Theorem}
+\theoremstyle{definition}\newtheorem{defn}[thm]{Definition}
+\theoremstyle{definition}\newtheorem{fact}[thm]{Fact}
+\theoremstyle{plain}\newtheorem{axiom}[thm]{Axiom}
+\theoremstyle{plain}\newtheorem{coro}[thm]{Corollary}
+\theoremstyle{plain}\newtheorem{lemma}[thm]{Lemma}
+\theoremstyle{plain}\newtheorem{prop}[thm]{Proposition}
+\theoremstyle{plain}\newtheorem{conj}[thm]{Conjecture}
+\theoremstyle{plain}\newtheorem{ques}[thm]{Problem}
+\theoremstyle{definition}\newtheorem{const}[thm]{Construction}
+\theoremstyle{definition}\newtheorem{cond}[thm]{Condition}
+\theoremstyle{remark}\newtheorem{notation}[thm]{Notation}
+\theoremstyle{plain}\newtheorem{app}{Application}
+\theoremstyle{plain}\newtheorem{exam}{Example}
+\theoremstyle{plain}\newtheorem{exer}{Exercise}
+\theoremstyle{remark}\newtheorem{remark}{Remark}
+\theoremstyle{remark}\newtheorem*{note}{\small{Note}}
+\numberwithin{equation}{section}
+\numberwithin{thm}{section}
+%==============================%
+
+%==============================%
+%    定义标题图片和背景图片    %
+%------------------------------%
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancypagestyle{plain}{
+    \renewcommand{\headrulewidth}{0pt}
+    \fancyhead{}
+    \chead{\includegraphics[width=0.4\linewidth]{qiuzhen.png}}
+}
+\renewcommand{\headrulewidth}{0pt}
+\addtolength{\headheight}{0.025\paperheight}
+\addtolength{\topmargin}{-0.025\paperheight}
+\fancyhead{}
+\chead{\includegraphics[width=0.4\linewidth]{qiuzhen.png}}
+%------------------------------%
+% \usepackage{eso-pic}
+%\DeclareHookRule{shipout/background}{title/opac}{before}{pgfrcs}
+%\AddToHook{shipout/background}[title/opac]{
+%    \begin{tikzpicture}[remember picture,overlay]
+%        \centering
+%        \node [opacity=0.1] at (current page.center) {
+%            \includegraphics[height=0.2\paperheight]{redqiuzhen.png}
+%        };
+%    \end{tikzpicture}
+%}
+%==============================%
+
+%==============================%
+%  添加参考文献库 (.bib 文件)  %
+%  例 \addbibresource{XX.bib}  %
+%------------------------------%
+
+%\addbibresource{}
+
+%==============================%
+
+%==============================%
+% 定义封面样式，请将 XX 替换为 %
+% 具体的课程名和人名           %
+%------------------------------%
+\title{
+    \huge{Homotopy theory}
+    \vspace{0.4\paperheight}
+}
+\author{
+    \Large{Xiaoyang Chen}\\
+    \vspace{0.1\paperheight}
+}
+\date{
+    \Large{Qiuzhen College, Tsinghua University}\\
+    \Large{2024 Spring}
+}
+%==============================%
+
+\begin{document}
+\maketitle
+\frontmatter
+\tableofcontents
+\newpage
+
+%==============================%
+%           正文内容           %
+%---------------------------------------------------------------------------------
+\mainmatter{}
+
+\input{Characteristic_classes}
+% To do: finish off cobordism and genus. 
+\input{Basic_stable_homotopy}
+% To do: almost everything. 
+\input{Chromatic_homotopy}
+\input{K_theory}
+\input{Unstable_chromatic_homotopy}
+\input{Ambidexterity}
+\end{document}
