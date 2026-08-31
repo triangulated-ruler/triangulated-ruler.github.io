@@ -14,8 +14,8 @@
 #let your-name = "Xiaoyang Chen"
 // Use "Ph.D. Candidate" only if your university formally uses that title,
 // usually after you have passed the relevant candidacy examination.
-#let academic-title = "Ph.D. Student in Mathematics"
-#let institution = "Tsinghua university"
+#let academic-title = "Incoming Ph.D. Student in Mathematics"
+#let institution = "Tsinghua University"
 #let email = "chensean229@gmail.com"
 #let website = "https://triangulated-ruler.github.io"
 #let github = "https://github.com/triangulated-ruler"
@@ -89,6 +89,7 @@
     breakable: false,
     spacing: 0pt,
     [
+	  #v(0.3em)
       #grid(
         columns: (1fr, auto),
         column-gutter: 1em,
@@ -98,7 +99,7 @@
 	  #v(-0.5em)
       #text(size: 9.6pt, style: "italic", fill: muted, organization)
       #if details != none {
-        pad(top: -0.5em, left: 0.55em, details)
+        pad(top: -0.3em, left: 0.55em, details)
       }
       #v(1.5em)
     ],
@@ -135,15 +136,30 @@
 
 #cv-entry(
   [Incoming Ph.D. in Mathematics (expected 2031)],
-  [Qiuzhen college, Tsinghua university, Beijing, China],
+  [Qiuzhen College, Tsinghua University, Beijing, China],
   [Starting September 2026],
   details: [Expected advisor: Prof. Penghui Li. Intended research area: Geometric representation theory.],
 )
 
 #cv-entry(
   [B.Sc. in Mathematics],
-  [Qiuzhen college, Tsinghua university, Beijing, China],
+  [Qiuzhen College, Tsinghua University, Beijing, China],
   [2023–2026],
+)
+
+// ----------------------- Awards and support -----------------------
+#cv-section[Fellowships, Scholarships, and Awards]
+
+#cv-entry(
+  [Outstanding undergraduate thesis award],
+  [Qiuzhen College, Tsinghua University],
+  [June 2026],
+)
+
+#cv-entry(
+  [Fellowship 2024 of Tsinghua University], 
+  [Qiuzhen College, Tsinghua University], 
+  [2024]
 )
 
 // ----------------------- Research interests ----------------------
@@ -156,9 +172,9 @@ Geometric representation theory; geometric Langlands; graded sheaves; derived al
 
 #cv-entry(
   [Undergraduate Thesis — "Langlands duality of affine Hecke categories"],
-  [Qiuzhen college, Tsinghua university],
+  [Qiuzhen College, Tsinghua University],
   [2025–2026],
-  details: [Advisor: Prof. Penghui Li. The paper gives a graded lift of the Bezrukavnikov-Arkhipov equivalence. ],
+  details: [Advisor: Prof. Penghui Li. The paper gives a graded lift of the Bezrukavnikov-Arkhipov equivalence. The paper is available on my website. ],
 )
 
 /*
@@ -184,7 +200,7 @@ Geometric representation theory; geometric Langlands; graded sheaves; derived al
   [The geometric Satake equivalence], 
   [], 
   [December 2025], 
-  details: [co-speakers: Mingyu Bai, Kun Zheng]
+  details: [Joint presentation with: Mingyu Bai, Kun Zheng]
 )
 
 #cv-entry(
@@ -202,9 +218,16 @@ Geometric representation theory; geometric Langlands; graded sheaves; derived al
 #cv-entry(
   [Galois extensions of structured ring spectra and Goerss--Hopkins theory],
   [],
-  [Month 2025], 
-  details: [\ The notes of these talks are on my website]
+  [May 2025], 
+  details: [\ The notes of these talks are also available on my website. ]
 )
+
+#pagebreak()
+
+#align(right, text(size: 8pt, fill: muted)[
+  Xiaoyang Chen — Curriculum Vitae
+])
+
 /*
 // ---------------------------- Teaching ---------------------------
 #cv-section[Teaching Experience]
@@ -231,53 +254,35 @@ Geometric representation theory; geometric Langlands; graded sheaves; derived al
 
 #cv-entry(
   [International Workshop on Algebraic Topology 2026 (IWoAT 2026)],
-  [Peking university, Beijing],
+  [Peking University, Beijing],
   [August 2026],
-  details: [participant],
 )
 
 #cv-entry(
 	[International Congress of Mathematicians 2026 (ICM 2026)], 
-	[IMU, Philadelphia], 
+	[IMU, Pennsylvania Convention Center, Philadelphia, USA], 
 	[July 2026], 
-	details: [participant], 
 )
 
 #cv-entry(
 	[International Congress of Chinese Mathematicians 2025 (ICCM 2025)], 
 	[SIMIS, Shanghai], 
 	[January, 2026], 
-	details: [participant], 
 )
 
 #cv-entry(
 	[Beijing--Shanghai Summer School in Mathematics 2025],
 	[SIMIS, Shanghai],
-	[July 2025],
-	details: [participant, the topic of this conference is the geometric Langlands program],
+	[June-July 2025],
+	details: [The course topic contains various aspects of the geometric Langlands programs],
 )
 
 #cv-entry(
 	[International Congress of Basic Science], 
 	[BIMSA, Beijing], 
 	[July 2023, July 2024, July 2025, August 2026], 
-	details: [participant], 
 )
 
-// ----------------------- Awards and support -----------------------
-#cv-section[Fellowships, Scholarships, and Awards]
-
-#cv-entry(
-  [Undergraduate thesis award],
-  [Qiuzhen College, Tsinghua university],
-  [June 2026],
-)
-
-#cv-entry(
-  [Fellowship 2024], 
-  [Qiuzhen College, Tsinghua university], 
-  [2024]
-)
 
 /*
 // ---------------------------- Service ----------------------------
