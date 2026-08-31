@@ -43,7 +43,7 @@
 )
 
 #set text(
-  font: ("Libertinus Serif", "New Computer Modern", "Noto Serif"),
+  font: ("Libertinus Serif", "New Computer Modern", "Noto Serif SC"), 
   size: 10pt,
   lang: "en",
 )
