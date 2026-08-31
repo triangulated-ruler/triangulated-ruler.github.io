@@ -1,7 +1,0 @@
-[package]
-name = "void-template"
-version = "1.0.0"
-entrypoint = "void-import.typ"
-authors = ["Void"]
-license = ""
-description = "A template for mathwork writing."
