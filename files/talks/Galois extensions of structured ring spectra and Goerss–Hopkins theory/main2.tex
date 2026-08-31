@@ -1,0 +1,771 @@
+\documentclass{beamer}
+
+\usepackage{amsmath}           % AMS 的主包
+\usepackage{amssymb}           % AMS 符号包，会自动加载 amsfonts
+\usepackage{latexsym}          % 几个额外的特殊符号，包括 \Box
+\usepackage{mathrsfs}          % \mathscr 字体样式
+\usepackage{eucal}             % 更改 \mathcal 的字体样式
+\usepackage{amsthm}            % AMS 的定理环境
+\usepackage{mathtools}         % 一些额外的数学环境功能，包括 \dfrac
+\usepackage{stmaryrd}          % 更更多的特殊符号
+\usepackage{esint}             % 更多积分符号
+\usepackage{extarrows}         % 提供在箭头上下写字的命令
+\usepackage{enumerate}         % 带序号列表环境
+\usepackage{xcolor}            % 让 latex 支持花里胡哨的颜色的包
+\usepackage{graphicx}          % 插入各种类型图片支持
+\usepackage{tikz}              % tikz 绘图环境
+\usepackage{tikz-3dplot}       % 一个简单的 tikz 3d 绘图宏包
+\usepackage{tikz-cd}           % 基于 tikz 的交换图表绘制工具
+\usepackage[all,cmtip]{xy}     % 交换图表绘制工具，命令为 \xymatrix
+\usepackage{pgfplots}          % 高级绘图包，基于 tikz，包括 2d 和 3d 绘图
+\pgfplotsset{compat=newest}    % 设置 pgfplots 兼容性选项，以使用新功能
+\usepackage{subcaption}        % 可以交叉引用的图表并排环境
+\usepackage{tcolorbox}         % 绘制彩色文本框的宏包
+\tcbuselibrary{most}           % 加载 tcolorbox 的库
+\usepackage{bm}                % 为所有数学字体添加粗体，命令 \bm{abcd}
+\usepackage{slashed}           % 在符号上添加反划线，命令 \slashed
+\usepackage{quiver}
+
+\newcommand{\ilim}{\varinjlim}
+\newcommand{\plim}{\varprojlim}
+\newcommand{\from}{\leftarrow}
+\newcommand{\lto}{\longrightarrow}
+\newcommand{\inj}{\hookrightarrow}
+\newcommand{\surj}{\twoheadrightarrow}
+\newcommand{\lact}{\curvearrowright}
+\newcommand{\ract}{\curvearrowleft}
+
+\newcommand{\grp}{\mathrm{grp}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\Map}{\mathrm{Map}}
+\newcommand{\Fun}{\mathrm{Fun}}
+\newcommand{\Tor}{\mathrm{Tor}}
+\newcommand{\Ext}{\mathrm{Ext}}
+
+\newcommand{\CMon}{\mathrm{CMon}}
+\newcommand{\CGrp}{\mathrm{CGrp}}
+\newcommand{\Th}{\mathrm{Th}}
+\newcommand{\Spec}{\mathrm{Spec}}
+\newcommand{\ad}{\mathrm{ad}}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\tr}{\mathrm{tr}}
+\newcommand{\disc}{\mathrm{disc}}
+\newcommand{\Sect}{\mathrm{Sect}}
+\newcommand{\Sh}{\mathrm{Sh}}
+\newcommand{\THH}{\mathrm{THH}}
+
+\newcommand{\Fin}{\mathrm{Fin}}
+\newcommand{\Cat}{\mathbf{Cat}}
+\newcommand{\Sp}{\mathbf{Sp}}
+\newcommand{\Seq}{\mathrm{Seq}}
+\newcommand{\Mod}{\mathbf{Mod}}
+\newcommand{\Comod}{\mathbf{Comod}}
+\newcommand{\Alg}{\mathbf{Alg}}
+\newcommand{\CAlg}{\mathbf{CAlg}}
+\newcommand{\Ring}{\mathbf{Ring}}
+\newcommand{\Syn}{\mathbf{Syn}}
+
+\AtBeginSection[]{
+  \begin{frame}
+  \vfill
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+  \end{beamercolorbox}
+  \vfill
+  \end{frame}
+}
+
+\usefonttheme{professionalfonts}
+\title{Galois Extensions of Structured Ring Spectra}
+\author{Xiaoyang Chen}
+\date{2024.12.4}
+\usetheme{Madrid}
+
+
+
+\begin{document}
+
+\begin{frame}
+	\maketitle
+\end{frame}
+
+\begin{frame}
+	\tableofcontents
+\end{frame}
+
+\begin{frame}
+	\begin{alertblock}{Conventions}
+		The $\Hom$ of an $\infty$-category will always be a space, while $\Map$ will always mean a the mapping spectra of a stable category, with some module structure equipped if necessary. Moreover, colimits and limits are always homotopy colimits and limits. \\
+		$S$ is the sphere spectrum. 
+	\end{alertblock}
+\end{frame}
+
+\section{Conditions on topological groups}
+
+\begin{frame}
+	\begin{block}{Definition}
+		Recall that for a spectrum $X$, its dual is defined to be $\Map(X,S)$, where $S$ is the sphere spectrum. 
+		We define a topological group $G$ to be stably dualizable if its suspension spectrum $S[G]:=\Sigma^\infty_+G$ is dualizable. We denote for simplicity its dual to be $DG_+$. 
+	\end{block}
+	\begin{block}{Recall}
+		Recall for a ring spectrum $R$, a right $R$-module $A$ and a left $R$-module $B$, $A\otimes_RB$ as
+		% https://q.uiver.app/#q=WzAsMyxbMCwwLCJBXFxvdGltZXMgQiJdLFsxLDAsIkFcXG90aW1lcyBSXFxvdGltZXMgQiJdLFsyLDAsIlxcY2RvdHMiXSxbMCwxXSxbMSwwLCIiLDAseyJvZmZzZXQiOi0yfV0sWzEsMCwiIiwxLHsib2Zmc2V0IjoyfV1d
+		\[ \ilim(\begin{tikzcd}[ampersand replacement=\&, column sep=small]
+			{A\otimes B} \& {A\otimes R\otimes B} \& \cdots
+			\arrow[from=1-1, to=1-2]
+			\arrow[shift left=2, from=1-2, to=1-1]
+			\arrow[shift right=2, from=1-2, to=1-1]
+		\end{tikzcd}) \]
+		and for a left $R$-module $A$ and a left $R$-module $B$, $\Hom_R(A,B)$ is
+		% https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXE1hcChBLEIpIl0sWzEsMCwiXFxNYXAoQVxcb3RpbWVzIFIsQikiXSxbMiwwLCJcXE1hcChBXFxvdGltZXMgUlxcb3RpbWVzIFIsQikiXSxbMCwxLCIiLDEseyJvZmZzZXQiOjJ9XSxbMCwxLCIiLDEseyJvZmZzZXQiOi0yfV0sWzEsMF0sWzEsMiwiXFxjZG90cyIsMSx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6Im5vbmUifSwiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dXQ==
+		\[ \plim(\begin{tikzcd}[ampersand replacement=\&, column sep=small]
+			{\Map(A,B)} \& {\Map(A\otimes R,B)} \& {\Map(A\otimes R\otimes R,B)}
+			\arrow[shift right=2, from=1-1, to=1-2]
+			\arrow[shift left=2, from=1-1, to=1-2]
+			\arrow[from=1-2, to=1-1]
+			\arrow["\cdots"{description}, draw=none, from=1-2, to=1-3]
+		\end{tikzcd}) \]
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Proposition}
+		$S[G]$ admits a ring spectrum structure, and for a spectrum $X$, a left $S[G]$-module structure on $X$ is equivalent to a left $G$-action on $X$, and if we equip $S$ with the trivial bimodule structure, we have $S\otimes_{S[G]}X=X_{hLG}$, and $\Map_{LS[G]}(S,X)=X^{hLG}$. We have a similar theorem for right $S[G]$-module structures on $X$. Likewise, we define for an $\mathbb{E}_\infty$-ring spectrum $A$, the group algebra $A[G]=A\otimes S[G]$. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{proof}
+		The ring spectrum structure of $S[G]$ comes from the property that $\Sigma_+^\infty$ is symmetric monoidal, allowing us to inherit a ring structure from the group structure of $G$. \\
+		Then, given a $S[G]$-module structure on $X$, the $g\in G$ acts on $X$ by the map $X\otimes S\inj X\otimes S[G]\to X$, where $S\inj S[G]$ is given by the inclusion $\{g\}\inj G$, and the second morphism the structure map of the module. \\
+		Therefore we have equivalences of categories $\Fun(BG,\Sp)\simeq {_{S[G]}}\Mod$. 
+	\end{block}
+\end{frame}
+\begin{frame}
+	\begin{block}{proof (continued)}
+		Then, notice that given a spectrum $X$, the trivial $G$-action on $X$ is given by the module structure $S[G]\otimes X\to X$ given by the projection of all elements of $G$ to a point. In particular, the trivial action of $G$ on $S$ is given this way. We conclude that this functor is equivalent to associating a spectrum $X$ the constant $X$-valued $BG$-diagram in $\Sp$. Moreover, We see that $S\otimes_{S[G]}X$ and $\Map_{LS[G]}(S,X)$ are by definition the left adjoint and right adjoint of the inclusion via trivial modules. By the uniqueness of the left and right adjoint, we see that $S\otimes_{S[G]}X=X_{hLG}$ and $\Map_{LS[G]}(S,X)=X^{hLG}$. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Corollary}
+		$DG_+$ admit a right $G$-action, with the right $S[G]$-module sturcture given by the dual of the left $S[G]$-module structure on $S[G]$, explicitly given by the following 
+		\begin{align*}
+			&\Hom_{\Sp}(\Map_{\Sp}(S[G],S)\otimes S[G],\Map_{\Sp}(S[G],S)) \\
+			\simeq&\Hom_{\Sp}(\Map_{\Sp}(S[G],S)\otimes S[G]\otimes S[G],S)
+		\end{align*}
+		and the map is the preimage of 
+		\[ \Map_{\Sp}(S[G],S)\otimes (S[G]\otimes S[G])\to\Map_{\Sp}(S[G],S)\otimes S[G]\to S \] 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Definition}
+		Notice that $S[G]$ admits a Hopf algebra structure with coalgebra structure given by the diagonal map $\Delta:G\to G\times G$, the counit given by the map collapsing $G$ to a point, and the conjugation given by the inverse map $i:G\to G$. 
+	\end{block}
+	\begin{block}{Definition}
+		For a stable dualizable group, we define the dualizing spectrum $S^{\ad G}=S[G]^{hRG}$, where $S[G]$ is regarded as a right $G$-module. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Theorem}
+		We have $DG_+\otimes S^{\ad G}\simeq S[G]$. 
+	\end{block}
+	\begin{block}{proof}
+		We consider the shear map given by 
+		\[ DG_+\otimes S[G]\xrightarrow{\id\otimes\Delta} DG_+\otimes S[G]\otimes S[G]\xrightarrow{m\otimes\id} DG_+\otimes S[G] \]
+		We claim that this map has an inverse given by 
+		\begin{align*}
+			&DG_+\otimes S[G]\xrightarrow{\id\otimes\Delta} DG_+\otimes S[G]\otimes S[G] \\
+			\xrightarrow{\id\otimes i\otimes\id}&DG_+\otimes S[G]\otimes S[G]\xrightarrow{m\otimes\id} DG_+\otimes S[G]
+		\end{align*}
+		where the middle map is induced by the inverse map on the middle $S[G]$-factor. 
+	\end{block}
+\end{frame}
+\begin{frame}
+	\begin{block}{proof (continued)}
+		Then, notice that if we take a right $G$-action on the left given by the right $G$-action on $S[G]$, the shear map takes this $G$-action to the standard right $G$-actions. Thus taking homotopy fixed points on both sides, we obtain on the left $(DG_+\otimes S[G])^{hRG}\simeq DG_+\otimes S^{\ad G}$, and on the right we have 
+		\begin{align*}
+			&(DG_+\otimes S[G])^{hRG} \\
+			\simeq&\Map_{\Sp}(S[G],S[G])^{hRG} \\
+			\simeq&\Map_RG(S,\Map_{\Sp}(S[G],S[G])) \\
+			\simeq&\Map_RG(S[G],S[G]) \\
+			\simeq&S[G]
+		\end{align*}
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Corollary}
+		Dually we define $S^{-\ad G}=(DG_+)_{hLG}$. Moreover, we have $S[G]\otimes S^{-\ad G}\simeq DG_+$. 
+	\end{block}
+	\begin{block}{Corollary}
+		This implies $S^{\ad G}\otimes S^{-\ad G}\simeq S$. 
+	\end{block}
+	\begin{block}{proof}
+		From the above we deduce that $S[G]\otimes S^{\ad G}\otimes S^{-\ad G}\simeq S[G]$. Then by shearing the $G$ actions on both sides to only acting on $S[G]$ if necessary, taking $G$-homotopy orbits on both sides we obtain the result. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Theorem}
+		For $X$ a left $G$-module, this map induces the norm map $N:(X\otimes S^{\ad G})_{hLG}\to X^{hLG}$. As a result, we may define the Tate construction $X^{tG}$ to be the cofiber of the norm map. 
+	\end{block}
+	\begin{block}{proof}
+		Consider the limit-colimit exchange map 
+		\[ \kappa:((X\otimes S[G])^{hRG})_{hLG}\to((X\otimes S[G])_{hLG})^{hRG} \]
+		where $X\otimes S[G]$ is equipped with the right action acting only on $S[G]$, and the left action acting diagonally. 
+	\end{block}
+\end{frame}
+\begin{frame}
+	\begin{block}{Lemma}
+		We have $(S[G]\otimes X)^{tG}\simeq*$. 
+	\end{block}
+	\begin{block}{proof}
+		Notice the source of the norm map can be identified with $(S[G]\otimes X\otimes S^{\ad G})_{hLG}\simeq X\otimes S^{\ad G}$, since we may always shear the $G$-action on the left to the action only on $S[G]$. Then on the right we have 
+		\begin{align*}
+			&(S[G]\otimes X)^{hRG}\simeq(DG_+\otimes S^{\ad G}\otimes W)^{hRG} \\
+			\simeq&\Map(S[G],W\otimes S^{\ad G})^{hRG}\simeq W\otimes S^{\ad G}
+		\end{align*}
+		Then we obtain the result. 
+	\end{block}
+\end{frame}
+
+\section{Definitions and examples}
+
+\begin{frame}
+	\begin{block}{Definition}
+		Let $A\to B$ be a map of $\mathbb{E}_\infty$ ring spectra, and let $G$ be a stably dualizable group acting on the left $B$ through $\mathbb{E}_\infty$ $A$-algebras (this basically implies that $A\to B$ is also a map of left $G$-modules). We say that this is a $G$-Galois extension if we have $A\to B^{hG}$ is an equivalence, and $h:B\otimes_AB\to\Map(S[G],B)$ is an equivalence, where this second map is obtained from the dual $B\otimes_AB\otimes S[G]\to B\otimes_AB\to B$. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Lemma}
+		For any $\mathbb{E}_\infty$-ring spectrum $A$ with $G$ stably dualizable, the map \\
+		$A\to\Map(S[G],A)$ is a $G$-Galois extension. The map $A\to\Map(S[G],A)$ is the dual of the collapse map mapping $G$ to $*$. 
+	\end{block}
+	\begin{block}{Theorem}
+		Recall that the Adams operation $\psi^{-1}:KU\to KU$ is the operation sending a vector bundle to its complex conjugate, and $(\psi^{-1})^2=\id$. Then let $c:KO\to KU$ be the complexification, then we have $c$ and $\psi^{-1}$ exhibits $KU$ as a $C_2$-Galois extension of $KO$. 
+	\end{block}
+\end{frame}
+
+\section{Dualizability and faithfulness}
+
+\begin{frame}
+	\begin{block}{Definition}
+		Recall for $A$ an $\mathbb{E}_\infty$-algebra, an $A$-module $M$ is faithful if for any other $A$-module $N$ we have $M\otimes_AN=0\implies N=0$. We say an $A$-algebra $B$ is faithful over $A$ if it is faithful as an $A$-module. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Lemma}
+		Let $A\to B$ be a map of $\mathbb{E}_\infty$-algebras, and $M$ a faithful $A$-module, we have the following. 
+		\begin{enumerate}
+			\item A map of $A$-modules $X\to Y$ is a weak equivalence iff $M\otimes X\to M\otimes Y$ is a weak equivalence. 
+			\item $B\otimes_AM$ is a faithful $B$-module. 
+			\item If $A\to B$ is moreover faithful, and for some $A$-module $N$ we have $B\otimes_AN$ is a faithful $B$-module we have $N$ is a faithful $A$-module. 
+		\end{enumerate}
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Lemma}
+		Let $A\to B$ be a map of $\mathbb{E}_\infty$-algebras, and $M$ an $A$-module. Then we have the following. 
+		\begin{enumerate}
+			\item If $M$ is dualizable as an $A$-module, then $B\otimes_AM$ is a dualizable $B$-module. 
+			\item If $A\to B$ is faithful, $B$ dualizable over $A$, and $M\otimes_AB$ is a dualizable $B$-module, then $M$ is a dualizable $A$-module. 
+		\end{enumerate}
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Lemma}
+		Let $A\to B$ be a map of $\mathbb{E}_\infty$-ring spectra, and let $G$ be a stably dualizable group acting on $B$ through $A$-algebra homomorphisms. Then if $M$ is a dualizable $A$-module, then the canonical map $M\otimes_AB^{hG}\simeq(M\otimes_AB)^{hG}$ is an equivalence. 
+	\end{block}
+	\begin{block}{proof}
+		Notice that the left hand side could be identified with $\Map(D_AM,B^{hG})$, while the right hand side could be identified with $\Map_A(D_AM,B)^{hG}$, and we may simply use the fact that taking limits commutes with the second factor of $\Map$. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Proposition}
+		Let $A$ and $B$ be $\mathbb{E}_\infty$ ring spectra, and $B$ be a $G$-Galois extension of $A$, then we have 
+		\begin{enumerate}
+			\item For each $B$-module $M$ a natural equivalence 
+			\[ h_M:M\otimes_AB\to\Map_{\Sp}(S[G],M) \]
+			\item For each $B$-module $M$ a natural equivalence 
+			\[ j_M:M\otimes S[G]\to\Map_A(B,M) \]
+		\end{enumerate}
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Proposition}
+		Let $A\to B$ be a $G$-Galois extension, then $B$ is a dualizable $A$-module. 
+	\end{block}
+	\begin{block}{proof}
+		We show the map $\Map_A(B,A)\otimes B\to\Map_A(B,B)$ is an equivalence. Note that this is the top map in the following diagram, with the second $B$ on the left and the right acually replaced by arbitrary $A$-modules. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{proof (continued)}
+		% https://q.uiver.app/#q=WzAsMTAsWzAsMCwiTVxcb3RpbWVzX0FcXE1hcF9BKEIsQSkiXSxbMSwwLCJcXE1hcF9BKEIsTVxcb3RpbWVzX0FBKSJdLFswLDEsIk1cXG90aW1lc19BXFxNYXBfQShCLEJee2hMR30pIl0sWzEsMSwiXFxNYXBfQShCLE1cXG90aW1lc19BQl57aExHfSkgIl0sWzAsMiwiTVxcb3RpbWVzX0FcXE1hcChCLEIpXntoTEd9Il0sWzEsMiwiXFxNYXBfQShCLE1cXG90aW1lc19BQilee2hMR30iXSxbMCwzLCJNXFxvdGltZXNfQShCXFxvdGltZXMgU1tHXSlee2hMR30iXSxbMSwzLCIoTVxcb3RpbWVzX0FCXFxvdGltZXMgU1tHXSlee2hMR30iXSxbMCw0LCJNXFxvdGltZXNfQShCXFxvdGltZXMgU1tHXVxcb3RpbWVzIFNee1xcYWQgR30pX3toUkd9Il0sWzEsNCwiKE1cXG90aW1lc19BQlxcb3RpbWVzIFNbR11cXG90aW1lcyBTXntcXGFkIEd9KV97aFJHfSJdLFswLDJdLFsyLDRdLFs2LDRdLFs4LDZdLFsxLDNdLFszLDVdLFs3LDVdLFs5LDddLFs4LDldLFs2LDddLFs0LDVdLFsyLDNdLFswLDFdXQ==
+		\[\begin{tikzcd}[ampersand replacement=\&, column sep=tiny]
+			{M\otimes_A\Map_A(B,A)} \& {\Map_A(B,M\otimes_AA)} \\
+			{M\otimes_A\Map_A(B,B^{hLG})} \& {\Map_A(B,M\otimes_AB^{hLG}) } \\
+			{M\otimes_A\Map(B,B)^{hLG}} \& {\Map_A(B,M\otimes_AB)^{hLG}} \\
+			{M\otimes_A(B\otimes S[G])^{hLG}} \& {(M\otimes_AB\otimes S[G])^{hLG}} \\
+			{M\otimes_A(B\otimes S[G]\otimes S^{\ad G})_{hRG}} \& {(M\otimes_AB\otimes S[G]\otimes S^{\ad G})_{hRG}}
+			\arrow[from=1-1, to=1-2]
+			\arrow[from=1-1, to=2-1]
+			\arrow[from=1-2, to=2-2]
+			\arrow[from=2-1, to=2-2]
+			\arrow[from=2-1, to=3-1]
+			\arrow[from=2-2, to=3-2]
+			\arrow[from=3-1, to=3-2]
+			\arrow[from=4-1, to=3-1]
+			\arrow[from=4-1, to=4-2]
+			\arrow[from=4-2, to=3-2]
+			\arrow[from=5-1, to=4-1]
+			\arrow[from=5-1, to=5-2]
+			\arrow[from=5-2, to=4-2]
+		\end{tikzcd}\]
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Proposition}
+		A $G$-Galois extension $A\to B$ is faithful iff the norm map $N:(B\otimes S^{\ad G})_{hG}\to B^{hG}$ is an equivalence. 
+	\end{block}
+	\begin{block}{proof}
+		If the norm map is an equivalence, and $M$ is an $A$-module such that $M\otimes_AB\simeq*$, then we have the following. 
+		\begin{align*}
+			&M\simeq M\otimes_AA\simeq M\otimes_AB^{hG}\simeq M\otimes_A(B\otimes S^{\ad G})_{hG} \\
+			\simeq&(M\otimes_A\otimes_B\otimes S^{\ad G})_{hG}\simeq* 
+		\end{align*}
+		Thus $A\to B$ is faithful. 
+	\end{block}
+\end{frame}
+\begin{frame}
+	\begin{block}{proof (continued)}
+		For the converse, it suffices to prove $B\otimes_A(B\otimes S^{\ad G})_{hG}\to B\otimes_AB^{hG}$ is an equivalence. To prove this, consider the diagram 
+		% https://q.uiver.app/#q=WzAsNixbMCwwLCJCXFxvdGltZXNfQShCXFxvdGltZXMgU157XFxhZCBHfSlfe2hMR30iXSxbMSwwLCJCXFxvdGltZXNfQUJee2hSR30iXSxbMSwxLCIoQlxcb3RpbWVzX0FCKV57aFJHfSJdLFswLDEsIihCXFxvdGltZXNfQUJcXG90aW1lcyBTXntcXGFkIEd9KV97aExHfSJdLFsxLDIsIlxcTWFwKFNbR10sQilee2hSR30iXSxbMCwyLCIoXFxNYXAoU1tHXSxCKVxcb3RpbWVzIFNee1xcYWQgR30pX3toTEd9Il0sWzAsM10sWzMsNV0sWzEsMl0sWzIsNF0sWzUsNF0sWzMsMl0sWzAsMV1d
+		\[\begin{tikzcd}[ampersand replacement=\&,row sep=tiny]
+			{B\otimes_A(B\otimes S^{\ad G})_{hLG}} \& {B\otimes_AB^{hRG}} \\
+			{(B\otimes_AB\otimes S^{\ad G})_{hLG}} \& {(B\otimes_AB)^{hRG}} \\
+			{(\Map(S[G],B)\otimes S^{\ad G})_{hLG}} \& {\Map(S[G],B)^{hRG}}
+			\arrow[from=1-1, to=1-2]
+			\arrow[from=1-1, to=2-1]
+			\arrow[from=1-2, to=2-2]
+			\arrow[from=2-1, to=2-2]
+			\arrow[from=2-1, to=3-1]
+			\arrow[from=2-2, to=3-2]
+			\arrow[from=3-1, to=3-2]
+		\end{tikzcd}\]
+		Notice that all the vertical maps are equivalences by preceding lemmas or definitions, and the bottom horizontal map is an equivalence by a dual argument of the fact that the norm map is an equivalence on free $G$-modules. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Proposition}
+		Let $A\to B$ be a map of $\mathbb{E}_\infty$ ring spectra, and let $G$ be a stably dualizable group acting on $B$ through $A$-algebra maps. Then $A\to B$ is a faithful $G$-Galois extension iff $B\otimes_AB\to\Map(S[G],B)$ is an equivalence and $B$ is faithful and dualizable over $A$. 
+	\end{block}
+	\begin{block}{proof}
+		$\implies$ is obvious, and we prove $\impliedby$. We show $A\to B^{hG}$ hence $B\to B\otimes_AB^{hG}$ is an equivalence. But we have $B\simeq\Map(S[G],B)^{hG}\simeq(B\otimes_AB)^{hG}\simeq B\otimes_AB^{hG}$ where the last map is again by the dualizability of $B$. 
+	\end{block}
+	\begin{block}{Proposition}
+		Let $A\to B$ be a $G$-Galois extension with $G$ an $\mathbb{E}_\infty$ group. Then $B$ is smash invertible as an $A[G]$-module iff $A\to B$ is faithful. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Lemma}
+		Let $A\to B$ be a map of $\mathbb{E}_\infty$ ring spectra, and let $A\to C$ be a $G$-Galois extension. Then we have the following. 
+		\begin{enumerate}
+			\item If $A\to C$ is faithful, then $B\to B\otimes_AC$ is a faithful $G$-Galois extension. 
+			\item If $B$ is dualizable over $A$, then $B\to B\otimes_AC$ is a $G$-Galois extension. 
+		\end{enumerate}
+	\end{block}
+	\begin{block}{Lemma}
+		Let $A\to B$ and $A\to C$ be maps of $\mathbb{E}_\infty$ ring spectrum, and suppose $B$ is faithful and dualizable over $A$. Then let $G$ be a stably dualizable group acting on $C$ through $A$-algebra maps. Then we have $B\to B\otimes_AC$ is a (faithful) $G$-Galois extension implies $A\to C$ is a (faithful) $G$-Galois extension. 
+	\end{block}
+\end{frame}
+
+\section{The Galois correspondence}
+
+\begin{frame}
+	\begin{block}{Definition}
+		Let $G$ be a stably dualizable group, and we say a subgroup $K\subseteq G$ is allowable if $K$ is stably dualizable, the collapse map $G\times_KEK\to G/K$ is a stable equivalence, and the projection $G\to G/K$ admits a section. We say $K$ is an allowable normal subgroup if furthermore $K$ is normal. \\
+		Finally we define the equivalences between allowable subgroups to be the minimal equivalence relation generated by the inclusions $K\subseteq K'$ and $K\inj K'$ is a stable equivalence. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Theorem (Galois correspondence, part I)}
+		Let $A\to B$ be a faithful $G$-Galois extension and $K\subseteq G$ be any allowable subgroup. Then the inclusion $C=B^{hK}\to B$ is a faithful $G$-Galois extension. Moreover, if $K$ is an allowable normal subgroup, then $A\to C$ is a faithful $G$-Galois extension. 
+	\end{block}
+	\begin{block}{proof}
+		We will prove the extensions are Galois by detecting it through the dualizable and faithful algebras. That is, since $B$ is faithful and dualizable over $A$, we have $C\otimes_AB$ is faithful and dualizable over $C$. Thus to prove $C\to B$ is Galois, it suffices to prove that 
+		\[ B\otimes_AC=C\otimes_C(C\otimes_AB)\to B\otimes_C(C\otimes_AB)=B\otimes_AB \] 
+		is Galois. We consider the commutative diagram 
+	\end{block}
+\end{frame}
+\begin{frame}
+	\begin{block}{proof (continued)}
+		% https://q.uiver.app/#q=WzAsMTIsWzAsMCwiQSJdLFswLDEsIkMiXSxbMCwyLCJCIl0sWzEsMCwiQiJdLFsxLDEsIkNcXG90aW1lc19BQiJdLFsxLDIsIkJcXG90aW1lc19BQiJdLFsyLDAsIkIiXSxbMywwLCJCIl0sWzIsMSwiXFxNYXAoU1tHXSxCKV57aEt9Il0sWzIsMiwiXFxNYXAoU1tHXSxCKSJdLFszLDEsIlxcTWFwKFxcU2lnbWFeXFxpbmZ0eV8rRy9LLEIpIl0sWzMsMiwiXFxNYXAoU1tHXSxCKSJdLFswLDNdLFswLDFdLFsxLDJdLFszLDRdLFsxLDRdLFs0LDVdLFsyLDVdLFszLDZdLFs3LDZdLFs2LDhdLFs4LDldLFs0LDhdLFs1LDldLFs3LDEwXSxbMTAsOF0sWzEwLDExXSxbMTEsOV1d
+		\[\begin{tikzcd}[ampersand replacement=\&]
+			A \& B \& B \& B \\
+			C \& {C\otimes_AB} \& {\Map(S[G],B)^{hK}} \& {\Map(\Sigma^\infty_+G/K,B)} \\
+			B \& {B\otimes_AB} \& {\Map(S[G],B)} \& {\Map(S[G],B)}
+			\arrow[from=1-1, to=1-2]
+			\arrow[from=1-1, to=2-1]
+			\arrow[from=1-2, to=1-3]
+			\arrow[from=1-2, to=2-2]
+			\arrow[from=1-3, to=2-3]
+			\arrow[from=1-4, to=1-3]
+			\arrow[from=1-4, to=2-4]
+			\arrow[from=2-1, to=2-2]
+			\arrow[from=2-1, to=3-1]
+			\arrow[from=2-2, to=2-3]
+			\arrow[from=2-2, to=3-2]
+			\arrow[from=2-3, to=3-3]
+			\arrow[from=2-4, to=2-3]
+			\arrow[from=2-4, to=3-4]
+			\arrow[from=3-1, to=3-2]
+			\arrow[from=3-2, to=3-3]
+			\arrow[from=3-4, to=3-3]
+		\end{tikzcd}\]
+		we must prove that all the horizontal maps on the middle and right are equivalences, so that the extension $B\otimes_AC\to B\otimes_AB$ would be equivalent to the extension $\Map(\Sigma^\infty_+G/K,B)\to\Map(S[G],B)$. But this is the trivial extension by the allowable condition, as the following shows. 
+		\[ \Map(S[G],B)\simeq\Map(\Sigma^\infty_+(K\times G/K),B)\simeq F(S[K],\Map(\Sigma^\infty_+(G/K),B)) \]
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{proof (continued)}
+		Then use the fact that $A\to B$ is faithful and use the previous lemmas we have $C\to B$ is a faithful extension. Now, only the maps in the middle row are non-trivially equivalences, but indeed they are since 
+		\[ B\otimes_AC\simeq B\otimes_AB^{hK}\simeq(B\otimes_AB)^{hK}\simeq\Map(S[G],B)^{hK} \]
+		\[ \Map(\Sigma^\infty_+(G/K),B)\simeq\Map(S[G]_{hK},B)\simeq\Map(S[G],B)^{hK} \]
+		Finally it remains to treat the case where $K$ is normal. If this is the case, then $G/K$ is also a group, hence the extension $B\to B\otimes_AC$ is equivalent to the trivial extension $B\to\Map(S[G/K],B)$, hence is faithfully $G/K$-Galois. And since $B$ is faithful and dualizable over $A$, we may reflect this faithful extension back and obtain that $A\to C$ is faithfully $G/K$-Galois. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Definition}
+		We define a category $\mathcal{C}$ to be Grothendieck prestable if there is some presentable stable category $\mathcal{D}$ equipped with a $t$-structure compatible with filtered colimits, and $\mathcal{C}\simeq\mathcal{D}_{\geq0}$. In fact, we can canonically find such $\mathcal{D}$ by taking $\mathcal{D}=\Sp(\mathcal{C})$, and associate it with the $t$-structure coming from $\mathcal{C}$. \\
+		If furthermore $\mathcal{C}$ is endowed with a symmetric monoidal structure, we require the above definitions to be compatible with our symmetric monoidal structure. 
+	\end{block}
+	\begin{block}{Definition}
+		Notice for such $\mathcal{C}$, we have doing truncations and taking connective covers agreeing with the $t$-structure of $\mathcal{D}$. Then we define $\mathcal{C}^\heartsuit$ by its discrete objects, and we have $\mathcal{C}^\heartsuit\simeq\Sp(\mathcal{C})^{\heartsuit}$. Then we define for $X\in\mathcal{C}$, $\pi_i(X)\in\mathcal{C}^\heartsuit$ to be $(\Omega_iX)_{\leq0}$. \\
+		Notice that a symmetric monoidal structure on $\mathcal{C}$ gives a symmetric monoidal structure on $\mathcal{C}^\heartsuit$ making $\pi_0:\mathcal{C}\to\mathcal{C}^\heartsuit$ symmetric monoidal. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Definition}
+		We define a grading on a symmetric monoidal Grothendieck prestable category $\mathcal{C}$ to be an autoequivalence $[1]:\mathcal{C}\to\mathcal{C}$ requiring $(c\otimes d)[1]\simeq c[1]\otimes d$. As usual, we will denote by its inverse $[-1]$. \\
+		The autoequivalence preserves $\Sigma$ and $\Omega$, and hence preserves the $t$-structure of $\mathcal{C}$. In particular, $[1]$ preserves the subcategory of discrete objects, so $[1]$ restricts to an autoequivalence $\mathcal{C}^\heartsuit\to\mathcal{C}^\heartsuit$, and we have $(\pi_iX)[k]\simeq\pi_i(X[k])$. We define the bigraded Ext groups for objects in $\mathcal{C}^\heartsuit$ by 
+		\[ \Ext_{\mathcal{C}^\heartsuit}^{s,t}(A,B)=\Hom_{D(\mathcal{C}^\heartsuit)}(A,\Sigma^sB[-t]) \]
+		viewed as an object in $\mathcal{C}^\heartsuit$. Finally we can always give any Grothendieck prestable category the trivial grading by $[1]=\id_\mathcal{C}$. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Definition}
+		We say $\mathcal{C}$ is separable if the homotopy groups detect equivalences, and complete if the Postnikov towers converge, that is, for every $X\in\mathcal{C}$ we have $X\to\plim_nX_{\leq n}$ is an equivalence. 
+	\end{block}
+	\begin{block}{Definition}
+		A shift algebra $A$ is an $\mathbb{E}_1$-algebra in $\mathcal{C}$ equipped with a map $\tau:\Sigma A[-1]\to A$ of right $A$-modules inducing an isomorphism $\pi_*A\simeq\pi_0A[\tau]$, where the latter is defined by the graded algebra in $\mathcal{C}^\heartsuit$ by $(\pi_0A[\tau])_k\simeq(\pi_0A)[-k]$. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{lemma}
+		Let $A$ be a shift algebra, and let $M$ be a left $A$-module. Then the following are equivalent. 
+		\begin{enumerate}
+			\item $\pi_*M\simeq\pi_*A\otimes_{\pi_0A}\pi_0M$. 
+			\item $\pi_0A\otimes_AM\in\mathcal{C}^\heartsuit$. 
+			\item $\tau\otimes\id_M:\Sigma M[-1]\to M$ is a 1-connective cover. 
+		\end{enumerate}
+	\end{block}
+	\begin{block}{Definition}
+		We define a left $A$-module $M$ to be periodic if it satisfies the above equivalent conditions. We denote the category of periodic modules to be the full subcategory $\Mod_A^{per}(\mathcal{C})\subseteq\Mod_A(\mathcal{C})$. 
+	\end{block}
+	\begin{block}{Theorem}
+		Let $A$ be a shift $\mathbb{E}_2$-algebra, then we have $\Mod_A^{per}(\mathcal{C})\simeq\Mod_A^{\tau^{-1}}(\Sp(\mathcal{C}))$, where the second category is the stable subcategory of $\Mod_A(\Sp(\mathcal{C}))$ consisting of $\tau$-local modules. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{const}
+		For any associative algebra $A$, its postnikov tower is a tower of associative algebras 
+		\[ A\to\cdots\to A_{\leq n}\to\cdots\to A_{\leq0} \]
+		where the passage from $A_{\leq n-1}$ to $A_{\leq n}$ is obtained by a square zero extension (we just point it out here, and it would be crucial for later purposes). This induces a tower of Grothendieck prestable categories by 
+		\[ \Mod_A\to\cdots\to\Mod_{A_{\leq n}}\to\cdots\to\Mod_{A_{\leq0}} \]
+		By giving a filtration on each category $\Mod_{A_{\leq n}}$ by truncation, we may prove that $\Mod_A\simeq\plim\Mod_{A_{\leq n}}$. Hence to understand $\Mod_A$, it suffices to understand $\Mod_{A_{\leq0}}$, and the relations between $\Mod_{A_{\leq n}}$ and $\Mod_{A_{\leq n-1}}$. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Construction}
+		We define $F_n\in\Mod_{A\leq n}$ by the fiber sequences $F_n\to A_{\leq n}\to A_{\leq n-1}$, which gives a pullback diagram of the form 
+		% https://q.uiver.app/#q=WzAsNCxbMCwwLCJBX3tcXGxlcSBufSJdLFsxLDAsIkFfe1xcbGVxIG4tMX0iXSxbMCwxLCJBX3tcXGxlcSBuLTF9Il0sWzEsMSwiQV97XFxsZXEgbi0xfVxcb3BsdXNcXFNpZ21hIEZfbiJdLFsxLDMsImRfMCJdLFsyLDMsImQiLDJdLFswLDFdLFswLDJdLFswLDMsIiIsMSx7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXItaW52ZXJzZSJ9fV1d
+		\[\begin{tikzcd}[ampersand replacement=\&]
+			{A_{\leq n}} \& {A_{\leq n-1}} \\
+			{A_{\leq n-1}} \& {A_{\leq n-1}\oplus\Sigma F_n}
+			\arrow[from=1-1, to=1-2]
+			\arrow[from=1-1, to=2-1]
+			\arrow["\ulcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+			\arrow["{d_0}", from=1-2, to=2-2]
+			\arrow["d"', from=2-1, to=2-2]
+		\end{tikzcd}\]
+		Here $A_{\leq n-1}\oplus\Sigma F_n$ is a trivial square-zero extension, and $d_0$ is the trivial section, while $d$ is a map of algebras depending on the square-zero extension $A_{\leq n}\to A_{\leq n-1}$. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Construction}
+		This square induces a pullback square of module categories. 
+		% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXE1vZF97QV97XFxsZXEgbn19Il0sWzEsMCwiXFxNb2Rfe0Ffe1xcbGVxIG4tMX19Il0sWzAsMSwiXFxNb2Rfe0Ffe1xcbGVxIG4tMX19Il0sWzEsMSwiXFxNb2Rfe0Ffe1xcbGVxIG4tMX1cXG9wbHVzXFxTaWdtYSBGX259Il0sWzEsMywiZF8wXioiXSxbMiwzLCJkXioiLDJdLFswLDFdLFswLDJdLFswLDMsIiIsMSx7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXItaW52ZXJzZSJ9fV1d
+		\[\begin{tikzcd}[ampersand replacement=\&]
+			{\Mod_{A_{\leq n}}} \& {\Mod_{A_{\leq n-1}}} \\
+			{\Mod_{A_{\leq n-1}}} \& {\Mod_{A_{\leq n-1}\oplus\Sigma F_n}}
+			\arrow[from=1-1, to=1-2]
+			\arrow[from=1-1, to=2-1]
+			\arrow["\ulcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+			\arrow["{d_0^*}", from=1-2, to=2-2]
+			\arrow["{d^*}"', from=2-1, to=2-2]
+		\end{tikzcd}\]
+		here $d^*$ and $d_0^*$ denote the pushforward (tensor) of modules induced by the map $d$ and $d_0$. Then we let $\Theta:\Mod_{A_{\leq n-1}}\to\Mod_{A_{\leq n-1}}$ is defined as $\Theta M=d_*d_0^*M$, where $d_*$ is the pullback of modules along $d$. Explicitly, we have $\Theta M\simeq M\oplus\Sigma^{n+1}(A_{\leq0}\otimes_{A_{\leq n-1}}M)$. \\
+		Then consider the projection $p:A_{\leq n-1}\oplus\Sigma F_n\to A_{\leq n-1}$, noticing that $d$ and $d_0$ are both sections of $p$, we have a map $d_*d_0^*M\to d_*p^*p_*d_0^*M\simeq M$. This gives a natural transformation of functors $\pi:\Theta\to\id$. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Theorem}
+		If $\Mod_A$ is generated by periodic modules, then we have an equivalence of categories 
+		\[ \Mod_A\simeq D_{\geq0}(\Mod_{\pi_0A}(C^\heartsuit)) \]
+	\end{block}
+	\begin{block}{Theorem}
+		We define the category of $\Theta$-sections $\Theta-\Sect_{A_{\leq n-1}}$ to be the category of triples $(M,s,h)$, where $M\in\Mod_{A_{\leq n-1}}$, $s:M\to\Theta M$ and $h$ is a homotopy from $\pi\circ s$ to $\id_M$. Then we have $\Mod_{A_{\leq n}}\simeq\Theta-\Sect_{A_{\leq n-1}}$. This means that $M$ can be lifted to $\Mod_{A_{\leq n}}$ iff $\Theta$ has a section. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Definition}
+		Recall that a module $M$ is periodic iff $\pi_*(M)\simeq\pi_*(A)\otimes_{\pi_0(A)}\pi_0(M)$. We say that an $A_{\leq n}$-module $N$ is a potential $n$-stage for a periodic $A$-module if we have $A_{\leq0}\otimes_{A_{\leq n}}M$ is discrete. We denote the category of potential $n$-stages by $\mathcal{M}_n$. Equivalently, for $M\in\Mod_{A_{\leq n}}$ and $n<\infty$, we have $M$ is a potential $n$-stage iff $\pi_*(M)\simeq\pi_*(A_{\leq n})\otimes_{\pi_0(A)}\pi_0(M)$. This implies that modules of potential $n$-stages are $n$-truncated. Moreover, this implies that the $A$-module structure on $M$ and $A_{\leq n}$-module structure on $M$ is equivalent. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Lemma}
+		Let $M\in\Mod_{A_{\leq n-1}}$. Then $\pi:\Theta M\to M$ is an $n$-equivalence. 
+	\end{block}
+	\begin{block}{Corollary}
+		The cofiber of $\pi:\Theta M\to M$ is equivalent to $\Sigma^{n+2}\pi_0M[-n]$, using the explicit construction of $\Theta M$. 
+	\end{block}
+	\begin{block}{Theorem}
+		Let $M\in\mathcal{M}_{n-1}$, then $M$ could be lifted to a potential $n$-stage (that is, if there is some $M'\in\mathcal{M}_n$ such that $M\simeq A_{\leq n-1}\otimes_{A\leq n}N$) iff a certain obstruction class $o_M\in\Ext_{\pi_0(A)}^{n+2,n}(\pi_0(M),\pi_0(M))$ vanishes. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{proof}
+		Recall that $M$ can be lifted to a potential $n$-stage iff $\Theta M\to M$ has a section, and by using the cofiber sequence $\Theta M\to M\to\Sigma^{n+2}\pi_0M[-n]$, the first map admits a section iff the second map is $0$. Thus the obstruction to the lifting lies in 
+		\begin{align*}
+			&\Hom_{A_{\leq n-1}}(M,\Sigma^{n+2}\pi_0M[-n]) \\
+			\simeq&\Hom_{\pi_0(A)}(\pi_0(A)\otimes_{A_{\leq n-1}}M,\Sigma^{n+2}\pi_0M[-n])
+		\end{align*}
+		using the fact that the target is canonically a $\pi_0(A)$-module. By definition that $M$ is a potential $(n-1)$-stage, $\pi_0(A)\otimes_{A_{\leq n-1}}M\simeq\pi_0(M)$, hence the obstruction lies in 
+		\[ \Hom_{\pi_0(A)}(\pi_0(M),\Sigma^{n+2}\pi_0(M)[-n])\simeq\Ext_{\pi_0(A)}^{n+2,n}(\pi_0(M),\pi_0(M)) \]
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Theorem}
+		Let $M,N\in\mathcal{M}_n$, then let $uM:=A_{\leq n-1}\otimes_{A_{\leq n}}M$, we have a fiber sequence 
+		\begin{align*}
+			&\Hom_{\mathcal{M}_n}(M,N)\to\Hom_{\mathcal{M}_{n-1}}(uM,uN) \\
+			\to&\Hom_{D(\Mod_{\pi_0(A)}(C^\heartsuit))}(\pi_0(M),\Sigma^{n+1}\pi_0N[-n])
+		\end{align*}
+	\end{block}
+	\begin{block}{proof}
+		Notice that $\mathcal{M}_n$ is a full subcategory of $\Mod_A$, moreover $uM\simeq M_{\leq n-1}$, hence the left arrow is equivalent to $\Hom_A(M,N)\to\Hom_A(M,N_{\leq n-1})$. Letting $F$ be the fiber of $N\to N_{\leq n-1}$, we have a fiber sequence 
+		\[ \Hom_A(M,N)\to\Hom_A(M,N_{\leq n-1})\to\Hom_A(M,\Sigma F) \]
+		and by noticing $F\simeq\Sigma^n\pi_0N[-n]$ we obtain the results. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Corollary}
+		We have a spectral sequence $E_1^{s,t}=\Ext_{\pi_0(A)}^{2s-t,s}(\pi_0(M),\pi_0(N))$ converging conditionally to $\pi_*\Hom_A(M,N)$. 
+	\end{block}
+	\begin{block}{proof}
+		Notice that $\Hom_A(M,N)\simeq\plim\Hom_{A_{\leq s}}(M\otimes_AA_{\leq s},N\otimes_AA_{\leq s})$. But by the previous theorem we have the fiber between the filtrations given by $F_s\simeq\Hom_{D(\pi_0(A))}(\pi_0(M),\Sigma^s\pi_0N[-s])$. Thus we have a spectral sequence associated to this filtration with the required $E_1$ page. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Definition}
+		A potential $n$-stage for an $\mathbb{E}_k$-algebra $R$ in $\Mod_{A\leq n}$ such that its underlying $A_{\leq n}$-module is a potential $n$-stage. We denote the category of potential $n$-stages for $\mathbb{E}_k$-algebra by $\Alg_{\mathbb{E}_k}(\mathcal{M}_n)$. This is, of course, equivalent to the condition that $A_{\leq0}\otimes_{A_{\leq n}}R$ is discrete. \\
+		Also by definition $\pi_0(R)$ is an algebra in $\Mod_{\pi_0(A)}(\mathcal{C}^\heartsuit)$. Finally we have $\Alg_{\mathbb{E}_k}(\mathcal{M}_\infty)\simeq\plim_n\Alg_{\mathbb{E}_k}(\mathcal{M}_n)$. 
+	\end{block}
+	\begin{block}{Lemma}
+		Let $R$ be a potential $(n-1)$-stage for an $\mathbb{E}_k$-algebra. Then the map $\pi:\Theta R\to R$ is a square zero extension of the $\mathbb{E}_k$-$A_{\leq n-1}$-algebra $R$ by the $R$-module $\Sigma^{n+1}\pi_0R[-n]$. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Construction}
+		Recall that the $\mathbb{E}_k$-$A_{\leq n-1}$-algebra $R$ has a cotangent complex $\mathbb{L}_{R/A_{\leq n-1}}^{\mathbb{E}_k}$. As usual, we have an equivalence of the mapping space $\Hom_R(\mathbb{L}_{R/A_{\leq n-1}}^{\mathbb{E}_k},\Sigma M)$ and the space of square zero-extensions of $\mathbb{E}_k$-$A_{\leq n-1}$-algebras $\tilde{R}\to R$ by $M$. In particular, an extension is trivial iff its corresponding map from the cotangent complex to $\Sigma M$ is null. 
+	\end{block}
+	\begin{block}{Theorem}
+		Let $R$ be a potential $(n-1)$-stage for an $\mathbb{E}_k$ algebra. Then $R$ can be lifted to a potential $n$-stage iff some obstruction class 
+		\[ o_R\in\Ext^{n+2,n}_{\Mod_{\pi_0(R)}(D(\Mod_{\pi_0(A)}(\mathcal{C}^\heartsuit)))}(\mathbb{L}_{\pi_0(R)/\pi_0(A)}^{\mathbb{E}_k},\pi_0(R)) \]
+		vanishes. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Corollary}
+		Let $R,T$ be potential $n$-stages for an $\mathbb{E}_k$-algebra, and let $uR\to uT$ be the corresponding map in the potential $(n-1)$-stages. Then we have an equivalence 
+		\[ F_\varphi\simeq P_{0,\varphi'}\Hom_{\pi_0(R)}(\mathbb{L}_{\pi_0(R)/\pi_0(A)}^{\mathbb{E}_k},\Sigma^{n+1}\pi_0T[-n]) \]
+		for $F_\varphi$ the fiber over $\varphi$ of the map 
+		\[ \Hom_{\Alg_{\mathbb{E}_k}(\mathcal{M}_n)}(R,T)\to\Hom_{\Alg_{\mathbb{E}_k}(\mathcal{M}_{n-1})}(uR,uT) \]
+		and $\varphi'$ is a certain morphism in $\Hom_{\pi_0(R)}(\mathbb{L}_{\pi_0(R)/\pi_0(A)}^{\mathbb{E}_k},\Sigma^{n+1}\pi_0T[-n])$, where $P_{0,\varphi'}$ denote the path space. \\
+		Finally, we have $\varphi$ (which lives in the potential $(n-1)$-stage) lifts to the potential $n$-stage iff $\varphi'\simeq0$. Moreover, the fiber is equivalent to 
+		\[ \Hom_{\pi_0(R)}(\mathbb{L}_{\pi_0(R)/\pi_0(A)}^{\mathbb{E}_k},\Sigma^n\pi_0T[-n]) \]
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Corollary}
+		Let $\varphi:R\to S$ be a $\mathbb{E}_k$-morphism of periodic $A$-algebras in $\mathcal{C}$. Then we have a spectral sequence with 
+		\[ E_1^{0,0}=\Hom_{\Alg_{\pi_0(A)}}(\pi_0(R),\pi_0(T)) \]
+		\[ E_1^{s,t}=\Ext_{\pi_0(R)}^{2s-t,s}(\mathbb{L}_{\pi_0(R)/\pi_0(A)}^{\mathbb{E}_k},\pi_0(T)),t\geq s>0 \]
+		converging conditionally to $\pi_{t-s}(\Hom_{\Alg_{\mathbb{E}_k}(\Mod_A)}(R,T),\varphi)$. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Construction}
+		We define an Adams type homology theory $E$ to be a homotopy commutative ring spectrum $E$ which is a filtered colimit $E=\ilim E_\alpha$ such that $E_*E_\alpha$ is a finitely generated projective $E_*$-module, and the Kunneth map $E^*E_\alpha\to\Hom_{E_*}(E_*E_\alpha,E_*)$ is an isomorphism. Then we define $\Sp_E^{fp}$ to be the category of finite spectra with finitely generated projective $E$-homology, and the covers to be the map inducing $E$-homology surjections. We define the category of $E$-synthetic spectra to be $\Syn_E:=\Sh_\Sigma^\Sp(\Sp_E^{fp})$. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Construction}
+		There is a $t$-structure on $\Syn_E$. We define for $X\in\Syn_E$, $\pi_n(X)$ to be the sheafification of the presheaf assigning the $\pi_n$ pointwise. We say $X$ is connective if $\pi_n(X)=0$ for $n<0$ and coconnective if $\Omega^\infty X$ is a discrete sheaf of spaces. In particular, we have $\Syn_E^\heartsuit$ the category consisting of sheaves of Abelian groups. This $t$-structure is right complete. According to our context, we only care about the connective synthetic spectra. \\
+		We have a functor $\nu:\Sp\to\Syn_E$ given by the the sheafification of the connective cover of the Yoneda embedding. Moreover, this functor is lax symmetric monoidal. \\
+		Finally, we have a bigrading structure on $\Syn_E$ given by $(\Sigma^{s,t}X)(P)=\Sigma^{-t}X(\Sigma^{-s-t}P)$. The categorical suspension is $\Sigma^{1,-1}$. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Construction}
+		We give $\Syn_E^{\geq0}$ a grading by $[1]=\Sigma^{1,0}$. We claim the following. \\
+		Firstly, we have for an $\mathbb{E}_\infty$ algebra $A\in\Sp_E$, $\nu A$ an $\mathbb{E}_\infty$ algebra. We have the following. 
+		\begin{enumerate}
+			\item $\nu A$ is a shift algebra. 
+			\item $\Mod^{per}_{\nu A}\simeq\Mod_A(Sp_E)$. 
+			\item $\Mod_{\pi_0(\nu A)}(\Syn_E^\heartsuit)\simeq\Mod_{E_*A}(\Comod_{E_*E})$. 
+			\item $\Mod_{\nu A}$ is generated by the periodic modules. 
+		\end{enumerate}
+		We will not give a proof here since we are running out of time. But the above gives rise to our desired spectral sequence. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Theorem}
+		Let $\varphi:R\to T$ be a morphism of $E$-local $\mathbb{E}_\infty$-$A$-algebras, then there is a spectral sequence with
+		\[ E_1^{0,0}=\Hom_{\CAlg_{E_*A}(\Comod_{E_*E})}(E_*R,E_*T) \]
+		\[ E_1^{s,t}=\Ext_{\Mod_{E_*R}(\CAlg_{E_*A}(\Comod_{E_*E}))}^{2s-t,s}(\mathbb{L}_{E_*R/E_*A}^{\mathbb{E}_\infty},E_*T) \]
+		where $E_*T$ is given $E_*R$-module structure by the map $\varphi$, converging conditionally to 
+		\[ \pi_{t-s}(\Map_{\CAlg_A}(R,T),\varphi) \]
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Definition}
+		For $A\to B$ a map of $\mathbb{E}_\infty$-ring spectra, we define the topological Hochschild homology of $B$ relative to $A$ by $\THH^A(B)=B\otimes_AS^1$, where this is the tensoring with space in the category $\CAlg(A)$. Equivalently, $\THH^A(B)\simeq B\otimes_{B\otimes_AB}B$. Also equivalently, we have $\THH^A(B)$ is the geometric realization of the cyclic bar construction of $B$ over $A$. In the last construction, the inclusion into the 0-simplices gives a map $B\to\THH^A(B)$. We say $A\to B$ is THH-etale if $B\to\THH^A(B)$ is an equivalence. \\
+		We say $A\to B$ is etale if $\mathbb{L}_{B/A}^{\mathbb{E}_\infty}$ is contractible, $B$ connected if $\pi_0(B)$ is connected, and $A\to B$ separable if $B\otimes_AB\to B$ admits a section. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Lemma}
+		Every separable $A\to B$ is THH-etale. Notice that with $G$ discrete, the $G$-Galois extension $A\to B$ is separable, hence is THH-etale. 
+	\end{block}
+	\begin{block}{Theorem}
+		For any map $A\to B$ of $\mathbb{E}_\infty$-ring spectra, if it is THH-etale, then it is etale. 
+	\end{block}
+	\begin{block}{Corollary}
+		Any $G$-Galois extension $A\to B$ with $G$ discrete is etale. In particular, $\prod_GA$ is etale over $A$. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Theorem}
+		Let $A\to B$ be a $G$-Galois extension with $G$ finite and $B$ connected. Then the natural map $G\to\CAlg_A(B,B)$ giving the action of $G$ on $B$ is an equivalence of $\mathbb{E}_1$-monoids. In particular, every endomorphism of $B$ over $A$ is an automorphism, up to a contractible choice. 
+	\end{block}
+	\begin{block}{proof}
+		We compute $\CAlg_A(B,B)\simeq\CAlg_B(B\otimes_AB,B)\simeq\CAlg_B(\prod_GB,B)$ by the Goerss-Hopkins spectral sequence derived above. We apply the spectral sequence with the case $E=S$. But since $\prod_GB$ is etale over $B$, we have the spectral sequence collapses complete at the first page leaving only the term $E_1^{0,0}=\CAlg_{B_*}(\prod_GB_*,B_*)\simeq G$ since $B_*$ is connected. Therefore we have the results. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Theorem}
+		Let $A\to B$ be a $G$-Galois extension with $B$ connected and $G$ finite and discrete. Then let $A\to C\to B$ be a factorization of the map through a separable $\mathbb{E}_\infty$-$A$-algebra $C$. Then $\CAlg_C(B,B)$ is discrete, and through the map $\CAlg_C(B,B)\to\CAlg_A(B,B)$, $\CAlg_C(B,B)$ can be identified with $K=\pi_0(\CAlg_C(B,B))$ as a subgroup of $G$. Moreover, the action of $K$ on $B$ induces an equivalence $B\otimes_CB\simeq\prod_KB$. 
+	\end{block}
+	\begin{block}{proof}
+		Again using the spectral sequence we see that $\CAlg_C(B,B)$ is discrete, and $K=\pi_0\CAlg_C(B,B)=\Alg_{\pi_*(B)}(\pi_*(B\otimes_CB),\pi_*(B))$. Then again using the that $\pi_*(B\otimes_CB)$ is a retract of $\pi_*(B\otimes_AB)$, this implies that $K$ is a retract of $G$, hence is a submonoid of $G$. But since $G$ is finite, $K$ must also be a group. \\
+		Moreover, noticing that $\pi_*(B\otimes_CB)$ is a retract of $\pi_*(B\otimes_AB)$, using the fact that $\pi_*(B)$ is connected, we see that $\pi_*(B\otimes_CB)\simeq\prod_{K'}\pi_*(B)$. Thus $K=K'$, and $B\otimes_AB\simeq\prod_GB$ restricts to $B\otimes_CB\simeq\prod_KB$. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Corollary}
+		Let $A\to B$ be a $G$-Galois extension with $B$ connected and $G$ finite and discrete. Then let $A\to C\to B$ be a factorization of the map through a separable $\mathbb{E}_\infty$-$A$-algebra $C$ such that $C\to B$ is faithful, and let $K=\pi_0(\CAlg_C(B,B))\subseteq G$. If $A\to B$ is faithful, then $C\simeq B^{hK}$ and $C\to B$ is a faithful $K$-Galois extension. 
+	\end{block}
+	\begin{block}{proof}
+		We first notice $A\to B$ is faithful implies $B$ dualizable over $C$. Moreover we have $B\otimes_CB\simeq\prod_KB$ is an equivalence, and since $B$ is faithful and dualizable over $C$, we conclude that $B\to C$ is a faithful $K$-Galois extension. 
+	\end{block}
+\end{frame}
+
+\section{Generalizations}
+
+\begin{frame}
+	\begin{block}{Definition}
+		Let $A$ be a $\mathbb{E}_\infty$-ring spectra, and let $A\to B_\alpha$ be a directed family of $G_\alpha$-Galois extensions, such that for $\alpha\leq\beta$, we have $A\to B_\alpha$ is a subextension of $A\to B_\beta$ equipped with a surjection $G_\beta\to G_\alpha$ with kernel a stably dualizable group $K_{\alpha,\beta}$, and the data of a natural equivalence $B_\alpha\simeq B_\beta^{hK_{\alpha,\beta}}$. Let $B=\ilim B_\alpha$ where the colimit is taken in $\mathbb{E}_\infty$-$A$-algebras, and let $G=\plim G_\alpha$, then we say $A\to B$ is a $G$-pro-Galois extension. 
+	\end{block}
+	\begin{block}{Example}
+		$L_{K(n)}S\to E_n$ is a $K(n)$-local pro-$\mathbb{G}_n$-Galois extension, where $\mathbb{G}_n$ is the Morava stabilizer group viewed as a profinite group. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Definition}
+		A Hopf algebra spectrum is a $\mathbb{E}_\infty$-ring spectrum $H$ equipped with a counit $\varepsilon:H\to S$ and a co-$\mathbb{E}_1$ coproduct $\psi:H\to H\otimes H$. We do \emph{not} assume that $H$ has an antipode map. \\
+		For $A\to B$ a map of $\mathbb{E}_\infty$-ring spectrum, we define the cobar complex $C^\bullet(H;B)$ with $H$ coacting on $B$ over $A$ to be the cosimplicial commutative $A$-algebra with 
+		\[ C^q(H;B)=B\otimes H^{\otimes q} \]
+		The coboundary and codegeneracy maps are obviously defined, and let $C(H;B)$ denote its totalization. The algebra unit $A\to B$ induces a coaugmentation $A\to C^\bullet(H;B)$, hence a map $A\to C(H;B)$. 
+		We say a map of $\mathbb{E}_\infty$ ring spectrum $A\to B$ is an $H$-Hopf-Galois extension if $H$ coacts on $B$ over $A$, so that the maps $A\to C(H;B)$ and $h:B\otimes_AB\to B\otimes H$ are both weak equivalences. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Example}
+		For an $\mathbb{E}_\infty$-grouplike space $X$, $S[X]$ is a $\mathbb{E}_\infty$-ring spectrum through the multilplication of $G$, and is a Hopf algebra spectrum with counit given by the collapse map $X\to *$ and the comultiplication given by the diagonal map $\Delta:X\to X\times X$. 
+	\end{block}
+	\begin{block}{Example}
+		The unit map $S\to MU$ is an $S[BU]$-Hopf-Galois extension. This can be viewed as the global version of $L_{K(n)}S\to E_n$ is a $K(n)$-local pro-$\mathbb{G}_n$-Galois extension. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	Thank you! 
+\end{frame}
+
+\end{document}

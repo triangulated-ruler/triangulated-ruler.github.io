@@ -1,0 +1,7 @@
+\contentsline {chapter}{\numberline {1}Formal groups and the moduli stack of formal groups}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Functor-of-points style algebraic geometry}{1}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Tangent schemes and formal groups}{3}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Stacks and algebraic stacks}{6}{section.1.3}%
+\contentsline {chapter}{\numberline {2}The moduli stack of formal groups}{10}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Coordinates and descent of formal groups}{10}{section.2.1}%
+\contentsline {section}{\numberline {2.2}The $p$-local case and the height filtration}{16}{section.2.2}%

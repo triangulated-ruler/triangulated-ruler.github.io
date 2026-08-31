@@ -1,0 +1,1040 @@
+% 本文档编写于 2022 年 9 月 13 日，使用 TeXLive 2022 编译通过
+% 请使用不低于 2021 版的 TeXLive (在苹果系统上可以是 MacTeX) 编译此文档
+% 其它编译器不保证编译效果的正确性，不要使用早已过时并且存在许多 bug 的 CTeX 套装
+
+%==============================%
+%   清华大学求真书院讲义模板   %
+%   清华大学求真书院版权所有   %
+%==============================%
+
+\documentclass[oneside,11pt]{book}
+                               % UTF8 指定文件编码
+                               % oneside 指定书籍为单开页 (防止多余的空白页出现)
+\usepackage[a4paper,margin=1in]{geometry}
+                               % 设置纸张大小为 A4，页边距为1英寸
+
+\usepackage{amsmath}           % AMS 的主包
+\usepackage{amssymb}           % AMS 符号包，会自动加载 amsfonts
+\usepackage{latexsym}          % 几个额外的特殊符号，包括 \Box
+\usepackage{mathrsfs}          % \mathscr 字体样式
+\usepackage{eucal}             % 更改 \mathcal 的字体样式
+\usepackage{amsthm}            % AMS 的定理环境
+\usepackage{mathtools}         % 一些额外的数学环境功能，包括 \dfrac
+\usepackage{stmaryrd}          % 更更多的特殊符号
+\usepackage{esint}             % 更多积分符号
+\usepackage{extarrows}         % 提供在箭头上下写字的命令
+\usepackage{enumerate}         % 带序号列表环境
+\usepackage{xcolor}            % 让 latex 支持花里胡哨的颜色的包
+\usepackage{graphicx}          % 插入各种类型图片支持
+\usepackage{tikz}              % tikz 绘图环境
+\usepackage{tikz-3dplot}       % 一个简单的 tikz 3d 绘图宏包
+\usepackage{tikz-cd}           % 基于 tikz 的交换图表绘制工具
+\usepackage[all,cmtip]{xy}     % 交换图表绘制工具，命令为 \xymatrix
+\usepackage{pgfplots}          % 高级绘图包，基于 tikz，包括 2d 和 3d 绘图
+\pgfplotsset{compat=newest}    % 设置 pgfplots 兼容性选项，以使用新功能
+\usepackage{subcaption}        % 可以交叉引用的图表并排环境
+\usepackage[ocgcolorlinks,linkcolor=blue]{hyperref}
+                               % 更 fancy (如带颜色，可以点击等等) 的引用
+\usepackage{cleveref}          % 更“聪明”的引用，使用此宏包，在引用一个公式/定理等时
+                               % 请使用 \cref 而非 \ref
+\usepackage{hyperref}
+\usepackage[hyperref=true,backend=biber,style=alphabetic,backref=true,url=false]{biblatex}
+                               % 使用 biblatex 管理参考文献，后端采用 biber，取代
+                               % 古老的 natbib + bibtex，使用方法自行上网查阅
+                               % 如果需要用 natbib，请自行注释掉这一行然后正常使用
+\usepackage{tcolorbox}         % 绘制彩色文本框的宏包
+\tcbuselibrary{most}           % 加载 tcolorbox 的库
+\usepackage{bm}                % 为所有数学字体添加粗体，命令 \bm{abcd}
+\usepackage{slashed}           % 在符号上添加反划线，命令 \slashed
+\usepackage{quiver}
+%\usepackage{spectralsequences}
+
+%==============================%
+%     请在这里添加其它宏包     %
+%------------------------------%
+
+% \usepackage{physics}         % 提供了方便地打出 d/dx 等符号的命令
+
+
+
+%==============================%
+
+\newcommand{\todo}[1]{\colorbox{red}{#1}}
+
+\newcommand{\from}{\leftarrow}
+\newcommand{\inj}{\hookrightarrow}
+\newcommand{\surj}{\twoheadrightarrow}
+\newcommand{\lto}{\longrightarrow}
+\newcommand{\adj}{\rightleftarrows}
+\newcommand{\nto}{\rightarrowtail}
+\newcommand{\ilim}{\varinjlim}
+\newcommand{\plim}{\varprojlim}
+\newcommand{\act}{\curvearrowright}
+
+\newcommand{\EE}{\mathbb{E}}
+
+\DeclareMathOperator{\Hom}{\mathrm{Hom}}
+\DeclareMathOperator{\Fun}{\mathrm{Fun}}
+\DeclareMathOperator{\End}{\mathrm{End}}
+\DeclareMathOperator{\Aut}{\mathrm{Aut}}
+\DeclareMathOperator{\Gal}{\mathrm{Gal}}
+\DeclareMathOperator{\Map}{\mathrm{Map}}
+\DeclareMathOperator{\Tor}{\mathrm{Tor}}
+\DeclareMathOperator{\Ext}{\mathrm{Ext}}
+\DeclareMathOperator{\fib}{\mathrm{fib}}
+\DeclareMathOperator{\cof}{\mathrm{cof}}
+\DeclareMathOperator{\tfib}{\mathrm{tfib}}
+\DeclareMathOperator{\tcof}{\mathrm{tcof}}
+\DeclareMathOperator{\rank}{\mathrm{rank}}
+\DeclareMathOperator{\Tr}{\mathrm{Tr}}
+\DeclareMathOperator{\img}{\mathrm{im}}
+\DeclareMathOperator{\LocSys}{\mathrm{LocSys}}
+\DeclareMathOperator{\Nm}{\mathrm{Nm}}
+\DeclareMathOperator{\Frob}{\mathrm{Frob}}
+\DeclareMathOperator{\Th}{\mathrm{Th}}
+\DeclareMathOperator{\Ch}{\mathrm{Ch}}
+\DeclareMathOperator{\id}{\mathrm{id}}
+\DeclareMathOperator{\op}{\mathrm{op}}
+\DeclareMathOperator{\im}{\mathrm{im}}
+\DeclareMathOperator{\Core}{\mathrm{Core}}
+\DeclareMathOperator{\Span}{\mathrm{Span}}
+\DeclareMathOperator{\St}{\mathrm{St}}
+\DeclareMathOperator{\TrFm}{\mathrm{TrFm}}
+\DeclareMathOperator{\fgl}{\mathbf{fgl}}
+\DeclareMathOperator{\fg}{\mathbf{fg}}
+\DeclareMathOperator{\Isofgl}{\mathbf{Isofgl}}
+\DeclareMathOperator{\coord}{\mathbf{coord}}
+\DeclareMathOperator{\Def}{\mathrm{Def}}
+\DeclareMathOperator{\Spec}{\mathrm{Spec}}
+\DeclareMathOperator{\Spf}{\mathrm{Spf}}
+\DeclareMathOperator{\Pt}{\mathrm{Pt}}
+\DeclareMathOperator{\gr}{\mathrm{gr}}
+\DeclareMathOperator{\Desc}{\mathrm{Desc}}
+\DeclareMathOperator{\Tot}{\mathrm{Tot}}
+\DeclareMathOperator{\tang}{\mathrm{T}}
+%\DeclareMathOperator{\der}{\mathrm{d}}
+\DeclareMathOperator{\dual}{\mathbb{D}}
+\DeclareMathOperator{\grp}{\mathrm{grp}}
+\DeclareMathOperator{\inv}{\mathrm{inv}}
+\DeclareMathOperator{\Pic}{\mathrm{Pic}}
+\DeclareMathOperator{\THH}{\mathrm{THH}}
+\DeclareMathOperator{\TC}{\mathrm{TC}}
+\DeclareMathOperator{\TP}{\mathrm{TP}}
+\DeclareMathOperator{\conn}{\mathrm{conn}}
+\DeclareMathOperator{\trun}{\mathrm{trun}}
+\DeclareMathOperator{\type}{\mathrm{type}}
+\DeclareMathOperator{\Exc}{\mathrm{Exc}}
+\DeclareMathOperator{\crs}{\mathrm{cr}}
+\DeclareMathOperator{\res}{\mathrm{res}}
+\DeclareMathOperator{\ind}{\mathrm{ind}}
+\DeclareMathOperator{\coind}{\mathrm{coind}}
+\DeclareMathOperator{\mBar}{\mathrm{Bar}}
+\DeclareMathOperator{\coBar}{\mathrm{coBar}}
+\DeclareMathOperator{\Lan}{\mathrm{Lan}}
+\DeclareMathOperator{\Ran}{\mathrm{Ran}}
+\DeclareMathOperator{\Inf}{\mathrm{Inf}}
+\DeclareMathOperator{\Sym}{\mathrm{Sym}}
+\DeclareMathOperator{\Iso}{\mathrm{Iso}}
+\DeclareMathOperator{\Lie}{\mathrm{Lie}}
+\DeclareMathOperator{\Nil}{\mathrm{Nil}}
+
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\der}{\mathrm{d}}
+
+\newcommand{\Aff}{\mathbf{Aff}}
+\newcommand{\Sch}{\mathbf{Sch}}
+\newcommand{\Ring}{\mathbf{Ring}}
+\newcommand{\Set}{\mathbf{Set}}
+\newcommand{\Sp}{\mathbf{Sp}}
+\newcommand{\Cat}{\mathbf{Cat}}
+\newcommand{\An}{\mathbf{An}}
+\newcommand{\Mon}{\mathrm{Mon}}
+\newcommand{\CMon}{\mathrm{CMon}}
+\newcommand{\Grp}{\mathrm{Grp}}
+\newcommand{\CGrp}{\mathrm{CGrp}}
+\newcommand{\Alg}{\mathrm{Alg}}
+\newcommand{\CAlg}{\mathrm{CAlg}}
+\newcommand{\Ab}{\mathbf{Ab}}
+\newcommand{\pSh}{\mathbf{pSh}}
+\newcommand{\Sh}{\mathbf{Sh}}
+\newcommand{\Mod}{\mathbf{Mod}}
+\newcommand{\coMod}{\mathbf{Mod}}
+\newcommand{\LMod}{\mathbf{LMod}}
+\newcommand{\RMod}{\mathbf{RMod}}
+\newcommand{\iGrpd}{\infty\mathbf{Grpd}}
+\newcommand{\QCoh}{\mathbf{QCoh}}
+\newcommand{\Ind}{\mathrm{Ind}}
+\newcommand{\Pro}{\mathrm{Pro}}
+\newcommand{\PrL}{\mathbf{Pr}^{\mathrm{L}}}
+\newcommand{\Fin}{\mathbf{Fin}}
+\newcommand{\co}{\mathrm{co}}
+\newcommand{\Grpd}{\mathbf{Grpd}}
+\newcommand{\Stk}{\mathbf{Stk}}
+
+%==============================%
+
+%==============================%
+%         定理环境设置         %
+%------------------------------%
+\theoremstyle{plain}\newtheorem{thm}{Theorem}
+\theoremstyle{definition}\newtheorem{defn}[thm]{Definition}
+\theoremstyle{definition}\newtheorem{fact}[thm]{Fact}
+\theoremstyle{plain}\newtheorem{axiom}[thm]{Axiom}
+\theoremstyle{plain}\newtheorem{coro}[thm]{Corollary}
+\theoremstyle{plain}\newtheorem{lemma}[thm]{Lemma}
+\theoremstyle{plain}\newtheorem{prop}[thm]{Proposition}
+\theoremstyle{plain}\newtheorem{conj}[thm]{Conjecture}
+\theoremstyle{plain}\newtheorem{ques}[thm]{Problem}
+\theoremstyle{definition}\newtheorem{const}[thm]{Construction}
+\theoremstyle{definition}\newtheorem{cond}[thm]{Condition}
+\theoremstyle{remark}\newtheorem{notation}[thm]{Notation}
+\theoremstyle{plain}\newtheorem{app}{Application}
+\theoremstyle{plain}\newtheorem{exam}{Example}
+\theoremstyle{plain}\newtheorem{exer}{Exercise}
+\theoremstyle{remark}\newtheorem{remark}{Remark}
+\theoremstyle{remark}\newtheorem*{note}{\small{Note}}
+\numberwithin{equation}{section}
+\numberwithin{thm}{section}
+%==============================%
+
+%==============================%
+%    定义标题图片和背景图片    %
+%------------------------------%
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancypagestyle{plain}{
+    \renewcommand{\headrulewidth}{0pt}
+    \fancyhead{}
+    \chead{\includegraphics[width=0.4\linewidth]{qiuzhen.png}}
+}
+\renewcommand{\headrulewidth}{0pt}
+\addtolength{\headheight}{0.025\paperheight}
+\addtolength{\topmargin}{-0.025\paperheight}
+\fancyhead{}
+\chead{\includegraphics[width=0.4\linewidth]{qiuzhen.png}}
+%------------------------------%
+% \usepackage{eso-pic}
+%\DeclareHookRule{shipout/background}{title/opac}{before}{pgfrcs}
+%\AddToHook{shipout/background}[title/opac]{
+%    \begin{tikzpicture}[remember picture,overlay]
+%        \centering
+%        \node [opacity=0.1] at (current page.center) {
+%            \includegraphics[height=0.2\paperheight]{redqiuzhen.png}
+%        };
+%    \end{tikzpicture}
+%}
+%==============================%
+
+%==============================%
+%  添加参考文献库 (.bib 文件)  %
+%  例 \addbibresource{XX.bib}  %
+%------------------------------%
+
+%\addbibresource{}
+
+%==============================%
+
+%==============================%
+% 定义封面样式，请将 XX 替换为 %
+% 具体的课程名和人名           %
+%------------------------------%
+\title{
+    \huge{The moduli stack of formal groups and chromatic homotopy theory}
+    \vspace{0.4\paperheight}
+}
+\author{
+    \Large{Xiaoyang Chen}\\
+    \vspace{0.1\paperheight}
+}
+\date{
+    \Large{Qiuzhen College, Tsinghua University}\\
+    \Large{2025 Summer}
+}
+%==============================%
+
+\begin{document}
+\maketitle
+\frontmatter
+\tableofcontents
+\newpage
+
+%==============================%
+%           正文内容           %
+%---------------------------------------------------------------------------------
+\mainmatter{}
+
+\chapter{Formal groups and the moduli stack of formal groups}
+
+\section{Functor-of-points style algebraic geometry}
+
+	We first give a brief introduction of the functor of points, which gives us a more convenient way of treating formal groups. 
+
+	\begin{defn}\label{Fun_of_pts_R_fun}
+		For a ring $R$, let the category of commutative $R$-algebras to be $\Alg_R$. We define an affine scheme over $R$ to be a functor $F:\Alg_R\to\Set$ corepresentable by an $R$-algebra $A$, that is, $F\simeq\Hom_{\Alg_R}(A,-)$. We denote this functor by $\Spec A$. We define an $R$-functor to be any functor $\Alg_R\to\Set$. Clearly, the category of $R$-functors has all limits and colimits by pointwise constructions. We denote the category of affine schemes over $R$ to be $\Aff_R$, and the category of $R$-functors to be $\pSh(\Aff_R)$. 
+	\end{defn}
+
+	\begin{defn}\label{Fun_of_pts_embs}
+		For a map of affine schemes $f:\Spec B\to\Spec A$, by Yoneda lemma this corresponds to a map of $R$-algebras $f:A\to B$. We say $\Spec B\to\Spec A$ is a closed immersion if $A\to B$ is surjective. This clearly identifies $B$ with $A/\ker f$, hence with $A/I$ for some ideal $I$. We denote this affine scheme by $V(I)$ or $\Spec A/I$. 
+		
+		We define the complement open immersion of a closed immersion to be the $R$-functor 
+		\[ \Spec A-\Spec(A/I):\Alg_R\to\Set, B\mapsto(f:A\to B, B\otimes_AA/I=0) \]
+		We denote this functor by $D(I)$. Natural transformations with codomain an affine scheme is an open immersion iff it can be identified with some functor of the above form. 
+
+		We define a map of $R$-functors $X\to Y$ to be affine, if for any map of $R$-functors $\Spec A\to Y$, we have $\Spec A\times_YX$ is affine. 
+
+		We define a map of $R$-functors $X\to Y$ to be a closed immersion, if it is affine and $\Spec A\times_YX\to\Spec A$ is a closed immersion of affine schemes. We define a map of $R$-functors $X\to Y$ to be an open immersion, if for any map of $R$-functors $\Spec A\to Y$, we have $\Spec A\times_YX\to\Spec A$ is an open immersion. 
+
+		We define a map of $R$-functors $X\to Y$ to be separated if the diagonal map $X\to X\times_YX$ is a closed immersion. 
+	\end{defn}
+
+	\begin{defn}\label{Fun_of_pts_geom_pts_R_fun}
+		For a $R$-functor $X$, we define the space of geometric points $|X|$ to be the set of equivalence classes of maps $\Spec k\to X$, where two maps $\Spec k\to X$ and $\Spec k'\to X$ are equivalent if $k$ and $k'$ admits a common extension $k''$, and there is a map $\Spec k''\to X$ such that it factors through $\Spec k''\to\Spec k'$ and $\Spec k''\to\Spec k$. This is a topological space with open sets $|U|$ where $U$ is an open subscheme of $X$. 
+		
+		Clearly, a map of $R$-functors $X\to Y$ induces a continuous map $|X|\to|Y|$. We say a map $f:X\to Y$ is quasi-compact if for every open affine subset $|U|\subseteq|Y|$, $f^{-1}(U)$ is affine. 
+	\end{defn}
+
+	\begin{defn}\label{Fun_of_pts_schs}
+		An $R$-functor $X:\Alg_R\to\Set$ is a scheme if it satisfies the two following properties. 
+		\begin{enumerate}
+			\item $X$ is a sheaf with respect to the Zariski topology in $\Alg_R$. 
+			\item There is a collection of affine schemes $\Spec A_i$ such that we have open immersions \\
+			$\Spec A_i\to X$ and 
+			\[ \coprod\Spec A_i\to X \]
+			induces a surjection of sets evaluated at every field over $R$. 
+		\end{enumerate}
+	\end{defn}
+
+	\begin{const}\label{Fun_of_pts_site}
+		Let $X$ be an arbitrary $R$-functor, and consider the category \\
+		$\pSh(\Aff_R)/X$. We define a sieve over $X$ to be a subfunctor $F$ of $\Hom_{\pSh(\Aff_R)}(-,1_X)$ (that is, a pointwise injection $F(Y\to X)\to\Hom_{\pSh(\Aff_R)}(Y\to X,1_X)$). Equivalently, a sieve over $X$ is a collection of morphisms $S=\{X_i\to X\}$ such that if $f\in S$, and $g$ is any morphism pre-composable with $f$, we have $fg\in S$. In this sense, we define for a collection of morphisms $S'=\{X_i\to X\}$ the sieve generated by $T$ to be the collection of morphisms $S=\{fg|f\in S'\}$. 
+
+		For a functor $F:\pSh(\Aff_R)^{\op}\to\mathcal{C}$ (where $\mathcal{C}$ is any category), let $S$ be a sieve over an $R$-functor $X$, we define 
+		\[ F(S):=\ilim(\prod_{X_i\to X\in S}F(X_i)\overunderset{p_1^*}{p_2^*}{\rightrightarrows}\prod_{X_i\to X,X_j\to X\in S}(X_i\times_XX_j)) \]
+
+		We define a topology to be a collection of covering sieves $J(X)$ associated to all $R$-schemes $X$ such that the following holds. 
+		\begin{enumerate}
+			\item $\Hom_{\pSh(\Aff_R)}(-,1_X)\in J(X)$. 
+			\item The sieve generated by all morphisms $\Spec A\to X$ is in $J(X)$. 
+			\item If $S\in J(X)$, and $Y\to X$ is a morphism of $R$-functors, then $S\times_XY\in J(Y)$. 
+			\item For a sieve $S\in J(X)$, if for another sieve $T$ over $X$ such that for all $f:X_i\to X\in J(X)$, we have $f^*T\in J(X_i)$, then $T\in J(X)$. 
+		\end{enumerate}
+		A site is a category equipped with a topology. 
+	\end{const}
+
+	\begin{remark}\label{Sieve_explanation}
+		The above equivalent definition of sieves can be explained as follows. First note that $\Hom_{\pSh(\Aff_R)}(Y\to X,1_X)$ is the singleton set consisting of the morphism $Y\to X$. Therefore, a subfunctor of it is equivalent to the data of some morphisms $X_i\to X$, where for these morphisms we have $F(X_i\to X)$ is empty. Thus the morphisms above are closed under precomposition with other morphisms. 
+
+		Moreover, the second assertion for the topology guarantees that every functor satisfying descent is a left Kan extension of its restriction to the affine schemes. 
+	\end{remark}
+
+	\begin{const}\label{Sch_Zar_et_top}
+		We define the Zariski site to be the category of schemes with morphisms the open immersions, and equipped with the topology generated by finite coverings. 
+
+		We define the etale site to be the category of schemes with morphisms the etale maps, and equipped with the topology generated by finite coverings. 
+		
+		The small Zariski site and etale site over some scheme $X$ is defined likewise. 
+	\end{const}
+
+	\begin{defn}\label{Shv_over_site}
+		For a topology chosen on the category of schemes and an $R$-functor $X$, we define a sheaf for this topology over $X$ to be a functor $\mathcal{F}:(\Aff/X)^{\op}\to\mathcal{C}$, such that the descent condition for the topology on affine schemes holds (that is, suppose $U\in\Aff/X$ and $S\in J(U)$ for the topology, then $\mathcal{F}(U)\simeq\mathcal{F}(S)$). 
+
+		For a geometric point $x\in X$, we define the stalk of a sheaf $\mathcal{F}$ at $x$ to be 
+		\[ \mathcal{F}_x:=\ilim_{U\ni x}\mathcal{O}_X(U) \]
+	\end{defn}
+
+	\begin{const}\label{Zariski_str_shv_qcoh}
+		We define the Zariski structure sheaf of an $R$-functor $X$ to be $\mathcal{O}_X:(\Aff/_{\text{open}}X)^{\op}\to\Ring$ by sending an affine open $U\simeq\Spec A$ to the ring $A$. A sheaf $\mathcal{F}$ of $\mathcal{O}_X$-modules is a Zariski sheaf over $X$ such that for all affine opens $\Spec A\simeq U\subseteq X$, we have $\mathcal{F}(U)$ is a $A$-module ($A\simeq\mathcal{O}_X(U)$), and for all inclusions $V\subseteq U$ (or equivalently, a ring map $A\to B$ where $V\simeq\Spec B$), the restriction map $\mathcal{F}(U)\to\mathcal{F}(V)$ is a map of $A$-modules. 
+
+		We define an $\mathcal{O}_X$-module $\mathcal{F}$ to be quasi-coherent if there is a cover of $X$ by open subschemes $U_i$, such that we have an exact sequence of $\mathcal{O}_{U_i}$-modules 
+		\[ \mathcal{O}_{U_i}^{I}\to\mathcal{O}_{U_i}^{J}\to\mathcal{F}|_{U_i}\to0 \]
+		where $I$ and $J$ are possibly infinite index sets. 
+
+		Clearly, for a map $f:X\to Y$, we have a pair of adjunctions $f^*:\Mod_{\mathcal{O}_Y}\adj\Mod_{\mathcal{O}_X}:f_*$, where $f_*\mathcal{F}(U\to X)\simeq\mathcal{F}(U\times_XY\to Y)$, and $f^*\mathcal{F}(V\to Y)=\ilim_{U\supseteq V}\mathcal{F}(U\to X)$. Here, $f^*$ preserves quasi-coherent sheaves, while $f_*$ not necessarily preserves quasi-coherent sheaves. 
+
+		\todo{The correct definition of quasi-coherent sheaves over general topologies.}
+	\end{const}
+
+	\begin{const}\label{Rel_spec}
+		We may form the construction of relative spectrums in terms of the functor of points. For a scheme $S$ and a quasi-coherent sheaf of $\mathcal{O}_S$-algebras $\mathcal{A}$, we define the relative spectrum $\Spec_S\mathcal{A}$ by the functor of points $\Aff^{\op}\to\Set$ by sending $U$ to pairs $(f,\varphi)$, where $f:U\to S$ is a morphism, and $\varphi:f^*\mathcal{A}\to\mathcal{O}_T$ a morphism of $\mathcal{O}_T$-algebras. It is easy to verify that for the case where $S=\Spec R$ is affine, then this relative spectrum $\Spec_S\mathcal{A}$ gives $\Spec\Gamma(S;\mathcal{A})$. 
+	\end{const}
+
+	\begin{const}\label{Sch_fpqc_top}
+		We define a map of $R$-functors $f:X\to Y$ to be flat if for all geometric point $x\in|X|$, it induces a flat map $\mathcal{O}_{Y,f(x)}\to\mathcal{O}_{X,x}$, and it is faithfully flat if it is flat and surjective, that is, induces an surjection $X(k)\to Y(k)$ for all $R$-fields $k$. 
+
+		We define the fpqc topology to be the category of schemes equipped with the topology generated by the following coverings on affine schemes: a fpqc cover of an affine scheme $U$ is a finite collection of flat morphisms $U_i\to U$ such that $\coprod U_i\to U$ is surjective. 
+
+		The fpqc topology is subcanonical. That is, for a scheme $X$ over a scheme $S$, $X$ can be viewed as a fpqc sheaf over $S$ via the Yoneda embedding. 
+	\end{const}
+
+	\begin{thm}\label{Faithfully_flat_desc}
+		If $f:X\to Y$ is a faithfully flat morphism of schemes, then the category of quasi-coherent sheaves over $Y$ is equivalent to the following category of descent data $\Desc(f)$. Let $\Desc(f)$ denote the category with objects pairs $(\mathcal{F},\psi)$, where $\mathcal{F}$ is a quasi-coherent sheaf over $X$, and $\psi:p_1^*\mathcal{F}\to p_2^*\mathcal{F}$ (here $p_1,p_2:X\times_YX\to X$ are the projection maps), such that we have $p_{1,3}^*\psi\simeq p_{2,3}^*\psi p_{1,2}^*\psi$ (here $p_{i,j}:X\times_YX\times_YX\to X\times_YX$ are the corresponding projection maps). Clearly, a quasi-coherent sheaf over $Y$ defines a descent data by the obvious pullbacks. 
+
+		In particular, this, along with the fact that two quasi-coherent sheaves $\mathcal{F}\to\mathcal{G}$ over $S$ are isomorphic iff for a faithfully flat map $f:T\to S$ we have $f^*\mathcal{F}\to f^*\mathcal{G}$ is an isomorphism, implies that $\QCoh$ is a fpqc-stack. We will define this later. 
+		
+		A similar descent theorem holds for affine schemes over $Y$. 
+	\end{thm}
+
+\section{Tangent schemes and formal groups}
+
+	\begin{defn}\label{Tangent_func}
+		Let $X$ be any $R$-functor, then we let $\tang_X$ denote the $R$-functor such that $\tang_X(A)=X(A[\varepsilon])$ (here $A[\varepsilon]\simeq A[x]/x^2$). Clearly, we have a projection functor $\tang_X\to X$ and a zero section functor $X\to\tang_X$, induced by the projection map and inclusion map $A[\varepsilon]\to A$ and $A\inj A[\varepsilon]$. 
+
+		If $X\to S$ is a morphism of $R$-functor, we define the relative tangent functor $\tang_{X/S}$ to be the pullback 
+		% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXHRhbmcgWC9TIl0sWzEsMCwiXFx0YW5nIFgiXSxbMSwxLCJcXHRhbmcgUyJdLFswLDEsIlMiXSxbMCwxXSxbMSwyXSxbMCwzXSxbMywyXSxbMCwyLCIiLDEseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyLWludmVyc2UifX1dXQ==
+		\[\begin{tikzcd}[ampersand replacement=\&]
+			{\tang_{X/S}} \& {\tang_X} \\
+			S \& {\tang_S}
+			\arrow[from=1-1, to=1-2]
+			\arrow[from=1-1, to=2-1]
+			\arrow["\ulcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+			\arrow[from=1-2, to=2-2]
+			\arrow[from=2-1, to=2-2]
+		\end{tikzcd}\]
+
+		The tangent functor $\tang_{X/S}$ is an Abelian group scheme over $X$ if $X\to S$ is a separated morphism of schemes. 
+	\end{defn}
+
+	\begin{defn}\label{Inf_nbd_closed_emb_nm_cone}
+		Let $i:X\to Y$ be a closed embedding of schemes given by a sheaf of ideals $\mathcal{I}$. Then we define the $n$-th infinitesimal neighborhood of $X$ to be $\Inf^n_X(Y)\subseteq Y$ induced by the sheaf of ideals $\mathcal{I}^n$. This definition can be generalized to any injection of fpqc sheaves over some base scheme $S$, by applying the above definition to any suitable fpqc cover of the morphism. 
+
+		We define the conormal sheaf to be $\omega_{X/Y}=i^*(\mathcal{I}/\mathcal{I}^2)$. For a finer construction, we consider the graded $\mathcal{O}_X$-algebra $\mathcal{A}^*_{X/Y}=\bigoplus i^*(\mathcal{I}^k/\mathcal{I}^{k+1})$. The relative spectrum gives the normal cone $C_{X/Y}=\Spec_X\mathcal{A}$. 
+
+		By construction, we have $\omega_{X/Y}\simeq\omega_{X/\Inf^n_X(Y)}$. 
+	\end{defn}
+
+	\begin{defn}\label{Ind_inf}
+		Let $S$ be a scheme and let $X$ be a fpqc sheaf over $S$, then we have a structure map $X\to S$ and some section $e:S\to X$. We say $X$ is ind-infinitesimal if the natural map $\ilim\Inf^n_S(X)\to X$ is an isomorphism of sheaves. 
+
+		We define this property for fpqc sheaf rather than schemes over $S$ since we use here the functor of points to describe formal schemes (see below). 
+	\end{defn}
+
+	\begin{defn}
+		Let $A$ be a topological ring over a ring $R$. Then we define $\Spf A$ to be the $R$-functor by $\Spf(A)(B)=\ilim\Hom(A/I,B)$, where the colimit is taken over open ideals. 
+	\end{defn}
+
+	\begin{defn}\label{Formal_Lie_var}
+		Let $S$ be a scheme, $X$ a sheaf in the fpqc topology over $S$, and let $e:S\to X$ be a section of the structure map $X\to S$, then we say $(X,e)$ is a formal Lie variety if 
+		\begin{enumerate}
+			\item $X$ is ind-infinitesimal and $\Inf^n_S(X)$ is representable by an scheme over $S$ whose structure morphism is affine. 
+			\item The conormal sheaf $\omega_{S/X}$ is locally free of finite rank over $S$. 
+			\item We have an isomorphism of graded rings $\Sym_S^*(\omega_{S/X})\simeq\mathcal{A}^*_{S/X}$. 
+		\end{enumerate}
+	\end{defn}
+
+	\begin{thm}\label{Loc_form_form_Lie_var}
+		Let $X$ be a formal Lie variety over $S$. Then there is an affine Zariski cover $\coprod\Spec A_i\to S$ such that $X\times_S\Spec A_i$ is of the form $\Spf A_i[[x_1,\dots,x_t]]$ with topology generated by the open ideal $(x_1,\dots,x_t)$. This choice of affine Zariski cover and the isomorphism is non-canonical. 
+	\end{thm}
+	\begin{proof}
+		For the case where $S=\Spec A$ and the sheaf $\omega_{S/X}$ is free with global sections $x_1,\dots,x_t$. Then let $\mathcal{J}=\Sym_{>0}(\omega_{S/X})$ be the augmentation ideal. Note that if we let the ideal sheaf associated to the closed immersion $e_n:S\to\Inf^n_S(X)$ to be $\mathcal{I}_n$ then we clearly have an identification $\Inf^n_S(X)\simeq\Spec A[x_1,\dots,x_t]/(x_1,\dots,x_t)^n$. Taking the colimit gives $X\simeq\Spf A[[X_1,\dots,x_t]]$ with the ideal of definition $(x_1,\dots,x_t)$. 
+
+		The general case follows easily from the above local case. 
+	\end{proof}
+
+	\begin{defn}\label{Formal_group}
+		Let $S$ be a scheme. We define a formal group over $S$ to be an Abelian group object $(G,e)$ in the category of formal Lie varieties over $S$ with the property that $\omega_G:=\omega_{S/G}$ is locally free of rank 1 over $S$. 
+
+		Let $A$ be a ring. Then we define a formal group law over $A$ to be a formal power series $f\in A[[x,y]]$ such that $f(x,0)=f(0,x)=x$, $f(x,y)=f(y,x)$, $f(x,f(y,z))=f(f(x,y),z)$. 
+	\end{defn}
+
+	\begin{remark}
+		By \cref{Loc_form_form_Lie_var}, a formal group over $S$ is locally presented by a formal group law over the corresponding base ring. 
+	\end{remark}
+
+	\begin{defn}\label{Lie_alg_formal_grp}
+		We define the Lie algebra of a formal group over $S$ to be the following pullback 
+		% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXExpZV97Ry9TfSJdLFsxLDAsIlxcdGFuZ197Ry9TfSJdLFswLDEsIlMiXSxbMSwxLCJYIl0sWzAsMl0sWzAsMV0sWzEsM10sWzIsMywiZSJdXQ==
+		\[\begin{tikzcd}[ampersand replacement=\&,column sep=small]
+			{\Lie_G} \& {\tang_{G/S}} \\
+			S \& X
+			\arrow[from=1-1, to=1-2]
+			\arrow[from=1-1, to=2-1]
+			\arrow[from=1-2, to=2-2]
+			\arrow["e", from=2-1, to=2-2]
+		\end{tikzcd}\]
+		hence $\Lie_G$ admits a structure of an Abelian scheme over $S$. By definition, we have $\Lie_G\simeq\Spec_S\Sym_S^*\omega_{S/G}$, where $\omega_{S/G}$ is the conormal bundle. 
+	\end{defn}
+
+	In the case where the base scheme is of characteristic $p$, an interesting structure called the Frobenius morphism arises. 
+
+	\begin{const}\label{Frob_rel_frob}
+		Let $S$ be a scheme over $\mathbb{F}_p$, where $p$ is a prime, then there is a map $\Frob_S:S\to S$ sending $x\in S(A)$ to $x^p$ is a well-defined morphism of schemes over $\Spec\mathbb{F}_p$. Then, for any scheme $X/S$, we define the Frobenius of $X$ to be $X^{(p)}$ be given by the pullback 
+		% https://q.uiver.app/#q=WzAsNCxbMCwwLCJYXnsocCl9Il0sWzEsMCwiWCJdLFswLDEsIlMiXSxbMSwxLCJTIl0sWzAsMl0sWzAsMV0sWzEsM10sWzIsMywiXFxGcm9iX1MiXSxbMCwzLCIiLDAseyJzdHlsZSI6eyJuYW1lIjoiY29ybmVyLWludmVyc2UifX1dXQ==
+		\[\begin{tikzcd}[ampersand replacement=\&,column sep=small]
+			{X^{(p)}} \& X \\
+			S \& S
+			\arrow[from=1-1, to=1-2]
+			\arrow[from=1-1, to=2-1]
+			\arrow["\ulcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+			\arrow[from=1-2, to=2-2]
+			\arrow["{\Frob_S}", from=2-1, to=2-2]
+		\end{tikzcd}\]
+		Moreover, there is a relative Frobenius morphism $\Frob_{X/S}:X\to X^{(p)}$, given by the above pullback diagram 
+		% https://q.uiver.app/#q=WzAsNSxbMSwwLCJYXnsocCl9Il0sWzIsMCwiWCJdLFsxLDEsIlMiXSxbMiwxLCJTIl0sWzAsMCwiWCJdLFswLDJdLFswLDFdLFsxLDNdLFsyLDMsIlxcRnJvYl9TIl0sWzAsMywiIiwwLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lci1pbnZlcnNlIn19XSxbNCwyXSxbNCwxLCJcXEZyb2JfWCIsMCx7ImN1cnZlIjotM31dLFs0LDAsIlxcRnJvYl97WC9TfSIsMCx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dXQ==
+		\[\begin{tikzcd}[ampersand replacement=\&,column sep=small]
+			X \& {X^{(p)}} \& X \\
+			\& S \& S
+			\arrow["{\Frob_{X/S}}", dashed, from=1-1, to=1-2]
+			\arrow["{\Frob_X}", curve={height=-18pt}, from=1-1, to=1-3]
+			\arrow[from=1-1, to=2-2]
+			\arrow[from=1-2, to=1-3]
+			\arrow[from=1-2, to=2-2]
+			\arrow["\ulcorner"{anchor=center, pos=0.125}, draw=none, from=1-2, to=2-3]
+			\arrow[from=1-3, to=2-3]
+			\arrow["{\Frob_S}", from=2-2, to=2-3]
+		\end{tikzcd}\]
+		This is a well-defined morphism of schemes over $S$. Clearly, the Frobenius construction of a group scheme is still a group scheme. Note that this construction makes sense for formal groups by taking colimits of its infinitesimal neighborhoods, which are group schemes. 
+	\end{const}
+
+	\begin{lemma}\label{Rel_frob_null_tan_init}
+		Let $G/S$ be a formal group. Then we have a natural identification $\Lie_G^{(p)}\simeq\Lie_{G^{(p)}}$. Moreover, the relative Frobenius map $\Frob_{G/S}:G\to G^{(p)}$ induces a zero map $\Lie_G\to\Lie_{G^{(p)}}$, that is, it factors as 
+		\[ \Lie_G\to S\to\Lie_{G^{(p)}} \]
+		Finally, the relative Frobenius map is the initial map inducing a zero map on the Lie algebras, that is, for any map $G\to H$ such that $\Lie_G\to\Lie_H$ is null, we have this map factors through $\Lie_G\to\Lie_{G^{(p)}}$. 
+	\end{lemma}
+	\begin{proof}
+		The first assertion is direct by verifying definitions, and for the second, note that for $R$ an $\mathbb{F}_p$-algebra, the frobenius on $R[\varepsilon]$ can be identified with 
+		\[ R[\varepsilon]\surj R\xrightarrow{\Frob_R}R\inj R[\varepsilon] \]
+		since $\varepsilon$ is killed by taking $p$-th power. Therefore by the definition of the Lie algebra of $G$ we have the result. 
+
+		For the last assertion, we work locally and assume that $G$ comes from a formal group law over an affine scheme $\Spec A$. Then the morphisms of formal group laws are formal power series $f\in A[[x]]$, and it induces the zero map on Lie algebras implies that $f'(x)=0$. This, along with $A$ having characteristic $p$, implies that $f(x)=g(x^p)$, and $g$ gives the factoring through the relative Frobenius $G^{(p)}\to H$. 
+	\end{proof}
+
+	\begin{lemma}\label{Frob_p_power_conormal_shv}
+		For a formal group $G$ over $S$, we have $\omega_{G^{p}}\simeq\omega_G^p$. 
+	\end{lemma}
+	\begin{proof}
+		This follows from the fact that the relative Frobenius of the Lie algebras itself $\Lie_G\to\Lie_G^{(p)}$ comes from the Frobenius map on the quasi-coherent sheaf of algebras $\Sym_S^*(\omega_{G^{(p)}})\to\Sym_S^*(\omega_G)$, and hence we obtain a homomorphism from $\omega_G^{(p)}\to\Sym_S^p(\omega_G)$ by the definition of the Frobenius, and since both sides are 1-dimensional, so it is an equivalence. 
+	\end{proof}
+
+	\begin{const}\label{Verschiebung_map_formal_grp_height}
+		Let $G$ be a formal group over $S$. $[p]:G\to G$ be the $p$-th power map. By definition have $[p]'(x)=0$ in a characteristic $p$ ring, so we have $[p]:G\to G$ induces the zero map on the Lie algebras, and so factors through the Frobenius map, and we name the factoring $V:G^{(p)}\to G$ the verschiebung map. We say $G$ has height at least $n$ if we have the following $n$ factoring of maps (that is, $V$ induces the zero map on Lie algebras again, which goes on). 
+		% https://q.uiver.app/#q=WzAsNixbMCwwLCJHIl0sWzQsMSwiRyJdLFsxLDAsIkdeeyhwKX0iXSxbMiwwLCJHXnsocF4yKX0iXSxbNCwwLCJHXnsocF5uKX0iXSxbMywwLCJcXGNkb3RzIl0sWzAsMSwiW3BdIiwyXSxbMiwxLCJWIiwxXSxbMywxLCJWXzIiLDFdLFs0LDEsIlZfbiIsMV0sWzAsMiwiXFxGcm9iX0ciXSxbMyw1XSxbNSw0XSxbMiwzLCJcXEZyb2Jfe0deeyhwKX19Il1d
+		\[\begin{tikzcd}[ampersand replacement=\&,column sep=small]
+			G \& {G^{(p)}} \& {G^{(p^2)}} \& \cdots \& {G^{(p^n)}} \\
+			\&\&\&\& G
+			\arrow["{\Frob_G}", from=1-1, to=1-2]
+			\arrow["{[p]}"', from=1-1, to=2-5]
+			\arrow["{\Frob_{G^{(p)}}}", from=1-2, to=1-3]
+			\arrow["V"{description}, from=1-2, to=2-5]
+			\arrow[from=1-3, to=1-4]
+			\arrow["{V_2}"{description}, from=1-3, to=2-5]
+			\arrow[from=1-4, to=1-5]
+			\arrow["{V_n}"{description}, from=1-5, to=2-5]
+		\end{tikzcd}\]
+		Note that all these construction of $V_n$ are natural since $\Frob_{G/S}$ is initial. 
+	\end{const}
+
+	\begin{prop}\label{Section_control_height}
+		Let $G$ be a formal group over $S/\Spec\mathbb{F}_p$. Suppose that $G$ has height at least $n$, then there is a global section $v_n(G)\in\Gamma(S;\omega_G^{p^n-1})$, so that $G$ has height at least $n+1$ iff $v_n(G)=0$. Moreover, the construction $v_n(G)$ is natural such that for any morphism $f:T\to S$ and $H\simeq f^*G$ is a formal group over $T$, then $f^*v_n(G)\simeq v_n(H)$. 
+	\end{prop}
+	\begin{proof}
+		Note that the height of $G$ is at least $n+1$ iff in the above diagram, the morphism $V_n$ induces a zero map on Lie algebras, and hence iff $dV_n:\omega_G\to\omega_{G^{(p^n)}}\simeq\omega_G^{p^n}$ is zero. Since $\omega_G$ is locally free of rank one, by tensoring $\omega_G^{-1}$ to the above we obtain a section $v_n(G):\mathcal{O}_S\to\omega_G^{p^n-1}$ controlling the behavior of being height at least $n+1$. The naturality comes from the naturality of maps of Lie algebras and Verschiebungs. 
+	\end{proof}
+
+\section{Stacks and algebraic stacks}
+
+	We use the modern definition of stacks. The usual definition would be a category fibered in groupoids, which, by the straightening and unstraightening, is equivalent to a sheaf valued in stacks. 
+
+	\begin{defn}\label{Stacks_defn}
+		For a site $\mathcal{C}$, we define a stack over $\mathcal{C}$ to be a functor $\mathcal{F}:\mathcal{C}^{\op}\to\Grpd$ such that for any cover for the topology $\{U_i\to U\}$, we have $\mathcal{F}(C(\{U_i\to U\}))$ is a limit diagram in $\Grpd$. Here $C$ denote the Cech nerve for the covering. This property is equivalent to the following, where $\{U_i\to U\}$ is again a covering. 
+		\begin{enumerate}
+			\item If $X,Y\in\mathcal{F}(U)$, and $\varphi_i:X|_{U_i}\to Y|_{U_i}$ are morphisms where we have $\varphi_i|_{U_{i,j}}\simeq\varphi_j|_{U_{i,j}}$, then there is a morphism $\varphi:X\to Y$ such that $\varphi|_{U_i}\simeq\varphi_i$. 
+			\item If $X,Y\in\mathcal{F}(U)$, and $\varphi,\psi:X\to Y$ are morphisms, then if $\varphi|_{U_i}=\psi|_{U_i}$ for all $U_i$, then $\varphi=\psi$. 
+			\item If $X_i\in\mathcal{F}(U_i)$, and $\varphi_{i,j}:X_i|_{U_{i,j}}\to X_j|_{U_{i,j}}$ are morphisms satisfying the cocycle condition $\varphi_{j,k}|_{U_{i,j,k}}\circ\varphi_{i,j}|_{U_{i,j,k}}\simeq\varphi_{i,k}|_{U_{i,j,k}}$, then there is some $X\in\mathcal{F}(U)$, and $\varphi_i:X|_i\simeq X_i$ such that $\varphi_{i,j}\circ\varphi_i|_{U_{i,j}}\simeq\varphi_j|_{U_{i,j}}$. 
+		\end{enumerate}
+
+		We define the 2-category of stacks by defining the objects of this category to be stacks, morphisms the morphisms of sheaves, and 2-morphisms the natural transformations. 
+
+		In this lecture, we will restrict to the case where $\mathcal{C}=\Aff/S$, and the topology is the Zariski, etale, or fpqc topology. 
+	\end{defn}
+
+	\begin{remark}
+		In the above sense, $\QCoh$ is a fpqc stack of categories by the faithfully flat descent theorem. 
+	\end{remark}
+
+	\begin{exam}
+		We give a few example of stacks. 
+
+		A trivial example is that every scheme regarded as a sheaf is a stack via the inclusion of the category of sets into the category of groupoids. By abuse of notation, we will refer to the stack coming from a scheme $X$ by $X$. 
+
+		A slightly more non-trivial example is the quotient stack. Let $S$ be a scheme, $X$ a scheme over $S$, and $G$ a flat group scheme over $S$ such that the sturcture map $G\to S$ is quasi-compact. Suppose we have an action of $G$ on $X$. Then we define the stack $X/G$ to send an affine scheme over $S$ $U\to S$ to the category of pairs $(P\to U,\alpha_P)$, where $P\to U$ is a $G$-principal bundle (or $G$-torsor), and $\alpha_P:P\to X$ is a $G$-equivariant map, and a morphism $(P\to U,\alpha_P)\to(Q\to U,\alpha_Q)$ is a morphism of principal bundles $f:P\to Q$ (hence an isomorphism) such that $\alpha_P=\alpha_Qf$. We denote this stack by $[X/G]$. 
+
+		For two morphisms of stacks $\mathcal{F}\to\mathcal{H}$ and $\mathcal{G}\to\mathcal{H}$, we can form the fiber product stack $\mathcal{F}\times_{\mathcal{H}}\mathcal{G}$, defined by 
+		\[ \mathcal{F}\times_{\mathcal{H}}\mathcal{G}(U)=\mathcal{F}(U)\times_{\mathcal{G}(U)}\mathcal{H}(U) \]
+		where the right hand side is the homotopy fiber product of groupoids. It is easily verified that this gives a presheaf of groupoids and the descent condition holds since products commutes with limits. 
+	\end{exam}
+
+	\begin{defn}\label{Alg_morphisms_prop}
+		We define a morphism of stacks $\mathcal{M}\to\mathcal{N}$ to be representable if for all morphisms $U\to\mathcal{M}$ where $U$ is an affine scheme, we have $U\times_{\mathcal{M}}\mathcal{N}$ is also an affine scheme. 
+
+		Let $P$ be a property of schemes (i.e. surjective, quasi-compact, separated, etc.) preserved under pullbacks and local with respect to the chosen topology. Then we say a representable morphism of stacks $\mathcal{M}\to\mathcal{N}$ satisfies the property $P$ if for every map $U\to\mathcal{M}$ where $U$ is an affine scheme, we have $U\times_{\mathcal{M}}\mathcal{N}\to U$ satisfies the property $P$. 
+	\end{defn}
+
+	\begin{defn}\label{Substacks_extra_cond}
+		Let $\mathcal{M}$ be a stack. We define $\mathcal{N}$ to be a substack of $\mathcal{M}$ if it is a subobject of $\mathcal{M}$, or equivalently, the following conditions holds. 
+		\begin{enumerate}
+			\item For each $U$, $\mathcal{N}(U)$ is a union of some path-components of $\mathcal{M}(U)$. 
+			\item For each $V\to U$, $\mathcal{N}(U)\to\mathcal{N}(V)$ via restriction of $\mathcal{M}(U)\to\mathcal{M}(V)$ is well-defined. 
+			\item Let $\{U_i\to U\}$ be a cover, then $X\in\mathcal{N}(U)$ iff $X|_{U_i}\in\mathcal{N}(U_i)$. 
+		\end{enumerate}
+
+		We say $\mathcal{N}\to\mathcal{M}$ is an open (closed, or locally closed) substack if $\mathcal{N}$ is a substack of $\mathcal{M}$, and this morphism is representable and open (closed, or locally closed respectively). 
+	\end{defn}
+
+	\begin{defn}\label{Alg_stacks_top}
+		Let $\mathcal{M}$ be a stack over a scheme $S$. We define $\mathcal{M}$ to be a fpqc algebraic stack if the diagonal morphism $\mathcal{M}\to\mathcal{M}\times_S\mathcal{M}$ is representable, separated, and quasi-compact, and there is some scheme $X$ over $S$ and a surjective, flat, and quasi-compact morphism $X\to\mathcal{M}$. Here $X$ is called an atlas of $M$, which means fpqc locally, $\mathcal{M}$ looks like a scheme. 
+	\end{defn}
+
+	\begin{defn}\label{fpqc_top_fpqc_alg_stack}
+		Let $\mathcal{M}$ be a fpqc algebraic stack. We define the fpqc site over $\mathcal{M}$ with objects the morphisms $U\to\mathcal{M}$ where $U$ is an affine scheme, and we assign the fpqc topology on $U$. We define the structure sheaf $\mathcal{O}_{\mathcal{M}}(U=\Spec A)=A$. 
+
+		Equivalently, we may let the fpqc site over $\mathcal{M}$ with objects $U\to\mathcal{M}$ where $U$ is not necessarily an affine scheme, but we may apply descent to obtain the information of $U$ from an affine open cover of it. 
+	\end{defn}
+
+	\begin{defn}\label{QCoh_fpqc_alg_stack}
+		Let $\mathcal{M}$ be a fpqc algebraic stack, and we define a quasi-coherent sheaf $\mathcal{F}$ over $\mathcal{M}$ to be a $\mathcal{O}_{\mathcal{M}}$-module sheaf on $\Aff/\mathcal{M}$, such that $\mathcal{F}(\Spec A\to M)$ is an $A$-module, and for a lax commuting diagram (recall the definition of 2-morphisms in the category of stacks)
+		% https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXFNwZWMgQSJdLFsyLDAsIlxcU3BlYyBCIl0sWzEsMSwiXFxtYXRoY2Fse019Il0sWzAsMSwiZiJdLFsxLDIsInYiXSxbMCwyLCJ1IiwyXV0=
+		\[\begin{tikzcd}[ampersand replacement=\&]
+			{\Spec A} \&\& {\Spec B} \\
+			\& {\mathcal{M}}
+			\arrow["f", from=1-1, to=1-3]
+			\arrow["u"', from=1-1, to=2-2]
+			\arrow["v", from=1-3, to=2-2]
+		\end{tikzcd}\]
+		we have a morphism $\mathcal{F}(v)\to\mathcal{F}(u)$, such that $A\otimes_B\mathcal{F}(v)\simeq\mathcal{F}(u)$. As usual, this is an Abelian category, and we can talk of derived functors. 
+
+		Also, one may use $\Sch/\mathcal{M}$ and replace all modules in the above definition by corresponding quasi-coherent sheaves. 
+	\end{defn}
+
+	\begin{defn}\label{Hopf_algebd_comod}
+		Let $R$ be a ring. Then a Hopf algebroid over $R$ is a pair of commutative algebras over $R$, say $(A,\Gamma)$, such that $(\Spec A,\Spec\Gamma)$ becomes a internal groupoid in the category $\Aff_R$. We denote the sturcture morphisms by $\eta_L,\eta_R:A\to\Gamma$ the source and target, $\Delta:\Gamma\to\Gamma\otimes_A\Gamma$ the composition, $\varepsilon:\Gamma\to A$, and the inverse $c:\Gamma\to\Gamma$. 
+		
+		We define a left comodule $M$ of a Hopf algebroid $(A,\Gamma)$ to be a $A$-module $M$ equipped with a left $A$-linear map $\psi:M\to\Gamma\otimes_AM$, such that we have compositions 
+		\[ \id_M:M\xrightarrow{\psi}\Gamma\otimes_AM\xrightarrow{\varepsilon\otimes M}M \]
+		% https://q.uiver.app/#q=WzAsNCxbMCwwLCJNIl0sWzEsMCwiXFxHYW1tYVxcb3RpbWVzX0FNIl0sWzAsMSwiXFxHYW1tYVxcb3RpbWVzX0FNIl0sWzEsMSwiXFxHYW1tYVxcb3RpbWVzX0FcXEdhbW1hXFxvdGltZXNfQU0iXSxbMCwxLCJcXHBzaSJdLFsxLDMsIlxcRGVsdGFcXG90aW1lcyBNIl0sWzAsMiwiXFxwc2kiLDJdLFsyLDMsIlxcR2FtbWFcXG90aW1lc1xccHNpIiwyXV0=
+		\[\begin{tikzcd}[ampersand replacement=\&]
+			M \& {\Gamma\otimes_AM} \\
+			{\Gamma\otimes_AM} \& {\Gamma\otimes_A\Gamma\otimes_AM}
+			\arrow["\psi", from=1-1, to=1-2]
+			\arrow["\psi"', from=1-1, to=2-1]
+			\arrow["{\Delta\otimes M}", from=1-2, to=2-2]
+			\arrow["{\Gamma\otimes\psi}"', from=2-1, to=2-2]
+		\end{tikzcd}\]
+		We denote the category of left comodules of $(A,\Gamma)$ by $\coMod_{(A,\Gamma)}$. Here left is omitted since this category is equivalent to the category of right comodules via the inverse map. 
+	\end{defn}
+
+	\begin{const}\label{Stack_QCoh_comod}
+		In some cases, there is a more convenient incarnation of its category of quasi-coherent sheaves. Suppose we have an fpqc algebraic stack $\mathcal{M}$ with the atlas of the form $\alpha:\Spec A\to\mathcal{M}$, and that we have the diagonal $\mathcal{M}\to\mathcal{M}\times_S\mathcal{M}$ representable and affine (we remark here that affine implies quasi-compactness and separatedness), we have $\Spec\Gamma\simeq\Spec A\times_{\mathcal{M}}\Spec A$ is also affine, then investigating the Cech nerve of $\Spec A\to\mathcal{M}$, we obtain that $(A,\Gamma)$ has the structure of a flat Hopf algebroid, with the structure maps given as follows. 
+		% https://q.uiver.app/#q=WzAsNixbMywxLCJcXG1hdGhjYWx7TX0iXSxbMiwxLCJcXFNwZWMgQSJdLFsxLDEsIlxcU3BlYyBBXFx0aW1lc197XFxtYXRoY2Fse019fVxcU3BlYyBBIl0sWzAsMSwiXFxTcGVjIEFcXHRpbWVzX3tcXG1hdGhjYWx7TX19XFxTcGVjIEFcXHRpbWVzX3tcXG1hdGhjYWx7TX19XFxTcGVjIEEiXSxbMSwwLCJcXFNwZWNcXEdhbW1hIl0sWzAsMCwiXFxTcGVjXFxHYW1tYVxcdGltZXNfe1xcU3BlYyBBfVxcU3BlY1xcR2FtbWEiXSxbMSwwXSxbNCwyLCJcXHNpbWVxIiwyXSxbNSwzLCJcXHNpbWVxIiwyXSxbMiwxLCJwXzI9XFxldGFfUl4qIiwyLHsib2Zmc2V0IjozfV0sWzIsMSwicF8xPVxcZXRhX0xeKiIsMCx7Im9mZnNldCI6LTN9XSxbMSwyLCJcXHZhcmVwc2lsb25eKiIsMV0sWzIsMiwiY14qIiwxLHsicmFkaXVzIjotM31dLFszLDIsIlxcRGVsdGFeKiJdXQ==
+		\[\begin{tikzcd}[ampersand replacement=\&,column sep=large]
+			{\Spec\Gamma\times_{\Spec A}\Spec\Gamma} \& {\Spec\Gamma} \\
+			{\Spec A\times_{\mathcal{M}}\Spec A\times_{\mathcal{M}}\Spec A} \& {\Spec A\times_{\mathcal{M}}\Spec A} \& {\Spec A} \& {\mathcal{M}}
+			\arrow["\simeq"', from=1-1, to=2-1]
+			\arrow["\simeq"', from=1-2, to=2-2]
+			\arrow["{\Delta^*}", from=2-1, to=2-2]
+			\arrow["{c^*}"{description}, from=2-2, to=2-2, loop, in=305, out=235, distance=10mm]
+			\arrow["{p_2=\eta_R^*}"', shift right=3, from=2-2, to=2-3]
+			\arrow["{p_1=\eta_L^*}", shift left=3, from=2-2, to=2-3]
+			\arrow["{\varepsilon^*}"{description}, from=2-3, to=2-2]
+			\arrow[from=2-3, to=2-4]
+		\end{tikzcd}\]
+
+		We claim that $\QCoh(\mathcal{M})\simeq\coMod_{(A,\Gamma)}$. For $\mathcal{F}\in\QCoh(\mathcal{M})$, let $M=\mathcal{F}(\Spec A\to M)$, and $p_1:\Spec\Gamma\to\Spec A$ identifies $\Gamma\otimes_AM$ as $\mathcal{F}(\alpha\circ p_1)$, and $p_2:\Spec\Gamma\to\Spec A$ induces a map $M\to\Gamma\otimes_AM$, which is the structure morphism of the comodule. This clearly gives a functor $\QCoh(\mathcal{M})\to\coMod_{(A,\Gamma)}$. 
+		
+		For the inverse of the above functor, let $M$ be a comodule, and we attempt to construct a quasi-coherent sheaf $\mathcal{F}$ over $\mathcal{M}$ with $\mathcal{F}(\Spec A\to\mathcal{M})=M$. Note that we have for any $\Spec B\to\mathcal{M}$, $\Spec A\times_{\mathcal{M}}\Spec B$ an affine scheme, say $\Spec C$, since $\mathcal{M}\to\mathcal{M}\times_S\mathcal{M}$ is affine. $\Spec A\to\mathcal{M}$ is flat and surjective, so $\Spec C\to\Spec B$ is flat and surjective, hence faithfully flat. Finally, we have 
+		\[ \Spec C\times_{\Spec B}\Spec C\simeq(\Spec A\times_{\mathcal{M}}\Spec B)\times_{\Spec B}(\Spec A\times_{\mathcal{M}}\Spec B)\simeq\Spec\Gamma\times_{\mathcal{M}}\times_{\mathcal{M}}\Spec B \]
+		and by the structure morphism of the comodule, we obtain a descent data of $M\otimes_AC$ over $B$, and by the faithfully flat descent theorem, we may extend $\mathcal{F}$ to $\Spec B\to\mathcal{M}$. 
+	\end{const}
+
+	\begin{defn}\label{Geom_pts_stacks}
+		For an fpqc algebraic stack $\mathcal{M}$, similar to the construction in \cref{Fun_of_pts_geom_pts_R_fun}, we define the space of geometric points $|\mathcal{M}|$ of $\mathcal{M}$ to be the set of equivalence classes of maps $\Spec k\to\mathcal{M}$, where $\Spec k\to\mathcal{M}$ and $\Spec k'\to\mathcal{M}$ are equivalent if there is some common extension $k''$ of $k$ and $k'$, and $\Spec k''\to\mathcal{M}$ factors through the extensions. This can be made a topological space with open sets defined by $|\mathcal{U}|$, where $\mathcal{U}\inj\mathcal{M}$ are open substacks. 
+	\end{defn}
+
+	\begin{lemma}\label{Geom_pts_surj_pullback}
+		For algebraic stacks $\mathcal{F}\to\mathcal{H}$ and $\mathcal{G}\to\mathcal{H}$, the pullback $|\mathcal{F}\times_\mathcal{H}\mathcal{G}|\to|\mathcal{F}|\times_{|\mathcal{H}|}|\mathcal{G}|$ is surjective. If $\mathcal{F}\to\mathcal{H}$ is a closed substack and $\mathcal{G}$ is a scheme with $\mathcal{G}\to\mathcal{H}$ a fpqc cover, then this map is 1-1. 
+	\end{lemma}
+	\begin{proof}
+		The surjection is direct by verifying the universal property of pullbacks, and for the case where $\mathcal{G}$ is a scheme, both spaces are geometric points of schemes, so we may verify this directly. 
+	\end{proof}
+
+	\begin{defn}\label{Closed_substacks_eff_Cart_div}
+		We first recall that closed subschemes corresponds to sheaf of ideals. Similarly, a sheaf of ideal $\mathcal{I}\subseteq\mathcal{O}_{\mathcal{M}}$ of the structure sheaf also defines a closed substack. We will define this closed substack via the functor of points. 
+		
+		Recall that for $X\subseteq Y$ a closed subscheme of a scheme defined via a sheaf of ideals $\mathcal{I}$, we can identify $X$ by the functor of points $X(A)\simeq\{f\in Y(A)|f^*\mathcal{I}\simeq0\}$. Here we follow the same process. 
+
+		Recall that $\mathcal{O}_\mathcal{M}$ is defined by letting for each $f:\Spec A\to\mathcal{M}$, $\mathcal{O}_\mathcal{M}(\Spec A)=f^*\mathcal{O}_M=A$, so a sheaf ideal would be for each $f:\Spec A\to\mathcal{M}$, $\mathcal{I}(\Spec A)=f^*\mathcal{I}=I_A$, where $I_A$ is an ideal of $A$. Therefore, we define the substack $\mathcal{N}$ defined by this sheaf of ideals to be 
+		\[ \mathcal{N}(U)=\{f\in\pi_0(\mathcal{M}(U))|f^*\mathcal{I}=0\} \]
+		here $\pi_0(\mathcal{M}(U))$ corresponds to isomorphic classes of actual maps $U\to\mathcal{M}$ (by the Yoneda lemma, 
+		\[ \mathcal{M}(U)\simeq\Hom_{\Stk}(\Spec U,\mathcal{M}) \] 
+		is a groupoid by the 2-morphisms in the category), so $\mathcal{N}(U)$ is a union of the connected components of maps satisfying the above conditions. Moreover, we have an exact sequence in $\QCoh(\mathcal{M})$ 
+		\[ 0\to\mathcal{I}\to\mathcal{O}_{\mathcal{M}}\to i_*\mathcal{O}_{\mathcal{N}}\to0 \]
+
+		Then notice that sheaf of ideals locally free of rank 1 corresponds to a section of an invertible sheaf via tensoring the above exact seqeuence with $\mathcal{I}^{-1}$, and hence 
+		\[ 0\to\mathcal{O}_{\mathcal{M}}\xrightarrow{s}\mathcal{I}^{-1}\to\mathcal{O}_{\mathcal{N}}\otimes\mathcal{I}^{-1}\to0 \]
+		This construction is called the effective Cartier divisors, which we will use later. The intuition for this construction is that the vanishing locus of a section of a line bundle is a closed subspace. 
+	\end{defn}
+
+	\begin{const}\label{Red_closed_substack}
+		For a fpqc algebraic stack $\mathcal{M}$, we may construct a closed substack called the reduced substack. Let $\mathcal{C}$ denote the category with objects closed substacks $\mathcal{N}\subseteq\mathcal{M}$ inducing an isomorphism on geometric points $|\mathcal{N}|\to|\mathcal{M}|$, and morphisms inclusions of substacks. Then let $\mathcal{I}_{\mathcal{N}}$ denote the sheaf of ideals corresponding to $\mathcal{N}$, and let $\mathcal{I}_{red}:=\ilim_{\mathcal{C}^{\op}}\mathcal{I}_{\mathcal{N}}$. We let $\mathcal{M}_{red}$ be the closed substack of $\mathcal{M}$ corresponding to $\mathcal{I}_{red}$. This is the initial (hence somehow smallest) closed substack with the set of geometric points isomorphic to $|\mathcal{M}|$. 
+	\end{const}
+
+	This somewhat implies that the reduced closed substacks of $\mathcal{M}$ is completely controlled by its geometric points. 
+
+\chapter{The moduli stack of formal groups}
+
+\section{Coordinates and descent of formal groups}
+
+	\begin{defn}\label{Formal_grp_law_iso_fun}
+		We let $\fgl$ denote the functor sending a ring to the set of formal group laws over it. Then we let $\Isofgl$ denote the functor sending a ring to the set of isomorphisms of formal group laws. 
+	\end{defn}
+
+	\begin{thm}[Lazard]\label{Lazard_thm}
+		$\fgl$ is representable by $L=\mathbb{Z}[b_1,\dots]$, $\Isofgl$ is representable by $W=\mathbb{Z}[a_0^{\pm1},a_1,\dots]\otimes L$. 
+	\end{thm}
+	\begin{proof}
+		We omit the proof of the first assertion, and simply give the construction of the isomorphism. Let $C_n(x,y)=d_n^{-1}((x+y)^n-x^n-y^n)$, where $d_n=p$ if $n$ is a power of $p$ and $1$ otherwise. Then any formal group law is of the form 
+		\[ F(x,y)=x+y+b_1C_2(x,y)+b_2C_3(x,y)+\cdots \]
+		modulo $(b_1,b_2,\dots)^2$, and by analysing the irreducibles we obtain a non-canonical isomorphism $L\simeq\mathbb{Z}[b_1,\dots]$. 
+
+		For the second assertion, note that an isomorphism of formal group laws $F\to F'$ is a map $f$ such that $f(F(x,y))=F(f(x),f(y))$, so $f$ corresponds to invertible formal power series, hence $\Isofgl$ is representable by the above polynomial algebra. 
+	\end{proof}
+
+	\begin{coro}
+		$(L,W)$ is a Hopf algebroid. 
+	\end{coro}
+	\begin{proof}
+		By construction. 
+	\end{proof}
+
+	\begin{const}\label{Mod_stack_fg_fgl}
+		We define the moduli stack of formal groups $\mathcal{M}_{\fg}$ to be the presheaf $\Sch^{\op}\to\Grpd$ by sending a scheme $S$ to the groupoid with objects formal groups over $S$ and morphisms the isomorphisms of formal groups. For a map of schemes $S\to T$ and a formal group $H$ over $T$, we define $f^*T$ to be the pullback of functors
+		% https://q.uiver.app/#q=WzAsNCxbMCwwLCJmXipHIl0sWzEsMCwiRyJdLFsxLDEsIlQiXSxbMCwxLCJTIl0sWzAsM10sWzAsMV0sWzEsMl0sWzMsMl0sWzAsMiwiIiwxLHsic3R5bGUiOnsibmFtZSI6ImNvcm5lci1pbnZlcnNlIn19XV0=
+		\[\begin{tikzcd}[ampersand replacement=\&,column sep=large]
+			{f^*G} \& G \\
+			S \& T
+			\arrow[from=1-1, to=1-2]
+			\arrow[from=1-1, to=2-1]
+			\arrow["\ulcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+			\arrow[from=1-2, to=2-2]
+			\arrow[from=2-1, to=2-2]
+		\end{tikzcd}\]
+		and $f^*G$ inherits a natural formal group structure over $S$. Note also that isomorphisms of formal groups pulls back, so this defines a well-defined morphism of groupoids. 
+
+		We define the moduli stack of formal group laws $\mathcal{M}_{\fgl}$ to be the presheaf $\Aff^{\op}\to\Grpd$ by sending an affine scheme $\Spec A$ to the groupoid whose object is the formal group laws over $A$, and morphisms the isomorphisms of formal group laws, and for a morphism of affine schemes $\Spec B\to\Spec A$ (corresponding to a ring $f:A\to B$) the pushforward of formal group laws. Note that isomorphism of formal group laws also pushes forward, so this defines a functor $\Aff^{\op}\to\Grpd$. 
+
+		Note that a formal group law over $A$ defines a formal group over $A$, so we have a forgetful morphism $\mathcal{M}_{\fgl}\to\mathcal{M}_{\fg}$. We do not yet know whether if they satisfy descent by now, but it will turn out that $\mathcal{M}_{\fg}$ is a fpqc algebraic stack, while $\mathcal{M}_{\fgl}$ is not even a stack. 
+	\end{const}
+
+	To better understand the morphism $\mathcal{M}_{\fgl}\to\mathcal{M}_{\fg}$, we give in the following another characterization of formal group laws. 
+
+	\begin{const}\label{Coord_formal_grp}
+		Let $G$ be a formal group over a scheme $S$, and we write $\Inf^n_S(G)=G_n$ for short, then we define a coordinate of $G$ to be a global section 
+		\[ x\in\Gamma(S;p_*\mathcal{O}_G)=\ilim\Gamma(S;p_*\mathcal{O}_{G_n}) \]
+		where $p:G_n\to S$ is the structure map. 
+
+		Equivalently, a coordinate of $G$ is an isomorphism $x:G\to S\times\widehat{\mathbb{A}}^1$ of formal schemes over $S$, which gives the above coordinate by the following diagram. 
+		% https://q.uiver.app/#q=WzAsMyxbMSwxLCJTIl0sWzAsMCwiRyJdLFsyLDAsIlNcXHRpbWVzXFx3aWRlaGF0e1xcbWF0aGJie0F9XjF9Il0sWzEsMCwicCIsMl0sWzIsMCwicSJdLFsxLDIsIngiXV0=
+		\[\begin{tikzcd}[ampersand replacement=\&,column sep=large]
+			G \&\& {S\times\widehat{\mathbb{A}}^1} \\
+			\& S
+			\arrow["x", from=1-1, to=1-3]
+			\arrow["p"', from=1-1, to=2-2]
+			\arrow["q", from=1-3, to=2-2]
+		\end{tikzcd}\]
+		we would have $x_*:q_*\mathcal{O}_{S\times\widehat{\mathbb{A}}^1}\simeq\mathcal{O}_S[[T]]\to p_*\mathcal{O}_G$, which preserves the structure map $\mathcal{O}_S$, so the only information would be a topologically nilpotent element $T$, which is our orietnation. The converse construction is similar. 
+	\end{const}
+
+	\begin{thm}\label{Formal_grp_law_coord}
+		Let $S=\Spec A$, then a formal group $G$ equippped with a coordinate $x$ is equivalent to the data of a formal group law $F\in A[[x,y]]$. 
+	\end{thm}
+	\begin{proof}
+		Firstly note that for a formal group law $F$ over $A$, there is an associated formal group $G_F/\Spec A$, therefore the element $x\in A[[x]]\simeq\Gamma(S,p_*\mathcal{O}_{G_F})$ is the preferred orientation. 
+		
+		For the converse, directly apply the definition of the coordinate as an isomorphism $x:G\to S\times\widehat{\mathbb{A}}^1$ as in \cref{Coord_formal_grp}, which gives a formal group law. 
+	\end{proof}
+
+	The construction of coordinates allows us to extend the definition of $\mathcal{M}_{fgl}$ on non-affine schemes. 
+
+	\begin{coro}\label{Formal_grp_law_coord_coro}
+		We define $\mathcal{M}_{\coord}:\Sch^{\op}\to\Grpd$ to be the sub-moduli stack (note that it is not a stack, it satisfies no descent) of formal groups equipped with a coordinate, with morphisms the isomorphisms of formal groups not necessarily preserving the coordinates. Then we have $\mathcal{M}_{\coord}\simeq\mathcal{M}_{\fgl}$ viewed as stacks over the category of affine schemes. 
+	\end{coro}
+
+	Now we attempt to analyse the properties of $\mathcal{M}_{\fg}$. 
+
+	\begin{thm}\label{Mod_stack_fg_desc}
+		$\mathcal{M}_{\fg}$ is a stack in the fpqc topology. 
+	\end{thm}
+	\begin{proof}
+		By the definition of a stack in \cref{Stacks_defn}, it suffices to verify that for two formal groups $G,H$ over some scheme $S$, the isomorphisms $\Iso_S(G,H)$ sending $i:U\to S$ of schemes to isomorphisms $i^*G\to i^*H$ is a sheaf in the fpqc topology, and that for a faithfully flat quasi-compact morphism $T\to S$, formal groups satisfies descent with respect to this morphism. 
+
+		Before verifying the above for formal groups, we first verify the above for the formal Lie varieties. Firstly, obviously the isomorphisms of formal Lie varieties form a fpqc sheaf by the faithfully flat descent theorem for affine schemes in \cref{Faithfully_flat_desc}. Then, consider a faithfully flat morphism $T\to S$, and a formal Lie variety $X/T$ with a map of formal Lie varieties $\psi:p_1^*X\to p_2^*X$, by passing to the infinitesimal neighborhoods $X_n$, we first see that since $X_n$ is affine over $T$, by the faithfully flat descent theorem for affine schemes in \cref{Faithfully_flat_desc}, we have a ind-infinitesimal scheme over $Y/S$ whose infinitesimal neighborhoods are affine and its pullback to $T$ is $X$. Then it suffices to verify that $Y$ is a formal Lie variety over $S$. For the relative conormal sheaf, note that since $f^*Y=X$, we have $f^*\omega_{S/Y}\simeq\omega_{T/X}$. By the local freeness of $\omega_{T/X}$, we have the local freeness of $\omega_{S/Y}$. Finally, the map $\Sym^*_S(\omega_{S/Y})\simeq\mathcal{A}^*_{S/Y}$ is an isomorphism since its pullback to $X$ is an isomorphism. 
+
+		Now we prove the descent for formal groups. By the descent for formal Lie varieties, it remains to show that if $(X,\psi)$ is a descent problem for formal groups over $T$, the solution to the descent problem $Y/S$ is also a formal group. This is done by descending the multiplication morphism $X\times_TX\to X$ to $Y\times_SY\to Y$. 
+	\end{proof}
+
+	We then consider the algebraicity of $\mathcal{M}_{\fg}$. 
+
+	\begin{lemma}\label{Mod_stack_fg_alg_lem_1}
+		Suppose we have $S_i=\Spec A_i$ for $i=1,2$, equipped with formal group laws $F_1,F_2$, which induces maps $S_i\to\mathcal{M}_{\fg}$, then we have $S_1\times_{\mathcal{M}_{\fg}}S_2$ is an affine scheme. Explicitly, suppose the formal group laws are classified by maps $\Spec A_i\to\Spec L$, then we have $S_1\times_{\mathcal{M}_{\fg}}S_2\simeq\Spec(A_1\otimes_LW\otimes_LA_2)$. 
+	\end{lemma}
+	\begin{proof}
+		By \cref{Formal_grp_law_coord_coro}, we have the $\mathcal{M}_{\coord}\to\mathcal{M}_{\fg}$ is fully faithful. But by assumption, the maps $S_i\to\mathcal{M}_{\fg}$ factors through the substack $\mathcal{M}_{\coord}\to\mathcal{M}_{\fg}$. Thus the above pullback is isomorphic to $S_1\times_{\mathcal{M}_{\coord}}S_2\simeq S_1\times_{\mathcal{M}_{\fgl}}S_2$. By the definition of the pullback of stacks, for any ring $A$, the groupoid $S_1\times_{\mathcal{M}_{\fgl}}S_2(\Spec A)$ has object the triples $(f_1,f_2,\alpha)$, where $f_i:\Spec A\to S_i$ and $\alpha:(f_1)_*F_1\to(f_2)_*F_2$ is an isomorphism of formal group laws over $A$, and no morphisms since $S_1$ and $S_2$ are schemes. This obviously identifies the pullback as $\Spec(A_1\otimes_LW\otimes_LA_2)$. 
+	\end{proof}
+
+	\begin{lemma}\label{Mod_stack_fg_alg_lem_2}
+		Let $F_i$ ($i=1,2$) be formal group laws over a ring $A$, and let $G_i\to S\simeq\Spec A$ be the correpsonding formal groups. Then the sheaf $\Iso_S(G_1,G_2)$ is an affine scheme over $S$. Explicitly, suppose the formal group laws are classified by maps $\Spec A_i\to\Spec L$, then we have an isomorphism 
+		\[ \Iso_S(G_1,G_2)\simeq\Spec(A\otimes_{A\otimes A}(A\otimes_LW\otimes_LA)) \]
+	\end{lemma}
+	\begin{proof}
+		This follows from \cref{Mod_stack_fg_alg_lem_1}, where the extra factor $A\otimes_{A\otimes A}-$ comes from the fact that the in the triple $(f_1,f_2,\alpha)$, $f_1=f_2$. 
+	\end{proof}
+
+	\begin{thm}\label{Mod_stack_fg_alg_thm_1}
+		The stack $\mathcal{M}_{\fg}$ is an fpqc algebraic stack, and let $\Spec L$ be the spectrum of the Lazard ring, and let $G_F$ be the formal group associated to the universal formal group law, then $G_F:\Spec L\to\mathcal{M}_{\fg}$ is the atlas. 
+	\end{thm}
+	\begin{proof}
+		We first prove that the diagonal map $\mathcal{M}_{\fg}\to\mathcal{M}_{\fg}\times\mathcal{M}_{\fg}$ is representable, quasi-compact, and separated. Consider an affine scheme $S$ and a map $S\to\mathcal{M}_{\fg}\times\mathcal{M}_{\fg}$, which gives two formal groups $G_1,G_2$ over $S$. Then the pullback $S\times_{\mathcal{M}_{\fg}\times\mathcal{M}_{\fg}}\mathcal{M}_{\fg}$ evaluated on an affine scheme $U$ is a groupoids with objects given by quadruples $(f,G,\alpha_1,\alpha_2)$, where 
+		\begin{enumerate}
+			\item $f:U\to S$ is a map of affine schemes. 
+			\item $G$ a formal group over $U$. 
+			\item $\alpha_1:G\to f^*G_1$, $\alpha_2:G\to f^*G_2$ isomorphisms of formal groups. 
+		\end{enumerate}
+		and morphisms given by an isomorphism of formal groups over $U$ $f:G\to G'$ such that the following diagram commutes 
+		% https://q.uiver.app/#q=WzAsMyxbMCwwLCIoRyxHKSJdLFsyLDAsIihHJyxHJykiXSxbMSwxLCIoZl4qR18xLGZeKkdfMikiXSxbMCwyLCIoXFxhbHBoYV8xLFxcYWxwaGFfMikiLDJdLFsxLDIsIihcXGFscGhhXzEnLFxcYWxwaGFfMicpIl0sWzAsMSwiKGYsZikiXV0=
+		\[\begin{tikzcd}[ampersand replacement=\&]
+			{(G,G)} \&\& {(G',G')} \\
+			\& {(f^*G_1,f^*G_2)}
+			\arrow["{(f,f)}", from=1-1, to=1-3]
+			\arrow["{(\alpha_1,\alpha_2)}"', from=1-1, to=2-2]
+			\arrow["{(\alpha_1',\alpha_2')}", from=1-3, to=2-2]
+		\end{tikzcd}\]
+		This implies that the groupoid is discrete. In particular, this groupoid can be identified with the set of isomorphisms $f^*G_1\simeq f^*G_2$, which is precisely the sheaf $\Iso_S(G_1,G_2)$. This, by \cref{Mod_stack_fg_alg_lem_2}, is affine over $S$. Therefore the diagonal is representable and affine. 
+
+		We then check that for all morphisms $G:S\to\mathcal{M}_{\fg}$ classifying a formal group $G$ with $S\simeq\Spec A$, we have $S\times_{\mathcal{M}_{\fg}}\Spec L\to S$ is quasi-compact and flat (it is obviously surjective). By \cref{Mod_stack_fg_alg_lem_1}, this morphism is affine hence quasi-compact. Recall that by \cref{Loc_form_form_Lie_var}, every formal group admits a coordinate Zariski locally, hence there is a faithfully flat morphism $f:T\to S$ (where $T=\Spec B$) such that $f^*G$ admits a coordinate, and hence $T\times_{\mathcal{M}_{\fg}}\Spec L\simeq\Spec(B\otimes_LW)\to T$ is flat by the construction of $W$. But this is the base change of $S\times_{\mathcal{M}_{\fg}}\Spec L\to S$ along $T\to S$, hence the morphism in question is also flat. 
+	\end{proof}
+
+	\begin{coro}
+		Since $\Delta:\mathcal{M}_{\fg}\to\mathcal{M}_{\fg}\times\mathcal{M}_{\fg}$ is affine, we may apply the construction in \cref{Stack_QCoh_comod}. Noticing that we have the identification $\Spec W\simeq\Spec L\times_{\mathcal{M}_{\fg}}\Spec L$, we may identify $\QCoh(\mathcal{M}_{\fg})\simeq\coMod_{(L,W)}$. 
+	\end{coro}
+
+	\begin{thm}\label{Mod_stack_fg_alg_thm_2}
+		$\mathcal{M}_{\coord}\to\mathcal{M}_{\fg}$ exhibits $\mathcal{M}_{\fg}$ as the stackification of $\mathcal{M}_{\coord}$. 
+	\end{thm}
+	\begin{proof}
+		We first remark that the coordinates are in some sense obstructions to the descent of formal groups, since some formal groups over schemes does not admit any coordinates. Therefore the stackification of $\mathcal{M}_{\coord}$ should behaves like removing some information on the coordinates. 
+
+		Let $S$ be a scheme, and let $G$ be a formal group over $S$. Then we define a representative of an equivalence class of coordinates to be a faithfully flat and quasi-compact map $T\to S$ and a coordinate $[x]$ on $f^*G$ over $T$. Suppose we have two representatives of coordinates $f_i:T_i\to S$ and $[x_i]$ a coordinate on $f_i^*G$ over $T_i$. Then we say they are equivalent if there is some $f:T\to S$ such that $f$ factors through $f_i$ and the pullback of $[x_i]$ to $T$ is equal. This is a sheaf in the fpqc topology by the faithfully flat descent. 
+
+		Then we define $\widetilde{\mathcal{M}}_{\coord}$ as the stack of formal groups equipped with an equivalence class of coordinates (recall that $\mathcal{M}_{\coord}$ is the stack of formal groups equipped with an actual coordinate). Similar to the proof of descent of $\mathcal{M}_{\fg}$, $\widetilde{\mathcal{M}}_{\coord}$ is actually a stack. Moreover, there is a natural map $\mathcal{M}_{\coord}\to\widetilde{\mathcal{M}}_{\coord}\to\mathcal{M}_{\fg}$ defined using the obvious maps. We first show that $\widetilde{\mathcal{M}}_{\coord}$ is the stackification of $\mathcal{M}_{\coord}$, and then show that $\widetilde{\mathcal{M}}_{\coord}\to\mathcal{M}_{\fg}$ is an equivalence. 
+
+		Firstly, suppose we have a morphism of presheaves of groupoids $\lambda:\mathcal{M}_{\coord}\to\mathcal{N}$ where $\mathcal{N}$ is a stack, we show that there is a factoring through $\widetilde{\mathcal{M}}_{\coord}$. To construct the factoring, consider an object $(G,[x])\in\widetilde{\mathcal{M}}_{\coord}(S)$, we choose a fpqc cover $p:T\to S$ such that $p^*G$ has a coordinate $x$ representing $[x]$. Then $T\to S$ gives an effective descent data for $G$, say $(p^*G,\varphi)$. Then we let $\widetilde{\lambda}(G,[x])$ be the descent of $\lambda(p^*G,\varphi)$ from $T$ to $S$ as an object in $\mathcal{N}(S)$. 
+
+		Then we show that $\widetilde{\mathcal{M}}_{\coord}\to\mathcal{M}_{\fg}$ is an equivalence. We consider some scheme $S$, and take a formal group $G/S$. We wish to show that the homotopy fiber of $\widetilde{\mathcal{M}}_{\coord}(S)\to\mathcal{M}_{\fg}(S)$ at $G$ is contractible. This is by definition the colimit $\ilim_{T\to S}\coord(G/T)$ (where $\coord(G/T)$ is the groupoid with objects the coordinates of $G$ over $T$ and morphisms the isomorphisms of formal groups respecting the coordinates). Note that isomorphisms of formal groups respecting the coordinates is canonical, so $\coord(G/T)$ is either contractible or empty depending on whether $G$ has a coordinate over $T$. Therefore this gives a contractible colimit. 
+	\end{proof}
+
+	\begin{thm}\label{Mod_stack_fg_alg_thm_3}
+		Let $\Lambda=\Spec\mathbb{Z}[a_0^{\pm1},a_1,\dots]$ denote the algebraic group of formal power series invertible under composition with multiplication given by composition. Then $\Lambda$ acts on $\Spec L$ given by the change of coordinates of formal group laws, then we have $\mathcal{M}_{FG}\simeq[\Spec L/\Lambda]$
+	\end{thm}
+	\begin{proof}
+		Expanding definitions, $[\Spec L/\Lambda](U)$ is equivalent to the groupoid having objects pairs $(P\to U,\alpha_P)$, where $P\to U$ is a principal $\Lambda$-bundle, and $\alpha_P$ is a $\Lambda$-equivariant map $P\to\Spec L$, and morphisms the maps of principal bundles. Therefore we attempt to connect each $\Lambda$-principal bundle over $U$ to a formal group, and prove that this is 1-1. Moreover, we must be able to transfer the isomorphisms canonically between this equivalence. 
+
+		We first give the connection. For $G$ a formal group over $S$, we let $\coord_G$ denote the scheme over $S$ given by the functor of points, sending $f:U\to S$ to the set of coordinates of $f^*G$ over $U$. This is clearly affine over $S$, and by definition it is a $\Lambda$-principal bundle (since the set of coordinates in $A[[x]]$ is the set of formal power series invertible under composition forgetting the unit, which gives a natural setting of a $\Lambda$-principal bundle). Note that we have a $\Lambda$-equivariant morphism $\coord_G\to\Spec L$ is given by assigning $x\in\coord_G(U)$ to its corresponding formal group law $G_x\in\Spec L(U)$. Moreover, for an isomorphism $G\to H$ of formal groups, we clearly have a canonical isomorphism $\coord_G\to\coord_H$. 
+
+		Therefore, it suffices to construct for each principal bundle $P\to S$ with an equivariant map $P\to\Spec L$ a formal group $G_P$, and for an isomorphism $(P\to S)\to(Q\to S)$, an isomorphism of formal groups $G_P\to G_Q$. We pick a trivialization of the principal bundle $P\to S$ over a faithfully flat and quasi-compact map $f:T\to S$ (that is, $f^*P\to T$ is a trivial $\Lambda$-principal bundle), and there is a map $f^*P\to\Spec L$. Then note that the composition $f^*P\to\Spec L\to\mathcal{M}_{\fg}$ is $\Lambda$-invariant, so factors through the projection $f^*P\to T$. This gives a formal group over $T$. And then by faithfully flat descent, we may define a formal group over $S$. The isomorphism required above is also direct by this construction. 
+	\end{proof}
+
+	After all these preliminaries, we may begin to connect the above theory to chromatic homotopy theory. We first give another characterization of the second page of the Adams-Novikov spectral sequence. 
+
+	Before this, we first give an algebraic characterization of gradings. 
+
+	\begin{lemma}\label{Z_grd_equiv_G_m_action}
+		A $\mathbb{Z}$-grading on a ring $A$ is equivalent to a $\mathbb{G}_m$ (the multiplicative group) action on the spectrum $\Spec A$. 
+	\end{lemma}
+	\begin{proof}
+		We let the coaction be given by $\psi:A\to A\otimes\mathbb{Z}[t^{\pm1}]$. Then we let $A^n:=\{x\in A|\psi(x)=x\otimes t^n\}$. This, upon verifying other properties, gives a graded ring. 
+	\end{proof}
+
+	\begin{const}\label{Grading_comod_stack}
+		Recall that the functor sending a ring to the formal group laws is representable by $\Spec L$, where $L=\mathbb{Z}[b_1,b_2,\dots]$ and the isomorphisms of formal group laws is representable by $\Spec W$, where $W=L[a_0^{\pm1},a_1,\dots]$. Now, we consider the strict isomorphisms of formal group laws, which is a formal power series $f=x+a_1x^2+\cdots$, and $F(f(x),f(y))=f(F'(x,y))$. Clearly the strict isomorphisms of formal group laws is representable by $\Spec W_0$. By definition, $(L,W_0)$ is also an Hopf algebroid. 
+
+		Now we investigate the relation between the Hopf algebroids $(L,W_0)$ and $(L,W)$. We first note that we have a natural grading structure on $L$ given by $\mathbb{G}_m\act\Spec L$, $\lambda F(x,y)=\lambda^{-1}F(\lambda x,\lambda y)$, where $F\in\Spec L(A)$, $\lambda\in A^\times$. Or equivalently, we say in $L\simeq\mathbb{Z}[b_1,\dots]$ we have $b_i$ is of degree $i$. 
+
+		Then we let $P=\mathbb{Z}[a_0^{\pm1},a_1,\dots]$ and $P_0=\mathbb{Z}[a_1,\dots]$ as the underlying ring of the spectrum of invertible formal power series (we previously defined $\Lambda=\Spec P$ and we now define $\Lambda_0=\Spec P_0$). We notice that $W\simeq L\otimes P$, while $W_0\simeq L\otimes P_0$, and moreover we have $P\simeq P_0\otimes\mathbb{Z}[a_0^{\pm1}]$. This is somewhat the process of adding a free grading. We make this more explicit. 
+
+		Note that in the identification $P\simeq P_0\otimes\mathbb{Z}[a_0^{\pm1}]$ can be viewed in terms of a semidirect product of algebraic groups. Note that the ring $P_0$ can be viewed as a graded ring since $a_i$ is the coefficient of $x^{i+1}$, hence can be endowed with the grading $i$. Therefore we have an action $\Lambda_0\curvearrowleft H$, and hence we have $\Lambda\simeq\Lambda_0\ltimes H$. By definition of a semidirect product, a right $\Lambda$ action on some scheme $X$ is equivalent to the data of a right $\Lambda_0$ action and a right $H$-action which is compatible in the sense that for all rings $A$ and $x\in X(A)$, $g\in\Lambda_0(A)$, and $u\in H(A)$, we have $x(g,u)=(xu)(gu)$. Here the intuition for $gu$ would be some conjugate action $u^{-1}gu$, so the above line seems to make sense. This allows us to investigate the difference between the quotient stacks $[\Spec L/\Lambda_0]$ and $[\Spec L/\Lambda]$. 
+
+		Note that the embedding $\Lambda_0\inj\Lambda$ gives a projection $[X/\Lambda_0]\to[X/\Lambda]$ by sending a $\Lambda_0$ principal bundle $P\to U$ to the induced bundle $P\times_{\Lambda_0}\Lambda\to U$ equipped with the natural morphism to $\Spec L$. Therefore this map is representable and faithfully flat, since $\Lambda_0$ and $\Lambda$ are flat group schemes, and surjectivity of this map is similar to the surjectivity of $X\to[X/G]$. 
+		
+		Then for a commutative ring $A$ and $P_0$ a $\Lambda_0$-principal bundle over $\Spec A$. Then for $u\in H(A)$, we define $P^u$ to be a principal bundle with underlying scheme isomorphic to the one of $P$, but with a different $\Lambda_0$ action given by $sg:=s(gu)$. Then the $\Lambda_0$-equivariant morphism $\alpha:P\to X$ induces another $\Lambda_0$-equivariant morphism $\alpha^u:P^u\to X$, explicitly given by $\alpha^u(s)=\alpha(s)u^{-1}$, here $u^{-1}$ is the action of $H(A)$ on $X(A)$. Finally, we have $P\times_{\Lambda_0}\Lambda\to P^u\times_{\Lambda_0}\Lambda$ a morphism of principal bundles by conjugation by $u$ in the second variable. This gives, by the functor of points of stacks, gives a morphism $[X/\Lambda_0]\times H\to[X/\Lambda_0]\times_{[X/\Lambda]}[X/\Lambda_0]$, which turns out to be an equivalence. This is the incarnation of the so-called Galois descent. 
+
+		Therefore, we have the following identification of the Cech nerve % https://q.uiver.app/#q=WzAsMTAsWzQsMCwiW1gvXFxMYW1iZGFdIl0sWzMsMCwiW1gvXFxMYW1iZGFfMF0iXSxbMiwwLCJbWC9cXExhbWJkYV8wXVxcdGltZXNfe1tYL1xcTGFtYmRhXX1bWC9cXExhbWJkYV8wXSJdLFsyLDEsIltYL1xcTGFtYmRhXzBdXFx0aW1lc1xcbWF0aGJie0d9X20iXSxbMSwwLCJbWC9cXExhbWJkYV8wXVxcdGltZXNfe1tYL1xcTGFtYmRhXX1bWC9cXExhbWJkYV8wXVxcdGltZXNfe1tYL1xcTGFtYmRhXX1bWC9cXExhbWJkYV8wXSJdLFsxLDEsIltYL1xcTGFtYmRhXzBdXFx0aW1lc1xcbWF0aGJie0d9X21cXHRpbWVzXFxtYXRoYmJ7R31fbSJdLFszLDEsIltYL1xcTGFtYmRhXzBdIl0sWzQsMSwiW1gvXFxMYW1iZGFdIl0sWzAsMCwiXFxjZG90cyJdLFswLDEsIlxcY2RvdHMiXSxbMSwwXSxbMiwzLCJcXHNpbWVxIl0sWzQsNSwiXFxzaW1lcSJdLFsxLDJdLFsyLDEsIiIsMSx7Im9mZnNldCI6LTJ9XSxbMiwxLCIiLDEseyJvZmZzZXQiOjJ9XSxbNCwyXSxbMiw0LCIiLDEseyJvZmZzZXQiOjJ9XSxbMiw0LCIiLDEseyJvZmZzZXQiOi0yfV0sWzQsMiwiIiwxLHsib2Zmc2V0IjotNH1dLFs0LDIsIiIsMSx7Im9mZnNldCI6NH1dLFs2LDddLFs2LDNdLFszLDYsIiIsMSx7Im9mZnNldCI6LTJ9XSxbMyw2LCIiLDEseyJvZmZzZXQiOjJ9XSxbNSwzXSxbMyw1LCIiLDEseyJvZmZzZXQiOi0yfV0sWzMsNSwiIiwxLHsib2Zmc2V0IjoyfV0sWzUsMywiIiwxLHsib2Zmc2V0IjotNH1dLFs1LDMsIiIsMSx7Im9mZnNldCI6NH1dXQ==
+		\[\begin{tikzcd}[ampersand replacement=\&,column sep=small]
+			\cdots \& {[X/\Lambda_0]\times_{[X/\Lambda]}[X/\Lambda_0]\times_{[X/\Lambda]}[X/\Lambda_0]} \& {[X/\Lambda_0]\times_{[X/\Lambda]}[X/\Lambda_0]} \& {[X/\Lambda_0]} \& {[X/\Lambda]} \\
+			\cdots \& {[X/\Lambda_0]\times H\times H} \& {[X/\Lambda_0]\times H} \& {[X/\Lambda_0]} \& {[X/\Lambda]}
+			\arrow[from=1-2, to=1-3]
+			\arrow[shift left=4, from=1-2, to=1-3]
+			\arrow[shift right=4, from=1-2, to=1-3]
+			\arrow["\simeq", from=1-2, to=2-2]
+			\arrow[shift right=2, from=1-3, to=1-2]
+			\arrow[shift left=2, from=1-3, to=1-2]
+			\arrow[shift left=2, from=1-3, to=1-4]
+			\arrow[shift right=2, from=1-3, to=1-4]
+			\arrow["\simeq", from=1-3, to=2-3]
+			\arrow[from=1-4, to=1-3]
+			\arrow[from=1-4, to=1-5]
+			\arrow[from=2-2, to=2-3]
+			\arrow[shift left=4, from=2-2, to=2-3]
+			\arrow[shift right=4, from=2-2, to=2-3]
+			\arrow[shift left=2, from=2-3, to=2-2]
+			\arrow[shift right=2, from=2-3, to=2-2]
+			\arrow[shift left=2, from=2-3, to=2-4]
+			\arrow[shift right=2, from=2-3, to=2-4]
+			\arrow[from=2-4, to=2-3]
+			\arrow[from=2-4, to=2-5]
+		\end{tikzcd}\]
+		and hence by the faithfully flat descent theorem for quasi-coherent sheaves, we can identify $\QCoh([X/\Lambda])$ with a system of quasi-coherent sheaves over $[X/\Lambda_0]\times H^n$ such that pullback of sheaves along the structure morphisms give isomorphisms. 
+
+		We apply the above descent to the case $X=\Spec L$ and $\Lambda_0$ the strict isomorphisms, $\Lambda$ the isomorphisms and $H=\mathbb{G}_m$ the multiplicative group, and translating the quasi-coherent sheaves of stacks to the setting of comodules, we have the following. If $M$ is a $(L,L\otimes\mathbb{Z}[a_0^{\pm1}])$-comodule, then $M\otimes\Lambda_0$ admits a induced structure as a $(L,L\otimes\mathbb{Z}[a_0^{\pm1}])$-comodule structure given by the diagonal action of $\mathbb{G}_m$. Thus we define the category of $(L,L\otimes\mathbb{Z}[a_0^{\pm1}])$-comodules in $(L,L\otimes\Lambda_0)$-comodules to be the $(L,L\otimes\Lambda_0)$-comodules whose structure map $\psi:M\to M\otimes_A(A\otimes\Lambda_0)$ is a map of $(A,A\otimes K)$-comodules. Then the above is simply saying that the category of $(L,L\otimes\Lambda)$-comodules is equivalent to the category of $(L,L\otimes\mathbb{Z}[a_0^{\pm1}])$-comodules in $(L,L\otimes\Lambda_0)$-comodules. 
+
+		In particular, for the case in $\mathbb{G}_m$, we can make a further identification. Since $\mathbb{G}_m$-actions are equivalent to gradings, the category of $(L,L\otimes\mathbb{Z}[a_0^{\pm1}])$-comodules in $(L,L\otimes\Lambda_0)$-comodules is simply the category of graded $(L,L\otimes\Lambda_0)$-comodules.
+	\end{const}
+
+	\begin{const}\label{Adams_Novikov_SS_mfg}
+		Now we briefly introduce the Adams Novikov spectral sequence in terms of $\mathcal{M}_{\fg}$. We define the quasi-coherent sheaf of invariant differentials $\omega$ over $\mathcal{M}_{\fg}$ the following. For a morphism $\Spec A\to\mathcal{M}_{\fg}$, it classifies a formal group over $\Spec A$. Choosing an arbitrary coordinate, we obtain a formal group law $F$ over $A$. We define a differential $f(x)\der x\in A[[x]]$ to be an invariant differential if we have $f(x+_Fy)\der(x+_Fy)=f(x)\der x+f(y)\der y$. This is a module over $A$ which is free of rank 1 and independent of the choice of the coordinate (it can be viewed as the Lie algebra of a one dimensional group $G$, recall the construction $\Lie_G\simeq\Sym^*_S\omega_{S/G}$), and hence we can assign $\omega(\Spec A\to\mathcal{M}_{\fg})$ to be the module of invariant differential of this formal group over $A$. By some work, we may check that this construction is compatible with pullbacks, and hence defines a quasi-coherent sheaf over $\mathcal{M}_{\fg}$. 
+
+		By the procedure discussed in \cref{Stack_QCoh_comod}, we consider $\omega(\Spec L\to\mathcal{M}_{\fg})$, classifying the formal group 
+		\[ F(x,y)=x+y+b_1C_2(x,y)+\cdots \]
+		By some calculation, this corresponds to $L[1]$ as a graded $(L,W_0)$ comodule, and hence the $E^2$-page of the Adams-Novikov spectral sequence can be identified with 
+		\[ E_2^{s,t}=\Ext_{MU_*MU}^{s,t}(MU_*,MU_*)=\Ext_{MU_*MU}^s(MU_*,\Omega^{2t}MU_*)=\Ext_W^s(L,L[t])=H^s(\mathcal{M}_{\fg},\omega^t) \]
+	\end{const}
+
+\section{The $p$-local case and the height filtration}
+
+	In this section we focus on the $p$-local case. In this case, we have a filtration on the stack $\mathcal{M}_{\fg}$, which gives more interesting structures. 
+	
+	\begin{defn}\label{p_typ_fgl}
+		For an algebra $A$ over $\mathbb{Z}_{(p)}$ and $F$ a formal group law over $A$, we define 
+		\[ [n]_F(x):=x+_Fx+_F\cdots+_Fx \]
+		and for $n$ coprime to $p$, $n$ is invertible in $A$, hence $[n]_F$ is an invertible power series. Therefore we have $[1/n]_F(x)$ as its inverse in composition. We add the primitive $n$-th root of unity $\zeta$ to $A$, and we note that 
+		\[ f_n(x)=[1/n]_F(x+_F\zeta x+_F\zeta^2x+_F\cdots+_F\zeta^{n-1}x) \]
+		which is a polynomial over $A$. We define $F$ to be $p$-typical if $f_\ell=0$ for all primes $\ell\neq p$. 
+
+		More generally, for the case of non-affine schemes $S$ and a formal group $G$ over $S$, we say a coordinate $x\in\Gamma(S;p_*\mathcal{O}_G)$ of $G$ is $p$-typical if $x$ makes the formal group $\Gamma(S;p_*\mathcal{O}_G)$ over $\Spec\Gamma(S;\mathcal{O}_S)$ $p$-typical. 
+	\end{defn}
+
+	We remark here that the property of being $p$-typical is defined on coordinates rather than formal groups. Recall that we have the following facts on $p$-typical formal group laws. 
+
+	\begin{thm}\label{Facts_p_typ_fgl}
+		Let $A$ be a $\mathbb{Z}_{(p)}$-algebra, and let $F$ be a $p$-typical formal group law over $A$. Then there are elements $u_i\in A$ such that 
+		\[ [p]_F(x)=px+_Fu_1x^p+_Fu_2x^{p^2}+_F\cdots \]
+
+		Moreover, this sequence $u_i$ completely determines $F$. Therefore, the functor $p-\fgl$ sending a $\mathbb{Z}_{(p)}$-algebra to $p$-typical formal group laws over it is representable by 
+		\[ V=\mathbb{Z}_{(p)}[u_1,u_2,\dots] \]
+
+		Then, for an isomorphism $f$ of $p$-typical formal group laws $G\to F$, there is some $t_i\in A$ such that $f^{-1}(x)=t_0x+_Gt_1x^p+_Gt_2x^{p^2}+_G\cdots$. 
+
+		Finally, for every formal group $F$ over $A$, there is a $p$-typical formal group law $eF$ over $A$ and a canonical isomorphism $F\to eF$, which is the identity if $F$ is itself $p$-typical. Therefore, $\mathcal{M}_{p-\coord}\simeq\Spec\mathbb{Z}_{(p)}\times\mathcal{M}_{\coord}$. 
+	\end{thm}
+
+	\begin{coro}
+		The stackification for $\mathcal{M}_{p-\coord}$ is $\Spec\mathbb{Z}{(p)}\times\mathcal{M}_{\fg}$. Moreover, let $V$ be the above universal $p$-typical formal group law, then we have $\Spec V\to\Spec\mathbb{Z}_{(p)}\times\mathcal{M}_{\fg}$ an atlas. Moreover, there is an isomorphism of affine schemes $\Spec V\times_{\Spec\mathbb{Z}_{(p)}\times\mathcal{M}_{\fg}}\Spec V\simeq\Spec W_p=\Spec V[t_0^{\pm},t_1,\dots]$. 
+	\end{coro}
+
+	As before, $V$ and $W_p$ are graded rings with $|u_i|=|t_i|=p^i-1$, and we have the category 
+	\[ \QCoh(\Spec\mathbb{Z}_{(p)}\times\mathcal{M}_{\fg})\simeq\coMod_{(V,W_p)}\simeq\gr\coMod_{(V,W_{p,0})}\simeq\gr\coMod_{(BP_*,BP_*BP)} \]
+
+	In the characteristic $p$ case, we have the notion of height of a formal group, which gives a filtration of the stack $\Spec\mathbb{Z}_{(p)}\times\mathcal{M}_{\fg}$ (we will later on write $\mathcal{M}_{\fg}$ for short). From now on, we fix a prime $p$ and we first consider the characteristic-$p$ fields. 
+
+	Recall the height of formal group laws defined in \cref{Verschiebung_map_formal_grp_height}, and the criterion of a height at least $n$ formal group to be height $n+1$ in \cref{Section_control_height}. This gives closed substacks of $\mathcal{M}_{\fg}$. 
+
+	\begin{defn}\label{Height_fil_mod_stack_fg}
+		We define a descending chain of reduced closed substacks 
+		\[ \cdots\inj\mathcal{M}(2)\inj\mathcal{M}(1)\inj\mathcal{M}_{\fg} \]
+		by the following. Firstly note that we have $\Spec\mathbb{F}_p\times\mathcal{M}_{\fg}\inj\Spec\mathbb{Z}_{(p)}\times\mathcal{M}_{\fg}$ an inclusion of closed substacks. We define $\mathcal{M}(1)=\mathbb{F}_p\times\mathcal{M}_{\fg}$. In particular, this is the effective Cartier divisor of the pair $(\mathcal{O}_{\mathcal{M}_{\fg}},p)$. Then we define the $\mathcal{M}(n+1)\inj\mathcal{M}(n)$ to be the effective Cartier divisor of the pair $(\omega^{p^n-1},v_n)$, which are defined in \cref{Section_control_height}. Note here that effective Cartier divisors are naturally reduced, so $\mathcal{M}(n)$ are all reduced substacks of $\mathcal{M}_{\fg}$. 
+		
+		We define $\mathcal{H}(n)$ to be the open complement of $\mathcal{M}(n+1)$ in $\mathcal{M}(n)$. We denote this by the moduli stack of formal groups of height exactly $n$. Moreover, let $\mathcal{U}(n)$ denote the open complement of $\mathcal{M}(n+1)$. This is the moduli stack of formal groups of height smaller than or equal to $n$. 
+	\end{defn}
+
+	\begin{const}\label{Ideal_defining_height}
+		The above chain 
+		\[ \cdots\inj\mathcal{M}(2)\inj\mathcal{M}(1)\inj\mathcal{M}_{\fg} \]
+		induces an ascending chain of ideals 
+		\[ 0\subseteq\mathcal{I}_1=(p)\subseteq\mathcal{I}_2\subseteq\cdots\subseteq\mathcal{O}_{\mathcal{M}_{\fg}} \]
+	\end{const}
+
+	\begin{lemma}\label{Atlas_substack_ht_n}
+		Recall $\Spec V=\Spec\mathbb{Z}_{(p)}[u_1,u_2,\dots]\to\mathcal{M}_{\fg}$ is an atlas. Then we have $X(n)=\Spec V(n)=\mathbb{F}_p[u_n,u_{n+1},\dots]\to\mathcal{M}(n)$ an atlas. 
+	\end{lemma}
+	\begin{proof}
+		This is obtained by pulling back the effective Cartier divisors to $V$. 
+	\end{proof}
+
+	\begin{lemma}\label{Height_n_fg_equiv_inv}
+		A formal group $G\to S$ is of exact height $n$ iff the global section $v_n(G)$ is invertible as a morphism $\mathcal{O}_S\to\omega_G^{p^n-1}$. In particular, every formal group over a field is of height $n$ for some $n$. 
+	\end{lemma}
+	\begin{proof}
+		By definition of the open complement of a closed substack. 
+	\end{proof}
+
+	Recall that the geometric points of $\mathcal{M}_{\fg}$ controlls the behavior of its reduced substacks. We then compute the set of geometric points of $\mathcal{M}_{\fg}$, so as to classify all its closed reduced substacks. It turns out that we have the following. 
+
+	\begin{thm}\label{Classify_red_substack_mod_stack_fg}
+		For all $n$, the algebraic stack $\mathcal{M}(n)$ is reduced. Moreover, if $\mathcal{N}\subseteq\mathcal{M}_{\fg}$ is any closed reduced substack, then there is some $n$ such that $\mathcal{N}=\mathcal{M}(n)$ for some $n$. 
+	\end{thm}
+
+	We begin with some lemmas. 
+
+	\begin{lemma}\label{Classify_red_substack_mod_stack_fg_lem_1}
+		Let $\mathcal{U}\subseteq\mathcal{M}_{\fg}$ be an open substack and suppose $\mathcal{U}$ has a geometric point of height $n$. Then it has a geometric point of height $k$ for all $k\leq n$. 
+	\end{lemma}
+	\begin{proof}
+		Let $G:\Spec k\to\mathcal{U}$ represent the geometric point of height $n$, then consider the diagram 
+		% https://q.uiver.app/#q=WzAsNSxbMCwwLCJcXFNwZWMgayJdLFsyLDEsIlxcU3BlYyBMIl0sWzEsMiwiXFxtYXRoY2Fse1V9Il0sWzIsMiwiXFxtYXRoY2Fse019X3tcXGZnfSJdLFsxLDEsIlxcbWF0aGNhbHtVfVxcdGltZXNfe1xcbWF0aGNhbHtNfV97XFxmZ319XFxTcGVjIEwiXSxbMCwyLCJHIiwyLHsiY3VydmUiOjN9XSxbMiwzXSxbMCw0LCJGIiwwLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzQsMSwiaiJdLFs0LDIsInEiXSxbMSwzXSxbMCwxLCIiLDEseyJjdXJ2ZSI6LTIsInN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dXQ==
+		\[\begin{tikzcd}[ampersand replacement=\&,column sep=small]
+			{\Spec k} \\
+			\& {\mathcal{U}\times_{\mathcal{M}_{\fg}}\Spec L} \& {\Spec L} \\
+			\& {\mathcal{U}} \& {\mathcal{M}_{\fg}}
+			\arrow["F", dashed, from=1-1, to=2-2]
+			\arrow[curve={height=-12pt}, dashed, from=1-1, to=2-3]
+			\arrow["G"', curve={height=18pt}, from=1-1, to=3-2]
+			\arrow["j", from=2-2, to=2-3]
+			\arrow["q", from=2-2, to=3-2]
+			\arrow[from=2-3, to=3-3]
+			\arrow[from=3-2, to=3-3]
+		\end{tikzcd}\]
+		obtained by choosing a coordinate. By definition, $j$ is open and $q$ is flat. By definition of representable morphisms, $\mathcal{U}\times_{\mathcal{M}_{\fg}}\Spec L$ is a scheme, and we may choose an affine open $\Spec A$ of it such that $\Spec k\to\Spec L$ factors through $\Spec A$. We let $G_0$ denote the formal group classified by this map. WLOG suppose that $\Spec k\to\Spec A$ induces a surjection $A\to k$, we choose an element $w\in A$ which maps onto $v_n(G)\in k$ (we identify $\omega_G$ with the base ring via a trivialization). Since $v_n(G)\neq0\in k$, $w$ is not nilpotent, and hence we may consider $R[w^{-1}]$ which makes $w$ a unit in $R$. Therefore the pullback ideal $\mathcal{I}_{n+1}(G_0)=R$ since $w$ is invertible. Since $\Spec R\to\mathcal{M}_{\fg}$ is flat, by exactness of pullbacks, by the definition of effective Cartier divisors, the chain of ideals $\mathcal{I}_1\subseteq\cdots\subseteq\mathcal{I}_n(G_0)$ is generated by a regular sequence. Then let $R_k=R/\mathcal{I}_k(G_0)$, and let $q_k$ denote the quotient maps. We conclude that $v_k(q_k^*G_0)$ is not nilpotent in $R_k$, by definition of a regular sequence. Thus we choose some $\mathfrak{p}_k\subseteq R_k$ such that $v_k(q_k^*G_0)\notin\mathfrak{p}_k$, and hence $\Spec Q(R_k/\mathfrak{p}_k)\to\Spec R\to\mathcal{U}$ represents a geometric point of height $k$. 
+	\end{proof}
+
+	We need more results on reduced substacks. 
+
+	\begin{defn}
+		Let $\mathcal{M}$ be an fpqc algebraic stack and suppose $X\to\mathcal{M}$ is an atlas. We let $\Nil_X$ denote the sheaf of nilpotent elements in $\mathcal{O}_X$. We define $\Nil_{\mathcal{M}}$ to be the quasi-coherent sheaf over $\mathcal{M}$ obtained by the descent data $p_1^*\Nil_X\simeq\Nil_{X\times_{\mathcal{M}}X}\simeq p_2^*\Nil_X$. 
+	\end{defn}
+
+	\begin{lemma}\label{Classify_red_substack_mod_stack_fg_lem_2}
+		Suppose $\mathcal{M}$ is an fpqc algebraic stack and $X\to\mathcal{M}$ is an atlas. Then $\Nil_M\simeq\mathcal{I}_{red}$. 
+	\end{lemma}
+	\begin{proof}
+		Let $\mathcal{M}_0\to\mathcal{M}$ denote the closed substack defined by $\Nil_{\mathcal{M}}$, then $X_red\to\mathcal{M}_0$ is a cover. Note $|X_{red}|=|X|$, and $|X_{red}|\to|\mathcal{M}_0|$ is surjective, we have $|\mathcal{M}_0|=|\mathcal{M}|$. Therefore we have $\mathcal{M}_{red}\subseteq\mathcal{M}_0$, or $\mathcal{I}_{red}\subseteq\Nil_M$. For the inverse inclusion, let $\mathcal{N}\subseteq\mathcal{M}$ be a closed inclusion defined by an ideal $\mathcal{J}$ with $|\mathcal{N}|=|\mathcal{M}|$. Let $Y\to\mathcal{N}$ denote the pullback cover obtained from $X$. Therefore $Y$ is a closed subscheme of $X$ defined by $\mathcal{J}|_X$, and the natural map $|Y|\to|X|\times_{|\mathcal{M}|}|\mathcal{N}|$ is an isomorphism by \cref{Geom_pts_surj_pullback}. Thus $|Y|=|X|$, and hence $X_{red}\subseteq Y$. Therefore $\Nil_\mathcal{M}\subseteq\mathcal{J}$ by descent, and hence $\Nil_\mathcal{M}\subseteq\mathcal{I}_{red}$. 
+	\end{proof}
+
+	\begin{lemma}\label{Classify_red_substack_mod_stack_fg_lem_3}
+		Let $\mathcal{N}\subseteq\mathcal{M}_{\fg}$ be a closed substack. If $\mathcal{N}$ has a geometric point of height $n$, then $\mathcal{M}(n)\subseteq\mathcal{N}$. 
+	\end{lemma}
+	\begin{proof}
+		Note that by the definition of reduced closed substacks being the initial closed substack with isomorphisms on the geometric points, it suffices to prove that there is some $\mathcal{M}(n)$ with $|\mathcal{M}(n)|\subseteq|\mathcal{N}|$. Note that this can be rephrazed by considering the complement open of $\mathcal{N}$, say $\mathcal{U}$, which says that if $\mathcal{U}$ does not have a geometric point of height $n$, then it does not have a geometric point of height $k$ for $k\geq n$. But this follows from \cref{Classify_red_substack_mod_stack_fg_lem_1}. 
+	\end{proof}
+
+	Now we prove \cref{Classify_red_substack_mod_stack_fg}
+	\begin{proof}
+		Suppose $\mathcal{N}\subseteq\mathcal{M}_{\fg}$ is closed and reduced. Then let $n$ be the smallest integer such that $\mathcal{N}$ has a geometric point of height $n$. Thus $\mathcal{M}(n)\subseteq\mathcal{N}$ by \cref{Classify_red_substack_mod_stack_fg_lem_3}. Since $n$ is the smallest integer, we have $|\mathcal{M}(n)|=|\mathcal{N}|$, and since $\mathcal{N}$ is also reduced, we have this is an isomorphism. 
+	\end{proof}
+
+	After classifying the closed reduced substacks of $\mathcal{M}_{\fg}$, we furthermore classify the differences between the stratas $\mathcal{H}(n)=\mathcal{M}(n)-\mathcal{M}(n-1)$ and $\mathcal{M}(\infty)=\bigcap\mathcal{M}(n)$. 
+
+	In fact, we have the following theorem 
+	
+	\begin{thm}
+		Let $\mathcal{N}(n)=\mathcal{H}(n)$ if $n<\infty$ and $\mathcal{N}(\infty)=\mathcal{M}(\infty)$, then $\mathbb{F}$ be a field of characteristic $p$, and let $G\to\Spec\mathbb{F}$ be any formal group of height $n$, then the classifying map for $G$ $\Spec\mathbb{F}\to\mathcal{N}(n)$ is a cover in the fpqc topology. In particular, $\mathcal{N}(n)$ has a single geometric point each. This gives an equivalence of stacks $\mathcal{N}(n)$ with $B\Aut(\Gamma_n)$, where $\Gamma_n$ is a formal group of height $n$ over $\mathbb{F}_p$. 
+	\end{thm}
+
+\end{document}

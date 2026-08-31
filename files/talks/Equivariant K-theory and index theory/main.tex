@@ -1,0 +1,548 @@
+% 本文档编写于 2022 年 9 月 13 日，使用 TeXLive 2022 编译通过
+% 请使用不低于 2021 版的 TeXLive (在苹果系统上可以是 MacTeX) 编译此文档
+% 其它编译器不保证编译效果的正确性，不要使用早已过时并且存在许多 bug 的 CTeX 套装
+
+%==============================%
+%   清华大学求真书院讲义模板   %
+%   清华大学求真书院版权所有   %
+%==============================%
+
+\documentclass{beamer}
+
+\usepackage{amsmath}           % AMS 的主包
+\usepackage{amssymb}           % AMS 符号包，会自动加载 amsfonts
+\usepackage{latexsym}          % 几个额外的特殊符号，包括 \Box
+\usepackage{mathrsfs}          % \mathscr 字体样式
+\usepackage{eucal}             % 更改 \mathcal 的字体样式
+\usepackage{amsthm}            % AMS 的定理环境
+\usepackage{mathtools}         % 一些额外的数学环境功能，包括 \dfrac
+\usepackage{stmaryrd}          % 更更多的特殊符号
+\usepackage{esint}             % 更多积分符号
+\usepackage{extarrows}         % 提供在箭头上下写字的命令
+\usepackage{enumerate}         % 带序号列表环境
+\usepackage{xcolor}            % 让 latex 支持花里胡哨的颜色的包
+\usepackage{graphicx}          % 插入各种类型图片支持
+\usepackage{tikz}              % tikz 绘图环境
+\usepackage{tikz-3dplot}       % 一个简单的 tikz 3d 绘图宏包
+\usepackage{tikz-cd}           % 基于 tikz 的交换图表绘制工具
+\usepackage[all,cmtip]{xy}     % 交换图表绘制工具，命令为 \xymatrix
+\usepackage{pgfplots}          % 高级绘图包，基于 tikz，包括 2d 和 3d 绘图
+\pgfplotsset{compat=newest}    % 设置 pgfplots 兼容性选项，以使用新功能
+\usepackage{subcaption}        % 可以交叉引用的图表并排环境
+\usepackage{tcolorbox}         % 绘制彩色文本框的宏包
+\tcbuselibrary{most}           % 加载 tcolorbox 的库
+\usepackage{bm}                % 为所有数学字体添加粗体，命令 \bm{abcd}
+\usepackage{slashed}           % 在符号上添加反划线，命令 \slashed
+\usepackage[hyperref=true,backend=bibtex,style=alphabetic,backref=true,url=false]{biblatex}
+\usepackage{quiver}
+
+%==============================%
+%     请在这里添加其它宏包     %
+%------------------------------%
+
+% \usepackage{physics}         % 提供了方便地打出 d/dx 等符号的命令
+
+
+
+%==============================%
+
+\newcommand{\todo}[1]{\colorbox{red}{#1}}
+
+\newcommand{\from}{\leftarrow}
+\newcommand{\inj}{\hookrightarrow}
+\newcommand{\surj}{\twoheadrightarrow}
+\newcommand{\lto}{\longrightarrow}
+\newcommand{\adj}{\rightleftarrows}
+\newcommand{\nto}{\rightarrowtail}
+\newcommand{\ilim}{\varinjlim}
+\newcommand{\plim}{\varprojlim}
+\newcommand{\act}{\curvearrowright}
+
+\newcommand{\EE}{\mathbb{E}}
+
+\DeclareMathOperator{\Hom}{\mathrm{Hom}}
+\DeclareMathOperator{\Fun}{\mathrm{Fun}}
+\DeclareMathOperator{\End}{\mathrm{End}}
+\DeclareMathOperator{\coker}{\mathrm{coker}}
+\DeclareMathOperator{\Aut}{\mathrm{Aut}}
+\DeclareMathOperator{\Gal}{\mathrm{Gal}}
+\DeclareMathOperator{\Map}{\mathrm{Map}}
+\DeclareMathOperator{\Tor}{\mathrm{Tor}}
+\DeclareMathOperator{\Ext}{\mathrm{Ext}}
+\DeclareMathOperator{\fib}{\mathrm{fib}}
+\DeclareMathOperator{\cof}{\mathrm{cof}}
+\DeclareMathOperator{\tfib}{\mathrm{tfib}}
+\DeclareMathOperator{\tcof}{\mathrm{tcof}}
+\DeclareMathOperator{\rank}{\mathrm{rank}}
+\DeclareMathOperator{\Tr}{\mathrm{Tr}}
+\DeclareMathOperator{\img}{\mathrm{im}}
+\DeclareMathOperator{\LocSys}{\mathrm{LocSys}}
+\DeclareMathOperator{\Nm}{\mathrm{Nm}}
+\DeclareMathOperator{\Frob}{\mathrm{Frob}}
+\DeclareMathOperator{\Th}{\mathrm{Th}}
+\DeclareMathOperator{\Ch}{\mathrm{Ch}}
+\DeclareMathOperator{\id}{\mathrm{id}}
+\DeclareMathOperator{\op}{\mathrm{op}}
+\DeclareMathOperator{\im}{\mathrm{im}}
+\DeclareMathOperator{\Core}{\mathrm{Core}}
+\DeclareMathOperator{\Span}{\mathrm{Span}}
+\DeclareMathOperator{\St}{\mathrm{St}}
+\DeclareMathOperator{\TrFm}{\mathrm{TrFm}}
+\DeclareMathOperator{\fgl}{\mathbf{fgl}}
+\DeclareMathOperator{\fg}{\mathbf{fg}}
+\DeclareMathOperator{\Isofgl}{\mathbf{Isofgl}}
+\DeclareMathOperator{\coord}{\mathbf{coord}}
+\DeclareMathOperator{\Def}{\mathrm{Def}}
+\DeclareMathOperator{\Spec}{\mathrm{Spec}}
+\DeclareMathOperator{\Spf}{\mathrm{Spf}}
+\DeclareMathOperator{\Pt}{\mathrm{Pt}}
+\DeclareMathOperator{\gr}{\mathrm{gr}}
+\DeclareMathOperator{\Desc}{\mathrm{Desc}}
+\DeclareMathOperator{\Tot}{\mathrm{Tot}}
+\DeclareMathOperator{\tang}{\mathrm{T}}
+%\DeclareMathOperator{\der}{\mathrm{d}}
+\DeclareMathOperator{\dual}{\mathbb{D}}
+\DeclareMathOperator{\grp}{\mathrm{grp}}
+\DeclareMathOperator{\inv}{\mathrm{inv}}
+\DeclareMathOperator{\Pic}{\mathrm{Pic}}
+\DeclareMathOperator{\THH}{\mathrm{THH}}
+\DeclareMathOperator{\TC}{\mathrm{TC}}
+\DeclareMathOperator{\TP}{\mathrm{TP}}
+\DeclareMathOperator{\conn}{\mathrm{conn}}
+\DeclareMathOperator{\trun}{\mathrm{trun}}
+\DeclareMathOperator{\type}{\mathrm{type}}
+\DeclareMathOperator{\Exc}{\mathrm{Exc}}
+\DeclareMathOperator{\crs}{\mathrm{cr}}
+\DeclareMathOperator{\res}{\mathrm{res}}
+\DeclareMathOperator{\ind}{\mathrm{ind}}
+\DeclareMathOperator{\coind}{\mathrm{coind}}
+\DeclareMathOperator{\mBar}{\mathrm{Bar}}
+\DeclareMathOperator{\coBar}{\mathrm{coBar}}
+\DeclareMathOperator{\Lan}{\mathrm{Lan}}
+\DeclareMathOperator{\Ran}{\mathrm{Ran}}
+\DeclareMathOperator{\Inf}{\mathrm{Inf}}
+\DeclareMathOperator{\Sym}{\mathrm{Sym}}
+\DeclareMathOperator{\Iso}{\mathrm{Iso}}
+\DeclareMathOperator{\Lie}{\mathrm{Lie}}
+\DeclareMathOperator{\Nil}{\mathrm{Nil}}
+
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\der}{\mathrm{d}}
+
+\newcommand{\Aff}{\mathbf{Aff}}
+\newcommand{\Sch}{\mathbf{Sch}}
+\newcommand{\Ring}{\mathbf{Ring}}
+\newcommand{\Set}{\mathbf{Set}}
+\newcommand{\Sp}{\mathbf{Sp}}
+\newcommand{\Cat}{\mathbf{Cat}}
+\newcommand{\An}{\mathbf{An}}
+\newcommand{\Mon}{\mathrm{Mon}}
+\newcommand{\CMon}{\mathrm{CMon}}
+\newcommand{\Grp}{\mathrm{Grp}}
+\newcommand{\CGrp}{\mathrm{CGrp}}
+\newcommand{\Alg}{\mathrm{Alg}}
+\newcommand{\CAlg}{\mathrm{CAlg}}
+\newcommand{\Ab}{\mathbf{Ab}}
+\newcommand{\pSh}{\mathbf{pSh}}
+\newcommand{\Sh}{\mathbf{Sh}}
+\newcommand{\Mod}{\mathbf{Mod}}
+\newcommand{\coMod}{\mathbf{Mod}}
+\newcommand{\LMod}{\mathbf{LMod}}
+\newcommand{\RMod}{\mathbf{RMod}}
+\newcommand{\iGrpd}{\infty\mathbf{Grpd}}
+\newcommand{\QCoh}{\mathbf{QCoh}}
+\newcommand{\Ind}{\mathrm{Ind}}
+\newcommand{\Pro}{\mathrm{Pro}}
+\newcommand{\PrL}{\mathbf{Pr}^{\mathrm{L}}}
+\newcommand{\Fin}{\mathbf{Fin}}
+\newcommand{\co}{\mathrm{co}}
+\newcommand{\Grpd}{\mathbf{Grpd}}
+\newcommand{\Stk}{\mathbf{Stk}}
+
+\defbibenvironment{bibliography}
+  {\list{}{%
+    \setlength{\leftmargin}{\bibhang}%
+    \setlength{\itemindent}{-\leftmargin}%
+    \small % Set font size here (e.g., \footnotesize, \scriptsize)
+  }}
+  {\endlist}
+  {\item}
+
+\AtBeginSection[]{
+  \begin{frame}
+  \vfill
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par
+  \end{beamercolorbox}
+  \vfill
+  \end{frame}
+}
+
+\addbibresource{citations.bib}
+
+\usefonttheme{professionalfonts}
+\title{Equivariant K-theory and index theory}
+\author{Xiaoyang Chen}
+\date{2025.5.26}
+\usetheme{Madrid}
+
+\begin{document}
+
+\begin{frame}
+	\maketitle
+\end{frame}
+
+\section{Equivariant K-theory}
+
+\begin{frame}
+	\begin{block}{Definition}
+		Let $G$ be a compact Lie group. We define a $G$-space $X$ to be a space $X$ equipped with a continuous action $G\act X$. We define a $G$-map of $G$-spaces to be a map of spaces preserving the $G$-action. 
+
+		We define a pointed $G$-space by a pair $(X,*)$, where $*$ is a $G$-fixed point of $X$. 
+
+		For $G$-maps of $G$ spaces $f,g:X\to Y$, we define $f$ to be homotopic to $g$ if there is a map $h:[0,1]\times X\to Y$ such that $h(t,-)$ is a $G$-map for all $t\in[0,1]$, and $h(0,-)=f$, $h(1,-)=g$. 
+
+		Just in the previous talk on K-theory, we will mainly focus on compact $G$-spaces where the vector bundles over it behaves nicely. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{alertblock}{Theorem}
+		Let $G$ be a compact Lie group. Then there is a unique up to scalar Haar measure $\mu$ over $G$ such that the following condition holds. 
+		\begin{enumerate}
+			\item For any open set $U$, $\mu(U)\neq0$. 
+			\item For any $g\in G$, and $S$ a measureable set in $G$, then $\mu(S)=\mu(gS)=\mu(Sg)$. 
+		\end{enumerate}
+	\end{alertblock}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Definition}
+		Let $X$ be $G$-space, then we define an $G$-vector bundle $E$ to be a $G$-space with a $G$-map $p:E\to X$, such that the two following condition holds. 
+		\begin{enumerate}
+			\item $p:E\to X$ is a complex vector bundle on $X$. 
+			\item For any $g\in G$ and $x\in X$, the group action $g:E_x\to E_{gx}$ is a linear map of vector spaces. 
+		\end{enumerate}
+
+		Let $E,F$ be $G$-vector bundles over $X$. We define a map of $G$-vector bundles $f:E\to F$ to be a $G$-map commuting with the structure maps of the vector bundles. Such $f$ is an isomorphism if it admits an inverse, which is equivalent to that $f$ is an isomorphism pointwise. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Example}
+		Let $X$ be a trivial $G$-space, then any $G$-representation over $\mathbb{C}$, say $V$, gives a $G$-vector bundle over $X$. We denote this by $\underline{V}$. 
+
+		Let $X$ be a $G$-space, then the tangent bundle $TX$ is a $G$-vector bundle over $X$. 
+	\end{block}	
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Construction}
+		For two $G$-vector bundles over $X$, say $p:E\to X$ and $q:F\to X$, we may construct the following:
+		\begin{enumerate}
+			\item The equivariant sections, denoted by $\Gamma^G(X;E)$, which is a complex vector space with the elements $G$-maps $s:X\to E$ such that $ps=\id_X$. We may also forget the $G$-structures and form the usual section $\Gamma(X;E)$. By choosing a Hermitian metric on $E$, $\Gamma(X;E)$ becomes a Banach space with a continuous action of $G$. 
+			\item Their direct sum, denoted by $E\oplus F$, with its underlying space the direct sum bundle $E\oplus F$ equipped with the action $g(e,f)=(ge,gf)$, where $g\in G$, $e\in E$, $f\in F$. 
+			\item Their tensor product, denoted by $E\otimes F$, again with the underlying space $E\otimes F$ and equipped with the action $g(e\otimes f)=ge\otimes gf$. 
+			\item Their $\Hom$ bundle, denoted by $\Hom(E,F)$, with again the underlying space $\Hom(E,F)$, and the $G$ action given by $(gh)(e)=g\cdot h(g^{-1}e)$ $h\in\Hom(E,F)_x$, $e\in E_{gx}$. 
+		\end{enumerate}
+	\end{block} 
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Construction}
+		Note that the $\Hom$ bundle generalizes the notion of maps of bundles. In fact, a map $f:E\to F$ of $G$-vector bundles over $X$ corresponds to an element in $\Gamma^G(X;\Hom(E,F))$. 
+
+		Moreover, for a $G$-map of $G$-spaces $f:X\to Y$, and for any $G$-vector bundle $E\to Y$, we may construct the pullback $G$-vector bundle $f^*E\to X$, with the obvious underlying vector bundle and actions. This construction clearly preserves the direct sum, tensor product, and $\Hom$ of $G$-vector bundles. 
+
+		This pullback construction generalizes to the case where $\varphi:H\to G$ is a map of compact Lie group, and $f:X\to Y$ is a map of spaces (where $X$ is an $H$-space, and $Y$ is an $G$-space) such that $f(hx)=\varphi(h)f(x)$. 
+	\end{block}
+	We have a theorem for pullback bundles. 
+\end{frame}
+
+\begin{frame}
+	\begin{alertblock}{Theorem}
+		If $f,g:X\to Y$ are $G$-homotopic $G$-maps of compact $G$-spaces, and $p:E\to Y$ is a $G$-vector bundle over $Y$, we have $f^*E\simeq g^*E$ as $G$-vector bundles over $X$. 
+	\end{alertblock}
+	\begin{block}{proof}
+		We define an isomorphism $k:f^*E\to g^*E$. Explicitly, suppose the homotopy between $f$ and $g$ be $h:[0,1]\times X\to Y$, we let $k_x:f^*E_x\to g^*E_x$ be given by the composition 
+		\[ f^*E_x\simeq E_{f(x)}\xrightarrow{\tilde{h}}E_{g(x)}\simeq g^*E_x \]
+		where $\tilde{h}$ is the $G$-equivariant parallel transport along the curve $h(-,x)$ (this is locally given by the trivializations of the bundle). This clearly gives a well-defined $G$-map $f^*E\to g^*E$, and by construction, it is a pointwise isomorphism, hence is an isomorphism. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Definition}
+		Let $X$ be a compact $G$-space. Then all $G$-vector bundles over $X$ form a commutative monoid over $X$ with multiplication the direct sum of isomorphism classes of bundles. We define the equivariant $K$-theory of $X$ to be $KU_G(X)$, which is the group completion of the above commutative monoid. Explicitly, its elements are virtual classes of the form $[E_1-E_2]$, where $E_1$ and $E_2$ are vector bundles over $X$, and $[E_1-E_2]\simeq[E'_1-E'_2]$ iff there is some $G$-vector bundle $F$ such that $E_1\oplus E'_2\oplus F\simeq E'_1\oplus E_2\oplus F$. $KU_G(X)$ can be given a ring structure by the tensor product of vector bundles. 
+
+		As in K-theory, for a map $f:X\to Y$ of compact $G$-spaces, the pullback of $G$-vector bundles over $Y$ along $f$ gives a ring homomorphism $f^*:KU_G(Y)\to KU_G(X)$. Moreover, as in the generalization of the pullback, we have a map $f^*:KU_G(Y)\to KU_H(X)$. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Corollary}
+		If $f,g:X\to Y$ are $G$-homotopic maps of compact $G$-spaces, then we have $f^*\simeq g^*:KU_G(Y)\to KU_G(X)$. 
+	\end{block}
+	\begin{block}{proof}
+		This follows from the previous theorem, stating that $f^*E\simeq g^*E$ whenever $f$ and $g$ are $G$-homotopic. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Example}
+		$KU_e(X)=KU(X)$, where $e$ is the trivial group. 
+
+		$KU_G(*)=R(G)$, where $R(G)$ is the representation ring of $G$. In particular, we have every $KU_G(X)$ a $R(G)$-algebra, since the unique map $X\to *$ gives a ring homomorphism $R(G)\to KU_G(X)$. 
+
+		$KU_G(G/H)=R(H)$, where $H$ is a closed subgroup of $G$. More generally, for a map $\varphi:G\to H$ and an $H$-space $X$, we have $KU_G(G\times_HX)\simeq KU_H(X)$. (The equivalence is given by the pullback map along $X\inj G\times_HX$ and the extension of bundles $E\mapsto G\times_HE$). 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Proposition}
+		If $N$ is a normal closed subgroup of $G$ such that $N$ acts freely on $X$, then we have $p^*:KU_{G/N}(X/N)\to KU_G(X)$ is an equivalence. 
+
+		If $X$ is a trivial $G$-space, then the natural map $R(G)\otimes KU(X)\to KU_G(X)$ is an isomorphism. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{proof}
+		For the first assertion, note $X/N\simeq(G/N)\times_GX$ since the $N$-action is free, and hence $KU_{G/N}(X/N)\simeq KU_G(X)$. 
+
+		For the second assertion, note that since the action of $G$ on $X$ is trivial, for any $G$-vector bundle $E\to X$, we have $g:E_x\to E_x$. Note that by the Haar measure, on each $E_x$, we have a projection $E_x\to E_x^G$ (the invariant subspace) by integration 
+		\[ v\mapsto\int_Ggv\der g \]
+		This gives a map of rings $\varepsilon:KU_G(X)\to KU(X)$. Note that this gives an isomorphism $E\simeq\bigoplus_{V irr}\underline{V}\otimes\Hom(\underline{V},E)^G$ by verifying pointwise. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{proof}
+		Therefore 
+		\[ KU(X)\otimes R(G)\to KU_G(X), (E,V)\mapsto E\otimes\underline{V} \]
+		\[ KU_G(X)\to KU(X)\otimes R(G), E\mapsto\bigoplus_{V irr}\underline{V}\otimes\Hom(\underline{V},E)^G \]
+		gives the isomorphism. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	We state the following theorem without proof (since it relies on hardcore functional analysis). 
+	\begin{alertblock}{Theorem}
+		Let $E$ be a $G$-vector bundle on a compact $G$-space $X$, then there is some $V\in R(G)$, and an isomorphism $\underline{V}=E\oplus E^{\perp}$. 
+	\end{alertblock}
+	(This allows us to give the reduced construction of $K$ and investigate its homological properties). 
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Definition}
+		We define the reduced K-theory, $\widetilde{KU}_G(X)$ to be the set $KU_G(X)/\sim$, where $\sim$ is the relation $E\sim F$ iff $E\oplus\underline{V}\simeq F\oplus\underline{V'}$. Equivalently, we may define the reduced K-theory of a space $X$ to be the kernel of the map $KU_G(X)\to KU_G(*)$, induced by an arbitrary base point $*\to X$. Note that this is naturally an Abelian group, but only admits a non-unital commutative ring structure. 
+	\end{block}
+
+\end{frame}
+
+\begin{frame}
+	\begin{alertblock}{Theorem}
+		Let $X$ be a pointed compact $G$-space, and let $A$ be a closed $G$-subspace of $X$ equipped with(and in particular containing) the same basepoint. Then we have an exact sequence. 
+		\[ \widetilde{KU}_G(X/A)\to\widetilde{KU}_G(X)\to\widetilde{KU}_G(A) \]
+		Here $X/A$ is the $G$-space $X\amalg_{A}CA$, where $CA$ is the cone of $A$. 
+	\end{alertblock}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{proof}
+		The sequence is obviously a chain complex. For exactness, note that if $E\in\widetilde{KU}_G(X)$ vanishes in $\widetilde{KU}_G(A)$, then there are trivial $G$-vector bundles over $A$ such that $E|_A\oplus\underline{V}\simeq\underline{V'}$. Thus $E\oplus\underline{V}\in KU_G(X)$ and $\underline{V'}\in KU_G(CA)$ can be clutched together on $A$, which gives the desired bundle in $KU_G(X/A)$ and hence $\widetilde{KU}_G(X/A)$. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Definition}
+		Let $X$ be a locally compact $G$-space. We define $X^+$ to be the one-point-compactification of $X$, equipped with a $G$-action that fixes $\infty$ and the inclusion $X\inj X^+$ is a $G$-map. 
+		
+		Let $q\in\mathbb{N}$. We define the following. 
+		\begin{enumerate}
+			\item $KU_{G,c}^{-q}(X)=\widetilde{KU}_G^{-q}(X^+)=\widetilde{KU}_G(S^qX^+)$. 
+			\item $KU_{G,c}^{-q}(X,A)=\widetilde{KU}_G(S^{-q}(X^+\amalg_{A^+}C(A^+)))$
+		\end{enumerate}
+
+		We sometimes write $KU_{G,c}$ for $KU_{G,c}^0$ for short. In particular, by the definition of smash products, we have a multiplication map $KU_{G,c}(X)\otimes KU_{G,c}(Y)\to KU_{G,c}(X\times Y)$. Moreover, as in the non-equivariant case, $KU_{G,c}(X)$ is again equivalent to the chain complexes of vector bundles with compact support. 
+	\end{block}
+	As the notations indicates and the preceding theorem shows, this is the negative part of a generalized cohomology theory, and so the excision theorem follows. 
+\end{frame}
+
+\section{The equivariant Thom isomorphism}
+
+\begin{frame}
+	As in the non-equivariant case, we have the Thom isomorphism. 
+	\begin{alertblock}{Theorem}
+		Let $E$ be a $G$-vector bundle over a compact $G$-space $X$, then there is some $\lambda_E\in KU_{G,c}^0(E)$ such that the multiplication map $KU_{G,c}(X)\to KU_{G,c}(E)$ given by $\alpha\mapsto p^*\alpha\cdot\lambda_E$ is an isomorphism. 
+	\end{alertblock}
+	To prove this theorem, we need the concept of equivariant index theory. 
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Definition}
+		Let $V$ and $W$ be Banach spaces equipped with a $G$-action. We define an $G$-operator $f:V\to W$ to be a bounded operator respecting the $G$-action. We define this operator $f$ to be Fredholm if $\ker f$ and $\coker f$ are both finite dimensional. Then, we define $\ind f=\ker f-\coker f\in R(G)$. 
+		
+		For a $G$-bundle $E$ over a $G$-smooth manifold $X$, recall $C^\infty(X;E)$ is a Banach space equipped with a $G$-action. We define a $G$-differential operator $D:C^\infty(X;E)\to C^\infty(X;F)$ to be a differential operator commuting with the action of $G$. In particular, we say it is elliptic if it is elliptic as a differential operator. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	We first prove the local case, which is the equivariant version of Bott periodicity. 
+	\begin{block}{Proposition}
+		Let $V$ be a finite dimensional complex $G$-representation, and $X$ a compact $G$-space. Then there is some $\lambda_V$ such that the multiplication map $\varphi=\cdot\lambda_V:KU_{G,c}(X)\to KU_{G,c}(X\times V)$ is an isomorphism. 
+	\end{block}
+	\begin{block}{proof}
+		We first note that $KU_{G,c}(X)\simeq KU_G(X)$, hence it is a ring. It then suffices to show that there is some map $\psi:KU_{G,c}(X\times V)\to KU_G(X)$ which is a $KU_G(X)$-module homomorphism functorial in $X$, and $\psi(\lambda_V)=1$. In particular, $\psi$ is a left inverse for $\varphi$. 
+
+		If this is the case, then for $\beta\in KU_{G,c}(X\times V)$, $\varphi\psi(\beta)=\psi(\beta)\cdot\lambda_V=\psi(\beta\cdots\lambda_V)=\psi(\beta)\lambda_V=\beta$. In fact, this only uses the functorality of $\psi$ for the case $X=X\times V$. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{proof}
+		To construct the desired map, consider the projective space $\mathbb{P}=\mathbb{P}(V\oplus\mathbb{C})$. Then by the existence of the Haar measure, we may assume that we have a $G$-invariant Hermitian metric on $\mathbb{P}$. 
+		
+		We first construct $\lambda_V$. As in the non-equivariant case, we let $\lambda_V$ denote the class in $KU_{G,c}(V)$ representing the bundle of exterior algebras, which is presented by the chain complex 
+		\[ 0\to\bigwedge^0V\to\bigwedge^1V\to\cdots\to\bigwedge^nV\to0 \]
+		We further let $\lambda^i_V$ denote each component in the complex. Note that $\lambda_V$ generates $KU_{G,c}(V)$. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{proof}
+		We then construct a map $j:KU_{G,c}(V)\to KU_G(\mathbb{P})$. Note that by the splitting principle, we have the following splitting of the pullback bundle 
+		% https://q.uiver.app/#q=WzAsNCxbMSwwLCJWXFxvcGx1c1xcbWF0aGJie0N9Il0sWzEsMSwiKiJdLFswLDEsIlxcbWF0aGJie1B9Il0sWzAsMCwiXFxtYXRoY2Fse099KC0xKVxcb3BsdXMgViciXSxbMywwXSxbMCwxXSxbMywyXSxbMiwxXV0=
+		\[\begin{tikzcd}[ampersand replacement=\&]
+			{\mathcal{O}(-1)\oplus V'} \& {V\oplus\mathbb{C}} \\
+			{\mathbb{P}} \& {*}
+			\arrow[from=1-1, to=1-2]
+			\arrow[from=1-1, to=2-1]
+			\arrow[from=1-2, to=2-2]
+			\arrow[from=2-1, to=2-2]
+		\end{tikzcd}\]
+		Then the map $\mathcal{O}(-1)\inj\underline{V\oplus\mathbb{C}}\surj\underline{V}$ gives a map 
+		\[ \underline{\mathbb{C}}\to\mathcal{O}(1)\otimes\underline{V} \] 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{proof}
+		This gives a construction of a chain complex 
+		\[ 0\lto\mathcal{O}(0)\lto\mathcal{O}(1)\otimes\bigwedge^1V\lto\cdots\lto\mathcal{O}(n)\otimes\bigwedge^nV\lto 0 \]
+		supported on the above section. This is clearly a well-defined element of $KU_G(\mathbb{P})$, and hence if we let $j(\lambda_V)$ be the above chain complex, or explicitly 
+		\[ j(\lambda_V)=\sum(-1)^i\mathcal{O}(i)\lambda^i_V \]
+		then we have a well-defined map $j:KU_{G,c}(V)\to KU_G(\mathbb{P})$. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{proof}
+		Then we let 
+		\[ \Omega^+=\bigoplus\Omega^{0,2k}, \Omega^-=\bigoplus\Omega^{0,2k+1} \]
+		Consider the $G$-elliptic operator $D=\overline{\partial}+\overline{\partial}^*:\Omega^+\to\Omega^-$. Then, for an arbitrary holomorphic vector bundle $Q$ over $\mathbb{P}$, we may consider 
+		\[ D\otimes\id_Q=D_Q:\Omega^+\otimes Q\to\Omega^-\otimes Q \]
+		By the Hodge decomposition theorem, we can identify the kernel and cokernel of $D_Q$ as 
+		\[ \ker D_Q=\bigoplus H^{2k}(M;\Omega^{0,\bullet}(Q)) \]
+		\[ \coker D_Q=\bigoplus H^{2k+1}(M;\Omega^{0,\bullet}(Q)) \]
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{proof}
+		Finally we may calculate its index in $R(G)$ 
+		\[ \ind D_Q=\bigoplus(-1)^iH^i(M;\Omega^{0,\bullet}(Q)) \]
+		Here we identify these cohomologies with the corresponding harmonic forms. 
+		Then we calculate these cohomologies for the case $Q=j(\lambda_V)$. In fact, by Kodaira vanishing theorem, we have for $Q=j(\lambda_V)$, $D_Q=1$ since all higher cohomology vanishes. Therefore we may define the initial splitting as the map 
+		\[ \psi:KU_{G,c}(V\times X)\xrightarrow{j}KU_{G,c}(\mathbb{P}(V\oplus\mathbb{C})\times X)\xrightarrow{(\ind D)\cdot-}KU_{G,c}(X) \]
+		By the above constructions, we have $\psi(\lambda_V)=1$, and the functorality and module homomorphism is direct. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	Now we prove the initial Thom isomorphism. 
+	\begin{block}{proof}
+		For the Thom isomorphism, let $E$ be a $G$-vector bundle over a compact $G$-space $X$ we let $H=G\times U(n)$, and let $Y$ be the associated $U(n)$-principal bundle of $E$ over $X$, so we have 
+		\[ KU_{G,c}(X)\simeq KU_{H,c}(Y)\simeq KU_{H,c}(V\times Y)\simeq KU_{G,c}(E) \]
+	\end{block}
+\end{frame}
+
+\section{The equivariant index theorem}
+
+\begin{frame}
+	\begin{block}{Definition}
+		Let $f:X\to Y$ be a smooth proper $G$-embedding of compact $G$-manifolds, with the $G$-tubular neighborhood $N$ given by \cite{kankaanrinta2007equivariant}. Then note that the $G$-tubular neighborhood of $\der f:TX\to TY$ can be identified with $TN$. If we let the Thom isomorphism for $TN\to TX$ be $\tau_f:KU_{G,c}(TX)\to KU_{G,c}(TN)$. Then since $TN\to TY$ is open, we have a map 
+		\[ TX^+\to TX^+/(TX^+\backslash TN)\simeq TN^+ \]
+		which gives a pushforward $j_*:KU_{G,c}(TN)\to KU_{G,c}(TY)$. 
+		Thus we have a proper pushforward map 
+		\[ f_!=j_*\circ\tau_f:KU_{G,c}(TX)\to KU_{G,c}(TY) \]
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	We first present the definition of the analytic and topological index. 
+	\begin{block}{Definition}
+		Let $X$ be a compact $G$-manifold, by integration via the Haar measure, we may choose a $G$-invariant Riemannian metric over $X$. Then consider the equivariant map $\pi:TX\to X$. Now, for two $G$-vector bundles $E,F$ over $X$, consider a $G$-elliptic operator $P:C^\infty(E)\to C^\infty(F)$. By taking values on a covector, $\sigma(P)$ defines a map of $G$-vector bundles over $TX$
+		\[ \sigma(P):\pi^*E\to\pi^*F \]
+		Since $P$ is elliptic, $\sigma(P)$ is supported on the zero section (as a chain complex of vector bundles). Thus $P$ defines a class $\sigma(P)\in KU_{G,c}(TX)$. 
+
+		The converse of the above construction is also true, which gives a map $\ind_a:KU_{G,c}(TX)\to R(G)$, by assigning a elliptic operator to its analytic index. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Definition}
+		For the topological index, note that again we need a $G$-equivariant embedding of $X$ into some finite dimensional representation of $G$. Since $X$ is compact, the embedding is provided by \cite{palais1957imbedding}. Suppose the embedding is $i:X\to V$. Then we define the topological index to be 
+		\[ \ind_t:KU_{G,c}(TX)\xrightarrow{i_!}KU_{G,c}(TV)\simeq R(G) \]
+	\end{block}	
+\end{frame}
+
+\begin{frame}
+	The index theorem can be stated as follows. 
+	\begin{alertblock}{Theorem}
+		For a compact $G$-manifold $X$, let $P$ be a $G$-ellptic operator over $G$-vector bundles $E,F$ over $X$. Then we have 
+		\[ \ind_tP\simeq\ind_aP \]
+	\end{alertblock}
+	This proof is identical to the non-equivariant case, that is, we check that $\ind_a$ commutes with open embeddings and Thom isomorphisms. We skip the proof, since there is nothing new. 
+\end{frame}
+
+\section{The Atiyah-Segal completion theorem}
+
+\begin{frame}
+	Finally we present some other aspects of equivariant K-theory. We will not present any details here. 
+	\begin{block}{Definition}
+		We recall that a spectrum $X$ is a sequence of spaces $X_n$ such that for each $n$ we have $\Omega X_n=X_{n+1}$. They represent the cohomology theories. We introduce a likewise construction involving $G$. 
+
+		Consider a finite dimensional $G$-representation $V$, and let $\mathbb{S}^V$ be the one-point compactification of $V$, which is a representation sphere of $G$. 
+
+		Now we consider the set of irreducible representations of $G$, say ${U_\alpha}_{\alpha\in A}$. Then consider $\mathcal{U}=\bigoplus U_\alpha^{\oplus\infty}$. We let a genuine $G$-spectra $X$ to be a set of pointed $G$-spaces indexed by finite dimensional subrepresentations of $\mathcal{U}$, say $X_V$. Moreover, these spaces satisfy for $V\subseteq W$, $X_V\simeq\Hom_G(\mathbb{S}^{W-V},X_W)$. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Construction}
+		For a pointed $G$-space $X$, we may form the $G$-suspension spectrum $\Sigma^\infty X$ defined as follows. Firstly we let $QX=\ilim_V\Omega^V\Sigma^VX$, where this colimit is taken over all finite dimensional subrepresentations of $\mathcal{U}$. Then we let $(\Sigma^\infty X)_W=Q\mathbb{S}^WX$. 
+
+		We define the equivariant cohomology represented by a $G$-spectrum $X$ by sending a $G$-space $Y$ to the Abelian group $\pi_0\Hom(\Sigma^\infty Y,X)$. 
+
+		For a generalized cohomology theory representable by a spectrum $E$, one may form the corresponding Borel equivariant cohomology theory $X^{hG}$ by assigning $Y\mapsto E^*(Y/G)$. Here the quotient is the homotopy quotient. 
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\begin{alertblock}{Theorem}
+		The previous construction $KU_G$ is a cohomology theory representable by a spectrum. Moreover, letting $KU$ denote the spectrum representing the usual complex K-theory, we have a natural map $KU_G\to KU^{hG}$ such that 
+		\[ R(G)\simeq KU_G(*)\to KU^G(*)\simeq KU(BG) \]
+		is the completion at the augmentation ideal, which is the kernel of $R(G)\to\mathbb{Z}$ by sending a representation to its rank. 
+	\end{alertblock}
+	This indicates the importance of studying equivariant K-theory, and furthermore, the importance of studying $G$-spectra. 
+\end{frame}
+
+\section{Thank you!}
+
+\begin{frame}
+	\nocite{*}
+	\printbibliography{}
+\end{frame}
+
+\end{document}

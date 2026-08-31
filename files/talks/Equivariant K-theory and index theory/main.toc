@@ -1,0 +1,5 @@
+\beamer@sectionintoc {1}{Equivariant K-theory}{2}{0}{1}
+\beamer@sectionintoc {2}{The equivariant Thom isomorphism}{21}{0}{2}
+\beamer@sectionintoc {3}{The equivariant index theorem}{31}{0}{3}
+\beamer@sectionintoc {4}{The Atiyah-Segal completion theorem}{36}{0}{4}
+\beamer@sectionintoc {5}{Thank you!}{40}{0}{5}

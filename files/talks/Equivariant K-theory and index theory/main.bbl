@@ -1,0 +1,203 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+\datalist[entry]{anyt/global//global/global}
+  \entry{atiyah2018k}{book}{}
+    \name{author}{1}{}{%
+      {{hash=AM}{%
+         family={Atiyah},
+         familyi={A\bibinitperiod},
+         given={Michael},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {CRC press}%
+    }
+    \strng{namehash}{AM1}
+    \strng{fullhash}{AM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{Ati18}
+    \field{sortinit}{A}
+    \field{sortinithash}{A}
+    \field{title}{K-theory}
+    \field{year}{2018}
+  \endentry
+
+  \entry{atiyah1968bott}{article}{}
+    \true{moreauthor}
+    \true{morelabelname}
+    \name{author}{1}{}{%
+      {{hash=AM}{%
+         family={Atiyah},
+         familyi={A\bibinitperiod},
+         given={MF},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Oxford University Press}%
+    }
+    \strng{namehash}{AM+1}
+    \strng{fullhash}{AM+1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{Ati+68}
+    \field{sortinit}{A}
+    \field{sortinithash}{A}
+    \field{number}{1}
+    \field{pages}{113\bibrangedash 140}
+    \field{title}{Bott periodicity and the index of elliptic operators}
+    \field{volume}{19}
+    \field{journaltitle}{The Quarterly Journal of Mathematics}
+    \field{year}{1968}
+  \endentry
+
+  \entry{kankaanrinta2007equivariant}{article}{}
+    \name{author}{1}{}{%
+      {{hash=KM}{%
+         family={Kankaanrinta},
+         familyi={K\bibinitperiod},
+         given={Marja},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Mathematical Sciences Publishers}%
+    }
+    \strng{namehash}{KM1}
+    \strng{fullhash}{KM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{Kan07}
+    \field{sortinit}{K}
+    \field{sortinithash}{K}
+    \field{number}{1}
+    \field{pages}{1\bibrangedash 27}
+    \field{title}{Equivariant collaring, tubular neighbourhood and gluing theorems for proper Lie group actions}
+    \field{volume}{7}
+    \field{journaltitle}{Algebraic \& Geometric Topology}
+    \field{year}{2007}
+  \endentry
+
+  \entry{may1998equivariant}{article}{}
+    \name{author}{2}{}{%
+      {{hash=MJ}{%
+         family={May},
+         familyi={M\bibinitperiod},
+         given={JP},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=DTt}{%
+         family={Dieck},
+         familyi={D\bibinitperiod},
+         given={Tammo\bibnamedelima tom},
+         giveni={T\bibinitperiod\bibinitdelim t\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {[London: London Mathematical Society], 1969-}%
+    }
+    \strng{namehash}{MJDTt1}
+    \strng{fullhash}{MJDTt1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{MD98}
+    \field{sortinit}{M}
+    \field{sortinithash}{M}
+    \field{number}{143}
+    \field{pages}{219\bibrangedash 220}
+    \field{title}{Equivariant homotopy and cohomology theory}
+    \field{volume}{30}
+    \field{journaltitle}{Bulletin of the London Mathematical Society}
+    \field{year}{1998}
+  \endentry
+
+  \entry{mukherjee2013atiyah}{book}{}
+    \name{author}{1}{}{%
+      {{hash=MA}{%
+         family={Mukherjee},
+         familyi={M\bibinitperiod},
+         given={Amiya},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{MA1}
+    \strng{fullhash}{MA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{Muk13}
+    \field{sortinit}{M}
+    \field{sortinithash}{M}
+    \field{title}{Atiyah-Singer Index Theorem-An Introduction: An Introduction}
+    \field{year}{2013}
+  \endentry
+
+  \entry{palais1957imbedding}{article}{}
+    \name{author}{1}{}{%
+      {{hash=PRS}{%
+         family={Palais},
+         familyi={P\bibinitperiod},
+         given={Richard\bibnamedelima S},
+         giveni={R\bibinitperiod\bibinitdelim S\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {JSTOR}%
+    }
+    \strng{namehash}{PRS1}
+    \strng{fullhash}{PRS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{Pal57}
+    \field{sortinit}{P}
+    \field{sortinithash}{P}
+    \field{pages}{673\bibrangedash 678}
+    \field{title}{Imbedding of compact, differentiable transformation groups in orthogonal representations}
+    \field{journaltitle}{Journal of Mathematics and Mechanics}
+    \field{year}{1957}
+  \endentry
+
+  \entry{segal1968equivariant}{article}{}
+    \name{author}{1}{}{%
+      {{hash=SG}{%
+         family={Segal},
+         familyi={S\bibinitperiod},
+         given={Graeme},
+         giveni={G\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{SG1}
+    \strng{fullhash}{SG1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{Seg68}
+    \field{sortinit}{S}
+    \field{sortinithash}{S}
+    \field{pages}{129\bibrangedash 151}
+    \field{title}{Equivariant $ K $-theory}
+    \field{volume}{34}
+    \field{journaltitle}{Publications Math{\'e}matiques de l'IH{\'E}S}
+    \field{year}{1968}
+  \endentry
+\enddatalist
+\endinput
