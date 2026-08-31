@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+  
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Homepage of Xiaoyang Chen</title>
@@ -23,47 +24,63 @@
       color: #0066cc;
     }
 
+    .introduction {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 40px;
+      align-items: center;
+    } 
+
     .profile-photo {
-      width: 200px;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 50%;
+      width: 100%;
+      max-width: 250px;
+      height: auto;
+      border-radius: 10px;
+    }
+  
+    .photo-column {
+      text-align: center;
     }
     
   </style>
 </head>
 
 <body>
-  <h1>Xiaoyang Chen</h1>
-
+  
   <nav>
     <strong>Home</strong>
     <a href="publications.html">Publications</a>
     <a href="notes.html">Notes</a>
   </nav>
 
-  <p>
-    Welcome to my personal homepage. I am interested in
-    geometric representation theory and related areas.
-  </p>
+  <div class="introduction">
+    <!-- First column: basic information -->
+    <div class="basic-information">
+      <h1>Sean Chen</h1>
 
-  <img
-    class="profile-photo"
-    src="images/my photo.jpg"
-    alt="Photo of Xiaoyang Chen"
-  >
-  
+      <p>PhD student in Mathematics</p>
+      <p>Tsinghua university, Qiuzhen college</p>
+      <p>Email: chensean229@gmail.com</p>
+    </div>
+
+    <!-- Second column: photo -->
+    <div class="photo-column">
+      <img
+        class="profile-photo"
+        src="images/profile.jpg"
+        alt="Photo of Sean Chen"
+      >
+    </div>
+  </div>  
   <h2>Research interests</h2>
+  I am currently a first year PhD student, doing research in geometric representation theory. The topics I am particularly interested in are: 
   <ul>
     <li>Geometric Langlands</li>
-    <li>Motivic homotopy theory and mixed Hodge modules</li>
+    <li>Graded sheaves and mixed Hodge modules</li>
+    <li>Higher representation theory and Gestalten</li>
   </ul>
 
-  <h2>Contact</h2>
-  <p>Email: chensean229@gmail.com</p>
-
   <h2>CV</h2>
-  <p>Download my CV</p>
-  <a href="files/CV/academic-cv.pdf">here</a>
+  <p>My CV is available </p><a href="files/CV/academic-cv.pdf">here</a>
 </body>
 </html>
