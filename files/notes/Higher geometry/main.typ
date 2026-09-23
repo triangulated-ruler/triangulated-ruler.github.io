@@ -7,15 +7,11 @@
 #outline()
 #pagebreak()
 
-#include "geom_satake.typ"
+#include "alg_geom_bck.typ"
 
 #pagebreak()
 
-#include "Bezrukavnikov.typ"
-
-#pagebreak()
-
-#include "graded.typ"
+#include "gestalten.typ"
 
 #pagebreak()
 
