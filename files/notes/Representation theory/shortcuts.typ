@@ -33,9 +33,10 @@
 #let HS = math.upright("HS")
 #let Rex = math.upright("Rex")
 #let Loc = math.upright("Loc")
+#let Tilt = math.upright("Tilt")
 
 #let BoldCatList = ([Set], [Fin], [Ani], [Sp], [Cat], [DGCat], [Mon], [Alg], [CMon], [CAlg], [Mod], [LMod], [Ab], [Vect], [Pr], [Aff], [Stk], [pStk], [Rep], [Perv], [Sch], [StRing])
-#let StrCatList = ([Sh], [pSh], [QCoh], [Coh], [Perf], [Desc], [Sat], [Ch], [HS], [Rex], [Loc])
+#let StrCatList = ([Sh], [pSh], [QCoh], [Coh], [Perf], [Desc], [Sat], [Ch], [HS], [Rex], [Loc], [Tilt])
 
 #let prefixcat(pre, cat) = {
 	if cat.has("child") and cat.at("child") in BoldCatList {
@@ -44,7 +45,7 @@
 		$upright(pre)cat$
 	} else {
 		$upright(pre)(cat)$
-	}
+	} 
 }
 
 #let refl(it) = it
@@ -84,6 +85,7 @@
 #let str = math.upright("str")
 #let cl = math.upright("cl")
 #let mon = math.upright("mon")
+#let nilp = math.upright("nilp")
 
 #let inj = sym.arrow.r.hook
 #let surj = sym.arrow.r.twohead
@@ -97,6 +99,7 @@
 #let sadj = sym.arrows.rl
 #let Ext = math.upright("Ext")
 #let Bar = math.op("Bar")
+#let Free = math.op("Free")
 
 #let Spec = math.op("Spec")
 #let Gr = math.upright("Gr")

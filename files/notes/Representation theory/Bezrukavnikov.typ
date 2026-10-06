@@ -71,6 +71,8 @@ Before we start, we must compute the equivariant cohomologies of points.
 
 = Koszul duality
 
+In this part, we discuss the application of the general theory of Koszul duality to representation theory. In particular, we will be interested in the Koszul duality of the stack $Spec A\/GG_m$ where $A$ is some quasi-heriditary algebra. In this section, all $Mod_A$ or $Mod_A^heart$ will mean $Mod_A^omega$ or $Mod_A^(heart,omega)$ for conventional simplicity. 
+
 == A first glance: Koszul duality for finite type groups
 
 === Highest weight categories 
@@ -91,7 +93,7 @@ In this section, we introduce a special type of Abelian categories which behaves
 This is not the main focus of this section, so we only present the main theorem of the article. 
 
 #thm(name: [Theorem 3.9, @Highestwt1])[
-	Finite length highest weight categories with finitely many simple objects are always of the form as a right module category $Mod_A^(f.g.)$ for some right quasi-hereditary algebra $A$. 
+	Finite length highest weight categories with finitely many simple objects are always of the form as a right module category $Mod_A^(omega, heart)$ for some right quasi-hereditary algebra $A$. 
 ] <Thm_CPS_highest_wt_heri_mod>
 
 This is mainly used in the paper @KoszulFin. In their paper, they only focused on finite length categories with finitely many simple objects, namely, the category of perverse sheaves with respect to a nice enough finite stratification. Their definitions went as follows. 
@@ -108,7 +110,7 @@ This is mainly used in the paper @KoszulFin. In their paper, they only focused o
 
 #lem[
 	We have the following orthogonality and Ext vanishing conditions: 
-	$ dim_k Hom(Delta_mu,nabla_nu)=delta_(mu,nu),Ext^i(Delta_mu,nabla_nu)=0 $
+	$ dim_k Hom(Delta_mu,nabla_nu)=delta_(mu,nu),Ext^i (Delta_mu,nabla_nu)=0 $
 ] <Lem_orthog_ext_vanish_highest_wt>
 #proof[
 	For the first orthogonality condition, note $Delta_mu->IC_mu$ is a projective cover in $cal(A)_(<=mu)$, so every quotient of $Delta_mu$ must have $IC_mu$ as a factor. Similarly, every subobject of $nabla_nu$ must intersect $IC_nu$. Thus, if there is a non-trivial map $Delta_mu->nabla_nu$, since the image and coimage is non-zero, we have 
@@ -190,15 +192,19 @@ This is mainly used in the paper @KoszulFin. In their paper, they only focused o
 	By projectivity of $P_mu$, the left hand side vanishes unless $i=0$. The right side also vanishes unless $i=0$ by the standard filtration of $P$ and applying the property of $!$-pushforwards. The statement for $i=0$ is trivial. 
 ]
 
+However, one ought to be careful about the stratified spaces. For example, if there are stacky components in the strata, the resulting category of sheaves is often not highest weight, for example, we have
+$ D(I\\L G\/I)!=D(Perv(I\\L G\/I)) $
+which is an evidence of $Perv(I\\L G\/I)$ not being highest weight. 
+
 Now, we may wish to generalize the above properties to possibly infinite stratifications. This is where the modern definition of highest weight categories come in. 
 
 #def[
 	Let $cal(A)$ be an Abelian category over some field $k$. We say $cal(A)$ is highest weight in the sense of @Highestwt2 if it is highest weight in the sense of @KoszulFin, but with the condition of the finite poset $Lambda$ replaced by for any $lambda in Lambda$, the set ${mu|mu<=lambda}subset Lambda$ is finite. 
 ] <Def_Highest_wt_cat_def_3>
 
-Properties such as the orthogonality and Ext vanishing still holds. However, the category of perverse sheaves over a stratified space may not be highest weight, for example 
-$ D(I\\L G\/I)!=D(Perv(I\\L G\/I)) $
-which is an evidence of $Perv(I\\L G\/I)$ not being highest weight. Later on, we will adopt this definition of highest weight categories. 
+Properties such as the orthogonality and Ext vanishing still holds. However, the existence of projective (injective) object fails by construction. However, this will prove not to be a major difficulty, since the categories we are dealing with such as $D(I\\L G\/I)$ is given by the 2-colimit on the finite stage objects 
+$ D(I\\Fl)=colim_(w in W^ext) D(I\\ Fl_(<=w)) $
+and each finite stage object will allow the previous properties. Later on, we will adopt this definition of highest weight categories. 
 
 #lem[
 	Let $Lambda' subset Lambda$ be a subposet closed under taking smaller objects, and let $cal(A)$ be a highest weight category with weight poset $Lambda$. Then, the Serre quotient $pi:cal(A)->>cal(A)\/cal(A)_Lambda'$ is a highest weight category with weight poset $Lambda-Lambda'$. Its simple, standard, and costandard objects are the image of the projection $pi$ of the original simple, standard, and costandard objects. 
@@ -216,22 +222,95 @@ which is an evidence of $Perv(I\\L G\/I)$ not being highest weight. Later on, we
 #prop[
 	Let $cal(A)$ be a highest weight category with weight poset $Lambda$. Then we have the following. 
 	+	The embedding $iota:D(cal(A)_(Lambda'))inj D(cal(A))$ is fully faithful. 
-	+	The embedding $iota:D(cal(A)_(Lambda'))inj D(cal(A))$ admit left and right adjoints, denoted by $iota^L$ and $iota^R$. Moreover, the projection $pi:D(cal(A))->D(cal(A)\/cal(A)_(Lambda'))$ admit left and right adjoints, denoted by $pi^L$ and $pi^R$. These adjoints provide a semi-orthogonal decomposition of $D(cal(A))$, namely 
+	+	The embedding $iota:D(cal(A)_(Lambda'))inj D(cal(A))$ admit left and right adjoints, denoted by $iota^L$ and $iota^R$. Moreover, the projection $pi.alt:D(cal(A))->D(cal(A))\/D(cal(A)_(Lambda'))$ admit left and right adjoints, denoted by $pi.alt^L$ and $pi.alt^R$. These adjoints provide a recollement of $D(cal(A))$. 
+]
+#proof[
+	For (1), note that the category $D(cal(A))$ and $D(cal(A)_(Lambda'))$ are generated by the standard and costandard objects separately. Thus, it suffices to prove that for $mu,nu in Lambda'$, we have 
+	$ Ext_(cal(A)_(Lambda'))(Delta_mu,nabla_nu)->Ext_(cal(A))(Delta_mu,nabla_nu) $
+	an isomorphism. This is by @Lem_orthog_ext_vanish_highest_wt. 
+
+	For (2), consider the category $D(cal(A))_(Lambda-Lambda')^nabla$, given by the subcategory of $D(cal(A))$ generated by $nabla_(lambda)$ for $lambda in Lambda-Lambda'$. Now, there exists a decomposition (fiber sequence) for any $M in D(cal(A))$
+	$ M'-->M-->M'' $
+	where $M' in D(cal(A)_(Lambda'))$ and $M'' in D(cal(A))_(Lambda-Lambda')^nabla$. The construction is analogous to the process of decomposing a sheaf into closed and open parts, and is unique and functorial. Then, this gives $pi.alt|_(D(cal(A))_(Lambda-Lambda')^nabla):D(cal(A))_(Lambda-Lambda')^nabla tilde.eq D(cal(A))\/D(cal(A)_(Lambda'))$. The inverse of this functor gives $pi.alt^R$, and projecting $M$ to $M'$ gives $iota^R$. 
+
+	Conversely, considering $D(cal(A))_(Lambda-Lambda')^Delta$ gives $iota^L$ and $pi.alt^L$. 
+]
+
+#coro[
+	We have an equivalence of categories 
+	$ D(cal(A))\/D(cal(A)_Lambda')=D(cal(A)\/cal(A)_Lambda') $
+]
+#proof[
+	Again, both categories are generated by $Delta_lambda$'s and $nabla_lambda$'s for $lambda in Lambda-Lambda'$ separately. Note that there is a natural functor $D(cal(A))\/D(cal(A)_Lambda')->D(cal(A)\/cal(A)_Lambda')$ It now suffices to prove that 
+	$ Hom_(D(cal(A))\/D(cal(A)_Lambda'))(pi.alt(Delta_mu),pi.alt(nabla_nu))=Hom_(D(cal(A)\/cal(A)_Lambda'))(pi(Delta_mu),pi(nabla_nu)) $
+	But by adjunction, we have 
+	$ LHS=Hom_(D(cal(A)))(Delta_mu,pi.alt^R pi.alt(nabla_nu))=Hom_(D(cal(A)))(Delta_mu,nabla_nu) $
+	where the second inequality follows from the construction of $pi.alt^R$. The analogous fact for $RHS$ follows likewise. 
 ]
 
 #def[
-	Tilting objects
+	Let $M in cal(A)$. We say it is a tilting object if it has both a standard and costandard filtration. 
+	
+	By categorical nonsense, $M$ admit a filtration by standard objects iff it has $Ext^1 (Delta_lambda,M)=0$, iff it has $Ext^i (Delta_lambda,M)=0$ for all $i>0$. Moreover, the number of $nabla_lambda$'s appearing in $M$ is computed via $dim Hom(Delta_lambda,M)$. The dual statement for costandard filtration is also true. 
 ]
 
-#todo[
-	Finish this section. 
+#prop[
+	For any $lambda in Lambda$, there is a unique tilting object $T_lambda$ such that $[T_lambda:IC_lambda]=1$, and $[T_lambda:IC_mu]=0$ for $t lt.eq.not s$.  
+] <Prop_tilting_gen_highest_wt>
+#proof[
+	We claim that there is a tilting object $T$ with an injection $Delta_lambda inj T$ with cokernel admitting a standard filtration by $Delta_mu$ for $mu<lambda$. We first use the claim to derive the final statement, and then prove the claim. 
+
+	Notice that $T$ admits an indecomposable direct summand $T_lambda$ with $(T_lambda:Delta_lambda)=1$, which is given by taking the limit along all quotient objects of $T$ containing $Delta_lambda$. Then, by the property of $T$, we have the composition $Delta_lambda->T->T_lambda$ still injective. The cokernel of $Delta_lambda inj T_lambda$ is still equipped with a costandard filtration by $Delta_mu$ for $mu<lambda$, so such $T_lambda$ satisfies indeed the conditions required in the property. 
+
+	Then, we prove that any other $T'_s$ subject to the requirements are isomorphic to $T_lambda$. In fact, we will prove that for $T$ an indecomposable tilting object, it must be isomorphic to some $T_lambda$. We take the first term of the standard filtration of $T$, say $Delta_mu inj T$. Consider the cokernel $C=coker(Delta_mu inj T)$. Since $T_mu$ is tilting, we have $Ext^1(C,T_mu)=0$. Thus, the long exact sequence gives 
+	$ Hom(T,T_mu)->Hom(Delta_mu,T_mu)->Ext^1(C,T_mu)=0 $
+	so, we find a preimage of the structural morphism $Delta_mu inj T_mu$, which gives $phi:T->T_mu$ restricting to the identity on $Delta_mu$. Conversely, there is a $psi:T_mu->T$ restricting to the identity on $Delta_mu$. Thus, $psi compose phi:T->T$ is a non-nilpotent element of the Artinian local ring $End(T)$, hence is invertible. Thus, $phi$ and $psi$ are isomophisms. 
+
+	Now, it suffices to prove the previous claim. We will construct such $T$ by induction on the size of the poset $Lambda$. Firstly, if $lambda$ is minimal, we can take $T=Delta_lambda=nabla_lambda$. Otherwise, pick $mu$ minimal with $mu in Lambda$. By induction, there is an object $M$ in $cal(A)\/cal(A)_mu$ satisfying the properties, and we can take $M'=pi_mu^L (M)$. By adjunction, there is an embedding $Delta_s inj M'$. Again by adjunction, for any $nu!=mu$, we have $Ext^1(Delta_nu,M')=Ext^1(Delta_nu,M)=0$. Now, take $E=Ext^1(Delta_mu,M')$. By definition, we can identify $E^or times.o E=Ext^1(E times.o Delta_mu,M')$, and consider the object $T in Ext^1(E times.o Delta_mu,M')$ representing the identity on $E$. Hence, we obtain an exact sequence 
+	$ 0-->M' --> T --> E times.o Delta_mu-->0 $
+	Now, $T$ admits an injection $Delta_lambda inj T$ with cokernel admitting a costandard filtration by $Delta_mu$ with $mu<lambda$. So now it suffices to prove that $T$ is tilting, i.e. it also admits a standard filtration. However, this amounts to prove that $Ext^1(Delta_nu,T)=0$ for all $nu$. If $nu!=mu$, this follows from the ext-vanishing by adjunction. If $nu=mu$, consider the long exact sequence associated to the short exact sequence defining $T$
+	$ Hom(Delta_mu,E times.o Delta_mu)-->Ext^1(Delta_mu,M')-->Ext^1(Delta_mu,T)-->Ext^1(Delta_mu,E times.o Delta_mu) $
+	By construction, the first map is an isomorphism, and the fourth group is trivial, so we obtain the desired vanishing. 
 ]
+
+#coro[
+	The natural functor $K(Tilt(cal(A)))->D(cal(A))$ is an equivalence of categories. 
+]
+#proof[
+	$D(cal(A))$ is clearly generated by the tilting objects by the presence of $T_lambda$'s. Thus, it suffices to show that the above functor is fully faithful. However, for $T,T' in Tilt(cal(A))$, consider the costandard filtration on $T$ and standard filtration on $T'$, we have $Ext^i (T,T')=0$ for all $i>0$. Hence full faithfulness holds. 
+]
+
+We can give a further enhancement of the formalism introduced above. 
+
+#def[
+	We define a graded highest weight category to be an Abelian category $cal(A)$ over some field $k$, such that every requirement in @Def_Highest_wt_cat_def_3 holds except for (2) and (4). For the modification of (2), this time $cal(A)$ has simple objects indexed by $Lambda times ZZ$, with simple objects denoted by $IC_lambda bracket(n)$. There is an additional requirement that $D(cal(A))$ is a stable $oo$-category equipped with a $t$-structure and a weight structure, where all simple objects $IC_lambda bracket(n)$ has weight $n$. 
+
+	Clearly, forgetting the grading $bracket(n)$ and identifying the corresponding simple objects gives a highest weight category. 
+
+	For the modification of (4), the projective objects and injective objects do not exists in $cal(A)$, but in the underlying highest weight category. 
+] <Def_gr_Highest_wt_cat>
+
+#todo[
+	Is this definition correct? 
+]
+
+We list but not prove the following properties below, since everything is a simple generalization of the previous proofs. 
+
+#prop[
+	Let $X=product.co_(lambda in Lambda)X_lambda$ be a finite affine stratification over a finite field $k$. Then, $Perv_(Lambda,m)(X)$ is a graded highest weight category. 
+]
+
+#coro[
+	We have the realization functor an equivalence $D(Perv_(Lambda,m)(X))->D_(Lambda,m)(X)$. 
+] <Coro_mixed_real_equiv>
 
 === Where is Koszul duality? 
 
 == Koszul Duality for Kac--Moody groups 
 
-In this chapter, we give a review of Bezrukavnikov-Yun's paper @KosKacMoody
+In this chapter, we give a review of Bezrukavnikov-Yun's paper @KosKacMoody. For $X$ a stack over any finite field $k$, we will use the notation $D_m (X)$ ($Perv_m (X)$) to denote the category of (perverse) sheaves over $X$, but with the space of morphisms given by $R Hom(iota cal(F),iota cal(G))$, where $iota:D_m (X)->D_m (X times.o overline(k))$. In particular, this space admit a Frobenius action since $cal(F)$ and $cal(G)$ are Frobenius fixed. We will write $underline(Hom)(cal(F),cal(G))$ if we mean the usual $Hom$ space in $D_m (X)$ instead. This convention indicates that what we should be caring about is the category of mixed sheaves $D_m (X times.o overline(k))$, but in the applications of representation theory, we only care about the image of the map $D(X)->D_m (X times.o overline(k))$, leaving the objects we are considering not too complicated. Moreover, we have the following relation on the $Hom$ groups  
+$ underline(Hom)(cal(F),cal(G))=Hom(iota cal(F),iota cal(G))^(h Fr) $
+The issue that $D(X)->D_m (X times.o overline(k))$ is not surjective can be fixed using the formalism of graded sheaves. Via this, we can define the category of mixed sheaves over $X times.o overline(k)$ where all possible reductions of $X$ over finite fields yield the same category. 
 
 === Kac--Moody lie algebras and Kac--Moody groups 
 
@@ -382,9 +461,9 @@ However, the above construction has two caveats: firstly, it works well only for
 === A realization result 
 
 #def[
-	Consider the category $Vect_(overline(QQ)_ell)$. We define a Frobenius module $M$ to be an object $M in Mod_(overline(QQ)_ell)$ equipped with an automorphism $Fr_M :M->M$. We denote the category of Frobenius modules by $Mod(Fr)$. We define a Frobenius module to be locally finite if it is a union of its finite submodules. For any Frobenius module $M$, we denote $M^f$ by the union of its finite submodules. 
+	Consider the category $Vect_(overline(QQ)_ell)^heart$. We define a Frobenius module $M$ to be an object $M in Vect_(overline(QQ)_ell)^heart$ equipped with an automorphism $Fr_M :M->M$. We denote the category of Frobenius modules by $Mod_Fr$. We define a Frobenius module to be locally finite if it is a union of its finite submodules. For any Frobenius module $M$, we denote $M^f$ by the union of its finite submodules. 
 
-	There is clearly a forgetful functor $Mod(Fr)->Vect_(overline(QQ)_ell)$ given by $M mapsto M^(Fr)$, the fixed point functor. Later on, we will use this functor to realize a category enriched over $Mod(Fr)$ to a DG category over $overline(QQ)_ell$. 
+	There is clearly a forgetful functor $Mod_Fr^heart->Vect_(overline(QQ)_ell)^heart$ given by $M mapsto M^(Fr)$, the fixed point functor. Later on, we will use this functor to realize a category enriched over $Mod_Fr$ to a DG category over $overline(QQ)_ell$. 
 ] <Def_Frob_mod>
 
 #def[
@@ -398,7 +477,7 @@ However, the above construction has two caveats: firstly, it works well only for
 ]
 
 #def[
-	Let $E$ be a $overline(QQ)_ell$-algebra. Let $E$ be equipped with a continuous Frobenius module structure compatible with its algebra structure, we define $Mod_(E,Fr)$ to be the category of $E$-modules equipped with a Frobenius automorphism compatible with the Frobenius module structure on $E$. 
+	Let $E in Alg(Mod_Fr^heart)$. we define $Mod_(E,Fr)^heart$ to be the category of $E$-modules equipped with a Frobenius automorphism compatible with the Frobenius module structure on $E$. We define $Mod_(E,Fr)$ to be its derived category. 
 ]
 
 In this section, our main goal is to answer the following question. 
@@ -410,7 +489,7 @@ In this section, our main goal is to answer the following question.
 We will show this with the following assumptions. 
 
 #ass[
-	Let $cal(D)$ to be a $overline(QQ)_ell$-linear category enriched in $D(Fr)$ (equivalently, the $Hom$ and $Ext$ groups are Frobenius modules), and is equipped with the following data: 
+	Let $cal(D)$ to be a $overline(QQ)_ell$-linear category enriched in $Mod_(Fr)$ (equivalently, the $Hom$ and $Ext$ groups are Frobenius modules), and is equipped with the following data: 
 	+	A finite poset $Lambda$ such that $cal(D)$ has a recollement indexed by $Lambda$ (that is, a series of open-closed semi-orthogonal decompositions). We define $cal(D)_lambda=cal(D)_(<=lambda)\/cal(D)_(<lambda)$. 
 	+	A full additive subcategory $cal(C)_lambda subset cal(D)_lambda$ stable under taking tensor with unipotent Frobenius modules, such that for any objects $c_1,c_2 in cal(C)_lambda$, we have 
 		$ Ext^i_(cal(D)_lambda) #h(-3pt) (c_1,c_2)^(Fr#[-]unip)=0 $
@@ -426,15 +505,15 @@ In practice, $cal(D)$ will be a category of mixed $ell$-adic sheaves constructib
 The main theorem is the following, which would be our main technical tool later on. 
 
 #thm[
-	For a category $cal(D)$ satisfying the requirements in @Ass_realization, there is a $overline(QQ)_ell$-algebra $E$ with a Frobenius action, such that $cal(D)inj D(E,Fr)$ is fully faithful in the sense that both categories are enriched in $Set$ rather than $D(Fr)$. Moreover, such construction is functorial for functors preserving the subcategory $cal(C)$. 
+	For a category $cal(D)$ satisfying the requirements in @Ass_realization, there is a $overline(QQ)_ell$-algebra $E$ with a Frobenius action, such that $cal(D)inj Mod_(E,Fr)$ is fully faithful in the sense that both categories are enriched in $Set$ rather than $D(Fr)$. Moreover, such construction is functorial for functors preserving the subcategory $cal(C)$. 
 ] <Thm_realization>
 
 We will begin with a simple lemma on the computation of a homotopy fixed point. 
 
 #lem[
-	Let $M in D(Fr)$. Then, 
+	Let $M in Mod_(Fr)$. Then, 
 	$ 0-->H^(i-1)(M)_(Fr)-->H^i (M^(h Fr))-->H^i (M)^Fr-->0 $
-]
+] <Lem_Fr_fp_exact_seq>
 #proof[
 	Consider the following description of homotopy fixed points of a $ZZ$ action as a fiber 
 	$ M^(h Fr)-->M-->^(Fr-id)M $
@@ -452,7 +531,7 @@ We will begin with a simple lemma on the computation of a homotopy fixed point.
 	$ dots.c -->Ext^i_(cal(C)_(<lambda))(i_(<lambda)^*c_1,i_(<lambda)^! c_2)^(Fr#[-]unip)-->Ext^i (c_1,c_2)^(Fr#[-]unip)-->Ext^i_(cal(C)_lambda)(i^*_lambda c_1,i^*_lambda c_2)^(Fr#[-]unip)-->dots.c $
 	which gives the vanishing result. 
 
-	For the second assertion, notice that for any $M in Mod_Fr$, we have $M^Fr subset M^(Fr#[-]unip)$. The rest follows from the previous lemma. 
+	For the second assertion, notice that for any $M in Mod_Fr^heart$, we have $M^Fr subset M^(Fr#[-]unip)$. The rest follows from the previous lemma. 
 ]
 
 #lem[
@@ -468,7 +547,7 @@ We will begin with a simple lemma on the computation of a homotopy fixed point.
 ]
 
 #def[
-	Let $K_acyc (cal(C))subset K(cal(C))$ denote the subcategory of the bounded homotopy category spanned by objects equivalent to $0 in cal(D)$.  
+	The composition $Ch(cal(C))->Fil(cal(C))->cal(D)$ (the second functor is the functor sending a filtered object to its underlying object in $cal(D)$) descends to a functor $tilde(rho)(cal(C)):K(cal(C))->cal(D)$. Let $K_acyc (cal(C))subset K(cal(C))$ denote the subcategory of the bounded homotopy category spanned by objects sent to $0 in cal(D)$ by $tilde(rho)(cal(C))$.  
 ]
 
 #lem[
@@ -528,7 +607,7 @@ We will begin with a simple lemma on the computation of a homotopy fixed point.
 Now, we notice that $cal(C)^(Fr#[-]unip)$ is in some sense the Frobenius semisimplification, as opposed to $cal(C)^Fr$ is removing the Frobenius structure. This can be shown in the following lemma. 
 
 #lem[
-	From now on, we require $cal(D)$ to satisfy all assumptions from @Ass_realization. For any $c in cal(C)$, there are complexes $M_lambda in D(Fr)$, such that 
+	From now on, we require $cal(D)$ to satisfy all assumptions from @Ass_realization. For any $c in cal(C)$, there are complexes $M_lambda in Mod_(Fr)$, such that 
 	$ c=plus.o.big c_lambda times.o M_lambda in cal(C)^(Fr#[-]unip) $
 ] <Lem_Frob_semisimplification>
 #proof[
@@ -564,10 +643,10 @@ Now, suppose there is a family of objects $d_lambda in cal(C)_(<=lambda)$ also p
 #proof[
 	Now we are ready to prove @Thm_realization. We let $d=plus.o.big d_lambda$, and take the $overline(QQ)_ell$-algebra $E$ to be 
 	$ E=plus.o.big_(i in ZZ)Ext^i_(cal(D))(d,d)^op $
-	In particular, this is concentrated at degree 0, so not a DG algebra. We will prove that we have a fully faithful functor $cal(C)inj Mod_(E,Fr)$, and then take derived categories, and prove $K(cal(C))\/K_acyc (cal(C))inj D(E,Fr)$ is fully faithful. Finally, by @Prop_half_realization, we obtain the desired fully faithful map. 
+	In particular, this is concentrated at degree 0, so not a DG algebra. We will prove that we have a fully faithful functor $cal(C)inj Mod_(E,Fr)^heart$, and then take derived categories, and prove $K(cal(C))\/K_acyc (cal(C))inj Mod_(E,Fr)$ is fully faithful. Finally, by @Prop_half_realization, we obtain the desired fully faithful map. 
 
-	Firstly, the functor $cal(C)inj Mod_(E,Fr)$ is via the obvious Yoneda functor 
-	$ h_d=plus.o.big_(i in ZZ)Ext^i_cal(D)(d,-):cal(C)->Mod_(E,Fr) $
+	Firstly, the functor $cal(C)inj Mod_(E,Fr)^heart$ is via the obvious Yoneda functor 
+	$ h_d=plus.o.big_(i in ZZ)Ext^i_cal(D)(d,-):cal(C)->Mod_(E,Fr)^heart $
 	Note that by definition 
 	$ Hom_(Mod_(E,Fr))(h_d (c_1),h_d (c_2))=Hom_E (h_d (c_1),h_d (c_2))^(Fr) $
 	so we only need 
@@ -576,7 +655,7 @@ Now, suppose there is a family of objects $d_lambda in cal(C)_(<=lambda)$ also p
 	$ Hom_E (h_d (d),h_d (c_2))^(Fr#[-]unip)=Hom_E (E,h_d (c_2))^(Fr#[-]unip)=h_d (c_2)^(Fr#[-]unip)=Hom_(cal(C))(d,c_2)^(Fr#[-]unip) $
 	And then, by projecting to direct summands in $cal(C)^(Fr#[-]unip)$, we see the above map is an isomorphism for $d_lambda$s. Finally, since the $d_lambda$s generates $cal(C)^(Fr#[-]unip)$ under direct sums, we have the functor fully faithful. 
 
-	Then passing to homotopy categories, we first prove $K_acyc (cal(C))$ is null-homotopic in $K(cal(C)^(Fr#[-]unip))$. This is done by @Lem_Fr_unip_Hom_exact, and explicitly constructing the contracting homotopy via the exactness of $Hom$ functors. Thus, we have a well-defined map $K(cal(C))\/K_acyc (cal(C))->D(E,Fr)$. However, in this case, the $Ext$ groups are computed likewise as above, so we are done. 
+	Then passing to homotopy categories, we first prove $K_acyc (cal(C))$ is null-homotopic in $K(cal(C)^(Fr#[-]unip))$. This is done by @Lem_Fr_unip_Hom_exact, and explicitly constructing the contracting homotopy via the exactness of $Hom$ functors. Thus, we have a well-defined map $K(cal(C))\/K_acyc (cal(C))->Mod_(E,Fr)$. However, in this case, the $Ext$ groups are computed likewise as above, so we are done. 
 
 	Finally, for the functoriality, for a map $Phi:cal(D)->cal(D)'$ with $Phi|_cal(C):cal(C)->cal(C)'$, we claim that we have the following commutative diagram: // https://q.uiver.app/#r=typst&q=WzAsNixbMCwwLCJjYWwoRCkiXSxbMCwxLCJjYWwoRCknIl0sWzEsMCwiSyhjYWwoQykpXFwvS19hY3ljIChjYWwoQykpIl0sWzEsMSwiSyhjYWwoQyknKVxcL0tfYWN5YyAoY2FsKEMpJykiXSxbMiwwLCJEKEUsRnIpIl0sWzIsMSwiRChFJyxGcikiXSxbMCwxLCJQaGkiLDJdLFsyLDMsIksoUGhpfF8oY2FsKEMpKSkiLDJdLFs0LDUsIkJfUGhpIHRpbWVzLm9fRSAoLSkiXSxbMiwwLCJyaG8oY2FsKEMpKSIsMl0sWzMsMSwicmhvKGNhbChDKScpIl0sWzIsNCwiaF9kIl0sWzMsNSwiaF8oZCcpIiwyXV0=
 	#align(center, diagram({
@@ -584,8 +663,8 @@ Now, suppose there is a family of objects $d_lambda in cal(C)_(<=lambda)$ also p
 		node((-1, 1), [$cal(D)'$])
 		node((0, 0), [$K(cal(C))\/K_acyc (cal(C))$])
 		node((0, 1), [$K(cal(C)')\/K_acyc (cal(C)')$])
-		node((1, 0), [$D(E,Fr)$])
-		node((1, 1), [$D(E',Fr)$])
+		node((1, 0), [$Mod_(E,Fr)$])
+		node((1, 1), [$Mod_(E',Fr)$])
 		edge((-1, 0), (-1, 1), [$Phi$], label-side: right, "->")
 		edge((0, 0), (0, 1), [$K(Phi|_(cal(C)))$], label-side: right, "->")
 		edge((1, 0), (1, 1), [$B_Phi times.o_E (-)$], label-side: left, "->")
@@ -599,8 +678,8 @@ Now, suppose there is a family of objects $d_lambda in cal(C)_(<=lambda)$ also p
 	#align(center, diagram({
 		node((0, 0), [$cal(C)$])
 		node((0, 1), [$cal(C)'$])
-		node((1, 0), [$Mod_(E,Fr)$])
-		node((1, 1), [$Mod_(E',Fr)$])
+		node((1, 0), [$Mod_(E,Fr)^heart$])
+		node((1, 1), [$Mod_(E',Fr)^heart$])
 		edge((0, 0), (0, 1), [$Phi|_(cal(C))$], label-side: right, "->")
 		edge((1, 0), (1, 1), [$B_Phi times.o_E (-)$], label-side: left, "->")
 		edge((0, 0), (1, 0), [$h_d$], label-side: left, "->")
@@ -614,7 +693,7 @@ Now, suppose there is a family of objects $d_lambda in cal(C)_(<=lambda)$ also p
 Finally, we will also be able to compute the image of the above fully faithful functor. 
 
 #coro[
-	The image of the functor $cal(D)inj Mod(E,Fr)$ is the full subcategory generated by the twists of $Hom(d,d_lambda)$s as a triangulated category. 
+	The image of the functor $cal(D)inj Mod_(E,Fr)$ is the full subcategory generated by the twists of $Hom(d,d_lambda)$s as a triangulated category. 
 ] <Coro_ess_image_realization>
 #proof[
 	Obvious. 
@@ -631,13 +710,13 @@ Another first corollary is the computation of $A$-equivariant derived category o
 ] <Def_Tate_mod_torus>
 
 #rem[
-	Notice that the Tate module $T_ell (A)$ is equivalently the pro-$ell$ part of $pi_1^(#[tame])(A)$, since $A[ell^k]$ can be identified as the Galois group of the $ell^k$-th power covering $A->A$. 
+	Notice that the Tate module $T_ell (A)$ is equivalently the pro-$ell$ part of $pi_1(A)^(#[tame])$, since $A[ell^k]$ can be identified as the Galois group of the $ell^k$-th power covering $A->A$. 
 ]
 
 #coro[
 	Take any torus $A$, we have an equivalence of categories 
-	$ D_m (BB A)tilde.eq D(check(S)_A,Fr)^omega $
-	The pullback functor $D_m (BB A)->D_m (pt)=D(Fr)$ corresponds to the functor $(-)times.o_(check(S)_A)overline(QQ)_ell$ using the natural augmentation of $check(S)_A$. 
+	$ D_m (BB A)tilde.eq Mod_(check(S)_A,Fr)^omega $
+	The pullback functor $D_m (BB A)->D_m (pt)=Mod_(Fr)$ corresponds to the functor $(-)times.o_(check(S)_A)overline(QQ)_ell$ using the natural augmentation of $check(S)_A$. 
 ] <Coro_torus_equi_shves>
 #proof[
 	By @Thm_realization, it suffices to verify that $D_m (BB A)$ satisfies the assumptions @Ass_realization. For (1), we simply pick the trivial decomposition. For (2), we take $cal(C)_lambda$ to be the very pure of weight 0 complexes (see @Def_very_pure_complex) such that they are constant over $overline(k)=overline(FF)_q$. Then, the $Ext^i_(D_lambda)(c_1,c_2)$ would be pure of weight $i$ by the same argument as in @Prop_weight_0_ext_weight, whose Frobenius unipotent part obviously vanish. They are clearly stable under taking tensors with unipotent Frobenius modules. 
@@ -813,12 +892,12 @@ Then we will introduce the hypercohomology functor for the convenience for certa
 
 #def[
 	By identifying $B\\G\/B=H\\(U\\G\/U)\/H$, we can project $U\\G\/U$ to a point, and obtain the equivariant cohomology functor 
-	$ Gamma_(H times H)(U\\G\/U,-):D_m (B\\G\/B)->D_m (BB(H times H))=D(check(S)times.o check(S),Fr)^omega $
+	$ Gamma_(H times H)(U\\G\/U,-):D_m (B\\G\/B)->D_m (BB(H times H))=Mod_(check(S)times.o check(S),Fr)^omega $
 	where $check(S)=check(S)_H$. We denote this functor by $HH$. 
 ] <Def_equi_coh>
 
 #lem[
-	The functor $HH$ has a natural monoidal structure with respect to the convolution on $D_m (B\\G\/B)$ and the tensor product $-times.o_(check(S))-$ on $D(check(S)times.o check(S),Fr)^omega$. 
+	The functor $HH$ has a natural monoidal structure with respect to the convolution on $D_m (B\\G\/B)$ and the tensor product $-times.o_(check(S))-$ on $Mod_(check(S)times.o check(S),Fr)^omega$. 
 ] <Lem_equi_coh_monoidal>
 #proof[
 	It suffices to prove that the tensor product $-times.o_(check(S))-$ on $D(check(S)times check(S),Fr)^omega$ is the same as the following pull-push: 
@@ -829,11 +908,11 @@ Then we will introduce the hypercohomology functor for the convenience for certa
 	// https://q.uiver.app/#r=typst&q=WzAsNixbMCwwLCJEX20gKEhcXFxccHRcXC9IIHRpbWVzIEhcXFxccHRcXC9IKSJdLFswLDEsIkQoY2hlY2soUyleKHRpbWVzLm8gNCksRnIpIl0sWzEsMCwiRF9tIChIXFxcXHB0IHRpbWVzXkggcHRcXC9IKSJdLFsxLDEsIkQoY2hlY2soUyleKHRpbWVzLm8gMyksRnIpIl0sWzIsMCwiRF9tIChIXFxcXHB0XFwvSCkiXSxbMiwxLCJEKGNoZWNrKFMpIHRpbWVzLm8gY2hlY2soUyksRnIpIl0sWzAsMiwiZGVsdGFfSF4qIl0sWzIsNCwibV8oSCwhKSJdLFsxLDMsIkYiXSxbMyw1LCJVIl0sWzAsMSwidGlsZGUuZXEiLDJdLFsyLDMsInRpbGRlLmVxIiwyXSxbNCw1LCJ0aWxkZS5lcSJdXQ==
 	#align(center, diagram({
 		node((-1, 0), [$D_m (H\\pt\/H times H\\pt\/H)$])
-		node((-1, 1), [$D(check(S)^(times.o 4),Fr)$])
+		node((-1, 1), [$Mod_(check(S)^(times.o 4),Fr)$])
 		node((0, 0), [$D_m (H\\pt times^H pt\/H)$])
-		node((0, 1), [$D(check(S)^(times.o 3),Fr)$])
+		node((0, 1), [$Mod_(check(S)^(times.o 3),Fr)$])
 		node((1, 0), [$D_m (H\\pt\/H)$])
-		node((1, 1), [$D(check(S) times.o check(S),Fr)$])
+		node((1, 1), [$Mod_(check(S) times.o check(S),Fr)$])
 		edge((-1, 0), (0, 0), [$delta_H^*$], label-side: left, "->")
 		edge((0, 0), (1, 0), [$m_(H,*)$], label-side: left, "->")
 		edge((-1, 1), (0, 1), [$F$], label-side: left, "->")
@@ -844,7 +923,7 @@ Then we will introduce the hypercohomology functor for the convenience for certa
 	}))
 	Here, by @Coro_torus_equi_shves $F$ is $-times.o_(check(S)times.o check(S))check(S)$, where the bottom $check(S)times.o check(S)$ is the two in the middle. The question now is what is $U$. We claim that this is forgetting the middle $check(S)$-action, hence identifying $U compose F$ as the tensor product. 
 
-	We first identify the functor $pi_*:D_m (BB A)->D_m (pt)$. While identifying $D_m (BB A)$ with $D(check(S)_A,Fr)$, we used the functor $Hom(bb(1),-)$, which is precisely taking the cohomology. Thus $pi_*$ is simply the forgetful functor $D(check(S)_A,Fr)->D(Fr)$. Hence in the above case, this is also the forgetful functor, but only forgetting the middle factor by the Künneth formula. 
+	We first identify the functor $pi_*:D_m (BB A)->D_m (pt)$. While identifying $D_m (BB A)$ with $D(check(S)_A,Fr)$, we used the functor $Hom(bb(1),-)$, which is precisely taking the cohomology. Thus $pi_*$ is simply the forgetful functor $Mod_(check(S)_A,Fr)->Mod(Fr)$. Hence in the above case, this is also the forgetful functor, but only forgetting the middle factor by the Künneth formula. 
 ]
 
 #lem[
@@ -1005,11 +1084,11 @@ Finally, we show that we can apply @Thm_realization to give a computation of $D_
 We first give a recap on the definition of monodromic sheaves. In this part, all monodromic means unipotently monodromic. 
 
 #def[
-	For convenience, we introduce the following variant of $!$-pushforwards and pullbacks: we define the adjoint pair $pi_dagger ladj pi^dagger:=pi_![r]ladj pi^![-r]$, where $pi$ is of relative dimension $r$. In our purpose, $pi$ is often the quotient functor of a torus of rank $r$. 
+	For convenience, we introduce the following variant of $!$-pushforwards and pullbacks: we define the adjoint pair $pi_dagger ladj pi^dagger:=pi_![r]ladj pi^![-r]$, where $pi$ is of relative dimension $r$. In our purpose, $pi$ is often the quotient functor of a torus of rank $r$. Note in particular that there are no weight shifts here. 
 ] <Def_dagger_pushforward_pullback>
 
 #def[
-	Let $X$ be a variety equipped with an action by a torus $A$. We denote $pi:X->X\/A:=Y$ the projection. We define $D_m^mon (X)$ to be the full subcategory generated by the image of $pi^!:D_m (Y)->D_m (X)$ under finite colimits. 
+	Let $X$ be a variety equipped with an action by a torus $A$. We denote $pi:X->X\/A:=Y$ the projection. We define $D_m^mon (X)$ to be the full subcategory generated by the image of $pi^!:D_m (Y)->D_m (X)$ under finite colimits. We define $Perv_m^mon (X)=Perv_m (X)inter D_m^mon (X)$. 
 ] <Def_monodromic_cat>
 // Recall $tilde(Fl,size:#140%)=G\/U$ is the enhanced flag variety. We define $D_m^mon (U\\G\/U)$ to be the subcategory of $D_m (B\\G\/B)$ spanned by the image of $pi^!:D_m (U\\G\/U)->D_m (B\\G\/B)$. Equivalently, we may take $D_m^mon (U\\G\/U)$ to be the subcategory of $D_m (B\\G\/B)$ spanned by the image of $pi^!:D_m (U\\G\/B)->D_m (B\\G\/B)$ by stratawise computations. 
 
@@ -1020,21 +1099,287 @@ However, this category is not what we need. Rather, we need a certain completion
 	$ D_m^mon (GG_m)={cal(F)in D_m (GG_m), cal(H)^i (cal(F))in Loc_u (GG_m)} $ 
 	Indeed, the right hand side is closed under taking kernels, cokernels, extensions, and direct summands, and contains the constant sheaf. Conversely, every unipotent local system must lie in $D_m^mon (GG_m)$ by considering the filtration, so the two categories are equivalent. 
 
-	Then, we can identify $Loc(GG_m)$ with $ell$-adic representations of $pi_1 (GG_m)$. Such representations then factors through its pro-$ell$ part $T_ell (GG_m)=ZZ_ell (1)$, so we have $Loc(GG_m)=Rep(ZZ_ell (1),overline(QQ)_ell^n)$. The unipotent local systems hence corresponds to unipotent representations. 
+	Then, we can identify $Loc(GG_m)$ with $ell$-adic representations of $pi_1 (GG_m)^#[tame]$. Such representations then factors through its pro-$ell$ part $T_ell (GG_m)=ZZ_ell (1)$, so we have $Loc(GG_m)=Rep(ZZ_ell (1),overline(QQ)_ell^n)^heart$. The unipotent local systems hence corresponds to unipotent representations. 
 
 	Now, for unipotent representations over a field of characteristic 0, we should pass to the nilpotent monodromy operator. Namely, for a representation $rho:T_ell (GG_m)->GL(overline(QQ)_ell^n)$, we have a linear map 
 	$ log rho:V_GG_m->End(overline(QQ)_ell^n), #h(0.5em) v mapsto log rho(v), v in T_ell (GG_m) $
-	If we choose a basis $v_0 in V$ ($V$ is 1-dimensional), clearly the data of $log rho$ is completely determined by $N:=log rho(v_0)$. Hence, $Loc_u (GG_m)=Mod^(f.l.)_(overline(QQ)_ell [[t]],Fr)$, where $Fr(t)=q^(-1)t$, and $f.l.$ denote finite length. Thus, we have by Morita theory $D_m^mon (GG_m)=D_(f.l.)(overline(QQ)_ell [[t]],Fr)$. 
+	If we choose a basis $v_0 in V$ ($V$ is 1-dimensional), clearly the data of $log rho$ is completely determined by $N:=log rho(v_0)$. Hence, $Loc_u (GG_m)=Mod^(f.l., heart)_(overline(QQ)_ell [[t]],Fr)$, where $Fr(t)=q^(-1)t$, and $f.l.$ denote finite length. Thus, we have by Morita theory $D_m^mon (GG_m)=Mod_(overline(QQ)_ell [[t]],Fr)^(f.l.)$. 
 
-	Notice that the whole category $D(overline(QQ)_ell [[t]],Fr)$ is a completion of $D_(f.l.)(overline(QQ)_ell [[t]],Fr)$. So we see that we need a completion $hat(D)_m^mon (GG_m)$ instead. In particular, we will need the object corresponding to the module $overline(QQ)_ell [[t]]$. 
+	Notice that the whole category $Mod_(overline(QQ)_ell [[t]],Fr)$ is a completion of $Mod^(f.l.)_(overline(QQ)_ell [[t]],Fr)$. So we see that we need a completion $hat(D)_m^mon (GG_m)$ instead. In particular, we will need the object corresponding to the module $overline(QQ)_ell [[t]]$. 
 ]
 
+For convenience of conventions, we denote $underline(lim)$ by the limit taken in the pro-category. 
+
 #const[
-	Recall that $Pro(D_m (X))$ admits a natural stable $oo$-structure. We define $hat(D)_m^mon (X)$ to be the full subcategory of $Pro(D_m^mon (X))$ spanned by objects $underline(lim)cal(F)_i$ satisfying the following conditions: 
+	Recall that $Pro(D_m (X))$ admits a natural stable $oo$-structure. We define $hat(D)_m^mon (X)$ to be the full subcategory of $Pro(D_m^mon (X))$ spanned by objects $underline(lim) cal(F)_i$ satisfying the following conditions: 
 	+	$pi$-constant, that is, $underline(lim)pi_dagger cal(F)_i in Pro(D_m (Y))$ is constant. 
 	+	Uniformly bounded in degrees, that is, there exists a number $N$ such that $cal(F)_i$ are in perverse degrees $[-N,N]$ 
 	+	Uniformly bounded above in weights, that is, objects such that there exists a number $N$ with each $cal(F)_i$ of weight at most $N$. 
+	For $X=A$, $Y=pt$, there is a typical element in $hat(D)_m^mon (X)$ given as follows. We define $tilde(cal(L)) in hat(D)_m^mon (A)$ to be $underline(lim)cal(L)_n$, where $cal(L)_n$ is the local system over $A$ corresponding to the representation $Sym V_A\/(V_A^(n+1))$, and with the obvious transition maps. 
 ] <Const_completed_monodromic>
+
+Then, we investigate the functorialities of this construction. 
+
+#lem[
+	Let $mu:A times X->X$ denote the action map. Then, there is a natural isomorphism for $cal(F) in hat(D)_m^mon (X)$ given by $mu_! (tilde(cal(L))times.square cal(F))tilde.eq cal(F)[-2r](-r)$. 
+] <Lem_act_univ_mon_shift>
+#proof[
+	Since $D_m^mon (X)$ generate $hat(D)_m^mon (X)$ under limits, it suffices to prove the isomorphism for $cal(F) in D_m^mon (X)$ (note that we will still have to prove a pro-isomorphism for the presence of $tilde(cal(L))$). Since $mu$ is smooth, we will first construct a map $tilde(cal(L))times.square cal(F)->mu^! cal(F)[-2r](-r)=mu^*cal(F)$. 
+
+	By purity, if we denote $e:pt->A$ the identity point, we have 
+	$ e^!cal(L)_n=e^*cal(L)_n [-2r](-r)tilde.eq Sym (V_A)\/(V_A^(n+1))[-2r](-r) $
+	Hence, take the inclusion $1:overline(Q)_ell->Sym (V_A)\/(V_A^(n+1))$, we have a morphism
+	$ overline(QQ)_ell [-2r](-r)->e^! cal(L)_n $
+	Then, since $e_! =e_* ladj e^!$, we have 
+	$ e_!overline(QQ)_ell [-2r](-r)->cal(L)_n $
+	Taking exterior tensor with $cal(F)$ and applying $mu_!$, we have 
+	$ mu_!(e_! overline(QQ)_ell [-2r](-r) times.square cal(F))=mu_!(e_(X,!)(cal(F)[-2r](-r)))=cal(F)[-2r](-r) $
+	where $e_X:X inj A times X$ is the inclusion at the identity. Thus, we get a map 
+	$ cal(F)[-2r](-r)->mu_!(cal(L)_n times.square cal(F)) $
+	Then, note that it suffices to prove that the above is an isomorphism for $cal(F)=pi^dagger cal(K)$, where $cal(K)in D_m (Y)$, since by definition $D_m^mon (X)$ is generated by these objects under extensions. Note that we have $pi compose p_2=pi compose mu:A times X->Y$, so $mu^*(cal(F))=p_2^*(cal(F))$. 
+	$ mu_! (cal(L)_n times.square cal(F))=mu_!(p_1^*cal(L)_n times.o mu^*cal(F))=mu_!p_1^*cal(L)_n times.o cal(F)=cal(F)times.o R Gamma_c (A,cal(L)_n) $
+	where the last equivalence is by base change. 
+
+	Thus, it suffices to show that 
+	$ overline(QQ)_ell [-2r](-r)->underline(lim) R Gamma_c (A,cal(L)_n) $
+	is a pro-equivalence. We first take $A=GG_m$. Then, we claim that for any unipotent local system $cal(L)$ with fiber $M$, the cohomology is given by 
+	$ R Gamma(GG_m,cal(L))=[M->^t M(-1)] $
+	where $t$ is the logarithm of the monodromy automorphism of $M$. Note that local systems over $GG_m$ are equivalent to $pi_1(GG_m)^#[tame]$-representations, the unipotent local systems corresponds to modules over the completed logarithmic group algebra $overline(Q)_ell [[t]]$, where $t$ has grade -1. Thus, for the local system $cal(L)$ which corresponds to $M$, we have a resolution for $overline(QQ)_ell$ by 
+	$ 0-->overline(QQ)_ell [[t]](1)-->^t overline(QQ)_ell [[t]]-->overline(QQ)_ell-->0 $
+	applying $Hom(-,M)$ gives the computation for cohomology. Applying Poincaré duality, we have 
+	$ H^1_c (GG_m,cal(L)_M)=ker (t:M->M(-1)), #h(1em) H^2_c (GG_m,cal(L)_M)=(M\/t M)(-1) $
+	Thus, for $cal(L)_M=cal(L)_n$, we have $H^1_c=overline(QQ)_ell t^n$, $H^2_c=overline(QQ)_ell (-1)$. Then, note that the transition maps between $H^1_c$ is 0 and between $H^2_c$ is the identity. Hence, for $GG_m$ we have the desired pro-isomorphism. For $A=GG_m^n$, the conclusion holds by Künneth formula. 
+]
+
+#lem[
+	Let $pi_i:X_i->Y_i$ be $A$-torsors. Then, suppose we have a commutative diagram // https://q.uiver.app/#r=typst&q=WzAsNCxbMCwwLCJEX21ebW9uIChYXzEpIl0sWzAsMSwiRF9tIChZXzEpIl0sWzEsMSwiRF9tIChZXzIpIl0sWzEsMCwiRF9tXm1vbiAoWF8yKSJdLFswLDEsInBpXygxLGRhZ2dlcikiLDJdLFszLDIsInBpXygyLGRhZ2dlcikiXSxbMCwzLCJQaGkiXSxbMSwyLCJvdmVybGluZShQaGkpIiwyXV0=
+	#align(center, diagram({
+		node((0, 0), [$D_m^mon (X_1)$])
+		node((0, 1), [$D_m (Y_1)$])
+		node((1, 1), [$D_m (Y_2)$])
+		node((1, 0), [$D_m^mon (X_2)$])
+		edge((0, 0), (0, 1), [$pi_(1,dagger)$], label-side: right, "->")
+		edge((1, 0), (1, 1), [$pi_(2,dagger)$], label-side: left, "->")
+		edge((0, 0), (1, 0), [$Phi$], label-side: left, "->")
+		edge((0, 1), (1, 1), [$overline(Phi)$], label-side: right, "->")
+	}))
+	then $Phi$ extends naturally to $hat(Phi):hat(D)_m^mon (X_1)->hat(D)_m^mon (X_2)$. 
+] <Lem_func_extend_to_pro>
+#proof[
+	It suffices to show that $Pro(#[$Phi$])$ preserves the objects with the three requirements. For $pi$-constance, it follows from that the above diagram is commutative, and $Pro(#[$overline(Phi)$])$ sends constant diagrams to constant diagrams. For uniformly bounded in degrees and uniformly bounded above in weights, it follows from the following argument of devissage. 
+	
+	Take $cal(G):=underline(lim)cal(G)_m$ with $pi_dagger cal(G)=K$ for an ordinary object $K in D_m (Y)$. We show that $cal(G)$ can be disintegrated into pieces with each piece of the form $pi^dagger K times.o Sym^j (V_A)$. For each $n$, we define the sheaf 
+	$ cal(E)_n=underline(lim)_m mu_! (cal(L)_n times.square cal(G)_m)[2r](r)in Pro(D_m (X)) $
+	Note that $cal(L)_n$ is the local system corresponding to $Sym (V_A)\/(V_A^(n+1))$, so admits a filtration by augmentation, which has graded pieces given by $Sym^j (V_A)$. Then, choosing an identification $X times_Y X=X times A$, proper base change gives 
+	$ mu_! (overline(QQ)_ell times.square cal(G)_m)[2r](r)=pi^*pi_! cal(G)[2r](r)=pi^dagger K $
+	Hence, the filtration on $cal(L)_n$ by $Sym^j (V_A)$ gives a filtration on $cal(E)_n$ with graded pieces $pi^dagger K times.o Sym^j (V_A)$. Moreover, by @Lem_act_univ_mon_shift, we have $mu_!(tilde(cal(L))times.square cal(G)_m)[2r](r)=cal(G)_m$, so we have $underline(lim)cal(E)_n=cal(G)$. To sum up briefly what we have done above, we chose a convenient pro-presentation for $cal(G)_m$ and hence gave another pro-presentation for $cal(G)$. 
+
+	We finally prove that uniformly bounded in degrees and uniformly bounded above in weights are preserved by $Pro(#[$Phi$])$. Now, suppose $K$ is in perverse degrees $[-N,N]$, so does $pi^dagger K$. Since $cal(E)_n$ are extensions of $pi^dagger K$'s, the $cal(E)_n$'s are bounded by $[-N,N]$ and hence so is $cal(G)=underline(lim)cal(E)_n$. For weights, note $V_A$ has weight -2, so the weight of $pi^dagger (K)times.o Sym^j (V_A)<=w-r-2j<=w-r$ where $K$ has weight $<=w$. Thus, every $cal(E)_n$ hence $cal(G)$ have weight $<=w-r$. 
+]
+
+#coro[
+	Let $f:X_1->X_2$ be an $A$-equivariant morphism. Then, the functors $f^*,f_*,f_!,f^!$ extend to functors between $hat(D)_m^mon (X_i)$. 
+] <Coro_6ff_completed_monodromic>
+#proof[
+	We apply @Lem_func_extend_to_pro to various $overline(Phi)$s. For $f_!$, we directly have $pi_(2,dagger)f_! =overline(f)_!pi_(1,dagger)$, and for $f^*$, by base change we have $pi_(1,dagger)f^*=overline(f)^*pi_(2,dagger)$, so these two cases are done. 
+
+	For $f_*$, we only have a natural transformation $pi_(2,dagger)f_*->overline(f)_*pi_(1,dagger)$, which we claim to be an isomorphism when we restrict the source to $D_m^mon (X_1)$. We check this on objects of the form $pi_1^dagger (cal(K))$. Then, we have 
+	$ pi_(2,dagger)f_*pi_1^dagger (cal(K))=pi_(2,dagger)pi_2^dagger overline(f)_* (cal(K))=overline(f)_* (cal(K))times.o H^*_c (A) $
+	On the other hand 
+	$ overline(f)_*pi_(1,dagger)pi_1^dagger (cal(K))=overline(f)_*(cal(K)times.o H^*_c (A))=overline(f)_*(cal(K))times.o H^*_c (A) $
+	The readers may draw the diagrams themselves and check that the induced map between the objects is indeed a natural isomorphism. 
+
+	Finally, for $f^!$, again we have only a natural trnsformation $pi_(1,dagger)f^!->overline(f)^! pi_(2,dagger)$, and it is an isomorphism restricted to $D_m^mon (X_2)$ by the same reason as above. 
+]
+
+#coro[
+	The adjunction 
+	$ pi_dagger:D_m^mon (X) adj D_m (Y):pi^dagger $ 
+	extends to an adjunction 
+	$ pi_dagger:hat(D)_m^mon (X)adj D_m (Y):pi^dagger $
+	and the functor $pi_dagger:hat(D)_m^mon (X)->D_m (Y)$ is conservative. 
+] <Coro_pi_dagger_pushforward_conservative>
+#proof[
+	The lifting of the adjunctions is a direct corollary of the general theory of pro-categories. Then, since $pi_dagger$ is exact, to show it is conservative suffices to show that it kills no object. Suppose $pi_dagger (underline(lim)cal(F)_n)=0$. Then, for any $cal(G) in D_m (Y)$ we have all maps $underline(lim)cal(F)_n->pi^dagger cal(G)$ are zero. However $pi^dagger cal(G)$ generates $hat(D)_m^mon (X)$ under extensions and limits, which implies that $underline(lim)cal(F)_n$ is itself zero. 
+]
+
+The main example we will be concered with is the following. 
+
+#exam[
+	Take $tilde(Fl,size:#140%):=G\/U$ the enhanced flag variety. We define $D_m^mon (U\\G\/U)$ to be the category of monodromic sheaves with respect to the projection $U\\G\/U->U\\G\/B$. Equivalently, this is the category of monodromic sheaves with respect to the projection $U\\G\/U->B\\G\/B$. We may apply the above construction and define $hat(D)_m^mon (U\\G\/U)$. 
+
+	More precisely, we should not take the full category at once, but first treat the case with finitely many strata
+	$ U\\tilde(Fl,size:#140%)_(<=w)->>U\\Fl_(<=w) $
+	and then take the colimit to glue together the original category. 
+]
+
+From now on, we assume that $X->Y$ is a trivial $A$-torsor, since it is the case of our interest. 
+
+#def[
+	Let $cal(F) in D_m (Y)$. We define $Free(cal(F))in hat(D)_m^mon (X)$ to be the object $cal(F)times.square tilde(cal(L))[r](r)$, which is monodromic because the torsor $X->Y$ is trivial. 
+] <Def_free_monodromic>
+
+#def[
+	We define $check(S)_A^and$ to be the completion of $check(S)_A$ along $V_A$, regarded as a pro-object. Namely, we define $check(S)_A^and:=underline(lim)Sym(V_A)\/V_A^n$. 
+]
+
+#lem[
+	Take any section $epsilon:Y->X$. Then, we have an adjunction 
+	$ Hom_(hat(D)_m^mon (X))(Free(cal(F)),cal(G))=Hom_(Pro(D_m (Y)))(cal(F),epsilon^dagger (cal(G))),cal(F)in D_m (Y),cal(G)in D_m^mon (X) $
+	where $epsilon^dagger=epsilon^![r]$. 
+]
+#proof[
+	We construct the unit map for the adjunction. Firstly, note $epsilon^!tilde(cal(L))[2r](r)=epsilon^* tilde(cal(L))$ by purity, and the latter is equivalent to $check(S)_A^and in Pro(D_m (pt))$. Let $s:overline(QQ)_ell->check(S)_A^and$ be the unit, so by the compatibility of pullbacks with exterior tensors, we have a map 
+	$ cal(F)->cal(F)times.o check(S)_A^and=cal(F)times.square check(S)_A^and=id^!(cal(F))times.square e^!(tilde(cal(L))[2r](r))=epsilon^!(cal(F)times.square tilde(cal(L)))[2r](r)=epsilon^dagger Free(cal(F)) $
+	then, to show that this is indeed a unit for an adjunction, we check that it is a unit for $cal(G)=pi^dagger cal(K)$. In this case, note $epsilon^dagger cal(G)=cal(K)$, and so the right hand side is simply $Hom(cal(F),cal(K))$. On the left hand side, using the computation of $R Gamma_c (A,cal(L))=overline(QQ)_ell [-2r](-r)$ as in @Lem_act_univ_mon_shift, we have $pi_dagger Free(cal(F))=cal(F)$, so $Hom(Free(cal(F)),pi^dagger (cal(K)))=Hom(cal(F),cal(K))$. 	
+]
+
+#const[
+	Let $cal(C)$ be a symmetric monoidal category, and let $Pro(cal(C))$ be equipped with the natural symmetric monoidal structure. Then, take $A in CAlg(Pro(cal(C)))$. We define $Mod_A^nilp$ to be the full subcategory of $Mod_A (Pro(cal(C)))$ spanned by constant objects. 
+] <Const_pro_alg_nil_mod>
+
+#prop[
+	The functor $epsilon^dagger$ lifts to an equivalence of Abelian categories 
+	$ sigma:Perv_m^mon (X)->Mod_(check(S)_A^and,Fr)^nilp (Perv_m (Y)) $
+]
+#proof[
+	Firstly, note $epsilon^dagger$ indeed has image in $check(S)_A^and$-modules, given by the nilpotent monodromy action 
+	$ epsilon^dagger (mu_cal(F)):V_A times.o epsilon^dagger (cal(F))->epsilon^dagger (cal(F)) $
+	and by choosing a basis of $V_A$, we see that this action is uniformly nilpotent, hence defines an $check(S)_A^and$-action. Then, we mimic the Barr-Beck theorem and construct an inverse functor. We consider the functor 
+	$ Mod_(check(S)_A^and,Fr)^nilp (Perv(Y))->Perv_m^mon (X), cal(F)mapsto coker(V_A times.o (cal(F)times.square tilde(cal(L)))[r](r)xarrow(m(cal(F))times.square id-id times.square m(tilde(cal(L))))cal(F)times.square tilde(cal(L))[r](r)) $
+	where $m(cal(F))$ and $m(tilde(cal(L)))$ are the action of $V_A$ on $cal(F)$ and $tilde(cal(L))$ respectively. Then, the two functors are clearly inverse to each other. 
+]
+
+#coro[
+	The adjunction 
+	$ H^0 pi_dagger:Perv_m^mon (X)adj Perv_m (Y):pi^dagger $
+	is equivalent to
+	$ -times.o_(check(S)_A^and)overline(QQ)_ell:Mod^nilp_(check(S)_A^and,Fr)(Perv_m (Y))adj Perv_m (Y):#[triv] $
+] <Coro_pi_dagger_monad>
+#proof[
+	Note $epsilon^dagger pi^dagger cal(F)=cal(F)$, so $pi^dagger$ can be identified with $#[triv]$. The left adjoint hence can be identified.  
+]
+
+#prop[
+	Assume that $Perv_m (Y)$ is graded highest weight (recall from @Def_gr_Highest_wt_cat the definition of graded highest weight categories). Then, we have the free monodromic objects $Free(cal(F))$ generate $hat(D)_m^mon (X)$. 
+] <Prop_Y_D_eq_D_Perv_gen>
+#proof[
+	We will use two core properties: firstly, every object in $Perv_m (Y)$ admits a finite resolution by objects projective in $Perv(Y)$; secondly, the realization functor 
+	$ rho_(Y,m):D(Perv_m (Y))->D_m (Y) $ 
+	is an equivalence. 
+
+	Now, given an object $underline(lim)cal(F)_n in hat(D)_m^mon (X)$, by $pi$-constance we have $underline(lim)pi_dagger cal(F)_n$ represented by some object $cal(G) in D_m (Y)$. By assumption, $cal(G)$ is represented by a complex 
+	$ dots.c-->cal(K)^(-1)-->cal(K)^0-->dots.c $
+	where each $cal(K)^i in Perv_m (Y)$ is projective in $Perv(Y)$. We now construct a weight filtration on $cal(K)^i$, inverse to the usual weight filtration. Namely, we construct a decreasing filtration 
+	$ 0subset dots.c subset W^(<=v)cal(K)^i subset W^(<=v-1)cal(K)^i subset dots.c subset cal(K)^i $
+	where the usual weight filtration is given by the inclusions $w^(>=v)cal(K)^i subset cal(K)^i$. By @Lem_Fr_fp_exact_seq, suppose $P,Q$ are projective in $Perv(Y)$ with $P$ has weight $<=v$ and $Q$ has weight $<v$. Moreover, suppose $P$ is indecomposable in $Perv(Y)$ with a simple quotient of weight $v$. Hence 
+	$ underline(Ext)^1(P,Q)=Hom(P,Q)^(Fr)=0 $
+	Hence, the above filtration exists, and is unique. 
+
+	We define the width of $underline(lim)pi_dagger cal(F)_n$ to be the smallest possible numbers of pairs $(v,i)$ where $gr_W^v cal(K)^i!=0$, smallest among all representing complexes $cal(K)^bullet$. Now, we apply induction on the width of such object, and prove that they are generated by free objects. 
+
+	For the base case, if $underline(lim)pi_dagger cal(F)_n$ has width 0, then $underline(lim)pi_dagger cal(F)_n=0$, and by conservativity, $underline(lim) cal(F)_n=0$. Now, suppose that for $underline(lim)pi_dagger cal(F)_n$ of width $<N$, the object $underline(lim)cal(F)_n$ is an extension of free monodromic objects. Take $underline(lim)pi_dagger cal(F)_n$ of width $N$. Noticing that weight shifting and cohomological shifting does not affect anything, we may assume that the representing complex terminates at $cal(K)^0$, and $W^(>=1)cal(K)^0=0$ but $gr_W^0 cal(K)^0!=0$. 
+
+	Now, we show that we may assume that each $cal(F)_n in D_m (X)^(<=0)$, with $H^0(cal(F)_n)$ having weight $<=0$. Note that we have $underline(lim)pi_dagger cal(F)_n in D_m (Y)^(<=0)$. Then, by uniform boundedness, we may assume $cal(F)_n in D_m (X)^(<=d)$ for some $d$. If $d<=0$ we are done with the first part. If not, we have $underline(lim)H^d (pi_dagger cal(F)_n)=0$, which shows that the transition $H^d (pi_dagger cal(F)_n)->H^d (pi_dagger cal(F)_m)$ is zero for large $n,m$. Thus, by @Coro_pi_dagger_monad, the image of the $cal(F)_n->cal(F)_m$ must land in $V_A cal(F)_m$, so the projective system $underline(lim)H^d (cal(F)_n)$ is itself 0. The proof on the weight assertion on $H^0$ is proven likewise. 
+
+	We then construct a map $Free(W^(>=0)cal(K)^0)->underline(lim)cal(F)_n$. We first construct $Free(W^(>=0)cal(K)^0)->H^0(cal(F)_n)$, equivalent to a map $W^(>=0)cal(K)^0->H^0(epsilon^dagger cal(F)^n)$. For this, note $w_(>=0)(epsilon^dagger H^0(cal(F)_n))=w_(>=0)(H^0(pi_dagger cal(F)_n))$, because $V_A$ has weight $-2$, and $H^0(pi_dagger cal(F)_n)=H^0(cal(F)_n)\/V_A H^0(cal(F)_n)$. Then, by construction, we have a map 
+	$ W^(>=0)cal(K)^0->H^0(pi_dagger cal(F)_n)->w_(>=0)(H^0(pi_dagger cal(F)_n))=w_(>=0)(epsilon^dagger H^0(cal(F)_n)) $
+	This map then factors through $W^(>=0)cal(K)^0->epsilon^dagger H^0(cal(F)_n)->w_(>=0)(epsilon^dagger H^0(cal(F)_n))$ by the previous computation of vanishing of $Ext^1$ (the lifting obstruction). Again by vanishing of $Ext^1$, we can lift $W^(>=0)cal(K)^0->epsilon^dagger H^0(cal(F)_n)$ to $W^(>=0)cal(K)->epsilon^dagger cal(F)_n$ (here we must use $cal(F)_n$ has cohomological degree $<=0$). 
+
+	Finally, take $underline(lim)cal(F)'_n$ to be the cone of the map $Free(W^(>=0)cal(K)^0)->underline(lim)cal(F)_n$, which has $pi_dagger$ represented by the complex 
+	$ dots.c-->cal(K)^1-->cal(K)^0\/W^(>=0)cal(K)^0-->dots.c $
+	which is of width $<N$. This finishes the induction.  
+]
+
+#coro[
+	Assume that $Perv_m (Y)$ is graded highest weight. We have the following: 
+	+	The realization functor $rho_(X,m)^mon:D(Perv_m^mon (X))-->D_m^mon (X)$ is an equivalence. Hence, we have 
+		$ D_m^mon (X)=D(Mod_(check(S)_A^and,Fr)^nilp (Perv_m (Y))) $
+	+	Suppose $D_m (Y)=Mod_(E,Fr)$ for some $E$, there is an equivalence of categories 
+		$ hat(D)_m^mon (X)=Mod_(E times.o check(S)_A^and,Fr) $
+		Under this equivalence, the adjunction $pi_dagger ladj pi^dagger$ becomes 
+		$ -times.o_(check(S)_A^and)overline(QQ)_ell:Mod_(E times.o check(S)_A^and,Fr)adj Mod_(E,Fr):#[triv] $
+] <Coro_completed_monodromic_equiv_mod>
+#proof[
+	Firstly, $rho_(X,m)^mon$ is essentially surjective, because both sides are generated by objects of the form $pi^dagger cal(F)$ for $cal(F) in Perv_m (Y)$ by definition. Then, for full faithfulness, it suffices to compute the $Ext$ groups between objects of the form $pi^dagger cal(F)$. On one hand, we have by the projection formula 
+	$ Ext_(D_m^mon (X))(pi^dagger cal(F),pi^dagger cal(G))=Ext_(D_m (Y))(cal(F),cal(G))times.o H^*(A) $
+	On the other hand, we have 
+	$ Ext_(D(Perv_m^mon (X)))(pi^dagger cal(F),pi^dagger cal(G))=Ext_(Perv_m (Y))(cal(F),cal(G))times.o Ext_(check(S)_A^and)(overline(QQ)_ell,overline(QQ)_ell) $
+	Now, we have $Ext_(D_m (Y))(cal(F),cal(G))=Ext_(Perv_m (Y))(cal(F),cal(G))$ since $Perv_m (Y)$ is graded highest weight, and $H^*(A)=Ext_(check(S)_A^and)(overline(QQ)_ell,overline(QQ)_ell)$ by the equivalence $Ext_(check(S)_A^and)(overline(QQ)_ell,overline(QQ)_ell)=and.big^*(V_A^or [-1])=H^*(A)$. 
+
+	For the second assertion, firstly note that under the assertion $D_m (Y)=Mod_(E,Fr)$, we have 
+	$ Mod_(check(S)_A^hat,Fr)^nilp (Perv_m (Y))=Mod_(check(S)_A^hat,Fr)^nilp (Mod_(E,Fr)^heart)=Mod(E times.o check(S)_A^hat,Fr)^(nilp,heart) $
+	we extend the equivalence 
+	$D_m^mon (X)=D(Mod_(check(S)_A^and,Fr)^nilp (Perv_m (Y)))$ to the pro-categories. Then, we can identify $Mod_(E times.o check(S)_A^hat,Fr)$ as a full subcategory of $Pro(D_m^mon (X))$. On one hand, any object in $Mod_(E times.o check(S)_A^hat,Fr)$ is isomorphic to a complex of free objects, which shows that it is contained in $hat(D)_m^mon (X)$. On the other hand, $hat(D)_m^mon (X)$ is generated by the free objects by @Prop_Y_D_eq_D_Perv_gen, so the two categories are equivalent. The identification of the adjunction follows from @Coro_pi_dagger_monad. 
+]
+
+To sum up, taking the category of completed monodromic sheaves over a trivial $A$-torsor is somehow taking the category of $check(S)_A^and$-modules. We end this section with a treatment of the stratified space, which also gives the perverse $t$-structure over $hat(D)_m^mon$. 
+
+#ass[
+	Now, we assume $Y$ is finitely stratified by affine spaces, indexed by $Lambda$. Then, suppose there is a map $pi:X->Y$, and we denote $X_lambda=pi^(-1)(Y_lambda)$, and suppose each $X_lambda->Y_lambda$ is a trivial $A$-torsor for some torus $A$. In this case, we define $Perv_m (Y)=Perv_(m,Y_Lambda)(Y)$ to be the category of stratified perverse sheaves, where we additionally require to be constant along each strata (later, in our application, we will see that this condition is naturally satisfied). 
+
+	We denote $i_lambda:Y_lambda->Y$ and $tilde(i)_lambda:X_lambda->X$ denote the locally closed inclusions of strata. 
+] <Ass_strat_monodromic>
+
+#def[
+	Under @Ass_strat_monodromic, we denote $cal(L)_lambda in Perv_m (Y_lambda)$ to be the unique weight 0 object forgetting to the constant perverse sheaf in $Perv(Y_lambda)$. Furthermore, we denote 
+	$ tilde(cal(L))_lambda=Free(cal(L))in hat(D)_m^mon (X_lambda) $
+	by the free monodromoic sheaf. Moreover, we define 
+	$ Delta_lambda=i_(lambda,!)cal(L)_lambda,nabla_lambda=i_(lambda,*)cal(L)_lambda $
+	$ tilde(Delta)_lambda=tilde(i)_(lambda,!)tilde(cal(L))_lambda,tilde(nabla)_lambda=tilde(i)_(lambda,*)tilde(cal(L))_lambda $
+	by the standard and costandard objects. 
+]
+
+#lem[
+	The category $hat(D)_m^mon (X)$ is generated separately by $tilde(Delta)_lambda$'s and $tilde(nabla)_lambda$'s. 
+]
+#proof[
+	By the definition of a recollement, any $cal(F) in hat(D)_m^mon (X)$ is an extension of $tilde(i)_(lambda,*)tilde(i)_lambda^!cal(F)$'s (or $tilde(i)_(lambda,!)tilde(i)_lambda^*cal(F)$ respectively). On the other hand, by @Prop_Y_D_eq_D_Perv_gen we have $tilde(i)_lambda^!cal(F)$ or $tilde(i)_lambda^*cal(F)$ generated by free objects, hence by copies of $tilde(cal(L))_lambda$. Thus $cal(F)$ is generated by the $tilde(Delta)_lambda$'s or $tilde(nabla)_lambda$'s separately. 
+]
+
+#lem[
+	There is a natural perverse $t$-structure on $hat(D)_m^mon (X)$. 
+]
+#proof[
+	Note each $hat(D)_m^mon (X_lambda)tilde.eq Mod_(check(S)_A^and,Fr)$ by @Coro_completed_monodromic_equiv_mod, so admits a $t$-structure. Then, by the general theory of gluing $t$-structures, these $t$-structures glue to a perverse $t$-structure on $hat(D)_m^mon (X)$. By general categorical nonsense, this $t$-structure can also be identified with the restriction of the $t$-structure on $Pro(D_m^mon (X))$. 
+]
+We denote the heart of this $t$-structure by $hat(Perv)_m^mon (X)$. 
+
+#def[
+	We say $cal(F)in hat(D)^mon (X)$ is a free monodromic tilting sheaf if for all $lambda in Lambda$, we have $tilde(i)_lambda^*cal(F)$ and $tilde(i)_lambda^!cal(F)$ a direct sum of $tilde(cal(L))_lambda$'s. We say $cal(F)in hat(D)_m^mon (X)$ is a free monodromic tilting sheaf if its underlying sheaf in $hat(D)^mon$ is. 
+] <Def_free_monodromic_tilting>
+
+#lem[
+	An object $cal(T) in hat(D)_m^mon (X)$ is free monodromic tilting iff $pi_dagger cal(T)in D_m (Y)$ is a tilting sheaf. 
+]
+#proof[
+	By the identification @Coro_completed_monodromic_equiv_mod, $cal(T)$ is perverse iff $pi_dagger cal(T)$ is. The tilting part is obvious. 
+]
+
+#prop[
+	By @Prop_tilting_gen_highest_wt, if $Perv_m (Y)$ is graded highest weight, we have tilting objects $cal(T)_lambda$ whose restriction to $Y_lambda$ is $cal(L)_lambda$, and is indecomposable. Then, there exists free monodromic tilting sheaves $tilde(cal(T))_lambda in hat(D)_m^mon (X_(<=lambda))$ such that $pi_dagger tilde(cal(T))_lambda=cal(T)_lambda$. 
+]
+#proof[
+	We proceed by induction on strata. Assume that $X$ has a minimal stratum $Z$, and suppose that the required sheaf has been constructed on $X-Z=U$. We temporarily denote this object by $tilde(cal(T))_U$, where we have $pi_dagger tilde(cal(T))_U=cal(T)_lambda|_U$. We denote the inclusions $tilde(j):U inj X$ and $tilde(i):Z inj X$. 
+
+	We consider the object $cofib(tilde(j)_!tilde(cal(T))_U->tilde(j)_*tilde(cal(T))_U)$. Note by applying $pi_dagger$, it becomes $cofib(j_!cal(T)_lambda|_U->j_*cal(T)_lambda|_U)$. Since this object is zero on $U$, it is represented by some $i_*cal(F)[1]plus.o i_*cal(G)$ for $cal(F),cal(G)in Perv_m (pi(Z))$ (it is in fact a cofiber, but one may check that the differential is 0). We must now add $cal(F)$ and $cal(G)$ into $tilde(cal(T))_U$. 
+
+	Note that the above implies $cofib(tilde(j)_!tilde(cal(T))_U->tilde(j)_*tilde(cal(T))_U)$ is represented by $tilde(i)_*tilde(cal(K))^(-1)->tilde(i)_*tilde(cal(K))^0$, where $tilde(cal(K))^i in hat(Perv)_m^mon (Z)$, and $pi_dagger tilde(cal(K))^(-1)=cal(F)$, $pi_dagger tilde(cal(K))^0=cal(G)$. Thus, consider the extension class 
+	$ tilde(i)_*tilde(cal(K))^0->cofib(tilde(j)_!tilde(cal(T))_U->tilde(j)_*tilde(cal(T))_U)->tilde(j)_!tilde(cal(T))_U [1] $
+	We take $tilde(cal(T))_lambda$ to be the fiber of the above map (i.e. the extension class). By applying $pi_dagger$ to the above diagram, the desired equivalence holds. 
+]
+
+#prop[
+	Let $tilde(cal(T))_1,tilde(cal(T))_2 in Tilt(hat(Perv)_m^mon (X))$. Then, $Hom_(hat(D)_m^mon (X))(tilde(cal(T))_1,tilde(cal(T))_2)$ is a free $check(S)_A^hat$-module, and there is a $Fr$-equivariant isomorphism 
+	$ Hom_(hat(D)_m^mon (X))(tilde(cal(T))_1,tilde(cal(T))_2)times.o_(check(S)_A^hat)overline(QQ)_ell=Hom_(D_m (Y))(pi_dagger tilde(cal(T))_1,pi_dagger tilde(cal(T))_2) $
+]
+#proof[
+	We prove a stronger version where $tilde(cal(T))_1$ is only assumed to have a  standard filtrationa nd $tilde(cal(T))_2$ a costandard filtration. 
+	
+	For the case where there is only one stratum, the assertion follows directly from @Coro_completed_monodromic_equiv_mod. For the general case, we proceed by induction on strata. Assume that $X_lambda$ is an open stratum and the statement holds for $X_(<lambda)$. Then, we have the exact sequence 
+	$ 0-->Hom_(hat(D)_m^mon (X_(<lambda)))(tilde(i)^*_(<lambda)tilde(cal(T))_1,tilde(i)^!_(<lambda)tilde(cal(T))_2)-->Hom_(hat(D)_m^mon (X_(<=lambda)))(tilde(cal(T))_1,tilde(cal(T))_2)-->Hom_(hat(D)_m^mon (X_lambda))(tilde(i)_lambda^*tilde(cal(T))_1,tilde(i)_lambda^*tilde(cal(T))_2)-->0 $
+	Now, the left and right $Hom$-spaces satisfy the relation required by the induction hypothesis, hence so does the middle, by drawing the same exact sequences for $pi_dagger tilde(cal(T))_i$'s. 
+]
 
 === Application 2: The monodromic (tilting) side
 
