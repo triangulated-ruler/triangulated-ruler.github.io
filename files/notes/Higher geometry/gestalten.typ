@@ -310,7 +310,7 @@ We now temporarily set $CAlg=CAlg(Sp)$, and prove a descent result.
 
 	Firstly, we assume that $A->A_bullet$ is an $aleph_1$-finitely presented hypercover (i.e., the maps $f^i:A->A_i$ are $aleph_1$-finitely presented). We prove in this case that the functor 
 	$ 0Pr_A->attach(lim_Delta,tr:!) 0Pr_A_bullet=attach(colim_(Delta^op),br:*)0Pr_A_bullet $ 
-	is fully faithful and essentially surjective. We note here that the functor $0Pr_A->lim^! 0Pr_A_bullet$ given by $!$-pullback admit a left adjoint given by $(M_n) mapsto colim f_*^n M_n$. 
+	is fully faithful and essentially surjective. We note here that the functor $0Pr_A->lim^! 0Pr_A_bullet$ given by $!$-pullback admit a left adjoint given by $(M_n) mapsto colim f_*^n M_n$. Equivalently, we compute this limit in $Pr^R_aleph_1$. 
 
 	For full faithfulness, take $M in 0Pr_A$, we must show that the counit map 
 	$ colim_(Delta^op)f^i_*f^(i,!)M->M $
@@ -318,10 +318,288 @@ We now temporarily set $CAlg=CAlg(Sp)$, and prove a descent result.
 	$ colim_(Delta^op)f^i_*f^(i,!)M=colim_(m>=0)colim_(Delta^op_(<=m))Hom_A (A_i,M)=colim_(m>=0)Hom_A (lim_(Delta_(<=m))A_i,M) $
 	where the final equivalence is true because $lim_(Delta_(<=m))$ is a finite colimit, hence preserved by the exact functor $Hom_A (-,M)$. Note that 
 	$ M=colim_(m>=0)M=colim_(m>=0)Hom_A (A,M) $
-	thus it suffices to identify the pro-systems $underline(lim)A$ and $underline(lim)lim_()A_i$. 
+	thus it suffices to identify the pro-objects $underline(lim)A$ and $underline(lim)lim_(Delta_(<=m))A_i$. 
 
-	By flatness, we may assume that $A$ and $A_i$'s are connective by replacing by their connective covers. Then, to show that $underline(lim)A$ and $underline(lim)A_i$ are equivalent as pro-objects, we may equivalently prove that the cofiber of $underline(lim)A->underline(lim)A_i$ is zero. This cofiber is given by 
+	By flatness, we may assume that $A$ and $A_i$'s are connective by replacing by their $tau_(>=0)$'s. Then, to show that $underline(lim)A$ and $underline(lim)lim_(Delta_(<=m))A_i$ are equivalent as pro-objects, we may equivalently prove that the cofiber of $underline(lim)A->underline(lim)lim_(Delta_(<=m))A_i$ is zero. This cofiber is given by the pro-object $underline(lim)C_m$, where $C_m=cofib(A->lim_(Delta_(<=m))A_i)$. Now, we prove that the transition maps $C_(m+1)->C_m$ are phantom, and by @Thm_composition_phantom_null we have $C_(m+2)->C_m$ is null. Hence, we have the whole pro-object is trivial. 
+
+	To prove that these maps are phantom, we claim that $C_m [m]$ is a flat $A$-module. By the derived version of Lazard's theorem (@HA 7.2.2.15), we may take $C_m=colim A_alpha^(plus.o n_alpha)[-m]$, where the colimit is filtered. Hence, for any perfect $A$-module $M$, the map $M->C_(m+1)$ factors through some $A_alpha^(plus.o n_alpha)[-m-1]$. Hence it suffices to show that $A_alpha^(plus.o n_alpha)[-m-1]->C_m$ is null, which is by connectivity of $A$. 
+
+	Finally, we derive the desired flatness. Again by flatness, we may assume that $A$ is discrete. This time, by cosimplicial Dold-Kan correspondence, we may assume the cosimplicial object $A_i$ is represented by the negative flat chain complex $0->N_0->N_(-1)->dots.c$, where $lim_(Delta_(<=m))A_i$ is given by 
+	$ 0->N_0->N_(-1)->dots.c->N_(-m) $
+	Hence $C_m$ is given by 
+	$ 0->A->N_0->N_(-1)->dots.c->N_(-m) $
+	which is concentrated at degree $-m$. Hence this proves shifted flatness in the case where $A$ is discrete, hence proves the general case. 
+
+	Then we prove essential surjectivity. Consider the commutative square 
+	// https://q.uiver.app/#r=typst&q=WzAsNCxbMCwwLCJBIl0sWzEsMCwidW5kZXJsaW5lKGxpbSlBX2kiXSxbMCwxLCJBXzAiXSxbMSwxLCJBXzAgdGltZXMub19BIHVuZGVybGluZShsaW0pQV9pIl0sWzAsMV0sWzEsM10sWzAsMl0sWzIsM11d
+	#align(center, diagram({
+		node((-1, 0), [$A$])
+		node((0, 0), [$underline(lim)A_i$])
+		node((-1, 1), [$A_0$])
+		node((0, 1), [$A_0 times.o_A underline(lim)A_i$])
+		edge((-1, 0), (0, 0), "->")
+		edge((0, 0), (0, 1), "->")
+		edge((-1, 0), (-1, 1), "->")
+		edge((-1, 1), (0, 1), "->")
+	}))
+	We wish to show that $0Pr_(A)=lim^! 0Pr_(A_i)$. To show this, it suffices to show the following three equivalences: 
+	$ 0Pr_(A)=attach(lim_(Delta),tr:!) 0Pr_(A_0^(times.o_A n+1)), 0Pr_(A_0)=attach(lim_(Delta),tr:!)0Pr_(A_0 times.o_A A_i),0Pr_(A_i)=attach(lim_(Delta),tr:!)0Pr_(A_0^(times.o_A n+1)times.o_A A_i) $
+	the second equivalence is by the splitting of the cosimplicial object, and the first and third equivalence is the case of a Cech cover. Thus, it suffices to prove that the essential surjectivity for the case where $A->A_bullet$ is a Cech cover. 
+
+	Now, assume $A_i=A_0^(times.o_A i+1)$ is a Cech cover. We wish to prove that 
+	$ attach(lim_Delta,tr:!)0Pr_(A_i)=attach(colim_(Delta^op),br:*)0Pr_(A_i)=0Pr_(A) $
+	Here, the colimit is computed in $Mod_(0Pr_A)(Pr^L_aleph_1)$. Also, the comparison functor in question $attach(colim_(Delta^op),br:*)0Pr_(A_i)->0Pr_(A)$ is an equivalence after applying $- times.o_(0Pr_(A))0Pr_(A_0)$ by the existence of a splitting of the simplicial object. Moreover, since $A->A_bullet$ is a Cech cover, the comparison functor is an equivalence after applying all $- times.o_(0Pr_(A))0Pr_(A_i)$, so is an equivalence after applying 
+	$ - times.o_(0Pr_(A))attach(colim_(Delta^op),br:*)0Pr_(A_i) $
+	Moreover, by the previous step we know that there is a fully faithful functor, whose post composition with the comparison functor is the identity
+	$ 0Pr_(A)inj attach(colim_(Delta^op),br:*)0Pr_(A_i)->0Pr_(A) $
+	Hence the comparison functor is an equivalence after applying $-times.o_(0Pr_(A))0Pr_(A)$, which is the identity. 
+
+	We apply the above result for $!$-descent along countably presented faithfully flat hypercovers to prove the desired $*$-descent for countably presented faithfully flat hypercovers. 
+
+	Consider the adjunction (note this is not a bi-adjunction due to the existence of $lim$) 
+	$ F_(n,*):lim^* n Pr_(A_bullet) adj n Pr_A:F_n^* $
+	Here, $F_n^*$ is the naive pullback, and $F_(n,*):(M_i)mapsto colim_* F_(n,*)M_i$. We first show that $F_n^*$ is fully faithful, or equivalently the counit map $F_(n,*)F_n^*$ is the identity. Since this map is $n Pr_A$-linear, it suffices to show this counit map is the identity on the monoidal unit, i.e., the map 
+	$ F_(n,*)F_n^* (n-1)Pr_A->(n-1)Pr_A $ 
+	is an equivalence. We prove this fact via inducion. For $n=1$, note that the left hand side is precisely $colim_* 0Pr_(A_bullet)$, which is the base case which we have proven above. For $n>1$, we must prove $colim_* (n-1)Pr_(A_bullet)->(n-1)Pr_A$ is an equivalence. However, upon taking dual, the above map corresponds to a map $(n-1)Pr_A->lim^* (n-1)Pr_(A_bullet)$. Now, it suffices to show that this map is the hyperdescent comparison map for $n-1$ (here we use this map is an equivalence, which will be shown below). But this follows from the linearity and the image of the monoidal unit. 
+
+	Now, it suffices to show that $F_n^*$ is essentially surjective. But this follows from the same argument as in the case where $n=0$. 
+
+	Finally, we prove the $*$-descent for the general case. By reducing to the static case and choosing a filtered colimit presentation, we can prove that any faithfully flat map $A->B$ is a $aleph_1$-filtered colimit of countably presented faithfully flat map $A->B_i$. Now, take $A->A_0$ a flat cover, and suppose it is the filtered colimit of $A->A_0^i$. We first show the descent for this case. We have 
+	$  
+		lim_Delta n Pr_(A_0^(times.o_A (m+1)))=lim_Delta colim_I n Pr_((A_0^i)^(times.o_A (m+1)))=colim_I lim_Delta n Pr_((A_0^i)^(times.o_A (m+1)))=colim_I n Pr_A=n Pr_A 
+	$
+	where the commuting of limits and colimits is by the $aleph_1$-finiteness of $Delta$. For general flat hypercovers $A->A_bullet$, we can find 
+	$ A->A_bullet=colim_I (A->A_bullet^i) $
+	where each $A->A_bullet^i$ is a countably presented flat hypercover, by treating the matching maps one by one. By the same commuting as above, we have 
+	$ lim_Delta n Pr_A_bullet=n Pr_A $
 ]
 #rem[
 	We remark here that it is important that we have set $1Pr_A=Mod_(0Pr_A)(Pr^L_aleph_1)$ instead of $Mod_(0Pr_A)(Pr^L)$. 
 ]
+
+There is a further result on general flat stacks. But this is not our main focus, so we just present the result here. 
+
+#thm[
+
+]
+
+== Geometry and higher category theory
+
+=== The category of Stefanich rings
+
+We begin with an analogue of the familiar fact $CAlg_A (cal(C))=CAlg(cal(C))_(\/A)$. 
+
+#lem[
+	The initial object in $StRing$ is given by 
+	$ PP=(*,0Pr,1Pr,dots.c) $
+]
+#proof[
+	This is by the construction of limits in categories. 
+]
+
+#const[
+	Let $A$ be a Stefanich ring. We now construct the category of internal Stefanich rings in $A$. 
+
+	The first ingredient we will use is the generalized $Mod^A_n ladj End^A_n$ adjunction. For any $n$, by definition we have $A_n=End_(A_(n+1))(1)$. Applying the adjunction 
+	$ Mod:CAlg(n Pr_#[])adj CAlg((n+1)Pr_#[]):End $
+	The above equivalence gives a map by adjunction $L_n^A:Mod_(A_n)(n Pr_#[])->A_(n+1)$. Explicitly, this is the functor $M mapsto 1 times.o M$, where the tensoring comes from the equivalence $A_n=End_(A_(n+1))(1)$. 
+	
+	This map admits a right adjoint, given by the internal $Hom$ 
+	$ U_n^A:N mapsto Hom_(A_(n+1))(1,N) in Mod_(End_(A_(n+1))(1))=Mod_(A_n) $
+	which admits a further right adjoint by the cotensoring. Hence, we have $L_n^A$ and $U_n^A$ functors in $(n+1)Pr_#[]$. 
+
+	We then define 
+	$ Mod_n^A=L_n^A compose Mod:CAlg(A_n)->CAlg(A_(n+1)),X mapsto 1_(A_(n+1))times.o Mod_X (A_n)in CAlg(A_(n+1)) $
+	whose right adjoint is given by 
+	$ End_n^A=End compose U_n^A:CAlg(A_(n+1))->CAlg(A_n),Y mapsto End_(Hom_(A_(n+1))(1,Y))(1) $
+] <Const_internal_Mod_End_adj>
+
+#lem[
+	The map $Mod_n^A:CAlg(A_n)->CAlg(A_(n+1))$ is fully faithful. 
+]
+#proof[
+	Note all functors are taken in the category $1Pr_#[]=Pr_(aleph_1)^L$. Hence, it suffices to show that the unit $id->End_n^A compose Mod_n^A$ is the identity on $aleph_1$-compact objects. 
+	
+	Now, take $R in CAlg(A_n)$ a countably presented algebra. By definition, we have 
+	$ End_n^A compose Mod_n^A (R)=End_(U_n^A L_n^A (Mod_R (A_m)))(1)=End_(T(Mod_R (A_m)))(1) $
+	where we temporarily denote $T=U_n^A L_n^A:Mod_(A_n)->Mod_(A_n)$, and note that by definition $T$ is a functor in $(n+1)Pr_#[]$. Also by definition, we have the unit map $id->T$ the identity on $A_n$. 
+
+	By definition, we have $T$ a lax monoidal functor preserving adjunctions. Hence, applying $T$ to the adjunction $F:A_n adj Mod_R (A_n):U$, we obtain an adjunction 
+	$ T(F):T(A_n)adj T(Mod_R (A_n)):T(U) $
+	By lax monoidalness of $T$, we have $T(F)$ a symmetric monoidal functor, so we have the unit object of $T(Mod_R (A_n))$ given by $T(F)(1_(T(A_n)))$. Combining the above facts, we have the following computation. 
+	$
+		End_(T(Mod_R (A_m)))(1) =& End_(T(Mod_R (A_m)))(T(F)(1_(T(A_n)))) \
+		=& Hom_(T(A_n))(1_(T(A_n)),T(U)T(F)(1_(T(A_n)))) #[by adjunction] \
+		=& Hom_(T(A_n))(1_(T(A_n)),T(R times.o -)(1_(T(A_n)))) #[by definition of $U$ and $F$] \
+		=& Hom_(A_n)(1_(A_n),R times.o 1_(A_n)) #[since $A_n=T(A_n)$] \
+		=& R
+	$
+]
+
+By definition $Mod_n^A=L_n^A compose Mod$, which has $Mod$ and $Mod_n^A$ fully faithful functors. Unfortunately, $L_n^A$ is not always fully faithful, but since the unit map of $L_n^A$ is at least an equivalence on the identity object, we have the following partial full faithfulness. 
+
+#lem[
+	The functor $L_n^A:Mod_(A_n)(n Pr_#[])->A_(n+1)$ is fully faithful on dualizable objects (and hence, fully faithful on $aleph_1$-filtered colimits of dualizable objects). 
+] <Lem_L_n_A_fully_faithful_dualizable>
+#proof[
+	Let $X,Y in Mod_(A_n)(n Pr_#[])$ be dualizable. Since $L_n^A$ is symmetric monoidal, it preserves dualizable objects. Hence, we have identifications // https://q.uiver.app/#r=typst&q=WzAsNCxbMSwwLCJIb21fKE1vZF8oQV9uKShuIFByXyNbXSkpKFgsWSkiXSxbMCwwLCJIb21fKE1vZF8oQV9uKShuIFByXyNbXSkpKFggdGltZXMubyBZXm9yLCAxKSJdLFswLDEsIkhvbV8oQV8obisxKSkoTF9uXkEgKFggdGltZXMubyBZXm9yKSwxKSJdLFsxLDEsIkhvbV8oQV8obisxKSkoTF9uXkEgKFgpLExfbl5BIChZKSkiXSxbMSwwLCJ0aWxkZS5lcSJdLFsyLDMsInRpbGRlLmVxIl0sWzAsM10sWzEsMl1d
+	#align(center, diagram({
+		node((-1, 0), [$Hom_(Mod_(A_n)(n Pr_#[]))(X,Y)$])
+		node((-2, 0), [$Hom_(Mod_(A_n)(n Pr_#[]))(X times.o Y^or, 1)$])
+		node((-2, 1), [$Hom_(A_(n+1))(L_n^A (X times.o Y^or),1)$])
+		node((-1, 1), [$Hom_(A_(n+1))(L_n^A (X),L_n^A (Y))$])
+		edge((-2, 0), (-1, 0), [$tilde.eq$], label-side: left, "->")
+		edge((-2, 1), (-1, 1), [$tilde.eq$], label-side: left, "->")
+		edge((-1, 0), (-1, 1), "->")
+		edge((-2, 0), (-2, 1), "->")
+	}))
+	Hence, it suffices to prove that the left arrow is an equivalence. But we have 
+	$ Hom_(Mod_(A_n)(n Pr_#[]))(X times.o Y^or, 1)=Hom_(Mod_(A_n)(n Pr_#[]))(X times.o Y^or, U_n^A (1))=Hom_(A_(n+1))(L_n^A (X times.o Y^or),1) $
+	where the first equivalence is because $U_n^A L_n^A (A_n)=A_n$. 
+]
+
+#def[
+	Let $A in StRing$. We define the category of Stefanich rings internal to $A$ to be the colimit 
+	$ StRing(A)=colim_(1Pr)(CAlg(A_1)xarrowHook(Mod_1^A)CAlg(A_2)xarrowHook(Mod_2^A)dots.c) $
+	Equivalently, it is the limit 
+	$ StRing(A)=lim(CAlg(A_1)xarrow(sym:arrow.l,End_A^1)CAlg(A_2)xarrow(sym:arrow.l,End_A^2)dots.c) $
+] <Def_internal_Stefanich_ring>
+
+#const[
+	Let $f:A->B$ be a morphism of Stefanich rings. By definition, this is the data $f_(i-1)^*:A_i->B_i$ (here the index in $f$ denotes the categorical level, i.e., $A_i$ and $B_i$ are $(i-1)$-categories), if we denote $A=(A_0,A_1,dots.c)$ and $B=(B_0,B_1,dots.c)$. 
+
+	We define $(B\/A)_(n-1)=f_(n-1,*)(1_B_n))in CAlg(A_n)$, where $1_(B_n)in CAlg(B_n)$ is the unit. 
+] <Const_relative_to_internal>
+
+#thm[
+	We have an equivalence of categories 
+	$ StRing_(A\/)tilde.eq StRing(A) $
+	Given by sending $A->B$ to $((B\/A)_0,(B\/A)_1,dots.c)$. 
+] <Thm_internal_equiv_under>
+#proof[
+	By definition, we have an equivalence 
+	$ StRing_(A\/)=lim(CAlg(0Pr)_(A_0\/)xarrow(sym:arrow.l,End_1^PP)CAlg(1Pr)_(A_1\/)xarrow(sym:arrow.l,End_2^PP)dots.c) $
+	Then, using $CAlg(n Pr_#[])_(A_n)=CAlg(Mod_(A_n)(n Pr_#[]))$, the transition $End_n^PP$ factors as 
+	$ CAlg(Mod_(A_(n+1))((n+1)Pr))-->^(End)CAlg(A_(n+1))-->^(U_m^A)CAlg(Mod_(A_n)(n Pr_#[])) $
+	Hence, by coinitialness, the category $StRing_(A\/)$ can be expressed as 
+	$ 
+	StRing_(A\/) =& lim(CAlg(0Pr)_(A_0\/)xarrow(sym:arrow.l,End_1^PP)CAlg(1Pr)_(A_1\/)xarrow(sym:arrow.l,End_2^PP)dots.c) \
+	=& lim(CAlg(Mod_(A_0)(0Pr))<-CAlg(Mod_(A_1)(1Pr))<-dots.c) \
+	=& lim(CAlg(Mod_(A_0)(0Pr))<-CAlg(A_1)<-CAlg(Mod_(A_1)(1Pr))<-CAlg(A_2)<-dots.c) \
+	=& lim(CAlg(A_1)xarrow(sym:arrow.l,End_1^A)CAlg(A_2)xarrow(sym:arrow.l,End_2^A)dots.c) \
+	=& StRing(A)
+	$
+	The identification of this equivalence is direct. 
+]
+
+#coro[
+	The functor $StRing_(A\/)->CAlg(A_(n+1))$, $B mapsto (B\/A)_n$ admits a fully faithful left adjoint $CAlg(A_(n+1))inj StRing(A)=StRing_(A\/)$. 
+]
+
+We then prove some categorical properties of $StRing(A)$. As in the case for general limits, we have limits and $aleph_1$-filtered colimits in $StRing$ are computed pointwise, since the trasition functors $End_n^A$ preserves them. Arbitrary colimits, on the other hand, is much more difficult to compute. We will introduce a concept of pre-Stefanich rings and a "spectrification" functor (@Lem_pStRing_pointwise_colim and @Lem_spectrification_functor) to compute them, just like the case when we are computing colimits in the category $Sp$. 
+
+#def[
+	Let $A$ be a Stefanich ring. We define the category of pre-Stefanch rings $pStRing(A)$ to be a sequence of objects $(B_0,B_1,dots.c)$, such that $B_n in CAlg(A_(n+1))$, and with structure comparison maps $alpha_n:B_n->End_(A_(n+1))(B_(n+1))$ (which we do *NOT* require to be an equivalence). 
+
+	More precisely, we define 
+	$ cal(P)_A=product_(n>=0)CAlg_(A_(n+1)) $
+	and define an endofunctor 
+	$ End_bullet^A:cal(P)_A->cal(P)_A, (B_n)mapsto(B'_n),B'_n=End_(n+1)^A (B_(n+1)) $
+	Now, we may define the category of pre-Stefanich rings as the lax equalizer
+	$ pStRing(A)=cal(P)_A arrow(times)_(cal(P)_A times cal(P)_A)cal(P)_A^(Delta_1) $
+	where $cal(P)_A->(cal(P)_A times cal(P)_A)$ is given by $(id,End_bullet^A)$. This is simply the categorical translation of the above definition. 
+]
+
+#lem[
+	The category $pStRing(A)$ admits all colimits. The colimits in $pStRing(A)$ are computed pointwise. 
+] <Lem_pStRing_pointwise_colim>
+#proof[
+	Let $I->pStRing(A)$ be a diagram, with $i mapsto (B^i,alpha^i)$. Take 
+	$ B=(colim B^i)in cal(P)_(A) $
+	which is the pointwise colimit. Then, we construct the structure map $B->End_bullet^A (B)$. This is obtained by the lax commutation of $End_bullet^A$ with the colimit, explicitly 
+	$ alpha:B=colim_I B^i->colim_I End_bullet^A (B^i)->End_bullet^A (colim_I B^i)->End_bullet^A (B) $
+	where the second arrow is by the universal property of the colimit. Thus, we have $(B,alpha) in pStRing(A)$. 
+	Finally we verify the universal property. By the construction of the lax pullback, for $(B,alpha),(C,beta)in pStRing(A)$, the $Hom$ space is computed via 
+	$ Hom_(pStRing(A))((B,alpha),(C,beta))=upright("eq")(Hom(B,Y)arrows Hom(B,End_bullet^A (Y))) $
+	where the two arrows are defined by $f mapsto beta compose f$ and $f mapsto End_bullet^A (f)compose alpha$. This verifies the universal property of the colimit by definition. 
+]
+
+#lem[
+	There exists a spectrification functor $L:pStRing(A)->StRing(A)$, left adjoint to the inclusion $StRing(A)inj pStRing(A)$. 
+] <Lem_spectrification_functor>
+#proof[
+	We define a functor $T:pStRing(A)->pStRing(A)$, given by 
+	$ (B,alpha)mapsto (End_bullet^A (B),End_bullet^A (alpha)) $
+	Note that there is a map $eta:id->T$, given by $eta(B,alpha)=alpha:B->End_bullet^A (B)$
+	Then, we define 
+	$ X^((0))=X, X^((alpha+1))=T(X^((alpha))), X^((lambda))=colim_(alpha<lambda)X^((alpha)), #[$lambda$ a limit cardinal] $
+	We define $L(X)=X^((aleph_1))$. Since $T$ commutes with $aleph_1$-filtered colimits, and the cardinal $aleph_1$ is itself $aleph_1$-filtered, we have 
+	$ T(L(X))=T(X^((aleph_1)))=T(colim_(alpha<aleph_1)X^((alpha)))=colim_(alpha<aleph_1) T(X^((alpha)))=X^((aleph_1))=L(X) $
+	Hence, $L(X)in StRing(A)$. 
+
+	On the other hand, for any $Y in StRing(A)$, it suffices to show that for any $X in pStRing(A)$, we have 
+	$ eta_X^*:Hom(T(X),Y)->Hom(X,Y) $
+	is an equivalence. This is because $T(Y)=Y$, hence we can construct an inverse via sending $f:X->Y$ to $eta_Y^(-1)compose T(f)$. 
+]
+
+#coro[
+	Colimits in $StRing(A)$ are computed via spectrifying the colimit in $pStRing(A)$. 
+]
+
+#const[
+	Let $A->B$, $A->C$ be maps of Stefanich rings. We define $B times.o_A C$ to be the pushout of the two maps. By construction, this is the spectrification of 
+	$ ((B\/A)_0 times.o (C\/A)_0,(B\/A)_1 times.o (C\/A)_1,dots.c) $
+] <Const_tensor_Stefanich_rings>
+
+Likewise to the category $Sp$, there is also a shift functor in $StRing$. 
+
+#const[
+	Consider the forgetful functor $CAlg((n+1) Pr_#[])->CAlg(n Pr_#[])$ right adjoint to the inclusion $CAlg(n Pr_#[])inj CAlg((n+1) Pr_#[])$ by directly regarding an $n$-category as an $(n+1)$-category. This is the functor of taking cores. Thus, we have a map of shifting given by taking the colimit 
+	// https://q.uiver.app/#r=typst&q=WzAsNixbMSwwLCJDQWxnKDJQcl8jW10pIl0sWzIsMCwiQ0FsZygxUHJfI1tdKSJdLFsxLDEsIkNBbGcoMVByXyNbXSkiXSxbMiwxLCJDQWxnKDBQcl8jW10pIl0sWzAsMCwiZG90cy5jIl0sWzAsMSwiZG90cy5jIl0sWzAsMV0sWzIsM10sWzEsMywiKC0pXih0aWxkZS5lcSkiXSxbMCwyLCIoLSleKHRpbGRlLmVxKSJdLFs0LDBdLFs1LDJdLFs0LDUsIigtKV4odGlsZGUuZXEpIl1d
+	#align(center, diagram({
+		node((-1, 0), [$CAlg(2Pr_#[])$])
+		node((0, 0), [$CAlg(1Pr_#[])$])
+		node((-1, 1), [$CAlg(1Pr_#[])$])
+		node((0, 1), [$CAlg(0Pr_#[])$])
+		node((-2, 0), [$dots.c$])
+		node((-2, 1), [$dots.c$])
+		edge((-1, 0), (0, 0), "->")
+		edge((-1, 1), (0, 1), "->")
+		edge((0, 0), (0, 1), [$(-)^(tilde.eq)$], label-side: left, "->")
+		edge((-1, 0), (-1, 1), [$(-)^(tilde.eq)$], label-side: left, "->")
+		edge((-2, 0), (-1, 0), "->")
+		edge((-2, 1), (-1, 1), "->")
+		edge((-2, 0), (-2, 1), [$(-)^(tilde.eq)$], label-side: left, "->")
+	}))
+	We denote this functor by $arrow(Omega):StRing->StRing$. This functor is by definition fully faithful and has essential image given by $StRing_(\/arrow(Omega)(PP))$, where 
+	$ arrow(Omega)(PP)=arrow(Omega)(*,0Pr,1Pr,dots.c)=(0Pr,1Pr,2Pr,dots.c) $
+] <Const_shifting>
+
+=== Affine, proper, and etale maps
+
+#def[
+	Let $f:A->B$ be a map in $StRing$. We say it is $n$-affine if $B$ is in the essential image of the inclusion $CAlg(A_(n+1))inj StRing(A)=StRing_(A\/)$.
+
+	By definition, this means that for $m>=n$, we have $(B\/A)_(m+1)=Mod_(m+1)^A ((B\/A)_m)$.  
+] <Def_affine_maps>
+
+We first give some basic properties of $n$-affine maps. 
+
+#lem[
+	Let $B in StRing_(A\/)$ be $n$-affine. Then, the comparison map $Mod_((B\/A)_m)(A_(m+1))->B_(m+1)$ is an equivalence. 
+] <Lem_n_aff_compare_equiv>
+#proof[
+	Take any $m>=n$. Recall the pair of adjunction 
+	$ L_(m+1)^A:Mod_(A_(m+1))((m+1)Pr)adj A_(m+2):U_(m+1)^A $
+	By definition, we have 
+	$ 
+		B_(m+1)=&End_(B_(m+2))(1_B_(m+2))  \
+		=&Hom_(A_(m+2))(1_A_(m+2),f_(m+1,*)1_B_(m+2)) && #[by adjunction] \
+		=&U_(m+1)^A f_(m+1,*)1_B_(m+2) && #[by definition of $U_(m+1)^A$, @Const_internal_Mod_End_adj] \
+		=&U_(m+1)^A (B\/A)_(m+1) && #[by definition of $(B\/A)_(m+1)$, @Const_relative_to_internal] \
+		=&U_(m+1)^A Mod_(m+1)^A ((B\/A)_m) && #[by affineness] \
+		=&U_(m+1)^A L_(m+1)^A Mod_((B\/A)_m)(A_(m+1))
+	$
+	Hence, the comparison map in question is actually the unit map of $L_(m+1)^A ladj U_(m+1)^A$ on the object $Mod_((B\/A)_m)(A_(m+1))$. By @Lem_L_n_A_fully_faithful_dualizable, it suffices to show that $Mod_(B\/A)_m (A_(m+1))$ is a $aleph_1$-filtered colimit of dualizable objects, which is done by writing $(B\/A)_m$ as an $aleph_1$-filtered colimit of its countably presented subalgebras. 
+]
+

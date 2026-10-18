@@ -13,6 +13,8 @@
 	#set enum(numbering: "(1a)")
 
 	#show: C.thmrules.with(qed-symbol: $square$)
+
+	#show "etale": "étale"
 	
 	#set text(
 		font: ((covers: regex("[\u0000-\u2023]"), name: "New Computer Modern"), "STSong"), 

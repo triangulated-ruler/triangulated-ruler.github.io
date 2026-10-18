@@ -21,6 +21,7 @@
 #let Perv = math.bold("Perv")
 #let nPr = [$upright("n")$$bold("Pr")$]
 #let StRing = math.bold("StRing")
+#let pStRing = math.bold("pStRing")
 
 #let Sh = math.upright("Sh")
 #let pSh = math.upright("pSh")
@@ -93,7 +94,7 @@
 #let RHS = math.op("RHS")
 #let ladj = sym.tack.l
 #let radj = sym.tack.r
-#let adj = sym.arrows.rl.long
+#let adj = [#h(2pt)$arrows.rl.long$#h(2pt)]
 #let sadj = sym.arrows.rl
 #let Ext = math.upright("Ext")
 #let Bar = math.op("Bar")
