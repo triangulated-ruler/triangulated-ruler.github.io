@@ -79,3 +79,30 @@ KosKacMoody:
   title: Koszul duality for Kac--Moody groups
   date: 2014-6-22
   url: "https://arxiv.org/pdf/1101.1253"
+
+HM6FF: 
+  type: article 
+  author: ["Heier, Claudius", "Mann, Lucas"]
+  title: 6-Functor formalisms and smooth representations
+  date: 2024
+  url: "https://arxiv.org/pdf/2410.13038"
+
+nSh:
+  type: article
+  author: "Stefanich, German"
+  title: Categorification of sheaf theory 
+  date: 2025-11-12
+  url: "https://arxiv.org/pdf/2511.09553"
+
+Gest:
+  type: article
+  author: "Scholze, Peter"
+  title: Geometry and higher category theory 
+  date: 2025
+  url: "https://people.mpim-bonn.mpg.de/scholze/Gestalten.pdf"
+
+GestNotes:
+  type: article
+  title: "Gestalten"
+  date: 2026
+  url: "https://github.com/BastiaanCnossen/Gestalten/blob/main/Gestalten%20Notes.pdf"

@@ -205,6 +205,8 @@ We will then show that the above data of $f_n^*$ can be upgraded to a six-functo
 	Then, suppose the underlying object of $M$ is compact. The argument follows again from the monadic free-forgetful adjunction as in the previous proof of @Lem_alg_cpt_iff_mod_cpt. 
 ]
 
+Then, we show that the above data can be assembled into a six-functor formalism (see @Section_Six_functor_formalisms). 
+
 #thm[
 	For every $n>=0$, we have a six-functor formalism $n Pr^(*,*)$ given by 
 	$ Span(Aff,#[all],#[$aleph_1$-finitely presented maps])->(n+1)Pr $
@@ -549,6 +551,8 @@ We then prove some categorical properties of $StRing(A)$. As in the case for gen
 #const[
 	Let $A->B$, $A->C$ be maps of Stefanich rings. We define $B times.o_A C$ to be the pushout of the two maps. By construction, this is the spectrification of 
 	$ ((B\/A)_0 times.o (C\/A)_0,(B\/A)_1 times.o (C\/A)_1,dots.c) $
+	Or, if we regard it as a ring over $C$, it is the spectrification of 
+	$ (g_0^*(B\/A)_0, g_1^*(B\/A)_1,dots.c) $
 ] <Const_tensor_Stefanich_rings>
 
 Likewise to the category $Sp$, there is also a shift functor in $StRing$. 
@@ -601,5 +605,269 @@ We first give some basic properties of $n$-affine maps.
 		=&U_(m+1)^A L_(m+1)^A Mod_((B\/A)_m)(A_(m+1))
 	$
 	Hence, the comparison map in question is actually the unit map of $L_(m+1)^A ladj U_(m+1)^A$ on the object $Mod_((B\/A)_m)(A_(m+1))$. By @Lem_L_n_A_fully_faithful_dualizable, it suffices to show that $Mod_(B\/A)_m (A_(m+1))$ is a $aleph_1$-filtered colimit of dualizable objects, which is done by writing $(B\/A)_m$ as an $aleph_1$-filtered colimit of its countably presented subalgebras. 
+]
+
+#coro[
+	Let $g:A->C$ be any map of Stefanich rings. Then, for any $n$-affine $A$-algebra $A->B$, we have $g_m^*(B\/A)_m=(B times.o_A C\/C)_m$ for $m>=n$. Equivalently, the spectrification process in @Const_tensor_Stefanich_rings to define the tensor product $B times.o_A C\/C$ is not needed. 
+] <Coro_affine_tensor_equiv_pullback>
+#proof[
+	Note that by affineness, we have $g_(m+1)^* compose Mod_m^A=Mod_m^C compose g_m^*$ for $m>=n$. Thus, presenting $g^*(B)$ as the spectrification of the pre-Stefanich ring 
+	$ (g_0^*(B\/A)_0,g_1^*(B\/A)_1,dots.c) $
+	by the above relation, this is already a Stefanich ring if we omit the part where $i<=n$. Hence, $g^*(B)$ is an $n$-affine ring over $C$ determined by $g_n^*(B\/A)_n$. Hence, by a direct computation, we have $g_m^*(B\/A)_m=(B times.o_A C\/C)_m$ for $m>=n$. 
+]
+
+#coro[
+	Let $h=g compose f:A->B->C$. If $f$ is $n$-affine, then $h$ is $n$-affine iff $g$ is. 
+] <Coro_n_aff_preserved_composition>
+#proof[
+	We first give a better characterization of the condition where $h$ is $n$-affine. Notice that $C$ is $n$-affine over $A$ iff it lies in the essential image of $CAlg(A_(n+1))inj StRing_(A\/)$. Slicing over the object $(B\/A)_n$, we obtain a functor of categories $CAlg(A_(n+1))_((B\/A)_n\/)inj StRing_(B\/)$. Thus, a ring $B inj C$ is $n$-affine over $A$ iff it lies in the slice $CAlg(A_(n+1))_((B\/A)_n\/)$. However, by affineness, we may identify $B_(n+1)=Mod_((B\/A)_n)(A_(n+1))$ by @Lem_n_aff_compare_equiv, so 
+	$ CAlg(A_(n+1))_((B\/A)_n\/)=CAlg(B_(n+1)) $
+	Thus, the essential image of $h$ being $n$-affine and $g$ being $n$-affine coincide. 
+]
+
+We then move on to proper and etale morphisms. 
+
+#def[
+	Let $f:A->B$ be a map of Stefanich rings. We say it is $n$-prim if for all $m>=n$, the map $(f\/A)_m^*:(A\/A)_(m+1)->(B\/A)_(m+1)$ admits a right adjoint $(f\/A)_(m,*):(B\/A)_(m+1)->(A\/A)_(m+1)$ in the category $A_(m+2)$. 
+	
+	By definition, if we compose two $n$-prim maps, we can apply the forgetful functor $B_(m+1)->A_(m+1)$ and compose the right adjoint, and conclude that the composition is still $n$-prim. 
+] <Def_n_prim_map>
+
+#lem[
+	The composition $(f\/A)_(m,*)(f\/A)_m^*:(A\/A)_(m+1)->(A\/A)_(m+1)in End(A_(m+2))$ is identified with $(B\/A)_(m)$.  
+]
+#proof[
+	Note that the functor $A_(m+2)->(m+2)Pr$ preserves adjunctions, so the adjunction $(f\/A)_m^* ladj (f\/A)_(m,*)$ is send to the adjunction $f_m^* ladj f_(m,*)$, and the latter sends $1_(A_(m+1))$ to $(B\/A)_(m+1)$ by definition. 
+]
+
+#prop[
+	If $f:A->B$ is $n$-affine and countably presented, then it is $n$-prim. 
+] <Prop_aff_countably_presented_prim>
+#proof[
+	The map $(f\/A)_m^*:(A\/A)_(m+1)->(B\/A)_(m+1)$ factors as 
+	$ (A\/A)_(m+1)->Mod_(m+1)^A ((B\/A)_m)xarrow(L_m^(B\/A))(B\/A)_(m+1) $
+	by definition. Then, for $m>=n$, since $f$ is $n$-affine, $L_m^(B\/A)$ is an equivalence. Hence, it suffices to show that the first functor admit a right adjoint. 
+
+	Notice that this functor is the image of $A_(m+1)->Mod_((B\/A)_m)(A_(m+1))$ under the functor 
+	$ L_(m+1)^A:Mod_(A_(m+1))((m+2)Pr)->A_(m+2) $
+	The functor $L_(m+1)^A$ preserves adjoints, and the above free functor $F_((B\/A)_m)$ admit a right adjoint in $Pr_kappa^L$ iff $A->B$ is $kappa$-finitely presented. In this case, since $A->B$ is countably presented, there is a right adjoint of $A_(m+1)->Mod_((B\/A)_m)(A_(m+1))$ internal to $Mod_(A_(m+1))((m+2)Pr)$. Thus we obtain the desired right adjoint. 
+]
+
+#lem[
+	If $f:A->B$ is $n$-prim, then for any $g:A->C$, we have the induced pushout map $f':C->C times.o_A B$ $n$-prim. Moreover, for every $m>=n$, the comparison map 
+	$ g_m^* (B\/A)_m->(B times.o_A C\/C)_m $
+	is an isomorphism. Equivalently, the spectrification process in @Const_tensor_Stefanich_rings to define the tensor product $B times.o_A C\/C$ is not needed. 
+]
+#proof[
+	
+]
+
+#lem[
+	A filtered colimit of $n$-prim $A$-algebras is $n$-prim. 
+]
+#proof[
+	Let $I$ be a filtered index category with an initial object, and let $A_i$
+]
+
+=== The category of Gestalten
+
+
+
+== Six functor formalisms and Gestalten
+
+=== Six functor formalisms <Section_Six_functor_formalisms>
+
+#def[
+	We define a geometric setting to be a pair $(cal(C),E)$, where $cal(C)$ is a category with finite limits and $E subset cal(C)$ is a wide subcategory (i.e. a class of morphisms) subject to the following conditions: 
+	+	$E$ contains all isomorphisms. 
+	+	For $f:c->d in E$, for any $g:e->d in cal(C)$ we have $g^*f:c times_d e->e in E$. 
+	+	For $f:c->d,g:d->e in E$, we have $g compose f:c->e in E$. 
+	+	For $f:c->d in E$, we have $Delta_f:c->c times_d c in E$. 
+] <Def_geometric_setup>
+
+#const[
+	Let $(cal(C),E)$ be a geometric setup. We define $Corr(cal(C),E)$ to be the following 2-category: 
+	+	The objects of $Corr(cal(C),E)$ are the same ones as $cal(C)$. 
+	+	For $c,d in cal(C)$, we define $Hom_(Corr(cal(C),E))(c,c')$ to be the category of diagrams $c<-d->c'$ in $cal(C)$, where the map $d->c' in E$. 
+	+	The composition of morphisms are given by pullbacks. Namely, for morphisms 
+		$ f_1=c_1<-d_1->c_2,quad f_2=c_2<-d_2->c_3 $
+		we define their composition to be the pullback $c_1<-d_1 times_(c_2)d_2->c_3$, to be depicted in the following diagram: // https://q.uiver.app/#r=typst&q=WzAsNixbMCwyLCJjXzEiXSxbMiwyLCJjXzIiXSxbNCwyLCJjXzMiXSxbMSwxLCJkXzEiXSxbMywxLCJkXzIiXSxbMiwwLCJlIl0sWzMsMF0sWzMsMV0sWzQsMV0sWzQsMl0sWzUsM10sWzUsNF1d
+		#align(center, diagram({
+			node((-2, 1), [$c_1$])
+			node((0, 1), [$c_2$])
+			node((2, 1), [$c_3$])
+			node((-1, 0), [$d_1$])
+			node((1, 0), [$d_2$])
+			node((0, -1), [$e$])
+			edge((-1, 0), (-2, 1), "->")
+			edge((-1, 0), (0, 1), "->")
+			edge((1, 0), (0, 1), "->")
+			edge((1, 0), (2, 1), "->")
+			edge((0, -1), (-1, 0), "->")
+			edge((0, -1), (1, 0), "->")
+			node((0, -0.6), [#rotate($Cartmark$,45deg)])
+		}))
+		Here, $e->d_2$ is in $E$ by the axiom (2), and the composition $e->c_3$ is in $E$ by the axiom (3). 
+	We notice that here we have $c<-d->c'$ is the composition of $c<-d->d$ and $d<-d->c'$. 
+
+	More rigorously, we can realize $Corr(cal(C),E)$ as a 1-full subcategory of $Cat_(\/cal(C))$, where: 
+	+	$c in cal(C)$ is mapped to $cal(C)_(\/c)$. 
+	+	
+	In particular, if $E$ is the set of all morphisms in $cal(C)$, we denote $Corr(cal(C))$ by $Corr(cal(C),E)$. 
+]
+
+#const[
+	There is a symmetric monoidal structure on $Corr(cal(C),E)$. For $c,d in Corr(cal(C),E)$, we define $c times.o d=c times d$, where the product is taken in $cal(C)$. The product on morphisms is likewise defined. 
+] <Const_sym_mon_Corr>
+
+#const[
+	We note that $Corr(cal(C))$ admits an enrichment by itself. This enrichment comes from the fact that the symmetric monoidal structure $Corr(cal(C))^times$ is closed symmetric monoidal. We will denote the enriched version by $Corr^enr (cal(C))$ if we wish to emphasize that the category we are using is the enriched one. 
+
+	For $X->* in E$, note that the morphisms $*<-X->X times X$ and $X times X<-X->*$ presents $X$ as the dual of itself (directly). Thus, we may set the internal $Hom$ of $Corr(cal(C))$ by $underline(Hom)(X,Y)=X times Y$. 
+
+	As is so for general closed symmetric monoidal categories, we have 
+	$ Hom(X,Y)=Hom(bb(1),underline(Hom)(X,Y)) $
+	In this setting, unwinding the definitions, the right hand side are the space of spans 
+	$ *<-Z->X times Y $
+	and $Z->X times Y$ is equivalent to the data of $X<-Z->Y$, i.e., a morphism $X->Y$ in $Corr(cal(C))$. 
+] <Const_Corr_self_enrichment>
+
+#def[
+	Let $(cal(C),E)$ be a geometric setup. A 3-functor formalism is a lax symmetric monoidal functor 
+	$ D:Corr(cal(C),E)->Cat $
+	A 6-functor formalism is a lax symmetric monoidal functor 
+	$ D:Corr(cal(C),E)->Pr^L $
+	We will denote the image of $X in cal(C)$ by $D(X)$. For any morphism $f:X->Y in cal(C)$, we define the image of $Y<-X->X$ by $D$ as $f^*:D(Y)->D(X)$, and for any morphism $g:X->Y in E$, we define the image of $X<-X->Y$ by $D$ as $g_!:D(X)->D(Y)$. 
+]
+
+#def[
+	We then define the 2-category of geometric settings. Given geometric settings $(cal(C),E)$ and $(cal(C)',E')$, we define the category of morphisms $Hom_(#[GeomSetup])((cal(C),E),(cal(C)',E'))$ to be the 1-full subcategory of $Fun(cal(C),cal(D))$, where a functor $F:cal(C)->cal(D)$ is a morphism of geometric settings iff the following conditions holds: 
+	+	$phi(E)subset F$. 
+	+	$phi$ preserves fibered products $c times_d e$ where $c->d in E$. 
+	Here, the intuition of the second condition is that $phi$ preserves the composition in $Corr(cal(C),E)$. 
+
+	Then, a natural transformation $omega:F->F'$ of morphisms of geometric settings lies in $Hom_(#[GeomSetup])((cal(C),E),(cal(C)',E'))$ if it 
+]
+
+#todo[
+	Nagata settings. 
+]
+
+=== The 2-category of kernels and higher categorical sheaves 
+
+In this section, we will use many facts on enriched categories. We will not record the exact details of how to define enriched categories in the $oo$-categorical setting, and we refer the readers to @HM6FF. 
+
+#def[
+	Let $cal(V)$ be a monoidal category. We define $Cat^cal(V)$ to be the $(oo,1)$-category of categories enriched in $cal(V)$. 
+] <Def_enr_cat>
+
+#const[
+	Let $A in Alg(cal(V))$. Then, there is an object $B A in Cat^cal(V)$, with one object $*$ and $End(*)=A$. This can be regarded as a functor $B:Alg(cal(V))->Cat^cal(V)_*$, the target being the category of pointed $cal(V)$-enriched categories. This functor admits a right adjoint, given by 
+	$ Omega:Cat^cal(V)_*->Alg(cal(V)), (cal(C),c)mapsto End_cal(C) (c) $
+] <Const_B_Omega_adj>
+
+We first state the main categorical tool we will use in this section (which we will not prove). 
+
+#thm[
+	Let $phi:cal(V)->cal(W)$ be a lax monoidal morphism of monoidal categories. Then, there exists a transfer functor 
+	$ tau_phi:Cat^cal(V)->Cat^cal(W) $
+	having the intuition of sending a category $cal(C)$ to a category enriched in $cal(W)$ with the same objects and 
+	$ Hom_cal(C)^cal(W)(c,d)=phi(Hom_(cal(C))^cal(V)(c,d)) $
+] <Thm_transfer_enrichment_lax_mon>
+
+#def[
+	Given a 3-functor formalism $D:Corr(cal(C),E)->Cat$, we can define the category of kernels as follows. Firstly, if we have $E$ the set of all morphisms in $cal(C)$, we define
+	$ cal(K)_(D):=tau_D (Corr^enr (cal(C)))in Cat^Cat=Cat_2 $
+	where $Corr(cal(C))in Cat^(Corr(C))$ via the closed symmetric monoidal structure. Then, in the general case, for $S in cal(C)$, we define 
+	$ cal(K)_(D,S)=tau_D (Corr^enr ((cal(C)_E)_(\/S)))in Cat_2 $
+
+	Explicitly, $cal(K)_(D,S)$ has objects $X->S in E$, and $Hom(X->S,Y->S)=D(X times_S Y)$. The composition of morphisms are given by convolution. Namely, for $X,Y,Z in (cal(C)_E)_(\/S)$, and for morphisms $X->Y$ presented by $cal(F) in D(X times_S Y)$ and $Y->Z$ presented by $cal(G) in D(Y times_S Z)$, we define their composition to be 
+	$ pi_(X,Z,!)(pi_(X,Y)^* cal(F) times.o pi_(Y,Z)^* cal(G)) $
+] <Def_3ff_kernel_cat>
+
+#rem[
+	The seemingly correct way of understanding this definition is via Fourier-Mukai transforms. Recall that any object $cal(K)in D(X times_S Y)$ gives rise to a functor $D(X)->D(Y)$ via $cal(F)mapsto pi_(Y,!)(cal(K)times.o pi_X^* cal(F))$, where $cal(K)$ acts as something like the convolution kernel. 
+]
+
+We state another theorem of kernel categories that we will not prove, since we will prove a more general version directly. 
+
+#thm[
+	Let $D$ be a 3-functor formalism on a geometric setup $(cal(C),E)$. Then, the assignment $S mapsto cal(K)_(D,S)$ upgrades to a lax symmetric monoidal functor 
+	$ cal(K)_(D,(-)):Corr(cal(C),E)->Cat_2 $
+	Moreover, there exists a natural transformation 
+	$ Phi_(D,(-)):Corr((cal(C)_E)_(\/(-)))->cal(K)_(D,(-)) $
+	Taken at a value $S$, we have $Phi_(D,(S))$ sends an object $X->S$ to $X->S$, and sends 
+	$ X<-^f Z->^g Y mapsto (f,g)_!(1_(D(Z)))in D(X times_S Y) $
+] <Thm_kernel_6ff_2cat_nat_transf>
+
+Then, Stefanich generalized the above definitions to a version of "$n$-categories of kernels" in the paper @nSh. 
+
+#def[
+	Now, suppose $cal(V)$ is an symmetric monoidal category. We define $Cat_n^cal(V)$ inductively as follows: 
+	+	For $n=1$, $Cat_n^cal(V):=Cat^cal(V)$. 
+	+	For $n>1$, $Cat_n^cal(V):=Cat^(Cat_(n-1)^cal(V))$
+	Here we use the fact that for $cal(V)$ a symmetric monoidal category, $Cat^cal(V)$ admits a symmetric monoidal structure. Heuristically, this symmetric monoidal structure sends $cal(C),cal(D)in Cat^cal(V)$ to a category with objects pairs $(c,d)$ for $c in cal(C),d in cal(D)$, and 
+	$ Hom^cal(V)((c_1,d_1),c_2,d_2)=Hom^cal(V)(c_1,c_2)times.o Hom^cal(V)(d_1,d_2) $
+	In particular, the monoidal unit is the category with one object $*$, and $End(*)=1_cal(V)$. This is the category $B 1_cal(V)$.
+] <Def_higher_enriched_cat>
+
+We will use a further fact on enriched categories. 
+
+#thm[
+	Let $cal(M)$ be a presentably symmetric monoidal category, and let $A in CAlg(cal(M))$. Then, we have a symmetric monoidal equivalence 
+	$ Gamma_A:Cat^(Mod_A (cal(M)))->Mod_(B A)(Cat^cal(M)) $
+	where $Gamma_A$ is constructed via the inclusion $iota:Mod_A (cal(M))inj cal(M)$, namely 
+	$ tau_(iota):Cat^(Mod_A (cal(M)))->Cat^cal(M) $
+	lies in the category of $tau_(iota)(1_(Cat^(Mod_A (cal(M)))))=B A$-modules. 
+] <Thm_enr_mod_equiv_mod_B>
+
+#coro[
+	The iterated functor 
+	$ Gamma_A^n:Cat_n^(Mod_A (cal(M)))->Mod_(B^n A)(Cat_n^cal(M)) $
+	is an equivalence. 
+]
+
+#const[
+	We may iteratively generalize the definition of $n Corr(cal(C))_#[]$. For $n=1$, we define it simply to be $Corr(cal(C))$. For $n>1$, we define it to be the category the same as $cal(C)$, and such that
+	$ Hom_(n Corr(cal(C))_#[])(X,Y)=(n-1)Corr(cal(C_(X\/-\/Y))) $
+	It is a monoidal category via $(X,Y)mapsto X times Y$. 
+]
+
+#const[
+	Via the adjunction $B ladj Omega$, we obtain the iterated counit map 
+	$ B^(n-1)Corr(cal(C))=B^(n-1)Omega^(n-1)n Corr(cal(C))_#[]->n Corr(cal(C))_#[] $
+	Which gives an enrichment $n Corr^enr (cal(C))_#[] in Cat_n^(Corr(cal(C)))$. 
+]
+
+#const[
+	Now, given a six-functor theory $Sh:Corr(cal(C))->1Pr$ (i.e. $Sh$ is a lax monoidal functor), we may extend it to an $n$-categorical sheaf via the following process. 
+
+	Firstly, we define the target of the $n$-categorical sheaf theory. Note that there is a free (cocompletion) functor 
+	$ cplt_n:Cat_n^Pr->(n+1)Pr $
+	Note that intuitively $Cat_n^Pr$ has the objects certain $(n+1)$-categories, since we have the inclusion $Cat_n^Pr->Cat_n^Cat=Cat_(n+1)$. Then, we define $n Pr_Sh in (n+1)Pr$ to be the category 
+	$ n Pr_Sh :=cplt_n (tau_(Sh)(n Corr^enr (cal(C)))) $
+
+	Then, for the whole sheaf theory, notice that there is a natural transformation 
+	$ eta:U_(Corr(cal(C)))->Sh in Fun(Corr(cal(C)),Cat) $
+	where $U_(Corr(cal(C))):Corr(cal(C))->Ani$ is given by $X mapsto Hom(bb(1),X)$. On the level of objects, this natural transformation is given by $(f:Z->X) mapsto f_*(bb(1)_(Sh(Z)))$. 
+
+	Hence, we have an induced functor 
+	$ n Sh_#[]:n Corr(cal(C))_#[]=tau_(U_(Corr(cal(C))))(n Corr^enr (cal(C)))->tau_(Sh)(n Corr^enr (cal(C)))->cplt_n (tau_(Sh)(n Corr^enr (cal(C))))=n Pr_Sh $
+	which is our desired higher analogue of the construction of the 2-category of kernels. 
+
+	By construction, we may identify 
+	$ (n-1)Sh_#[]=End(n Sh_#[]) $
+	where $End(cal(C))=End_cal(C)(bb(1)_cal(C))$, as in the previous definitions. Thus, this construction gives rise from a sheaf theory $Sh:Corr(cal(C))->Pr$ to a map of Gestalten 
+	$ (1Sh,2Sh,dots.c):(1Corr(cal(C)),2Corr(cal(C)),dots.c)->(1Pr_Sh,2Pr_Sh,dots.c) $
+] <Def_n_Sh_theory>
+
+However, in @Gest, Scholze used a different iterative construction. This construction is levelwise easier, however loses information on the functoriality (for example, his sheaf theory $n Sh_#[]$ still has source $Corr$ instead of $n Corr_#[]$). We record his construction as follows, and give an equivalence of the category of sheaves. 
+
+
+
+#rem[
+	We may recover the original sheaf theory from the map of Gestalten. We only need to consider the map $1Sh:1Corr(cal(C))->1Pr_Sh$. By construction, we have $1Corr(cal(C))=Corr(cal(C))$, and
+	$ 1Pr_Sh=cplt_1 (tau_Sh (Corr^enr (cal(C)))) $
+	Unwinding the definitions, $tau_Sh (Corr^enr (cal(C)))$ is the category of kernels of the 3-functor formalism $Sh:Corr(cal(C))->Cat$ (we forget the structure of presentability). Hence by construction, we have for $X in cal(C)$, $Sh(X)=Hom_(1Pr_Sh)(bb(1)_(1Pr_Sh),1Sh(-))$. 
 ]
 
