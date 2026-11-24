@@ -100,6 +100,7 @@
 #let Ext = math.upright("Ext")
 #let Bar = math.op("Bar")
 #let Free = math.op("Free")
+#let sh = math.op("sh")
 
 #let Spec = math.op("Spec")
 #let Gr = math.upright("Gr")
@@ -116,8 +117,8 @@
 #let CT = math.op("CT")
 #let Frac = math.op("Frac")
 
-#let lact = [#rotate(90deg, sym.arrow.cw) #h(0pt)]
-#let ract = [#rotate(270deg, sym.arrow.ccw) #h(0pt)]
+#let lact = [#h(0pt) #rotate(90deg, sym.arrow.cw) #h(0pt)]
+#let ract = [#h(0pt) #rotate(270deg, sym.arrow.ccw) #h(0pt)]
 
 #let res = math.op("res")
 #let ind = math.op("ind")
@@ -138,8 +139,9 @@
 #let coCartmark = scale($angle.right.rev$,80%)
 
 #let IW = math.cal("IW")
-#let AS = math.bb("AS")
+#let AS = math.bold("AS")
 #let Av = math.op("Av")
+#let Pic = math.upright("Pic")
 
 #let Sym = math.op("Sym")
 
@@ -196,3 +198,11 @@
 		link(label(name))[[#name, #pos]]
 	}
 }
+
+#let eqn-height-state = state("1")
+
+#let sendEqnHeight = context eqn-height-state.update(measure(box("")).height)
+	
+#let fixDiagram(it) = context box(baseline: (at: horizon, shift: -eqn-height-state.get() / 2), it)
+
+
