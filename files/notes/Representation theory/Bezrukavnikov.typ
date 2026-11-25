@@ -1908,7 +1908,7 @@ We have the dual statement for @Prop_equi_coh_fully_faithful_wt_0.
 
 #prop[
 	For $tilde(cal(T))_1,tilde(cal(T))_2 in hat(Perv)_m^mon (U\\G\/U)$ free monodromic tilting sheaves, the map 
-	$ Hom_(hat(Perv)_m^mon (U\\G\/U))(tilde(cal(T))_1,tilde(cal(T))_2)^f->Hom_(S times.o S)(VV(tilde(cal(T)))_1,VV(tilde(cal(T)))_2) $
+	$ Hom_(hat(Perv)_m^mon (U\\G\/U))(tilde(cal(T))_1,tilde(cal(T))_2)^f->Hom_(S times.o S)(VV(tilde(cal(T))_1),VV(tilde(cal(T))_2)) $
 	is an isomorphism of $Fr$-modules. 
 ] <Prop_V_fully_faithful_free_mon_tilting>
 #proof[
@@ -2017,7 +2017,179 @@ Finally, again we show that we may apply @Thm_realization to compute our categor
 	+	For any $M in Mod_Fr$ and $cal(F)in D_m (B\\G\/B)$, there is an isomorphism 
 		$ Phi(cal(F)times.o M)=Phi(cal(F))times.o phi(M) $
 		In particular, $Phi compose [1](1\/2)=(-1\/2)compose Phi$
+] <Thm_equivariant_monodromic_duality>
+
+The final construction follows from the following computation in the $SL_2$ case. 
+
+#lem[
+	$H^*(B\\G\/B)=cal(O)(Gamma(e)union Gamma(s))[1](1\/2)$ for $G=SL_2$. 
+] <Lem_SL2_IC_coh>
+#proof[
+	We equivalently compute the cohomology of $H\\PP^1$. This is the projective bundle of $L_1 plus.o L_(-1)$ over $BB H$. Apply the projective bundle formula to $BB H$, we have 
+	$ H^bullet_H (PP(L_1 plus.o L_(-1)))=H^bullet_H (pt)[y]/(y^2-c_1 (L_1 plus.o L_(-1))x+c_2 (L_1 plus.o L_(-1))x^2) $
+	Here $y$ is the first Chern class of the line bundle $cal(O)(-1)$. Then, note $c_1(L_1)=x$, $c_1(L_(-1))=-x$, hence we have $c_2(L_1 plus.o L_(-1))=-x^2$, $c_1(L_1 plus.o L_(-1))=0$. Hence, the cohomology of the space is equal to 
+	$ k[x][y]\/(y^2-x^2)=k[x,y]/((x-y)inter (x+y))=cal(O)(Gamma(e)union Gamma(s)) $
 ]
+
+#const[
+	We now construct a indecomposable tilting sheaf over $PP^1$. Consider the local system $cal(L)_n$ on the open stratum $U\\U s B\/U$ corresponding to the representation $S\/V_H^(n+1)S$ of $pi_1 (H,e)$. If we take 
+	$ Delta_n=tilde(j)_! cal(L)_n [2](3\/2), quad nabla_n=tilde(j)_* cal(L)_n [2](3\/2) $
+	we have $tilde(Delta)_s=underline(lim)tilde(Delta)_n$, $tilde(nabla)_s=underline(lim)tilde(nabla)_n$. Moreover, we have the exact sequence 
+	$ 0-->pi^dagger delta(1\/2+n)-->Delta_n-->nabla_n-->pi^dagger delta(-1\/2)-->0 $
+	Taking the formal limit gives the exact sequence 
+	$ 0-->tilde(Delta)_s-->tilde(nabla)_s-->pi^dagger delta(-1\/2)-->0 $
+	We take $tilde(cal(T))_s=tilde(nabla)_s times_(pi^dagger delta(-1\/2))tilde(delta)(-1\/2)$. Note that 
+	$ ker(tilde(cal(T))_s->tilde(delta)(-1\/2))=ker(tilde(nabla)_s->pi^dagger delta(-1\/2))=tilde(Delta)_s $
+	and 
+	$ ker(tilde(cal(T))_s->tilde(nabla)_s)=ker(tilde(delta)(-1\/2)->pi^dagger delta(-1\/2))=tilde(delta)(1\/2) $
+	We have constructed standard and costandard filtrations on $tilde(cal(T))_s$ 
+	$ 0-->tilde(Delta)_s-->tilde(cal(T))_s-->tilde(delta)(-1\/2)-->0 $
+	$ 0-->tilde(delta)(1\/2)-->tilde(cal(T))_s-->tilde(nabla)_s-->0 $
+	Hence $tilde(cal(T))$ is tilting. By pulling back to the respective strata, it is free monodromic tilting. 
+] <Const_PP1_free_monodromic_open>
+
+#lem[
+	We have $End(tilde(cal(T))_s)=cal(O)(Gamma^*(e)union Gamma^*(s))$. Hence, $VV(tilde(cal(T))_s)=cal(O)(Gamma^*(e)union Gamma^*(s))(-1\/2)$. 
+] <Lem_SL2_T_VV>
+#proof[
+	We firstly note that we have $tilde(cal(P))=tilde(cal(T))_s (1\/2)$. This is because $iota pi_dagger tilde(cal(P))$ and $iota pi_dagger tilde(cal(T))_s$ are both projective covers of $iota delta$, hence any map $tilde(cal(P))->tilde(cal(T))_s (1\/2)$ is an isomorphism since after taking $pi_dagger$ it is. Then, since $iota tilde(cal(T))$ is the projective cover of $iota pi^dagger delta$, the construction of a map $tilde(cal(P))->tilde(cal(T))_s (1\/2)$ is given by lifting the map $tilde(cal(P))->>pi^dagger delta$ along $tilde(cal(T))_s (1\/2)->>pi^dagger delta$. 
+
+	We apply $Hom(tilde(cal(T))_s,-)$ to the exact sequence 
+	$ 0-->tilde(Delta)_s-->tilde(cal(T))_s-->tilde(delta)(-1\/2)-->0 $
+	It gives 
+	$ 0-->Hom(tilde(cal(T))_s,tilde(Delta)_s)-->End(tilde(cal(T))_s)-->Hom(tilde(cal(T))_s,tilde(delta)(-1\/2))-->0 $
+	The final $Hom$ is computed by $Hom(tilde(cal(T))_s,tilde(delta)(-1\/2))=End(tilde(delta)(-1\/2))=cal(O)(Gamma^*(e))$. On the other hand, we have 
+	$ Hom(tilde(cal(T))_s,tilde(Delta)_s)=Hom(tilde(cal(P)),tilde(Delta)_s)(1\/2)=VV(tilde(Delta)_s)(1\/2)=cal(O)(Gamma^*(s))(1) $
+	Hence the map 
+	$ tilde(j)^* times tilde(i)^*:End(tilde(cal(T))_s)->End(tilde(cal(L))_s)times End(tilde(delta))=cal(O)(Gamma^*(s))times cal(O)(Gamma^*(e)) $
+	is injective, since $tilde(j)^*$ is identified by the natural inclusion $Gamma^*(s)(1)->Gamma^*(s)$ (here $V_A$ has degree -2, so the embedding is from a minus weight thing to the original one!). 
+	Hence, we can consider 
+	$ S times.o S->End(tilde(cal(T))_s)->End(tilde(cal(L))_s)times End(tilde(delta)) $
+	The second map is injective, and the image of $S times.o S$ in $End(tilde(cal(L))_s)times End(tilde(delta))$ is given by the union $cal(O)(Gamma^*(e)union Gamma^*(s))$ (think about the corresponding map on schemes). Hence the map $S times.o S->End(tilde(cal(T))_s)$ factors through $cal(O)(Gamma^*(e)union Gamma^*(s))$. Thus, consider the diagram of exact sequences 
+	// https://q.uiver.app/#r=typst&q=WzAsNixbMCwwLCJjYWwoTykoR2FtbWFeKihzKSkoMSkiXSxbMSwwLCJjYWwoTykoR2FtbWFeKihzKXVuaW9uIEdhbW1hXiooZSkpIl0sWzIsMCwiY2FsKE8pKEdhbW1hXiooZSkpIl0sWzAsMSwiSG9tKHRpbGRlKGNhbChUKSlfcyx0aWxkZShEZWx0YSlfcykiXSxbMSwxLCJFbmQodGlsZGUoY2FsKFQpKV9zKSJdLFsyLDEsIkhvbSh0aWxkZShjYWwoVCkpX3MsdGlsZGUoZGVsdGEpKSJdLFswLDNdLFsxLDRdLFsyLDVdLFswLDFdLFsxLDJdLFszLDRdLFs0LDVdXQ==
+	#align(center, diagram({
+		node((-1, 0), [$cal(O)(Gamma^*(s))(1)$])
+		node((0, 0), [$cal(O)(Gamma^*(s)union Gamma^*(e))$])
+		node((1, 0), [$cal(O)(Gamma^*(e))$])
+		node((-1, 1), [$Hom(tilde(cal(T))_s,tilde(Delta)_s)$])
+		node((0, 1), [$End(tilde(cal(T))_s)$])
+		node((1, 1), [$Hom(tilde(cal(T))_s,tilde(delta))$])
+		edge((-1, 0), (-1, 1), "->")
+		edge((0, 0), (0, 1), "->")
+		edge((1, 0), (1, 1), "->")
+		edge((-1, 0), (0, 0), "->")
+		edge((0, 0), (1, 0), "->")
+		edge((-1, 1), (0, 1), "->")
+		edge((0, 1), (1, 1), "->")
+	}))
+	where the first and third vertical maps are equivalences. Hence the middle map is an equivalence. 
+]
+
+#const[
+	We now construct the algebras according to @Thm_realization. For any $w in W$, we take a reduced word expression $underline(w)=s_1 dots.c s_(ell(w))$. We denote
+	$ 
+		IC_(underline(w)):=IC_(s_1)*_B IC_(s_2)*_B dots.c *_B IC_(s_ell(w))\
+		tilde(cal(T))_(underline(w))=tilde(cal(T))_(s_1)*_U tilde(cal(T))_(s_2)*_U dots.c *_U tilde(cal(T))_(s_ell(w)) 
+	$
+	and the corresponding algebras
+	$ 
+		E_(<=w)^(<=w'):=&plus.o.big_(u&<=w'\ v&<=w)Ext_(D_m (B\\G\/B))^bullet (IC_underline(u),IC_underline(v)) \
+		M_(<=w)^(<=w'):=&plus.o.big_(u&<=w'\ v&<=w) Hom_(hat(Perv)_m^mon (U\\G\/U))(tilde(cal(T))_underline(u),tilde(cal(T))_underline(v))^f
+	$
+	In particular, we define $E_(<=w):=(E_(<=w)^(<=w))^op$ and $M_(<=w):=(M_(<=w)^(<=w))^op$ (here $(-)^op$ denote the opposite for $EE_1$-algebras rather than the opposite for Frobenius modules), so $E_(<=w)^(<=w')$ is a $(E_(<=w'),E_(<=w))$-bimodule, and the same goes to $M$. 
+
+	Since $IC_w subset IC_(overline(w))$ is a multiplicity 1 direct summand by @Lem_IC_convolution, an ad hoc method in @Coro_irreducible_has_realization applies to $IC_underline(w)$, and we have 
+	$ D_m (B\\overline(B w B)\/B)=Mod_(E_(<=w),Fr) $
+
+	For the monodromic side, note that $tilde(cal(T))_(underline(w))$ still pulls back to the free monodromic local system $tilde(cal(L))_w$, an ad hoc method in @Coro_tilting_has_realization applies to $tilde(cal(T))_underline(w)$, and we have 
+	$ hat(D)_m^mon (U\\overline(U w B)\/U)=Mod_(M_(<=w),Fr) $
+] <Const_algebras_for_realization>
+
+#const[
+	We now construct the final categorical equivalence. 
+
+	By the results for $SL_2$ (@Lem_SL2_IC_coh and @Lem_SL2_T_VV), we have for any $s in W$ a simple reflection the equivalence 
+	$ theta_s:HH(IC_s)^op=VV(tilde(cal(T))_s) $
+	By @Lem_equi_coh_monoidal and @Lem_functor_V_monoidal, we have the functors $HH:D_m (B\\G\/B)->Mod_(check(S)times.o check(S),Fr)$ and $VV:hat(D)_m^mon (U\\G\/U)->Mod_(S times.o S,Fr)$ are symmetric monoidal. Hence, if we define $HH_(underline(w)):=HH(IC_underline(w))$ and $VV_(underline(w)):=VV(tilde(cal(T))_underline(w))$, we have an equivalence 
+	$ theta_underline(w):HH_underline(w)^op=VV_underline(w) $
+	obtained by tensoring the maps $theta_s$. 
+	
+	Now, these objects control the behavior of the equivariant and monodromic categories. By @Prop_equi_coh_fully_faithful_wt_0 and @Prop_very_pure_wt_0_closed_convolution (so the objects $IC_underline(w)$ are pure of weight 0), we have the equivalence 
+	$ Ext^bullet (IC_underline(u),IC_underline(v))=Hom_(check(S)times.o check(S))(HH_underline(u),HH_underline(v))==>E_(<=w)^(<=w')=plus.o.big_(u&<=w'\ v&<=w)Hom(HH_underline(u),HH_underline(v)) $
+	Likewise, by @Prop_V_fully_faithful_free_mon_tilting and @Lem_convolution_preserve_free_mon_tilt (so the objects $tilde(cal(T))_underline(w)$ are free monodromic tilting), we have the equivalence 
+	$ Hom(tilde(cal(T))_underline(u),tilde(cal(T))_underline(v))^f=Hom_(S times.o S)(VV_underline(u),VV_underline(v))==>M_(<=w)^(<=w')=plus.o.big_(u&<=w'\ v&<=w)Hom(VV_underline(u),VV_underline(v)) $
+	Then, the isomorphisms $theta_underline(w)$ gives an isomorphism of algebras 
+	$ (E_(<=w))^op=M_(<=w) $
+	Hence, we have an equivalence of categories 
+	$ Phi_(<=w)=(-)^op:Mod_(E_(<=w),Fr)->Mod_(M_(<=w),Fr) $
+	Then, by @Thm_realization, the transition functor 
+	$ i_(w,w',*):D_m (B\\overline(B w B)\/B)inj D_m (B\\overline(B w' B)\/B) $
+	is given by $E_(<=w)^(<=w')times.o_(E_(<=w))(-)$. Dually, the transition functor 
+	$ tilde(i)_(w,w',*):hat(D)_m^mon (U\\overline(U w B)\/U)inj hat(D)_m^mon (U\\overline(U w' B)\/U) $
+	is given by $M_(<=w)^(<=w')times.o_(M_(<=w))(-)$. Thus, since $Phi_(<=w'):E_(<=w)^(<=w') mapsto M_(<=w)^(<=w')$, the maps $Phi_(<=w)$ agree with the transition maps, and these maps assemble to 
+	$ Phi:D_m (B\\G\/B)->^(tilde.eq)hat(D)_m^mon (U\\G\/U) $
+] <Const_equivariant_monodromic_duality>
+
+#proof[
+	We now prove @Thm_equivariant_monodromic_duality. We have already constructed the functor $Phi$, and we verify the six properties. 
+
+	(6). Notice that the functor $HH=sh^(arrow.l.double)compose R Gamma_#[]$, so this is obvious. 
+
+	(5). This is also direct. 
+
+	(3). Clearly we have $Phi(IC_underline(w))=tilde(cal(T))_underline(w)$. Then, consider the following cofiber sequence of morphisms: // https://q.uiver.app/#r=typst&q=WzAsNixbMCwwLCJEX20gKEJcXFxccGFydGlhbCBvdmVybGluZShCIHcgQilcXC9CKSJdLFsxLDAsIkRfbSAoQlxcXFxvdmVybGluZShCIHcgQilcXC9CKSJdLFsyLDAsIkRfbSAoQlxcXFxCIHcgQlxcL0IpIl0sWzAsMSwiaGF0KEQpX21ebW9uIChVXFxcXHBhcnRpYWwgb3ZlcmxpbmUoVSB3IEIpXFwvVSkiXSxbMSwxLCJoYXQoRClfbV5tb24gKFVcXFxcb3ZlcmxpbmUoVSB3IEIpXFwvVSkiXSxbMiwxLCJoYXQoRClfbV5tb24gKFVcXFxcVSB3IEJcXC9VKSJdLFswLDMsIlBoaV8oPHcpIiwyXSxbMSw0LCJQaGlfKDw9dykiLDJdLFsyLDUsIlBoaV93Il0sWzAsMSwiaV8oPHcsKikiXSxbMSwyLCJpX3deKiJdLFszLDQsInRpbGRlKGkpXyg8dywqKSJdLFs0LDUsInRpbGRlKGkpX3deKiJdXQ==
+	#align(center, diagram({
+		node((-1, 0), [$D_m (B\\partial overline(B w B)\/B)$])
+		node((0, 0), [$D_m (B\\overline(B w B)\/B)$])
+		node((1, 0), [$D_m (B\\B w B\/B)$])
+		node((-1, 1), [$hat(D)_m^mon (U\\partial overline(U w B)\/U)$])
+		node((0, 1), [$hat(D)_m^mon (U\\overline(U w B)\/U)$])
+		node((1, 1), [$hat(D)_m^mon (U\\U w B\/U)$])
+		edge((-1, 0), (-1, 1), [$Phi_(<w)$], label-side: right, "->")
+		edge((0, 0), (0, 1), [$Phi_(<=w)$], label-side: right, "->")
+		edge((1, 0), (1, 1), [$Phi_w$], label-side: left, "->")
+		edge((-1, 0), (0, 0), [$i_(<w,*)$], label-side: left, "->")
+		edge((0, 0), (1, 0), [$i_w^*$], label-side: left, "->")
+		edge((-1, 1), (0, 1), [$tilde(i)_(<w,*)$], label-side: left, "->")
+		edge((0, 1), (1, 1), [$tilde(i)_w^*$], label-side: left, "->")
+	}))
+	The left two morphisms are equivalences, hence so is the right. Thus, we have 
+	$ Phi_w (overline(QQ)_(ell,overline(w)))=Phi_w (i_w^*IC_overline(w))=tilde(i)_w^*Phi_(<=w)(IC_(overline(w)))=tilde(i)_w^*tilde(cal(T))_overline(w)=tilde(cal(L))_w $
+	By adjoints, the right square also commutes if we replace the horizontal arrows by the left/right adjoints of $i_w^*$ and $tilde(i)_w^*$, so 
+	$  
+		Phi_(<=w)(Delta_w)=Phi_(<=w)(i_(w,!)overline(QQ)_(ell,w))=tilde(i)_(w,!)Phi_w (overline(QQ)_(ell,w))=tilde(i)_(w,!)tilde(cal(L))_w=tilde(Delta)_w \
+		Phi_(<=w)(nabla_w)=Phi_(<=w)(i_(w,*)overline(QQ)_(ell,w))=tilde(i)_(w,*)Phi_w (overline(QQ)_(ell,w))=tilde(i)_(w,*)tilde(cal(L))_w=tilde(nabla)_w
+	$
+	(4). The class of very pure complexes are precisely the pure complexes, hence is the intersection 
+	$ Span(Delta_w bracket(?)|w in W)inter Span(nabla_w bracket(?)|w in W) $
+	Hence this class is sent by $Phi$ to 
+	$ Span(tilde(Delta)_w (?)|w in W)inter Span(tilde(nabla)_w (?)|w in W) $
+	which is precisely the class of free monodromic tilting sheaves. 
+
+	(1). To construct a monoidal structure on $Phi$, we must construct more bimodules to compare the monoidal structures on both categories. Firstly, note that it suffices to show the convolutions 
+	$ 
+		(-)*_B (-):D_m (B\\overline(B w B)\/B)times.o D_m (B\\overline(B w' B)\/B)->D_m (B\\overline(B w w' B)\/B) \
+		(-)*_U (-):hat(D)_m^mon (U\\overline(U w B)\/B)times.o hat(D)_m^mon (U\\overline(U w' B)\/B)->hat(D)_m^mon (U\\overline(U w w' B)\/B)
+	$
+	coincide for $ell(w)+ell(w')=ell(w w')$. We take 
+	$ 
+		C^E_(<=w,<=w'):=plus.o.big_(u<=w w'\ v<=w,v'<=w') Ext^bullet (IC_underline(u),IC_underline(v)*_B IC_underline(v)')=Hom_(check(S)times.o check(S))(HH_underline(u),HH_underline(v)times.o_(check(S))HH_underline(v)')\
+		C^M_(<=w,<=w'):=plus.o.big_(u<=w w'\ v<=w,v'<=w') Hom (tilde(cal(T))_underline(u),tilde(cal(T))_underline(v)*_B tilde(cal(T))_underline(v)')^f=Hom_(S times.o S)(VV_underline(u),VV_underline(v)times.o_S VV_underline(v)')
+	$
+	By $theta_underline(w):HH_underline(w)^op=VV_underline(w)$, we have $(C^E_(<=w,<=w'))^op=C^M_(<=w,<=w')$
+	Then, by the functoriality in @Thm_realization, the convolutions $*_B$ and $*_U$ correspond to the functors 
+	$ 
+		C^E_(<=w,<=w')times.o_(E_(<=w)times.o E_(<=w'))(-times.square-):Mod_(E_(<=w),Fr)times.o Mod_(E_(<=w'),Fr)->Mod_(E_(<=w w'),Fr) \
+		C^M_(<=w,<=w')times.o_(M_(<=w)times.o M_(<=w'))(-times.square-):Mod_(M_(<=w),Fr)times.o Mod_(M_(<=w'),Fr)->Mod_(M_(<=w w'),Fr)
+	$
+	Hence the monoidal structures can be identified by $Phi$. The higher associativity constraints can be checked by taking all associators through the above process. 
+
+	(2). It remains to check that $HH^op$ and $VV$ are intertwined by $Phi$. We define 
+	$ H_(<=w):=plus.o.big_(v<=w)HH_(underline(v)), quad V_(<=w):=plus.o.big_(v<=w)VV_underline(v) $
+	The functors $HH$ and $VV$ are given by tensoring $H_(<=w)$ and $V_(<=w)$ on the left by definition (notice $E_(<=w)$ is the opposite algebra of $End(H_(<=w))$). Using $theta$, we have $H_(<=w)^op=V_(<=w)$, so we get the desired equivalence. 
+]
+
+
 
 = The Bezrukavnikov-Arkhipov equivalence 
 
